@@ -1,12 +1,14 @@
 import pygame as game
 from pygame.locals import *
 import sys
+import colors
 
 
 class MainMenuGUI:
     def __init__(self):
         self.window_height = 800
         self.surface = game.display.set_mode((800, 800))
+        self.colors = colors.Colors().get_colors()
 
     def main(self) -> str:
         """
@@ -16,7 +18,6 @@ class MainMenuGUI:
         Initializes game screen & maintains main while loop that listens for
             events from game.event.get()
         """
-        black: tuple = (0, 0, 5)
 
         # initialize basic screen components
         game.init()
@@ -25,7 +26,7 @@ class MainMenuGUI:
         # fill background with brown
         background = game.Surface(self.surface.get_size())
         background = background.convert()
-        background.fill(black)
+        background.fill(self.colors['black'])
 
         # Blit background to the screen
         self.surface.blit(background, (0, 0))
@@ -65,7 +66,7 @@ class MainMenuGUI:
                             return 'new game'
                     elif 520 > mouse[0] > 270 and 570 > mouse[1] > 520:
                         if click[0] == 1:
-                            print('clicked options')
+                            return 'load game'
                     elif 440 > mouse[0] > 350 and 670 > mouse[1] > 620:
                         print('clicked exit')
                         return 'exit'
@@ -81,7 +82,6 @@ class MainMenuGUI:
             including: draw_outline(), write_game_title(),
             & write_menu_choices()
         """
-        white: tuple[int, int, int] = (250, 250, 250)
 
         # local vars for draw_outline
         buffer: int = 25
@@ -90,7 +90,7 @@ class MainMenuGUI:
         thickness: int = 3
 
         # draw outline
-        self.draw_outline(buffer, thickness, board_width, white)
+        self.draw_outline(buffer, thickness, board_width, self.colors['white'])
 
         # write title
         self.write_game_title()
@@ -122,9 +122,8 @@ class MainMenuGUI:
 
         Performs rendering for Game Title text
         """
-        off_white: tuple = (220, 220, 226)
         font = game.font.SysFont('dubai', 95)
-        img = font.render('G A M E T I T L E', True, off_white)
+        img = font.render('G A M E T I T L E', True, self.colors['off_white'])
         self.surface.blit(img, (60, 75))
 
         # To get available fonts..
@@ -145,16 +144,17 @@ class MainMenuGUI:
         Performs rendering for menu choice text
         Renders based on mouse_pos() as determined by and called in main()
         """
-        off_white: tuple = (220, 220, 226)
-        highlight_grey: tuple = (135, 135, 135)
         font = game.font.SysFont('dubai', 55)
 
-        new_game = font.render('New Game', True, off_white)
-        new_game_highlight = font.render('New Game', True, highlight_grey)
-        load_game = font.render('Load Game', True, off_white)
-        load_game_highlighted = font.render('Load Game', True, highlight_grey)
-        exit_game = font.render('Exit', True, off_white)
-        exit_game_highlight = font.render('Exit', True, highlight_grey)
+        new_game = font.render('New Game', True, self.colors['off_white'])
+        new_game_highlight = font.render('New Game', True,
+                                         self.colors['hl_dark_grey'])
+        load_game = font.render('Load Game', True, self.colors['off_white'])
+        load_game_highlighted = font.render('Load Game', True,
+                                            self.colors['hl_dark_grey'])
+        exit_game = font.render('Exit', True, self.colors['off_white'])
+        exit_game_highlight = font.render('Exit', True,
+                                          self.colors['hl_dark_grey'])
 
         if highlighted == 1:
             self.surface.blit(new_game_highlight, (280, 400))

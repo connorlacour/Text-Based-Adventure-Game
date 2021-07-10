@@ -2,6 +2,7 @@ import pygame as game
 import sys
 import game_gui
 import main_menu_gui
+import load_game_gui
 
 
 def controller() -> None:
@@ -30,8 +31,8 @@ def controller() -> None:
         print('okay.. exiting..')
         game.quit()
         sys.exit()
-    elif main_return == 'options':
-        print('opening options..')
+    elif main_return == 'load game':
+        load_game()
 
 
 def game_menu() -> None:
@@ -50,6 +51,21 @@ def start_new_game() -> None:
 
     # 'main menu' is returned upon clicking the exit_button in game_gui
     if game_return == "main menu":
+        controller()
+
+
+def load_game() -> None:
+    """
+    Instantiates a LoadGameGUI() object and calls main()
+
+    LoadGameGUI() listens for MOUSEMOTION and MOUSEBUTTONDOWN events
+        to detect which game to load
+    """
+
+    load = load_game_gui.LoadGameGUI().main()
+    if load == 'load':
+        start_new_game()
+    elif load == 'back':
         controller()
 
 

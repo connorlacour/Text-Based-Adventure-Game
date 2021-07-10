@@ -2,6 +2,7 @@ import pygame as game
 from pygame.locals import *
 import sys
 import text_scroll as scroll
+import colors
 
 
 class GameGUI:
@@ -14,6 +15,9 @@ class GameGUI:
         # else:
         #   self.scroll = scroll.Scroll()
         self.scroll = scroll.Scroll(1)
+        self.colors: dict = colors.Colors().get_colors()
+        self.game_typing = False
+        self.user_typing = False
 
     def main(self) -> str:
         """
@@ -29,7 +33,6 @@ class GameGUI:
             game.MOUSEBUTTONDOWN
             game.KEYDOWN
         """
-        black: tuple = (0, 0, 5)
 
         # initialize basic screen components
         game.init()
@@ -38,7 +41,7 @@ class GameGUI:
         # fill background with brown
         background = game.Surface(self.surface.get_size())
         background = background.convert()
-        background.fill(black)
+        background.fill(self.colors['black'])
 
         # Blit background to the screen
         self.surface.blit(background, (0, 0))
@@ -88,7 +91,7 @@ class GameGUI:
                             self.display_text_in_scroll()
 
                 elif events.type == game.MOUSEBUTTONDOWN:
-                    click = game.mouse.get_pressed()
+                    click = game.mouse.get_pressed(3)
                     mouse = game.mouse.get_pos()
 
                     # if in area of exit_button
@@ -99,8 +102,13 @@ class GameGUI:
                 # if user is typing, handle text-entry by calling
                 #   self.handle_text_entry()
                 elif events.type == game.KEYDOWN:
-                    user_entry = self.handle_text_entry(
-                        event=events, text=user_entry)
+                    if not self.game_typing:
+                        user_entry = self.handle_text_entry(
+                            event=events, text=user_entry)
+                    if events.key == game.K_RETURN and self.game_typing:
+                        self.draw_text_entry_box()
+                        game.display.update()
+                        self.handle_game_text()
 
             # re-render text-entry box
             # if user_entry is not empty, also re-render that text within box
@@ -118,8 +126,6 @@ class GameGUI:
             including: draw_outline(), draw_text_entry_box(),
             draw_scroll_text_box(), & write_exit_button()
         """
-        white: tuple[int, int, int] = (250, 250, 250)
-
         # local vars for draw_outline
         buffer: int = 25
         screen_width: int = self.window_height
@@ -127,14 +133,11 @@ class GameGUI:
         thickness: int = 3
 
         # draw outline
-        self.draw_outline(buffer, thickness, board_width, white)
-
+        self.draw_outline(buffer, thickness, board_width, self.colors['white'])
         # draw text-entry box
         self.draw_text_entry_box()
-
         # draw entered text box
         self.draw_scroll_text_box()
-
         # write exit button
         self.write_exit_button(highlighted=highlighted)
 
@@ -168,9 +171,8 @@ class GameGUI:
 
         renders the text-entry box (not the text itself)
         """
-        dark_grey: tuple = (30, 30, 30)
         text_entry_box = game.Rect(100, 600, 600, 100)
-        game.draw.rect(surface=self.surface, color=dark_grey,
+        game.draw.rect(surface=self.surface, color=self.colors['dark_grey'],
                        rect=text_entry_box)
 
     def draw_scroll_text_box(self) -> None:
@@ -180,9 +182,8 @@ class GameGUI:
 
         renders the scroll text box (not the text itself)
         """
-        dark_grey: tuple = (20, 20, 20)
         text_entry_box = game.Rect(100, 100, 600, 480)
-        game.draw.rect(surface=self.surface, color=dark_grey,
+        game.draw.rect(surface=self.surface, color=self.colors['dark_grey'],
                        rect=text_entry_box)
 
     def write_exit_button(self, highlighted: int = 0) -> None:
@@ -195,11 +196,10 @@ class GameGUI:
         If highlighted == 1: render exit_button in highlighted_grey
         Else: render exit_button in grey
         """
-        grey: tuple = (100, 100, 100)
-        highlighted_grey: tuple = (200, 200, 225)
         font = game.font.SysFont('dubai', 20)
-        exit_button = font.render('Exit', True, grey)
-        exit_button_highlighted = font.render('Exit', True, highlighted_grey)
+        exit_button = font.render('Exit', True, self.colors['grey'])
+        exit_button_highlighted = font.render('Exit', True,
+                                              self.colors['hl_grey'])
         self.surface.blit(exit_button, (730, 35))
 
         if highlighted == 1:
@@ -223,24 +223,26 @@ class GameGUI:
         """
         # if user presses 'return', append text entry to
         #   self.scroll.text_in_scroll
-        if event.key == game.K_RETURN:
-            self.scroll.text_in_scroll.append(text)
+        if not self.game_typing:
+            if event.key == game.K_RETURN:
+                self.scroll.text_in_scroll.append(text)
 
-            # redraw the scroll text box to 'overwrite' any previously
-            #   rendered text
-            self.draw_scroll_text_box()
+                # redraw the scroll text box to 'overwrite' any previously
+                #   rendered text
+                self.draw_scroll_text_box()
 
-            # anytime we want to display text from self.text_in_scroll
-            #   we need to ensure it is of appropriate size, and thus need
-            #   to call self.scroll.handle_scroll_size()
-            self.scroll.handle_scroll_size()
-            self.display_text_in_scroll()
-            return ''
-        elif event.key == game.K_BACKSPACE:
-            if text != '':
-                text = text[:-1]
-        else:
-            text += event.unicode
+                # anytime we want to display text from self.text_in_scroll
+                #   we need to ensure it is of appropriate size, and thus need
+                #   to call self.scroll.handle_scroll_size()
+                self.scroll.handle_scroll_size()
+                self.display_text_in_scroll()
+                self.game_typing = True
+                return ''
+            elif event.key == game.K_BACKSPACE:
+                if text != '':
+                    text = text[:-1]
+            else:
+                text += event.unicode
 
         return text
 
@@ -251,13 +253,12 @@ class GameGUI:
         """
         x: int = 110
         y: int = 105
-        white: tuple = (220, 220, 220)
         font = game.font.SysFont('dubai', 20)
 
         # display text one line at a time
         #   increment 'y' to display each line below the previous
         for text in self.scroll.text_in_scroll:
-            text_img = font.render(text, True, white)
+            text_img = font.render(text, True, self.colors['off_white'])
             self.surface.blit(text_img, (x, y))
             y += 20
 
@@ -266,7 +267,52 @@ class GameGUI:
         takes one parameter: user_text (str)
         renders that text within the text-entry box
         """
-        white: tuple = (220, 220, 220)
         font = game.font.SysFont('dubai', 20)
-        text_img = font.render(user_text, True, white)
+        text_img = font.render(user_text, True, self.colors['off_white'])
         self.surface.blit(text_img, (110, 610))
+
+    def handle_game_text(self) -> None:
+        game_text = self.load_game_text()
+        self.display_game_text(text_list=game_text)
+        return
+
+    def load_game_text(self, text='') -> list:
+        # INTEGRATE WITH TEXT-PARSING, ETC
+        # sample_text to be replaced by function parameter 'text'
+        sample_text = 'This is text for testing.. \n' \
+                      'I wanted to practice this "typing" effect \n' \
+                      'as well as handling newline chars..'
+        text_list = []
+
+        # check for \n as they don't play nicely with pygame rendering
+        # if \n, split text into a list of single lines to be displayed
+        if '\n' in sample_text:
+            print("true")
+            text_list = sample_text.split('\n')
+        else:
+            text_list.append(sample_text)
+        return text_list
+
+    def display_game_text(self, text_list: list) -> None:
+        wait_val = 40
+
+        for line in text_list:
+            self.scroll.text_in_scroll.append('')
+            for char in line:
+                self.scroll.text_in_scroll[-1] += char
+
+                # redraw the scroll text box to 'overwrite' any previously
+                #   rendered text
+                self.draw_scroll_text_box()
+
+                # anytime we want to display text from self.text_in_scroll
+                #   we need to ensure it is of appropriate size, and thus need
+                #   to call self.scroll.handle_scroll_size()
+                self.scroll.handle_scroll_size()
+                self.display_text_in_scroll()
+                game.display.update()
+                game.time.wait(wait_val)
+        self.user_typing = True
+        self.game_typing = False
+        return True
+
