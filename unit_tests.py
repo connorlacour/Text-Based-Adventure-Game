@@ -1,4 +1,4 @@
-from parse_cmd import parse_entry
+from parse_cmd import *
 import unittest
 
 class TestParse(unittest.TestCase):
@@ -17,6 +17,10 @@ class TestParse(unittest.TestCase):
         expect_parse = {"verb": "GO", "dir": "NORTH"}
         self.assertTrue(test_cmd == expect_parse)
 
+    def test4(self):
+        test_cmd = act_exists("select")
+        expect_exist = "CHOOSE"
+        self.assertTrue(test_cmd == expect_exist)
 
 if __name__ == '__main__':
     unittest.main()

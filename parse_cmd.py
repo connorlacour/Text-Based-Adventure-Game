@@ -1,6 +1,7 @@
 # Found dictionary library at https://pypi.org/project/PyDictionary/
 # Run pip install PyDictionary
 # Can be used for determining whether the word is a verb or noun and for finding synonyms
+from typing import Dict
 from PyDictionary import PyDictionary
 
 dict = PyDictionary()
@@ -19,7 +20,7 @@ preps = ['ABOARD', 'ABOUT', 'ABOVE', 'ACROSS', 'AFTER', 'AGAINST', 'ALONG', 'AMI
     'WITHIN', 'WITHOUT']
 
 
-def parse_entry(usr_cmd: str) -> dict:
+def parse_entry(usr_cmd: str) -> object:
     """
     Processing function for counting words in user entered string,
     and isolating verbs, directions, and objects
@@ -63,3 +64,27 @@ def parse_entry(usr_cmd: str) -> dict:
                     cmds["a_obj"] = wrd_lst[x].upper()
                 continue
     return cmds
+
+# WILL NEED TO LINK TO ACTIONS FOR CHECKING
+def act_exists(action: str) -> str or bool:
+    """
+    Takes an action and determines if it is an existing action within the gameplay.
+    Searches word for synonyms that might be used for action as well.
+
+    params: action = verb obtained from user command
+    returns: String with game action if exists; otherwise, returns False
+    """
+    syns = dict.synonym(action)
+#    print(syns)
+    syns = [x.upper() for x in syns]
+
+    # TEMP ACTION TESTING
+    acts = ['EAT', 'DROP', 'UNLOCK', 'PERSUADE', 'COMBINE', 'JUMP', 'FIGHT', 'CHOOSE', 'PRESS', 'GIVE', 'LOOK', 'GO', 'TAKE', 'HELP']
+
+    for x in range(len(acts)):
+        if acts[x] == action.upper():
+            return action.upper()
+        elif acts[x] in syns:
+            return acts[x]
+    
+    return False
