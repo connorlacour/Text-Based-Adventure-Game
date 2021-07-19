@@ -59,7 +59,7 @@ class MainMenuGUI:
 
                 elif event.type == game.MOUSEBUTTONDOWN:
                     mouse = game.mouse.get_pos()
-                    click = game.mouse.get_pressed()
+                    click = game.mouse.get_pressed(3)
                     if 520 > mouse[0] > 280 and 470 > mouse[1] > 420:
                         if click[0] == 1:
                             print('clicked new game')

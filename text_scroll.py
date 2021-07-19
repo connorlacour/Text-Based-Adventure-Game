@@ -7,11 +7,14 @@ class Scroll:
                                    'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
                                    's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-    def get_text_in_scroll(self) -> list:
+    def display_text_in_scroll(self) -> list:
         """
         returns text_in_scroll
         """
-        return self.text_in_scroll
+        txt_len = len(self.text_in_scroll)
+        display_text = self.text_in_scroll[(txt_len-20):txt_len]
+
+        return display_text
 
     def clear_text_in_scroll(self) -> None:
         """

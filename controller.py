@@ -62,7 +62,10 @@ def load_game() -> None:
         to detect which game to load
     """
 
+    # this will eventually return something like a save_id to load a formally
+    # saved state
     load = load_game_gui.LoadGameGUI().main()
+
     if load == 'load':
         start_new_game()
     elif load == 'back':

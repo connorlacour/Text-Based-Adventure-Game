@@ -4,6 +4,22 @@ import sys
 import colors
 
 
+# STATIC FUNCTIONS
+
+def check_mouse_collide(mouse: tuple, rect: Rect) -> bool:
+    """
+    Takes 2 arguments:
+        mouse of type tuple which represents the current position of mouse
+        rect of type Rect
+
+    If mouse is colliding with rect: return True
+    Else: return False
+    """
+    if rect.collidepoint(mouse):
+        return True
+    return False
+
+
 def load_games_test_data():
     # I don't know how the Object will be structured, this is
     #   just to populate sample data just as "proof of concept"
@@ -72,12 +88,12 @@ class LoadGameGUI:
                     # rect count to iterate over load game rects
                     rect_count = 0
                     for load_rect in self.load_game_rects:
-                        if self.check_mouse_collide(mouse, load_rect):
+                        if check_mouse_collide(mouse, load_rect):
                             load_highlighted = rect_count
                         rect_count += 1
 
                     # Check for highlight over Back Button
-                    if self.check_mouse_collide(mouse, self.back_button_rect):
+                    if check_mouse_collide(mouse, self.back_button_rect):
                         # highlighted = 1 will render the back_button as
                         #   'highlighted_grey'
                         back_highlighted: int = 1
@@ -109,11 +125,10 @@ class LoadGameGUI:
                     click = game.mouse.get_pressed()
                     if click[0] == 1:
                         for load_rect in self.load_game_rects:
-                            if self.check_mouse_collide(mouse, load_rect):
+                            if check_mouse_collide(mouse, load_rect):
                                 return 'load'
 
-                        if self.check_mouse_collide(mouse,
-                                                    self.back_button_rect):
+                        if check_mouse_collide(mouse, self.back_button_rect):
                             return 'back'
             game.display.update()
 
@@ -281,16 +296,3 @@ class LoadGameGUI:
             # increment positional arguments (y) and count
             y += (h + 20)
             load_rect_count += 1
-
-    def check_mouse_collide(self, mouse: tuple, rect: Rect) -> bool:
-        """
-        Takes 2 arguments:
-            mouse of type tuple which represents the current position of mouse
-            rect of type Rect
-
-        If mouse is colliding with rect: return True
-        Else: return False
-        """
-        if rect.collidepoint(mouse):
-            return True
-        return False
