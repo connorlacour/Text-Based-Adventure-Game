@@ -1,10 +1,10 @@
 # Found dictionary library at https://pypi.org/project/PyDictionary/
 # Run pip install PyDictionary
 # Can be used for determining whether the word is a verb or noun and for finding synonyms
-from typing import Dict
-from PyDictionary import PyDictionary
+from typing import Dict, Optional
+import PyDictionary
 
-dict = PyDictionary()
+dict = PyDictionary.PyDictionary()
 
 # Set up defined directions, determiners, and prepositions
 dirs = ["NORTH", "SOUTH", "EAST", "WEST"]
@@ -20,7 +20,7 @@ preps = ['ABOARD', 'ABOUT', 'ABOVE', 'ACROSS', 'AFTER', 'AGAINST', 'ALONG', 'AMI
     'WITHIN', 'WITHOUT']
 
 
-def parse_entry(usr_cmd: str) -> object:
+def parse_entry(usr_cmd: str) -> Dict[str, str]:
     """
     Processing function for counting words in user entered string,
     and isolating verbs, directions, and objects
@@ -65,8 +65,9 @@ def parse_entry(usr_cmd: str) -> object:
                 continue
     return cmds
 
+
 # WILL NEED TO LINK TO ACTIONS FOR CHECKING
-def act_exists(action: str) -> str or bool:
+def act_exists(action: str) -> Optional[str]:
     """
     Takes an action and determines if it is an existing action within the gameplay.
     Searches word for synonyms that might be used for action as well.
@@ -87,4 +88,4 @@ def act_exists(action: str) -> str or bool:
         elif acts[x] in syns:
             return acts[x]
     
-    return False
+    return None
