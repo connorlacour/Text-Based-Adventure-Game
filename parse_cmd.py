@@ -2,9 +2,9 @@
 # Run pip install PyDictionary
 # Can be used for determining whether the word is a verb or noun and for finding synonyms
 from typing import Dict, Optional
-import PyDictionary
+from PyDictionary import PyDictionary
 
-dict = PyDictionary.PyDictionary()
+dict = PyDictionary()
 
 # Set up defined directions, determiners, and prepositions
 dirs = ["NORTH", "SOUTH", "EAST", "WEST"]
