@@ -100,14 +100,10 @@ class RoomConnectorSchema(Schema):
 
     direction = Str()
     room_name = Str()
-    connector_item = Str(required=False)
+    connector_item_name = Str(required=False)
     narrative_text = Str()
     known_to_player = Bool()
     article = Str()
-
-    @pre_load
-    def make_item(self, data, **kwargs):
-        return RoomConnector(**data)
 
     @post_load
     def make_item(self, data, **kwargs):

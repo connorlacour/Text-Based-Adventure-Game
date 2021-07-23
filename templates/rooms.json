@@ -20,6 +20,7 @@
 	}, {
 		"known_to_player": true,
 		"narrative_text": "There are $$this heading $$direction",
+		"connector_item_name": "stairs_to_foyer",
 		"article": "the",
 		"room_name": "bathroom",
 		"direction": "UPWARDS"
