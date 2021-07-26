@@ -4,7 +4,14 @@ from typing import Dict, Optional, List
 
 class Room:
 
-    def __init__(self, name, display_name, article, long_description, short_description):
+    def __init__(self,
+                 name,
+                 display_name,
+                 article,
+                 long_description,
+                 short_description,
+                 item_setup_dict=None,
+                 room_list: List[RoomConnector] = None):
 
         self.name: str = name
         self.display_name = display_name
@@ -15,10 +22,24 @@ class Room:
         self.long_description = long_description
         self.short_description = short_description
 
-        self.item_list: Dict[str, RoomItem] = {}
-        self.connecting_rooms: Dict[str, RoomConnector] = {}
+        self.item_setup_dict = item_setup_dict if item_setup_dict is not None else {}
+        self.room_list = room_list if room_list is not None else []
 
-    # Separate initializer method for item list to simplify constructor
+        self.item_list: Dict[str, RoomItem] = {key: RoomItem(key, value) for (key, value) in
+                                               self.item_setup_dict.items()}
+        self.connecting_rooms: Dict[str, RoomConnector] = {v.direction: v for v in self.room_list}
+
+    # initialize rooms
+    def setup_on_start(self):
+
+        for connector in self.connecting_rooms.values():
+            connector.setup_on_start()
+
+        for room_item in self.item_list.values():
+            room_item.setup_on_start()
+
+            # Separate initializer method for item list to simplify constructor
+
     def add_items(self, item_description_dict: Dict[str, str]):
         self.item_list = {key: RoomItem(key, value) for (key, value) in item_description_dict.items()}
 
@@ -40,7 +61,7 @@ class Room:
     def item_list_narration(self) -> str:
         narration = ""
         for i in self.item_list.values():
-            narration += i.narrative_text
+            narration += i.narration
         return narration
 
     def get_room_narration(self) -> str:
@@ -108,8 +129,9 @@ class Item:
 # Can be taken from a room
 class InventoryItem(Item):
 
-    def __init__(self, name, display_name, description, article="the"):
+    def __init__(self, name, display_name, description, article="the", can_take=True):
         super().__init__(name, display_name, description, article)
+        self.can_take = can_take
         self.discarded = False
 
     def discard(self) -> Item:
@@ -122,7 +144,7 @@ class SceneryItem(Item):
 
     def __init__(self, name, display_name, description, article="the"):
         super().__init__(name, display_name, description, article)
-        self.takeable = False
+        self.can_take = False
 
 
 # Item where if it is picked up, it isn't removed from the room
@@ -134,9 +156,10 @@ class CollectiveItem(Item):
                  name: str,
                  display_name: str,
                  description: str,
-                 singular_display_name: str,     #New look discription for created singular objects
-                 singular_description: str,      #New look discription for created singular objects
-                 max_count: int = 5):            #max number of items that can be created from collective
+                 singular_display_name: str,  # New look discription for created singular objects
+                 singular_description: str,  # New look discription for created singular objects
+                 max_count: int = 5,
+                 article="the"):  # max number of items that can be created from collective
         super().__init__(name, display_name, description)
         self.singular_display_name = singular_display_name
         self.singular_description = singular_description
@@ -155,14 +178,18 @@ class CollectiveItem(Item):
 class RoomItem:
 
     def __init__(self, item_name, narration):
+        self.item = None
+        self.item_name = item_name
+        self.narration = narration
+
+    def setup_on_start(self):
         import global_collections
-        self.item = global_collections.items.get(item_name)
-        self.narrative_text = narration
+        self.item = global_collections.items.get(self.item_name)
         if self.item is None:
-            printWarning(f"{item_name} not found in item list")
+            print_warning(f"{self.item_name} not found in item list")
 
     def narration(self):
-        return self.narrative_text
+        return self.narration
 
 
 # Data object to facilitate the user being able to move around with both
@@ -172,27 +199,30 @@ class RoomConnector:
     def __init__(self,
                  direction,                 # Direction player must specify to advance to this room
                  room_name,
-                 connector_item="",         # Optional connecting item that may connect two rooms
+                 connector_item_name="",    # Optional connecting item that may connect two rooms
                  narrative_text="To your",  # Narrative text to be shown when presenting directions to the user
                  known_to_player=False,     # If this is true and a connector item is used, will specify where the room leads
                  article="the"):
 
-        import global_collections
-
+        self.connector_item_name = connector_item_name
         self.direction: str = direction
         self.narrative_text = narrative_text
         self.article: str = article
 
-        self.room: Room = global_collections.rooms.get(room_name)
-        self.connector_item: Optional[Item] = global_collections.items.get(connector_item)
+        self.room_name = room_name
+        self.room: Room
+        self.connector_item: Optional[Item] = None
+        self.known_to_player = known_to_player
 
-        roomNotFoundWarning(self.room)
+    # initialize rooms
+    def setup_on_start(self):
+        import global_collections
+        self.room = global_collections.rooms[self.room_name]
+        self.connector_item = global_collections.items.get(self.connector_item_name)
 
         if self.connector_item is None:
-            if connector_item != "": itemNotFoundWarning(connector_item)
+            if self.connector_item_name != "": warning_item_not_found(self.connector_item_name)
             self.known_to_player = True
-        else:
-            self.known_to_player = known_to_player
 
     # To facilitate saying "There are stairs" or "There is a door"
     def get_article_with_existential_connector(self, article) -> str:
@@ -230,56 +260,23 @@ class RoomConnector:
     def get_interp_narration(self):
         return self.narrative_text.replace("$$this", self.get_display_name()).replace("$$direction", self.direction)
 
-    # For connectors with items, will print the connecting room if known to player.
+    # For item_setup_dict with items, will print the connecting room if known to player.
     def known_to_player_text(self):
         if self.connector_item is not None and self.known_to_player:
             return f" leading to {self.room.article} {self.room.display_name}"
         else:
             return ""
 
-def printWarning(str):
+
+def print_warning(str):
     print(f"Warning! {str}")
 
-def roomNotFoundWarning(room):
+
+def warning_room_not_found(room):
     if room is None:
-        printWarning(f"{str} not found in room list")
+        print_warning(f"{str} not found in room list")
 
-def itemNotFoundWarning(item):
+
+def warning_item_not_found(item):
     if item is None:
-        printWarning(f"{str} not found in item list")
-
-# class RoomConnectorMapCardinal:
-#
-#     def __init__(self,
-#                  north=None,
-#                  south=None,
-#                  east=None,
-#                  west=None,
-#                  up=None,
-#                  down=None):
-#
-#         self.north: Optional[RoomConnector] = rooms.get(north)
-#         self.east: Optional[RoomConnector] = rooms.get(east)
-#         self.south: Optional[RoomConnector] = rooms.get(south)
-#         self.west: Optional[RoomConnector] = rooms.get(west)
-#         self.up: Optional[RoomConnector] = rooms.get(up)
-#         self.down: Optional[RoomConnector] = rooms.get(down)
-#
-#     def printNarrative(self) -> str:
-#         narration = ""
-#         if self.north is not None:
-#             narration += f"to the NORTH is {self.north.connector_item.article} {self.north.connector_item.display_name},"
-#         if self.east is not None:
-#             narration += f"to the EAST is {self.east.connector_item.article} {self.east.connector_item.display_name},"
-#         if self.south is not None:
-#             narration += f"to the SOUTH is {self.south.connector_item.article} {self.south.connector_item.display_name},"
-#         if self.west is not None:
-#             narration += f"to the WEST is {self.west.connector_item.article} {self.west.connector_item.display_name},"
-#         if self.up is not None:
-#             narration += f"Leading UP is {self.up.connector_item.article} {self.up.connector_item.display_name},"
-#         if self.down is not None:
-#             narration += f"BELOW you is {self.down.connector_item.article} {self.down.connector_item.display_name}"
-#
-#         narration.rstrip(',')
-#         narration.capitalize()
-#         return narration
+        print_warning(f"{str} not found in item list")
