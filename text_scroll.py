@@ -8,15 +8,6 @@ class Scroll:
                                    's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '',
                                    '>']
 
-    def display_text_in_scroll(self) -> list:
-        """
-        returns text_in_scroll
-        """
-        txt_len = len(self.text_in_scroll)
-        display_text = self.text_in_scroll[(txt_len - 20):txt_len]
-
-        return display_text
-
     def clear_text_in_scroll(self) -> None:
         """
         clears text_in_scroll
@@ -24,6 +15,10 @@ class Scroll:
         self.text_in_scroll = []
 
     def get_max_scroll_page(self) -> int:
+        """
+        returns the maximum page number
+        used in the logic of "View Next Page", "View Previous Page"
+        """
         if len(self.text_in_scroll) % 23 == 0:
             max_page = (len(self.text_in_scroll) // 23) - 1
         else:

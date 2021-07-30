@@ -10,11 +10,6 @@ class GameGUI:
     def __init__(self):
         self.window_height = 800
         self.surface = game.display.set_mode((800, 800))
-
-        # to test scrolling (ie. initialize with several too many elements),
-        #   self.scroll = scroll.Scroll(1)
-        # else:
-        #   self.scroll = scroll.Scroll()
         self.scroll = scroll.Scroll(1)
         self.colors: dict = colors.Colors().get_colors()
         self.game_typing: bool = False
@@ -54,15 +49,16 @@ class GameGUI:
         # while 1 loop maintains display updates and should only terminate
         #   upon game ending
         while 1:
-            # constant check for game.QUIT
             for event in game.event.get():
+                # GUI game loop abstracted to self.check_event() and
+                #   subsequent/related functions
                 status = self.check_event(event=event)
                 if status == 'main menu':
                     return status
 
             # re-render text-entry box
             # if user_entry is not empty, also re-render that text within box
-            self.draw_text_entry_box()
+            self.render_text_entry_box()
             if self.user_entry != '':
                 self.display_user_text_in_box()
             game.display.update()
@@ -89,64 +85,60 @@ class GameGUI:
         self.surface.blit(background, (0, 0))
 
         # draw outline
-        self.draw_outline(buffer, thickness, board_width, self.colors['white'])
+        self.render_outline(buffer, thickness, board_width,
+                            self.colors['white'])
         # draw text-entry box
-        self.draw_text_entry_box()
+        self.render_text_entry_box()
         # draw entered text box
-        self.draw_scroll_text_box()
+        self.render_scroll_text_box()
         # write buttons: Exit, Save, View Previous & View Next
-        self.write_button(btn_text='Exit', pos=(730, 65))
-        self.write_button(btn_text='Save', pos=(730, 35))
+        self.render_button(btn_text='Exit', pos=(730, 65))
+        self.render_button(btn_text='Save', pos=(730, 35))
         if len(self.scroll.text_in_scroll) > 23 and \
                 self.scroll_page != self.scroll.get_max_scroll_page():
-            self.write_button(btn_text='View Previous Page', pos=(45, 35))
+            self.render_button(btn_text='View Previous Page', pos=(45, 35))
         if self.scroll_page > 0:
-            self.write_button(btn_text='View Next Page', pos=(45, 65))
-            self.write_button(btn_text='Back to Current Page', pos=(300, 65))
+            self.render_button(btn_text='View Next Page', pos=(45, 65))
+            self.render_button(btn_text='Back to Current Page', pos=(300, 65))
 
         # display any scroll text that needs displayed
         self.display_text_in_scroll()
 
-    def draw_outline(self, buffer: int, thickness: int,
-                     window_width: int, color: tuple) -> None:
+    def render_outline(self, buffer: int, thickness: int,
+                       window_width: int, color: tuple) -> None:
         """
         takes 4 parameters: buffer, thickness, window_width (int),
             and color (tuple)
         returns None
-
         renders the white outline
         """
-
         outline = Rect(buffer - thickness, buffer - thickness,
                        (window_width + (2 * thickness)),
                        window_width + (2 * thickness))
-
         game.draw.rect(surface=self.surface, color=color,
                        rect=outline, width=thickness)
 
-    def draw_text_entry_box(self) -> None:
+    def render_text_entry_box(self) -> None:
         """
         takes no parameters
         returns None
-
         renders the text-entry box (not the text itself)
         """
         text_entry_box = game.Rect(100, 600, 600, 100)
         game.draw.rect(surface=self.surface, color=self.colors['dark_grey'],
                        rect=text_entry_box)
 
-    def draw_scroll_text_box(self) -> None:
+    def render_scroll_text_box(self) -> None:
         """
         takes no parameters
         returns None
-
         renders the scroll text box (not the text itself)
         """
         text_entry_box = game.Rect(100, 100, 600, 480)
         game.draw.rect(surface=self.surface, color=self.colors['dark_grey'],
                        rect=text_entry_box)
 
-    def write_button(self, btn_text: str, pos: tuple) -> None:
+    def render_button(self, btn_text: str, pos: tuple) -> None:
         """
         takes one parameter: highlighted (int)
         returns None
@@ -173,12 +165,10 @@ class GameGUI:
     def handle_text_entry(self, event: game.event) -> None:
         """
         takes two parameters: event (pygame.event), text (str)
-
         If event.key == 'return' -> add text to self.scroll.text_in_scroll
             and re-render accordingly
         If event.key == 'backspace' -> remove last character in text
         If event.key is anything else, append the char to str text
-
         return text
         """
         # if user presses 'return', append text entry to
@@ -191,7 +181,7 @@ class GameGUI:
 
                 # redraw the scroll text box to 'overwrite' any previously
                 #   rendered text
-                self.draw_scroll_text_box()
+                self.render_scroll_text_box()
 
                 # anytime we want to display text from self.text_in_scroll
                 #   we need to ensure it is of appropriate size, and thus need
@@ -244,10 +234,16 @@ class GameGUI:
 
     def handle_game_text(self) -> None:
         game_text = self.load_game_text()
-        self.display_game_text(text_list=game_text)
+        self.render_game_text(text_list=game_text)
         return
 
     def load_game_text(self, text='') -> list:
+        """
+        takes one parameter: text (str)
+        returns a list of strings in the form that is displayable:
+            ie. fewer than 75 chars per line, split at space chars, and with
+            newline chars accounted for
+        """
         # INTEGRATE WITH TEXT-PARSING, ETC
         # sample_text to be replaced by function parameter 'text'
         sample_text = 'This is text for testing.. \n' \
@@ -290,14 +286,16 @@ class GameGUI:
                     to_list = sample_text2[split_index[x]:split_index[x + 1]]
 
                 text_list.append(to_list)
-
         else:
             text_list.append(sample_text2)
         return text_list
 
-    def display_game_text(self, text_list: list) -> None:
+    def render_game_text(self, text_list: list) -> None:
+        """
+        takes one parameter: text_list (list<str>)
+        renders text_list line by line to text scroll
+        """
         wait_val = 30
-
         for line in text_list:
             self.scroll.text_in_scroll.append('')
 
@@ -307,7 +305,7 @@ class GameGUI:
 
                 # redraw the scroll text box to 'overwrite' any previously
                 #   rendered text
-                self.draw_scroll_text_box()
+                self.render_scroll_text_box()
 
                 # anytime we want to display text from self.text_in_scroll
                 #   we need to ensure it is of appropriate size, and thus need
@@ -315,17 +313,22 @@ class GameGUI:
                 self.display_text_in_scroll()
                 game.display.update()
                 game.time.wait(wait_val)
-            game.time.wait(wait_val*2)
+            game.time.wait(wait_val * 2)
 
         self.scroll.text_in_scroll.append('')
         self.scroll.text_in_scroll.append('>')
-        self.draw_scroll_text_box()
+        self.render_scroll_text_box()
         self.display_text_in_scroll()
         game.display.update()
 
         self.game_typing = False
 
     def view_history(self, direction: str):
+        """
+        takes one parameter: direction (str) which can either be 'prev',
+            'next', or 'reset'
+        returns None
+        """
         if direction == 'prev':
             if self.scroll_page != self.scroll.get_max_scroll_page():
                 self.scroll_page += 1
@@ -341,6 +344,14 @@ class GameGUI:
         self.set_game_screen()
 
     def check_event(self, event):
+        """
+        abstraction of GUI while game loop
+        calls one of the following based on game events:
+            self.handle_mouse_motion_event()
+            self.handle_mouse_click_event()
+            self.handle_keydown_event()
+        returns None
+        """
         if event.type == game.QUIT:
             game.quit()
             sys.exit()
@@ -383,9 +394,6 @@ class GameGUI:
             if self.highlighted != '':
                 self.highlighted: str = ''
 
-        # entire game_screen must be re-rendered, so we
-        #   must ensure that the scroll text and all other
-        #   components are appropriately maintained
         self.set_game_screen()
 
     def handle_mouse_click_event(self):
@@ -401,19 +409,17 @@ class GameGUI:
                     if save_game != 'refresh':
                         break
                 self.set_game_screen()
-
             # elif in area of exit btn
             elif 760 > mouse[0] > 730 and 90 > mouse[1] > 70:
                 return 'main menu'
-
-            # elif in area of View Previous Text btn
+            # elif in area of View Previous btn
             elif 195 > mouse[0] > 45 and 60 > mouse[1] > 40:
                 self.view_history(direction='prev')
-
+            # elif in area of View Next btn
             elif self.scroll_page > 0 and 175 > mouse[0] > 45 and \
                     90 > mouse[1] > 70:
                 self.view_history(direction='next')
-
+            # elif in area of Back to Current btn
             elif self.scroll_page > 0 and 475 > mouse[0] > 300 and \
                     90 > mouse[1] > 70:
                 self.view_history(direction='reset')
@@ -424,6 +430,6 @@ class GameGUI:
             self.set_game_screen()
             self.handle_text_entry(event=events)
         if events.key == game.K_RETURN and self.game_typing:
-            self.draw_text_entry_box()
+            self.render_text_entry_box()
             game.display.update()
             self.handle_game_text()
