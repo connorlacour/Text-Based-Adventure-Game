@@ -1,4 +1,4 @@
-from global_collections import setup_global_collections, rooms
+from game_objects.global_collections import setup_global_collections, rooms
 from parse_cmd import *
 import unittest
 

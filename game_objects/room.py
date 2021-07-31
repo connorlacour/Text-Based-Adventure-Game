@@ -1,5 +1,8 @@
 from __future__ import annotations  # Enables forward type hints
-from typing import Dict, Optional, List
+from typing import List, Dict, Optional
+
+from game_objects.game_util import print_warning, warning_item_not_found
+from game_objects.items import Item, CollectiveItem, InventoryItem
 
 
 class Room:
@@ -27,6 +30,7 @@ class Room:
 
         self.item_list: Dict[str, RoomItem] = {key: RoomItem(key, value) for (key, value) in
                                                self.item_setup_dict.items()}
+        self.discarded_items: List[Item] = []
         self.connecting_rooms: Dict[str, RoomConnector] = {v.direction: v for v in self.room_list}
 
     # initialize rooms
@@ -40,12 +44,28 @@ class Room:
 
             # Separate initializer method for item list to simplify constructor
 
-    def add_items(self, item_description_dict: Dict[str, str]):
+    def set_item_list(self, item_description_dict: Dict[str, str]):
         self.item_list = {key: RoomItem(key, value) for (key, value) in item_description_dict.items()}
+
+    def add_item(self, item: RoomItem): self.item_list[item.item.name] = item
+
+    def delete_item(self, item: RoomItem):
+        if item.item.name in self.item_list:
+            del self.item_list[item.item.name]
+        else:
+            print_warning(f"Couldn't delete {item.item.name} from {self.name}, doesn't exist")
 
     # Separate initializer method for room list to simplify constructor
     def set_room_map(self, connector_list: List[RoomConnector]):
         self.connecting_rooms = {v.direction: v for v in connector_list}
+
+    def get_item_from_room(self, item_name) -> Optional[RoomItem]:
+        item = self.item_list.get(item_name)
+        if item is not None:
+            return item
+        else:
+            print_warning(f"{item_name} not found in {self.name}")
+            return None
 
     def get_discarded_item_list(self) -> Dict[str, Item]:
         return {key: value for (key, value) in self.item_list.items() if value.item.discarded}
@@ -73,7 +93,7 @@ class Room:
             return self.long_description + "\n" + self.room_list_narration()
 
     def take_item(self, item_name: str) -> str:
-        import global_collections
+        from game_objects.global_collections import player_inventory
 
         item_to_take = self.item_list.get(item_name)
         if item_to_take is not None:
@@ -81,12 +101,12 @@ class Room:
 
                 if isinstance(item_to_take.item, CollectiveItem):
                     new_single_item: InventoryItem = item_to_take.item.new_singular_item()
-                    global_collections.player_inventory[new_single_item.name] = new_single_item
+                    player_inventory[new_single_item.name] = new_single_item
                     return f"You grabbed a {new_single_item.display_name} " \
                            f"from the {item_to_take.item.display_name} and added it to your inventory."
 
                 else:
-                    global_collections.player_inventory[item_name] = item_to_take.item.take
+                    player_inventory[item_name] = item_to_take.item.take
                     del self.item_list[item_name]
                     return f"You took the {item_to_take.item.display_name} and added it to your inventory."
 
@@ -95,83 +115,24 @@ class Room:
         else:
             return f"What {item_name} ???"
 
-    def discard_item(self, item_name: str) -> str:
-        import global_collections
+    def discard_item(self, item_name: str, must_be_in_inventory=True) -> str:
+        from game_objects.global_collections import player_inventory, find_room_item
 
-        item_to_discard = global_collections.player_inventory.get(item_name)
+        item_to_discard = player_inventory.get(item_name)
         if item_to_discard is not None:
-            self.item_list.update({item_name: item_to_discard})
-            del global_collections.player_inventory[item_name]
+            self.discarded_items.append(item_to_discard)
+            del player_inventory[item_name]
             return f"You dropped the {item_name} to the ground."
-        else:
+        elif must_be_in_inventory:
             return f"You don't have {item_to_discard.article} {item_name}, genius!"
-
-
-class Item:
-
-    def __init__(self, name, display_name, description, article="the"):
-        self.name: str = name  # reference name
-        self.article: str = article  # reference name
-
-        self.display_name: str = display_name  # name shown to players
-        self.description: str = description  # look discription
-        self.can_take: bool = True
-        self.discarded = False
-        self.vowels = ['a', 'i', 'o', 'u', 'e']
-
-    def article(self) -> str:
-        if self.display_name[0] in self.vowels:
-            return "an"
         else:
-            return "a"
+            room, item_to_discard = find_room_item(item_name)
+            room.delete_item(item_to_discard)
+            self.discarded_items.append(item_to_discard)
+            return f"You dropped {item_to_discard.item.article} {item_to_discard.item.display_name}"
 
-
-# Can be taken from a room
-class InventoryItem(Item):
-
-    def __init__(self, name, display_name, description, article="the", can_take=True):
-        super().__init__(name, display_name, description, article)
-        self.can_take = can_take
-        self.discarded = False
-
-    def discard(self) -> Item:
-        self.discarded = True
-        return self
-
-
-# Item that cannot be taken from the room
-class SceneryItem(Item):
-
-    def __init__(self, name, display_name, description, article="the"):
-        super().__init__(name, display_name, description, article)
-        self.can_take = False
-
-
-# Item where if it is picked up, it isn't removed from the room
-# Up to max_count items can be taken by the user, resulting in a new item being created
-class CollectiveItem(Item):
-    takenCount: int = 0
-
-    def __init__(self,
-                 name: str,
-                 display_name: str,
-                 description: str,
-                 singular_display_name: str,  # New look discription for created singular objects
-                 singular_description: str,  # New look discription for created singular objects
-                 max_count: int = 5,
-                 article="the"):  # max number of items that can be created from collective
-        super().__init__(name, display_name, description)
-        self.singular_display_name = singular_display_name
-        self.singular_description = singular_description
-        self.maxCount = max_count
-
-    # create a new item with the name: {self.name_#created}
-    def new_singular_item(self) -> Optional[InventoryItem]:
-        if self.takenCount < self.maxCount:
-            self.takenCount += 1
-            return InventoryItem(f"{self.name}_{str(self.takenCount)}", self.singular_display_name,
-                                 self.singular_description)
-
+    def __str__(self):
+        return self.name
 
 # Data object to bundle an item name and item narration together allowing us to more
 #   intuitively initialize room descriptions
@@ -183,14 +144,16 @@ class RoomItem:
         self.narration = narration
 
     def setup_on_start(self):
-        import global_collections
-        self.item = global_collections.items.get(self.item_name)
+        from game_objects.global_collections import items
+        self.item = items.get(self.item_name)
         if self.item is None:
             print_warning(f"{self.item_name} not found in item list")
 
     def narration(self):
         return self.narration
 
+    def __str__(self):
+        return f"{self.item_name}"
 
 # Data object to facilitate the user being able to move around with both
 #       Directions: Go DOWN
@@ -214,11 +177,13 @@ class RoomConnector:
         self.connector_item: Optional[Item] = None
         self.known_to_player = known_to_player
 
+    def __str__(self): return f"{self.room_name}.direction.{self.direction}"
+
     # initialize rooms
     def setup_on_start(self):
-        import global_collections
-        self.room = global_collections.rooms[self.room_name]
-        self.connector_item = global_collections.items.get(self.connector_item_name)
+        from game_objects.global_collections import rooms, items
+        self.room = rooms[self.room_name]
+        self.connector_item = items.get(self.connector_item_name)
 
         if self.connector_item is None:
             if self.connector_item_name != "": warning_item_not_found(self.connector_item_name)
@@ -266,17 +231,3 @@ class RoomConnector:
             return f" leading to {self.room.article} {self.room.display_name}"
         else:
             return ""
-
-
-def print_warning(str):
-    print(f"Warning! {str}")
-
-
-def warning_room_not_found(room):
-    if room is None:
-        print_warning(f"{str} not found in room list")
-
-
-def warning_item_not_found(item):
-    if item is None:
-        print_warning(f"{str} not found in item list")

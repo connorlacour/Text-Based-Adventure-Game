@@ -1,15 +1,17 @@
+from __future__ import annotations  # Enables forward type hints
 import json
-import os
 
-from marshmallow import Schema, fields, post_load, pre_load, post_dump
-from marshmallow.fields import Int, Str, Nested, Bool
-from data_objects import *
+from typing import List
+from marshmallow import Schema, fields, post_load, post_dump
+from marshmallow.fields import Int, Str, Bool
 from marshmallow_oneofschema import OneOfSchema
+
+from game_objects.item_event import ItemEvent
+from game_objects.items import Item, InventoryItem, SceneryItem, CollectiveItem
+from game_objects.room import Room, RoomConnector
 
 
 def load_items_from_file(filename: str) -> List[Item]:
-    dirname = os.path.dirname(__file__)
-    filename = os.path.join(dirname, f'templates/{filename}')
     with open(filename) as file:
         j = json.load(file)
 
@@ -17,17 +19,36 @@ def load_items_from_file(filename: str) -> List[Item]:
 
 
 def load_rooms_from_file(filename: str) -> List[Room]:
-    dirname = os.path.dirname(__file__)
-    filename = os.path.join(dirname, f'templates/{filename}')
     with open(filename) as file:
         j = json.load(file)
 
     return RoomSchema().load(j, many=True)
 
+
+class ItemEventSchema(Schema):
+    SKIP_VALUES = {None}
+
+    events = fields.List(Str())
+    passive_obj = Str()
+
+    @post_load
+    def make_item(self, data, **kwargs):
+        return ItemEvent(**data)
+
+    @post_dump
+    def remove_skip_values(self, data, **kwargs):
+        return {
+            key: value for key, value in data.items()
+            if value is not None or value != ""
+        }
+
+
+
 class InventoryItemSchema(Schema):
     item_type = "Inventory"
     name = Str()
     display_name = Str()
+    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
     article = Str()
     description = Str()
     can_take = Bool()
@@ -44,6 +65,7 @@ class SceneryItemSchema(Schema):
     item_type = "Scenery"
     name = Str()
     display_name = Str()
+    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
     article = Str()
     description = Str()
 
@@ -59,6 +81,7 @@ class CollectiveItemSchema(Schema):
     item_type = "Scenery"
     name = Str()
     display_name = Str()
+    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
     article = Str()
     description = Str()
     singular_display_name = Str()
