@@ -2,7 +2,7 @@ import pygame as game
 import sys
 import game_gui
 import main_menu_gui
-import load_game_gui
+import load_gui
 
 
 def controller() -> None:
@@ -35,14 +35,6 @@ def controller() -> None:
         load_game()
 
 
-def game_menu() -> None:
-    """
-    To be implemented as an in-game menu
-    Should allow exit, load, save
-    """
-    pass
-
-
 def start_new_game() -> None:
     """
     Starts a new game by instantiating a GameGUI() object and calling main()
@@ -52,6 +44,8 @@ def start_new_game() -> None:
     # 'main menu' is returned upon clicking the exit_button in game_gui
     if game_return == "main menu":
         controller()
+    if game_return == "save game":
+        save_game()
 
 
 def load_game() -> None:
@@ -64,12 +58,20 @@ def load_game() -> None:
 
     # this will eventually return something like a save_id to load a formally
     # saved state
-    load = load_game_gui.LoadGameGUI().main()
+    load = load_gui.LoadGameGUI().main()
 
     if load == 'load':
         start_new_game()
     elif load == 'back':
         controller()
+
+
+def save_game() -> None:
+    """
+    Instantiates a SaveGameGUI() object and calls main()
+    """
+    print('saving game..')
+    controller()
 
 
 controller()
