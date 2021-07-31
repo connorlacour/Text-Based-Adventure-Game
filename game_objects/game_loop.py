@@ -1,4 +1,4 @@
-from global_collections import *
+from game_objects.global_collections import *
 from parse_cmd import *
 from typing import Dict, Optional
 
