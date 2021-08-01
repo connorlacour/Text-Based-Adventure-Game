@@ -134,6 +134,7 @@ class Room:
     def __str__(self):
         return self.name
 
+
 # Data object to bundle an item name and item narration together allowing us to more
 #   intuitively initialize room descriptions
 class RoomItem:
@@ -149,11 +150,9 @@ class RoomItem:
         if self.item is None:
             print_warning(f"{self.item_name} not found in item list")
 
-    def narration(self):
-        return self.narration
-
     def __str__(self):
         return f"{self.item_name}"
+
 
 # Data object to facilitate the user being able to move around with both
 #       Directions: Go DOWN

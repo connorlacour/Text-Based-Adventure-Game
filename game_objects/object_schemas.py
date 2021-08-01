@@ -26,10 +26,12 @@ def load_rooms_from_file(filename: str) -> List[Room]:
 
 
 class ItemEventSchema(Schema):
-    SKIP_VALUES = {None}
 
     events = fields.List(Str())
     passive_obj = Str()
+
+    class Meta:
+        ordered = True
 
     @post_load
     def make_item(self, data, **kwargs):
@@ -41,7 +43,6 @@ class ItemEventSchema(Schema):
             key: value for key, value in data.items()
             if value is not None or value != ""
         }
-
 
 
 class InventoryItemSchema(Schema):

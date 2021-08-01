@@ -12,7 +12,8 @@ items: Dict[str, Item] = {}
 player_location = PlayerLocation()
 root_dir = os.path.dirname(__file__)
 
-def get_file_name(filename, dir_name = root_dir,):
+
+def get_file_name(filename, dir_name=root_dir,):
     return os.path.join(dir_name, f'{filename}')
 
 
@@ -60,6 +61,7 @@ def get_item(item_name) -> Optional[Room]:
     item = items.get(item_name)
     if item is None: print_warning(f"{item_name} not found in item list")
     return item
+
 
 def find_room_item(item_name) -> (Optional[Room], Optional[RoomItem]):
     for room in rooms.values():

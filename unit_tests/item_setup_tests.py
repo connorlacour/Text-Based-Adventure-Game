@@ -46,11 +46,13 @@ class ItemSetupTests(unittest.TestCase):
             "move plates to limbo",
             "move bimbus to takkawut",
             "move your booty real fast",
-            "move plates to urmoms_house"
+            "move plates to urmoms_house",
+            "move scroll to player_inventory"
         ]
 
         self.assertTrue("pig" in rooms["dining_room"].item_list)
         print(ItemEvent(move_events).do_event(player_location.room))
+        self.assertTrue("scroll" in player_inventory)
         self.assertFalse("pig" in rooms["dining_room"].item_list)
         self.assertTrue(rooms["foyer"].get_item_from_room("pig") is not None)
 
@@ -65,7 +67,8 @@ class ItemSetupTests(unittest.TestCase):
             """change pig bobs to `BIG PIG`""",
             """change meow max_count to 5""",
             """change plates max_count to 7""",
-            """change dining_room.direction.upwards known_to_player to False"""
+            """change dining_room.direction.upwards known_to_player to False""",
+            "change pig narration to `That's one big pig`"
         ]
 
         e = ItemEvent(change_events)
@@ -73,6 +76,8 @@ class ItemSetupTests(unittest.TestCase):
         print("Change Event Output: \n" + e.do_event(player_location.room))
 
         self.assertTrue(items["pig"].display_name == "BOING")
+        self.assertTrue(rooms["dining_room"].item_list["pig"].narration == "That's one big pig")
+
         self.assertTrue(items["plates"].max_count == 7)
         self.assertTrue(rooms["dining_room"].connecting_rooms["UPWARDS"].known_to_player == False)
 
