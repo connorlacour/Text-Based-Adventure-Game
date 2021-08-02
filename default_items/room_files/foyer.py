@@ -9,13 +9,12 @@ foyer_short_desc: str = "You are in the foyer. "
 foyer_items: object = {
     "chairs": "There is a sitting area with CHAIRS and ",
     "table": "a SMALL TABLE in one corner, and ",
-    "desk": "there is a DESK along the SOUTH wall by the main entrance. ",
-    "doors": "Two doors lead out of the room and further into the building: "
+    "desk": "there is a DESK along the SOUTH wall by the main entrance."
 }
 
 foyer_room_list: list = [{
 		"known_to_player": True,
-		"narrative_text": "one in the NORTH wall that goes to the DOWNSTAIRS HALLWAY and ",
+		"narrative_text": "Two doors lead out of the room and further into the building: one in the NORTH wall that goes to the DOWNSTAIRS HALLWAY and ",
 		"article": "the",
 		"room_name": "downstairs hallway",
 		"direction": "NORTH"
