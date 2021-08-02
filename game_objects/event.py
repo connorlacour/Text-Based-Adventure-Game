@@ -1,20 +1,44 @@
 from __future__ import annotations  # Enables forward type hints
 from typing import Dict, Optional, List, TYPE_CHECKING
-from game_objects.game_util import print_warning, debug_print
+from game_objects.game_util import print_warning, debug_print, pydict
+from game_objects.synonyms import synonym_dict
 
 if TYPE_CHECKING:
     from game_objects.room import Room
 
-
-class ItemEvent:
+class Event:
 
     def __init__(self,
-                 events = [],
-                 passive_obj: str = ""
-                 ):
-
-        self.passive_obj: Optional[str] = passive_obj
+                 events: List[str] = [],
+                 syn_list="",
+                 repeatable=True
+    ):
+        self.passive_obj: str = ""
         self.events: List[str] = events
+        self.verb = ""
+        self.repeatable = repeatable
+
+        if syn_list in synonym_dict:
+            self.synonyms = synonym_dict[syn_list],
+        else:
+            self.synonyms = []
+
+    def __str__(self):
+        if self.verb != "":
+            return str(self.events)
+        else: return self.verb
+
+    def set_verb_and_synonyms(self, verb_obj_dict_key: str = ""):
+        hi = verb_obj_dict_key.split(",")
+        if len(hi) > 1:
+            self.verb = hi[0]
+            self.passive_obj = hi[1]
+        else: self.verb = verb_obj_dict_key
+        if len(self.synonyms) == 0:
+            if len(self.verb.split(" ")) == 1:
+                self.synonyms = [x.upper() for x in pydict.synonym(self.verb)]
+            else:
+                print_warning(f"Custom Synonym not found for multi-word verb {self.verb}")
 
     def do_event(self, room: Room) -> str:
 
@@ -162,7 +186,11 @@ def move(event: str, room_to_check: Optional[Room] = None) -> str:
     if destination_name == "player_inventory":
         destination = player_inventory
     else:
-        destination = get_room(destination_name)
+        if destination_name == "player_room":
+            destination = player_location.room
+        else:
+            destination = get_room(destination_name)
+
         if destination is None:
             return f"You feel like '{target_name}' was supposed to move, but something happened."
         else:
@@ -179,14 +207,15 @@ def move(event: str, room_to_check: Optional[Room] = None) -> str:
     else:
         room_to_check, target_object = find_room_item(target_name)
 
-    destination[target_object.item.name] = target_object
-    room_to_check.delete_item(target_object)
+    if destination_name == "player_inventory": target_object = target_object.item
+    destination[target_name] = target_object
+    room_to_check.delete_item(target_name)
     debug_print(f"Successfully moved {target_object} from {room_to_check} to {destination_name}")
 
     return ""
 
 
-def drop(item_name: str, current_room: Room) -> str:
+def drop(item_name: str, current_room: Room, in_inventory = False) -> str:
 
-    return current_room.discard_item(item_name, False)
+    return current_room.discard_item(item_name, in_inventory)
 

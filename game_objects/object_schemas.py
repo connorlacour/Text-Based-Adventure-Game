@@ -6,7 +6,7 @@ from marshmallow import Schema, fields, post_load, post_dump
 from marshmallow.fields import Int, Str, Bool
 from marshmallow_oneofschema import OneOfSchema
 
-from game_objects.item_event import ItemEvent
+from game_objects.event import Event
 from game_objects.items import Item, InventoryItem, SceneryItem, CollectiveItem
 from game_objects.room import Room, RoomConnector
 
@@ -24,6 +24,12 @@ def load_rooms_from_file(filename: str) -> List[Room]:
 
     return RoomSchema().load(j, many=True)
 
+def load_events_from_file(filename: str) -> List[Room]:
+    with open(filename) as file:
+        j = json.load(file)
+
+    return RoomSchema().load(j, many=True)
+
 
 class ItemEventSchema(Schema):
 
@@ -35,7 +41,7 @@ class ItemEventSchema(Schema):
 
     @post_load
     def make_item(self, data, **kwargs):
-        return ItemEvent(**data)
+        return Event(**data)
 
     @post_dump
     def remove_skip_values(self, data, **kwargs):
@@ -126,6 +132,7 @@ class RoomConnectorSchema(Schema):
     room_name = Str()
     connector_item_name = Str(required=False)
     narrative_text = Str()
+    traversable = Bool()
     known_to_player = Bool()
     article = Str()
 
@@ -148,6 +155,10 @@ class RoomSchema(Schema):
     short_description = Str()
     item_setup_dict = fields.Dict(keys=Str(), values=Str())
     room_list = fields.List(fields.Nested(RoomConnectorSchema))
+    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
+
+    class Meta:
+        ordered = True
 
     @post_load
     def make_room(self, data, **kwargs):
