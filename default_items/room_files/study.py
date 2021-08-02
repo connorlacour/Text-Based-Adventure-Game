@@ -25,6 +25,6 @@ class Study(Room):
         super().__init__("study", "STUDY", "a", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_study():
+def initialize_study(long_desc: str = study_long_desc, short_desc: str = study_short_desc, items: object = study_items, room_list: list = study_room_list):
     """Create default study room for game"""
-    return Study(study_long_desc, study_short_desc, study_items, study_room_list)
+    return Study(long_desc, short_desc, items, room_list)

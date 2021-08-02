@@ -25,6 +25,6 @@ class Bathroom(Room):
         super().__init__("bathroom", "BATHROOM", "the", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_bathroom():
+def initialize_bathroom(long_desc: str = bath_long_desc, short_desc: str = bath_short_desc, items: object = bath_items, room_list: list = bath_room_list):
     """Create default bathroom for game"""
-    return Bathroom(bath_long_desc, bath_short_desc, bath_items, bath_room_list)
+    return Bathroom(long_desc, short_desc, items, room_list)

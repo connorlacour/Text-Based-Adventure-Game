@@ -32,6 +32,6 @@ class Living_Room(Room):
         super().__init__("living room", "LIVING ROOM", "the", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_living_room():
+def initialize_living_room(long_desc: str = living_room_long_desc, short_desc: str = living_room_short_desc, items: object = living_room_items, room_list: list = living_room_room_list):
     """Create default living room for game"""
-    return Living_Room(living_room_long_desc, living_room_short_desc, living_room_items, living_room_room_list)
+    return Living_Room(long_desc, short_desc, items, room_list)

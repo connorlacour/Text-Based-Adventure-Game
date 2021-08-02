@@ -25,6 +25,6 @@ class Closet(Room):
         super().__init__("closet", "CLOSET", "a", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_closet():
+def initialize_closet(long_desc: str = closet_long_desc, short_desc: str = closet_short_desc, items: object = closet_items, room_list: list = closet_room_list):
     """Create default closet room for game"""
-    return Closet(closet_long_desc, closet_short_desc, closet_items, closet_room_list)
+    return Closet(long_desc, short_desc, items, room_list)

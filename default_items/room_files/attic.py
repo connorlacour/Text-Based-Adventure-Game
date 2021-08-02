@@ -37,6 +37,6 @@ class Attic(Room):
         super().__init__("attic", "ATTIC", "the", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_attic():
+def initialize_attic(long_desc: str = attic_long_desc, short_desc: str = attic_short_desc, items: object = attic_items, room_list: list = attic_room_list):
     """Create default attic room for game"""
-    return Attic(attic_long_desc, attic_short_desc, attic_items, attic_room_list)
+    return Attic(long_desc, short_desc, items, room_list)

@@ -43,6 +43,6 @@ class Downstairs_Hallway(Room):
         super().__init__("downstairs hallway", "DOWNSTAIRS HALLWAY", "the", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_down_hallway():
+def initialize_down_hallway(long_desc: str = down_hall_long_desc, short_desc: str = down_hall_short_desc, items: object = down_hall_items, room_list: list = down_hall_room_list):
     """Create default downstairs hallway room for game"""
-    return Downstairs_Hallway(down_hall_long_desc, down_hall_short_desc, down_hall_items, down_hall_room_list)
+    return Downstairs_Hallway(long_desc, short_desc, items, room_list)

@@ -33,6 +33,6 @@ class Kitchen(Room):
         super().__init__("kitchen", "KITCHEN", "the", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_kitchen():
+def initialize_kitchen(long_desc: str = kitchen_long_desc, short_desc: str = kitchen_short_desc, items: object = kitchen_items, room_list: list = kitchen_room_list):
     """Create default kitchen room for game"""
-    return Kitchen(kitchen_long_desc, kitchen_short_desc, kitchen_items, kitchen_room_list)
+    return Kitchen(long_desc, short_desc, items, room_list)

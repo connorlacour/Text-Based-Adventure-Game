@@ -35,10 +35,13 @@ class Foyer(Room):
 
     def game_intro_narrative(self):
         if self.new_game_intro:
-            print(self.foyer_intro)
+#            print(self.foyer_intro)
             self.new_game_intro = False
+            return self.foyer_intro
+        else:
+            return False
 
 
-def initialize_foyer():
+def initialize_foyer(long_desc: str = foyer_long_desc, short_desc: str = foyer_short_desc, items: object = foyer_items, room_list: list = foyer_room_list):
     """Create default foyer room for game"""
-    return Foyer(foyer_long_desc, foyer_short_desc, foyer_items, foyer_room_list)
+    return Foyer(long_desc, short_desc, items, room_list)

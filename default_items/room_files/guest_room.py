@@ -28,10 +28,13 @@ class Guest_Bedroom(Room):
 
     def guest_intro_narrative(self):
         if self.first_entry:
-            print(self.guest_intro)
+#            print(self.guest_intro)
             self.first_entry = False
+            return self.guest_intro
+        else:
+            return False
 
 
-def initialize_guest_bedroom():
+def initialize_guest_bedroom(long_desc: str = guest_bed_long_desc, short_desc: str = guest_bed_short_desc, items: object = guest_bed_items, room_list: list = guest_bed_room_list):
     """Create default guest bedroom for game"""
-    return Guest_Bedroom(guest_bed_long_desc, guest_bed_short_desc, guest_bed_items, guest_bed_room_list)
+    return Guest_Bedroom(long_desc, short_desc, items, room_list)

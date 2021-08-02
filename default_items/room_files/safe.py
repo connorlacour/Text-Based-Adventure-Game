@@ -26,6 +26,6 @@ class Safe(Room):
         super().__init__("safe", "SAFE", "the", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_safe():
+def initialize_safe(long_desc: str = safe_long_desc, short_desc: str = safe_short_desc, items: object = safe_items, room_list: list = safe_room_list):
     """Create default safe for game"""
-    return Safe(safe_long_desc, safe_short_desc, safe_items, safe_room_list)
+    return Safe(long_desc, short_desc, items, room_list)

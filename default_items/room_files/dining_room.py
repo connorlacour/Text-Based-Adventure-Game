@@ -31,6 +31,6 @@ class Dining_Room(Room):
         super().__init__("dining room", "DINING ROOM", "the", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_dining_room():
+def initialize_dining_room(long_desc: str = dining_room_long_desc, short_desc: str = dining_room_short_desc, items: object = dining_room_items, room_list: list = dining_room_room_list):
     """Create default dining room for game"""
-    return Dining_Room(dining_room_long_desc, dining_room_short_desc, dining_room_items, dining_room_room_list)
+    return Dining_Room(long_desc, short_desc, items, room_list)

@@ -25,6 +25,6 @@ class Home_Gym(Room):
         super().__init__("home gym", "HOME GYM", "a", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_home_gym():
+def initialize_home_gym(long_desc: str = gym_long_desc, short_desc: str = gym_short_desc, items: object = gym_items, room_list: list = gym_room_list):
     """Create default home gym room for game"""
-    return Home_Gym(gym_long_desc, gym_short_desc, gym_items, gym_room_list)
+    return Home_Gym(long_desc, short_desc, items, room_list)

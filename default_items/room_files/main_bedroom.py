@@ -31,6 +31,6 @@ class Main_Bedroom(Room):
         super().__init__("main bedroom", "MAIN BEDROOM", "the", long_description, short_description, item_setup_dict=item_setup_dict, room_list=room_list)
 
 
-def initialize_main_bedroom():
+def initialize_main_bedroom(long_desc: str = main_bed_long_desc, short_desc: str = main_bed_short_desc, items: object = main_bed_items, room_list: list = main_bed_room_list):
     """Create default main bedroom for game"""
-    return Main_Bedroom(main_bed_long_desc, main_bed_short_desc, main_bed_items, main_bed_room_list)
+    return Main_Bedroom(long_desc, short_desc, items, room_list)
