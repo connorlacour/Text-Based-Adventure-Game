@@ -29,7 +29,7 @@ def get_next_narration(user_text) -> str:
         if active_object == "":
             player_location.room.visited = False
             return "You LOOK AROUND."
-        elif active_object == "inventory":
+        elif active_object == "INVENTORY":
             return print_inventory()
         else:
             return look_at_object(active_object)
@@ -62,11 +62,6 @@ def look_at_object(obj_name):
         return obj.description
     else:
         return "There is no {obj_name} to look at."
-
-
-def print_inventory():
-    return "to do"
-
 
 def take_object(verb, object_name):
     narration = ""

@@ -38,7 +38,15 @@ def get_item_in_player_scope(item_name: str) -> Optional[Item]:
 
 
 def print_inventory() -> str:
-    return "todo"
+    narration = "You are currently holding:"
+    if len(player_inventory) == 0:
+        narration += " NOTHING.  Try picking something up!"
+    else:
+
+        for item in player_inventory.values():
+            narration += f" \n-{item.display_name}"
+
+    return narration
 
 
 def get_items_display_name() -> Dict[str, str]:
