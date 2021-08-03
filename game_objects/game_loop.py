@@ -27,7 +27,8 @@ def get_next_narration(user_text) -> str:
     elif verb in look_synonyms:
 
         if active_object == "":
-            return "You LOOK AROUND." #Since the next loop will just print room description, just skip.
+            player_location.room.visited = False
+            return "You LOOK AROUND."
         elif active_object == "inventory":
             return print_inventory()
         else:
