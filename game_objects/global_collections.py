@@ -29,6 +29,10 @@ def get_item_in_player_scope(item_name: str) -> Optional[Item]:
         return player_location.room.item_list[item_name].item
     elif item_name in player_location.room.discarded_items:
         return player_location.room.discarded_items[item_name]
+    elif item_name != "":
+        room_connectors_dict =  {x.connector_item_name: x.connector_item for x in player_location.room.connecting_rooms.values()}
+        if item_name in room_connectors_dict:
+            return room_connectors_dict[item_name]
 
     print_warning(f"Couldn't find {item_name} in inventory or {player_location}")
 

@@ -32,7 +32,7 @@ def get_next_narration(user_text) -> str:
         elif active_object == "inventory":
             return print_inventory()
         else:
-            return look_at_object()
+            return look_at_object(active_object)
 
     elif active_object == "":
         narration = resolve_itemless_events(verb)
@@ -55,9 +55,13 @@ def get_next_narration(user_text) -> str:
             narration = f"You try to {verb} to no avail."
         return narration
 
-def look_at_object():
 
-    return "to do"
+def look_at_object(obj_name):
+    obj = get_item_in_player_scope(obj_name)
+    if obj is not None:
+        return obj.description
+    else:
+        return "There is no {obj_name} to look at."
 
 
 def print_inventory():

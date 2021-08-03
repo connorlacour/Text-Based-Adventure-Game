@@ -95,6 +95,8 @@ def parse_entry(usr_cmd: str) -> (str, str, str ,str):
 
     if passive_obj == "" and active_object != "":
         passive_obj = active_object
+    elif passive_obj != "" and active_object == "":
+        active_object = passive_obj
 
     return verb, direction, passive_obj, active_object
 
