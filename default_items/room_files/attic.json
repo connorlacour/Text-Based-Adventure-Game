@@ -22,7 +22,7 @@
 		"direction": "WEST"
 	},{
 		"known_to_player": false,
-		"narrative_text": "The BOOKCASE slides to the side revealing a walk-in $$room_name with a KEYPAD and a SLOT for a key as well.",
+		"narrative_text": "The BOOKCASE slides to the side revealing a walk-in $$room_name with a KEYPAD.",
 		"article": "the",
 		"room_name": "safe",
 		"direction": "NORTH"

@@ -1,0 +1,36 @@
+[{
+	"name": "downstairs hallway",
+	"item_setup_dict": {
+        "painting": "A PAINTING and ",
+        "podium": "PODIUM are also along the EAST wall."
+    },
+	"short_description": "You are in the downstairs hallway. ",
+	"article": "the",
+	"long_description": "The downstairs hallway appears completely empty at first glance.  The door in the NORTH wall leads to the KITCHEN; the door in the WEST wall to the LIVING ROOM; and finally, the door in the SOUTH wall leads to the FOYER. On the EAST wall, you see a PAINTING hanging directly across from the LIVING ROOM.  Underneath the PAINTING is a PODIUM with a glass case on top of it.  Next to the PODIUM, leading up from the side of the EAST wall, are STAIRS leading to the SECOND FLOOR.",
+	"display_name": "DINING ROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The door in the $$direction wall leads to the $$room_name, ",
+		"article": "the",
+		"room_name": "kitchen",
+		"direction": "NORTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "the door in the $$direction wall leads to the $$room_name, and ",
+		"article": "the",
+		"room_name": "living room",
+		"direction": "WEST"
+	},{
+		"known_to_player": true,
+		"narrative_text": "the door in the $$direction wall leads to the $$room_name. ",
+		"article": "the",
+		"room_name": "foyer",
+		"direction": "SOUTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "There are STAIRS leading to the $$room_name in the $$direction wall. ",
+		"article": "the",
+		"room_name": "upstairs hallway",
+		"direction": "NORTH"
+	}]
+}]
