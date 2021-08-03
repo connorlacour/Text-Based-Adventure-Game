@@ -7,13 +7,11 @@
 }, {
 	"name": "stairs_to_bathroom",
 	"display_name": "STAIRS",
-	"article": "the",
 	"description": "I warned you bro, I warned you about the STAIRS...",
 	"type": "Scenery"
 }, {
 	"name": "dining_table",
 	"display_name": "DINING TABLE",
-	"article": "the",
 	"description": "Strewn with rotting food and even a stuffed pig. Who could have left it in such a state?",
 	"type": "Scenery"
 },
@@ -61,7 +59,7 @@
 	"events": {
 		"WASH": {
 			"events": [
-				"print You try to $$verb the plate, with what? Your tongue?"
+				"print You try to $$verb the $$this, with what? Your tongue?"
 			]
 		}
 	}
@@ -76,7 +74,7 @@
 	"events": {
 		"WASH": {
 			"events": [
-				"print You try to $$verb the plate, with what? Your tongue?"
+				"print You try to $$verb the $$this, with what? Your tongue?"
 			]
 		},
 		"PLACE,PIG": {

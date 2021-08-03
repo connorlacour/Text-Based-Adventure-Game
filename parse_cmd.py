@@ -4,7 +4,8 @@
 from typing import Dict, Optional
 from PyDictionary import PyDictionary
 from game_objects.global_collections import *
-from game_objects.game_util import pydict
+
+pydict = PyDictionary()
 
 # Set up defined directions, determiners, and prepositions
 directions = {"NORTH", "SOUTH", "EAST", "WEST"}
@@ -31,11 +32,12 @@ def setup_parser():
     #Add all exisiting directions to dirs
     for room in rooms.values():
         for direction in room.connecting_rooms.keys():
-            directions.add(direction)
+            directions.add(direction.upper())
 
 
 
 def parse_entry(usr_cmd: str) -> (str, str, str ,str):
+    import time
     """
     Processing function for counting words in user entered string,
     and isolating verbs, directions, and objects
@@ -52,7 +54,10 @@ def parse_entry(usr_cmd: str) -> (str, str, str ,str):
 
     verb, direction, passive_obj, active_object = "", "", "", ""
     for word in word_list:
+        start_time = time.time()
         word_type = pydict.meaning(word, disable_errors=True)
+        print("meaning call: --- %s seconds ---" % (time.time() - start_time))
+
         # Save directional words first
         if after_verb:
             after_verb = False
@@ -76,7 +81,10 @@ def parse_entry(usr_cmd: str) -> (str, str, str ,str):
                     passive_obj = word
                     after_preposition = False
                 else:
-                    active_object = word
+                    if active_object == "":
+                        active_object = word
+                    elif passive_obj == "": #If active already specified second becomes passive by defualt
+                        passive_obj = word
                 continue
 
     if passive_obj == "" and active_object != "":

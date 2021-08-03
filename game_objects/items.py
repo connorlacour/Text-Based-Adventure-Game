@@ -1,7 +1,7 @@
 from typing import Optional, List, Dict
 
 from game_objects.event import Event
-
+from game_objects.game_util import print_warning
 
 class Item:
 
@@ -24,6 +24,24 @@ class Item:
             return "an"
         else:
             return "a"
+
+    def do_event(self, verb, room = None) -> str:
+        from game_objects.global_collections import player_location
+        narration = ""
+        event = self.events.get(verb)
+        if room is None: room = player_location.room
+        if event is not None:
+            if not event.repeatable:
+                narration = event.do_event(room, verb, self.display_name)
+                del self.events[verb]
+                room.update_item_event_mapping_cache()
+            else:
+                narration = event.do_event(room, verb, self.display_name)
+
+        else:
+            print_warning(f"Couldn't find {verb} in {self}")
+        return narration
+
 
     def __str__(self):
         return self.name
