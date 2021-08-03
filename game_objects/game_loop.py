@@ -65,15 +65,15 @@ def print_inventory():
 
 def take_object(verb, object_name):
     narration = ""
-    if object_name in player_location.room.item_list or object_name in player_location.room.discarded_items.values():
+    if object_name in player_location.room.item_list or object_name in player_location.room.discarded_items.keys():
 
-        obj = player_location.room.item_list[object_name]
-        if obj.item.can_take:
+        obj = get_item_in_player_scope(object_name)
+        if obj.can_take:
             narration = move(f"move {object_name} to player_inventory", player_location.room)
             if narration == "":
-                narration = f"You {verb} the {obj.item.display_name} and put it in your INVENTORY"
+                narration = f"You {verb} the {obj.display_name} and put it in your INVENTORY"
         else:
-            narration = f"You can't {verb} the {obj.item.display_name}!"
+            narration = f"You can't {verb} the {obj.display_name}!"
 
     if narration == "":
         if object_name in items:
@@ -164,7 +164,8 @@ def move_player(direction, verb):
     return f"You {verb} {direction} to {player_location.room.display_name}"
 
 
-#will find name for first item in room or connecting item list
+# I'm sorry for this method
+# will find name for first item in room or connecting item list
 # that contains the noun extracted from the list of display names in room
 def resolve_noun_to_item_name(active, passive, room: Room = None) -> (str, str):
     if room is None: room = player_location.room
@@ -179,6 +180,16 @@ def resolve_noun_to_item_name(active, passive, room: Room = None) -> (str, str):
             if passive == active:
                 return a, a
         if passive in item.item.display_name:
+            p = name
+
+    if a != "" and p != "": return a, p
+
+    for name, item in room.discarded_items.items():
+        if active in item.display_name:
+            a = name
+            if passive == active:
+                return a, a
+        if passive in item.display_name:
             p = name
 
     if a != "" and p != "": return a, p
