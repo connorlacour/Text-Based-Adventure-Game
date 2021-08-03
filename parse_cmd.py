@@ -3,7 +3,7 @@
 # Can be used for determining whether the word is a verb or noun and for finding synonyms
 from typing import Dict, Optional
 from PyDictionary import PyDictionary
-from game_objects.global_collections import *
+
 
 pydict = PyDictionary()
 
@@ -29,6 +29,7 @@ actions = {'GO',
 
 
 def setup_parser():
+    from game_objects.global_collections import rooms
     #Add all exisiting directions to dirs
     for room in rooms.values():
         for direction in room.connecting_rooms.keys():

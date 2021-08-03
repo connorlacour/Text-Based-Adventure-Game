@@ -146,7 +146,7 @@ class Room:
 
     def get_room_narration(self) -> str:
         if self.visited:
-            narration = f"{self.short_description} {self.item_list_narration()}{self.get_discard_narration()}\n{self.room_list_narration()}"
+            narration = f"{self.short_description} {self.item_list_narration()}{self.get_discard_narration()}\n{self.       room_list_narration()}"
             return narration
         else:
             self.visited = True

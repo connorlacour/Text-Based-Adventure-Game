@@ -66,7 +66,7 @@ def print_inventory():
 
 def take_object(verb, object_name):
     narration = ""
-    if object_name in player_location.room.item_list or object_name in player_location.room.get_discarded_item_list():
+    if object_name in player_location.room.item_list or object_name in player_location.room.discarded_items():
 
         obj = player_location.room.item_list[object_name]
         if obj.item.can_take:

@@ -13,6 +13,7 @@ def get_room_connector(room_name: str, direction_name: str) -> (str, object):
     narration = ""
     room = get_room(room_name)
     direction = None
+
     if room is not None:
         if direction_name in room.connecting_rooms:
             direction = room.connecting_rooms[direction_name]

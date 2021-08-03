@@ -1,4 +1,4 @@
-from game_objects.global_collections import setup_global_collections, rooms
+from game_objects.global_collections import *
 from parse_cmd import *
 import unittest
 
@@ -38,7 +38,7 @@ class TestParse(unittest.TestCase):
         self.assertTrue(passive_obj == "SCROLL")
 
     def test3(self):
-        setup_global_collections_for_test(test_dir = test_dir)
+        setup_global_collections_for_test(test_dir)
         verb, direction, passive_obj, active_object = parse_entry("Go North")
         self.assertTrue(verb == "GO")
         self.assertTrue(direction == "NORTH")

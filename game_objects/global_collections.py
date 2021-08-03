@@ -11,6 +11,7 @@ from collections import defaultdict
 
 rooms: Dict[str, Room] = {}
 items: Dict[str, Item] = {}
+
 cached_inventory_synonym_mapping: Dict[str, List[str]] = {}
 
 global_events: Dict[str, Event] = events
