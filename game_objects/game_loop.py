@@ -1,7 +1,7 @@
 from parse_cmd import *
 from game_objects.event import *
 from game_objects.synonyms import *
-
+from game_objects.global_collections import *
 
 class GameLoop:
 

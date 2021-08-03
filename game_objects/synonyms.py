@@ -1,6 +1,4 @@
 
-
-
 go_synonyms = {
     "GO", "WALK", "RUN", "CRAWL", "TRAVEL"
 }

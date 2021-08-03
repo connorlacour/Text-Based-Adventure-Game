@@ -38,8 +38,6 @@ class Room:
 
     # initialize rooms
     def setup_on_start(self):
-        import time
-        start_time = time.time()
 
         for connector in self.connecting_rooms.values():
             connector.setup_on_start()
@@ -51,7 +49,6 @@ class Room:
             self.events[verb].set_verb_and_synonyms(verb)
 
         self.cached_item_event_synonym_mapping = self.item_event_synonym_mapping()
-        print("Room Setup on start: --- %s seconds ---" % (time.time() - start_time))
 
     def get_item_event_synonym_mapping(self):
         return self.cached_item_event_synonym_mapping
