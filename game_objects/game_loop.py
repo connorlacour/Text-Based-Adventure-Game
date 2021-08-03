@@ -11,7 +11,6 @@ class GameLoop:
         setup_global_collections()
 
 
-
 def get_next_narration(user_text) -> str:
     verb, direction, passive_obj, active_object = parse_entry(user_text)
     print(f"v: {verb}, d: {direction}, po: {passive_obj}, ao:{active_object}")
@@ -66,7 +65,7 @@ def print_inventory():
 
 def take_object(verb, object_name):
     narration = ""
-    if object_name in player_location.room.item_list or object_name in player_location.room.discarded_items():
+    if object_name in player_location.room.item_list or object_name in player_location.room.discarded_items.values():
 
         obj = player_location.room.item_list[object_name]
         if obj.item.can_take:
@@ -75,6 +74,13 @@ def take_object(verb, object_name):
                 narration = f"You {verb} the {obj.item.display_name} and put it in your INVENTORY"
         else:
             narration = f"You can't {verb} the {obj.item.display_name}!"
+
+    if narration == "":
+        if object_name in items:
+            obj = items[object_name]
+            narration = f"You can't {verb} {obj.display_name} !"
+        else:
+            return f"You can't take that!"
     return narration
 
 
