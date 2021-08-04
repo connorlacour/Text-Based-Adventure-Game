@@ -1,0 +1,18 @@
+[{
+	"name": "bathroom",
+	"item_setup_dict": {
+        "medicine cabinet": "There is a MEDICINE CABINET above the sink set in the NORTH wall and ",
+        "waste basket": "a WASTE BASKET against the EAST wall. "
+    },
+	"short_description": "You are in the bathroom. ",
+	"article": "the",
+	"long_description": "You look around the bathroom quickly.  It is a large room with a tub big enough for two or three people, but it is a bathroom nevertheless.  The white tile reflects what little light it catches and makes the room easy to look around.  You notice the MEDICINE CABINET set in the NORTH wall and a WASTE BASKET against the EAST wall.  The door in the WEST wall leads back to the MAIN BEDROOM.",
+	"display_name": "BATHROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The door in the $$direction wall leads back to the $$room_name. ",
+		"article": "the",
+		"room_name": "main bedroom",
+		"direction": "WEST"
+	}]
+}]

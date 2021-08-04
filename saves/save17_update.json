@@ -1,0 +1,78 @@
+[
+  {
+    "name": "dining_room",
+    "article": "the",
+    "display_name": "DINING ROOM",
+    "item_setup_dict": {
+      "chairs": "CHAIRS litter the ground and ",
+      "plates": "PLATES are scattered on the a DINING TABLE. ",
+      "dining_table": "In the center of the DINING_TABLE there is a ",
+      "pig": "PIG",
+      "scroll": " with a ROLLED-UP-SCROLL wedged in it's mouth. "
+    },
+    "room_list": [
+      {
+        "article": "a",
+        "room_name": "kitchen",
+        "connector_item_name": "",
+        "narrative_text": "To your",
+        "direction": "RIGHT",
+        "known_to_player": true
+      },
+      {
+        "article": "the",
+        "room_name": "bathroom",
+        "connector_item_name": "stairs_to_foyer",
+        "narrative_text": "There are $$this heading $$direction",
+        "direction": "UPWARDS",
+        "known_to_player": true
+      },
+      {
+        "article": "the",
+        "room_name": "foyer",
+        "connector_item_name": "",
+        "narrative_text": "$$direction you is the $$this",
+        "direction": "BEHIND",
+        "known_to_player": true
+      }
+    ],
+    "long_description": "You walk briskly in to the dining room with a grand DINING TABLE.  At once you notice that the former occupants must have left in great haste, for there are the blackened remnants of food on the PLATES, and the CHAIRS have been pushed away with little regard. Rats skitter away form the putrid remains of the forsaken dinner as you enter \nThe rats haven't seemed to have touched the main dish - a fully intact PIG lies upon the table, and a ROLLED UP SCROLL has been wedged in its mouth.",
+    "short_description": "You are in the dining room."
+  },
+  {
+    "name": "foyer",
+    "article": "the",
+    "display_name": "FOYER",
+    "item_setup_dict": {},
+    "room_list": [],
+    "long_description": "Idk long descr whatever",
+    "short_description": "Idk short descr whatever"
+  },
+  {
+    "name": "kitchen",
+    "article": "a",
+    "display_name": "KITCHEN",
+    "item_setup_dict": {},
+    "room_list": [],
+    "long_description": "Idk long descr whatever",
+    "short_description": "Idk short descr whatever"
+  },
+  {
+    "name": "New Bathroom description, now it's sparkly clean",
+    "article": "a",
+    "display_name": "BATHROOM",
+    "item_setup_dict": {},
+    "room_list": [],
+    "long_description": "Idk long descr whatever",
+    "short_description": "Idk short descr whatever"
+  },
+  {
+    "name": "limbo",
+    "article": "the",
+    "display_name": "LIMBO",
+    "item_setup_dict": {},
+    "room_list": [],
+    "long_description": "You shouldn't be here.",
+    "short_description": "How did you even get here?"
+  }
+]

@@ -3,6 +3,7 @@ from typing import List, Dict, Optional
 
 from game_objects.game_util import print_warning, warning_item_not_found
 from game_objects.items import Item, CollectiveItem, InventoryItem
+from game_objects.event import Event
 
 
 class Room:
@@ -14,7 +15,8 @@ class Room:
                  long_description,
                  short_description,
                  item_setup_dict=None,
-                 room_list: List[RoomConnector] = None):
+                 room_list: List[RoomConnector] = [],
+                 events: Dict[str, Event] = {}):
 
         self.name: str = name
         self.display_name = display_name
@@ -26,12 +28,13 @@ class Room:
         self.short_description = short_description
 
         self.item_setup_dict = item_setup_dict if item_setup_dict is not None else {}
-        self.room_list = room_list if room_list is not None else []
 
         self.item_list: Dict[str, RoomItem] = {key: RoomItem(key, value) for (key, value) in
                                                self.item_setup_dict.items()}
-        self.discarded_items: List[Item] = []
-        self.connecting_rooms: Dict[str, RoomConnector] = {v.direction: v for v in self.room_list}
+        self.discarded_items: Dict[str, Item] = {}
+        self.connecting_rooms: Dict[str, RoomConnector] = {v.direction: v for v in room_list}
+        self.events = events
+        self.cached_item_event_synonym_mapping: Dict[str, str] = {}
 
     # initialize rooms
     def setup_on_start(self):
@@ -42,18 +45,65 @@ class Room:
         for room_item in self.item_list.values():
             room_item.setup_on_start()
 
-            # Separate initializer method for item list to simplify constructor
+        for verb in self.events.keys():
+            self.events[verb].set_verb_and_synonyms(verb)
 
+        self.cached_item_event_synonym_mapping = self.item_event_synonym_mapping()
+
+    def get_item_event_synonym_mapping(self):
+        return self.cached_item_event_synonym_mapping
+
+    def update_item_event_mapping_cache(self):
+        self.cached_item_event_synonym_mapping = self.item_event_synonym_mapping
+
+    def item_event_synonym_mapping(self) -> Dict[str, str]: # return synonym -> item_name
+        room_verb_dict: [str, str] = {}
+
+        def addToDict(verb: str, e: str):
+            existing_list: Optional[List[Item]] = room_verb_dict.get(verb)
+            if existing_list is None:
+                room_verb_dict[verb] = [e]
+            else:
+                room_verb_dict[verb].append(e)
+
+        for item in self.item_list.values():
+            for verb, event in item.item.events.items():
+                addToDict(event.verb, item.item.name)
+                for s in event.synonyms:
+                    addToDict(s, item.item.name)
+
+        for item in self.discarded_items.values():
+            for verb, event in item.events.items():
+                addToDict(event.verb, item.item.name)
+
+                for s in event.synonyms:
+                    addToDict(s, item.name)
+
+        return room_verb_dict
+
+    def get_room_event_synonym_mapping(self) -> Dict[str, Event]:
+        return_dict = {}
+        for x in self.events.values():
+            return_dict[x.verb] = x
+            for syn in x.synonyms:
+                return_dict[syn] = x
+
+        return return_dict
+
+    # Separate initializer method for item list to simplify constructor
     def set_item_list(self, item_description_dict: Dict[str, str]):
         self.item_list = {key: RoomItem(key, value) for (key, value) in item_description_dict.items()}
 
-    def add_item(self, item: RoomItem): self.item_list[item.item.name] = item
+    def add_item(self, item: RoomItem):
+        self.item_list[item.item.name] = item
 
-    def delete_item(self, item: RoomItem):
-        if item.item.name in self.item_list:
-            del self.item_list[item.item.name]
+    def delete_item(self, item_name: str):
+        if item_name in self.item_list:
+            del self.item_list[item_name]
+        elif item_name in self.discarded_items:
+            del self.discarded_items[item_name]
         else:
-            print_warning(f"Couldn't delete {item.item.name} from {self.name}, doesn't exist")
+            print_warning(f"Couldn't delete {item_name} from {self.name}, doesn't exist")
 
     # Separate initializer method for room list to simplify constructor
     def set_room_map(self, connector_list: List[RoomConnector]):
@@ -67,8 +117,15 @@ class Room:
             print_warning(f"{item_name} not found in {self.name}")
             return None
 
-    def get_discarded_item_list(self) -> Dict[str, Item]:
-        return {key: value for (key, value) in self.item_list.items() if value.item.discarded}
+    def get_item_from_room_or_discard(self, item_name) -> Optional[Item]:
+        item = self.item_list.get(item_name)
+        if item is not None:
+            return item.item
+        else:
+            if item_name in self.discarded_items:
+                return self.discarded_items.get(item_name)
+        print_warning(f"{item_name} not found in {self.name}")
+        return None
 
     # EX:  There are STAIRS heading UPWARDS leading to a BATHROOM. BEHIND you is the FOYER.
     def room_list_narration(self) -> str:
@@ -86,14 +143,31 @@ class Room:
 
     def get_room_narration(self) -> str:
         if self.visited:
-            return self.short_description + " " + self.item_list_narration() + "\n" + self.room_list_narration()
-
+            narration = f"{self.short_description} {self.item_list_narration()}{self.get_discard_narration()}\n{self.       room_list_narration()}"
+            return narration
         else:
             self.visited = True
             return self.long_description + "\n" + self.room_list_narration()
 
+    def get_discard_narration(self) -> str:
+        discarded_count = len(self.discarded_items)
+        if discarded_count == 0:
+            return ""
+        elif discarded_count == 1:
+            be = "is"
+        else:
+            be = "are"
+
+        narration = f" Dropped on the ground {be} the"
+
+        for i in self.discarded_items.values():
+            narration += " " + i.display_name + ","
+        narration = narration.strip(",") + "."
+        return narration
+
+    #not in use
     def take_item(self, item_name: str) -> str:
-        from game_objects.global_collections import player_inventory
+        from game_objects.global_collections import player_inventory, update_inventory_synonym_mapping
 
         item_to_take = self.item_list.get(item_name)
         if item_to_take is not None:
@@ -102,11 +176,13 @@ class Room:
                 if isinstance(item_to_take.item, CollectiveItem):
                     new_single_item: InventoryItem = item_to_take.item.new_singular_item()
                     player_inventory[new_single_item.name] = new_single_item
+                    update_inventory_synonym_mapping()
                     return f"You grabbed a {new_single_item.display_name} " \
                            f"from the {item_to_take.item.display_name} and added it to your inventory."
 
                 else:
-                    player_inventory[item_name] = item_to_take.item.take
+                    player_inventory[item_name] = item_to_take.item
+                    update_inventory_synonym_mapping()
                     del self.item_list[item_name]
                     return f"You took the {item_to_take.item.display_name} and added it to your inventory."
 
@@ -116,30 +192,32 @@ class Room:
             return f"What {item_name} ???"
 
     def discard_item(self, item_name: str, must_be_in_inventory=True) -> str:
-        from game_objects.global_collections import player_inventory, find_room_item
+        from game_objects.global_collections import player_inventory, find_room_item, update_inventory_synonym_mapping
 
         item_to_discard = player_inventory.get(item_name)
         if item_to_discard is not None:
-            self.discarded_items.append(item_to_discard)
+            self.discarded_items[item_to_discard.name] = item_to_discard
             del player_inventory[item_name]
-            return f"You dropped the {item_name} to the ground."
+            update_inventory_synonym_mapping()
+            return f"You drop the {item_name} to the ground."
         elif must_be_in_inventory:
-            return f"You don't have {item_to_discard.article} {item_name}, genius!"
+            return f"You don't have any {item_name}, genius!"
         else:
             room, item_to_discard = find_room_item(item_name)
-            room.delete_item(item_to_discard)
-            self.discarded_items.append(item_to_discard)
-            return f"You dropped {item_to_discard.item.article} {item_to_discard.item.display_name}"
+            room.delete_item(item_to_discard.name)
+            self.discarded_items[item_to_discard.name] = item_to_discard
+            return f"You drop {item_to_discard.get_article} {item_to_discard.display_name}"
 
     def __str__(self):
         return self.name
+
 
 # Data object to bundle an item name and item narration together allowing us to more
 #   intuitively initialize room descriptions
 class RoomItem:
 
     def __init__(self, item_name, narration):
-        self.item = None
+        self.item: Optional[Item] = None
         self.item_name = item_name
         self.narration = narration
 
@@ -149,22 +227,22 @@ class RoomItem:
         if self.item is None:
             print_warning(f"{self.item_name} not found in item list")
 
-    def narration(self):
-        return self.narration
-
     def __str__(self):
         return f"{self.item_name}"
+
 
 # Data object to facilitate the user being able to move around with both
 #       Directions: Go DOWN
 #       Item: Take STAIRS
 class RoomConnector:
     def __init__(self,
-                 direction,                 # Direction player must specify to advance to this room
+                 direction,  # Direction player must specify to advance to this room
                  room_name,
-                 connector_item_name="",    # Optional connecting item that may connect two rooms
+                 connector_item_name="",  # Optional connecting item that may connect two rooms
+                 traversable: bool = True,
                  narrative_text="To your",  # Narrative text to be shown when presenting directions to the user
-                 known_to_player=False,     # If this is true and a connector item is used, will specify where the room leads
+                 known_to_player=False,
+                 # If this is true and a connector item is used, will specify where the room leads
                  article="the"):
 
         self.connector_item_name = connector_item_name
@@ -176,8 +254,10 @@ class RoomConnector:
         self.room: Room
         self.connector_item: Optional[Item] = None
         self.known_to_player = known_to_player
+        self.traversable = traversable
 
-    def __str__(self): return f"{self.room_name}.direction.{self.direction}"
+    def __str__(self):
+        return f"{self.room_name}.direction.{self.direction}"
 
     # initialize rooms
     def setup_on_start(self):

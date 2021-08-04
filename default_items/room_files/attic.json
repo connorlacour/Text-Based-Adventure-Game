@@ -1,0 +1,30 @@
+[{
+	"name": "attic",
+	"item_setup_dict": {
+        "bookcase": "There is a BOOKCASE on the NORTH wall and ",
+        "trunk": "a TRUNK in the middle of the room. "
+    },
+	"short_description": "You are in the attic. ",
+	"article": "the",
+	"long_description": "The attic is not what you expected.  You imagined a messy room where memories are sent for storage.  Instead, it could easily be turned into another bedroom.  There’s a circular window that lets in the light from the moon.  The only clutter is a TRUNK in the center of the room and a BOOKCASE against the NORTH wall.\n\nThere is a single door in the SOUTH wall that opens up to an ATTIC CLOSET.  The only other entryway/exit that you see are the stairs you took to enter this room that go back to the UPSTAIRS HALLWAY.",
+	"display_name": "ATTIC",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "A door in the $$direction wall opens to an $$room_name and ",
+		"article": "the",
+		"room_name": "attic closet",
+		"direction": "SOUTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "the stairs in the $$direction wall go back down to the $$room_name.",
+		"article": "the",
+		"room_name": "upstairs hallway",
+		"direction": "WEST"
+	},{
+		"known_to_player": false,
+		"narrative_text": "The BOOKCASE slides to the side revealing a walk-in $$room_name with a KEYPAD.",
+		"article": "the",
+		"room_name": "safe",
+		"direction": "NORTH"
+	}]
+}]

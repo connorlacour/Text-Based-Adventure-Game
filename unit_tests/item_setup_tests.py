@@ -3,6 +3,7 @@ from pprint import pprint
 
 from game_objects.global_collections import *
 from game_objects.object_schemas import *
+from game_objects.item_event import *
 from game_objects.room import Room, RoomConnector
 
 test_dir = os.path.dirname(__file__)
@@ -10,6 +11,7 @@ test_dir = os.path.dirname(__file__)
 
 def get_test_file_name(filename: str):
     return os.path.join(test_dir, f'{filename}')
+
 
 class ItemSetupTests(unittest.TestCase):
 
@@ -26,7 +28,6 @@ class ItemSetupTests(unittest.TestCase):
         e = ItemEvent(move_events)
 
         print(e.do_event(player_location.room))
-
 
     def testMoveEvents(self):
         setup_global_collections_for_test(test_dir)
@@ -53,8 +54,6 @@ class ItemSetupTests(unittest.TestCase):
         print(ItemEvent(move_events).do_event(player_location.room))
         self.assertFalse("pig" in rooms["dining_room"].item_list)
         self.assertTrue(rooms["foyer"].get_item_from_room("pig") is not None)
-
-
 
     def testChangeEvents(self):
         setup_global_collections_for_test(test_dir)
@@ -90,14 +89,13 @@ class ItemSetupTests(unittest.TestCase):
         print_events_2 = [
             "print \"Hi!\"",
         ]
-        expected_output_2 =  "\"Hi!\"\n"
+        expected_output_2 = "\"Hi!\"\n"
 
         print_events_output_2 = ItemEvent(print_events_2).do_event(player_location.room)
         self.assertTrue(print_events_output_1 == expected_output_1)
         self.assertTrue(print_events_output_2 == expected_output_2)
 
         print("Print Event Output: \n" + print_events_output_1 + print_events_output_2)
-
 
     def testItemSerialization(self):
         setup_global_collections_for_test(test_dir)
@@ -119,6 +117,8 @@ class ItemSetupTests(unittest.TestCase):
         room = rooms.values()
         result = schema.dumps(room, many=True)
         pprint(result)
+
+        return result
 
     def testRoomDeserialization(self):
 
@@ -142,8 +142,10 @@ class ItemSetupTests(unittest.TestCase):
         self.assertTrue(r.get_room_narration() == long_text + "\n" + rooms_text)
         self.assertTrue(r.get_room_narration() == r.short_description + " " + item_list_text + "\n" + rooms_text)
 
+
 if __name__ == '__main__':
     unittest.main()
+
 
 def setup_global_collections_from_code_obj():
 
@@ -245,16 +247,16 @@ scroll = InventoryItem(
     can_take=False
 )
 
-plates = CollectiveItem(
-    name="plates",
-    display_name="PLATES",
-    description="Dirty, nasty plates. You'd have these cleaned in a jiffy if you hadn't "
-                "already eaten all the Tide Pods.",
-    singular_display_name="PLATE",
-    singular_description="A grody PLATE you grabbed from the DINING TABLE.  You probably wouldn't eat on it.",
-    max_count=5,
-    events={"WASH": ItemEvent(["print You try to $$verb the plate, with what? Your tongue?"])}
-)
+# plates = CollectiveItem(
+#     name="plates",
+#     display_name="PLATES",
+#     description="Dirty, nasty plates. You'd have these cleaned in a jiffy if you hadn't "
+#                 "already eaten all the Tide Pods.",
+#     singular_display_name="PLATE",
+#     singular_description="A grody PLATE you grabbed from the DINING TABLE.  You probably wouldn't eat on it.",
+#     max_count=5,
+#     events={"WASH": ItemEvent(["print You try to $$verb the plate, with what? Your tongue?"])}
+# )
 
 chairs = CollectiveItem(
     name="chairs",

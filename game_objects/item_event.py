@@ -9,13 +9,12 @@ if TYPE_CHECKING:
 class ItemEvent:
 
     def __init__(self,
-                 events = [],
+                 events=[],
                  passive_obj: str = ""
                  ):
 
         self.passive_obj: Optional[str] = passive_obj
         self.events: List[str] = events
-
 
     def do_event(self, room: Room) -> str:
 
@@ -103,6 +102,7 @@ class ItemEvent:
 
         else:
             return f"You feel like '{target_name}' was supposed to move, but something happened."
+
 
 def change_obj_attr(obj, object_name, field, value):
     if obj is not None:

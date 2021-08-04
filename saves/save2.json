@@ -1,0 +1,78 @@
+[
+  {
+    "long_description": "You walk briskly in to the dining room with a grand DINING TABLE.  At once you notice that the former occupants must have left in great haste, for there are the blackened remnants of food on the PLATES, and the CHAIRS have been pushed away with little regard. Rats skitter away form the putrid remains of the forsaken dinner as you enter \nThe rats haven't seemed to have touched the main dish - a fully intact PIG lies upon the table, and a ROLLED UP SCROLL has been wedged in its mouth.",
+    "item_setup_dict": {
+      "chairs": "CHAIRS litter the ground and ",
+      "plates": "PLATES are scattered on the a DINING TABLE. ",
+      "dining_table": "In the center of the DINING_TABLE there is a ",
+      "pig": "PIG",
+      "scroll": " with a ROLLED-UP-SCROLL wedged in it's mouth. "
+    },
+    "room_list": [
+      {
+        "connector_item_name": "",
+        "known_to_player": true,
+        "article": "a",
+        "narrative_text": "To your",
+        "direction": "RIGHT",
+        "room_name": "kitchen"
+      },
+      {
+        "connector_item_name": "stairs_to_foyer",
+        "known_to_player": true,
+        "article": "the",
+        "narrative_text": "There are $$this heading $$direction",
+        "direction": "UPWARDS",
+        "room_name": "bathroom"
+      },
+      {
+        "connector_item_name": "",
+        "known_to_player": true,
+        "article": "the",
+        "narrative_text": "$$direction you is the $$this",
+        "direction": "BEHIND",
+        "room_name": "foyer"
+      }
+    ],
+    "short_description": "You are in the dining room.",
+    "name": "dining_room",
+    "article": "the",
+    "display_name": "DINING ROOM"
+  },
+  {
+    "long_description": "Idk long descr whatever",
+    "item_setup_dict": {},
+    "room_list": [],
+    "short_description": "Idk short descr whatever",
+    "name": "foyer",
+    "article": "the",
+    "display_name": "FOYER"
+  },
+  {
+    "long_description": "Idk long descr whatever",
+    "item_setup_dict": {},
+    "room_list": [],
+    "short_description": "Idk short descr whatever",
+    "name": "kitchen",
+    "article": "a",
+    "display_name": "KITCHEN"
+  },
+  {
+    "long_description": "Idk long descr whatever",
+    "item_setup_dict": {},
+    "room_list": [],
+    "short_description": "Idk short descr whatever",
+    "name": "bathroom",
+    "article": "a",
+    "display_name": "BATHROOM"
+  },
+  {
+    "long_description": "You shouldn't be here.",
+    "item_setup_dict": {},
+    "room_list": [],
+    "short_description": "How did you even get here?",
+    "name": "limbo",
+    "article": "the",
+    "display_name": "LIMBO"
+  }
+]

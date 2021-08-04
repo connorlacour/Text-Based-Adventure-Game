@@ -1,0 +1,24 @@
+[{
+	"name": "main bedroom",
+	"item_setup_dict": {
+        "bed": "There is a canopy BED against the far wall and ",
+        "window": "a WINDOW to the side of it. "
+    },
+	"short_description": "You are in the main bedroom. ",
+	"article": "the",
+	"long_description": "The main bedroom is spacious and decorated in vibrant greens.  A large canopy BED takes up a majority of the room, and a WINDOW facing the front of the house.  There are heavy drapes covering the WINDOW to block out light when sleeping.  While this may be a smaller house for the owner, no expense was spared with making this bedroom comfortable for the occupant.  There is a BATHROOM off to the side beyond a door in the EAST wall.  The other door in the room, in the SOUTH wall, goes back to the UPSTAIRS HALLWAY.",
+	"display_name": "MAIN BEDROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "There are two doors, one in the $$direction wall that goes back to the $$room_name and ",
+		"article": "the",
+		"room_name": "upstairs hallway",
+		"direction": "SOUTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "another in the $$direction wall that leads to a $$room_name. ",
+		"article": "the",
+		"room_name": "bathroom",
+		"direction": "EAST"
+	}]
+}]
