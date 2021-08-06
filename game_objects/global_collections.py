@@ -113,7 +113,7 @@ def setup_rooms_and_items(i: List[Item], r: List[Room], starting_player_location
     parse_cmd.setup_parser()
 
 
-def setup_global_collections(starting_player_location="dining_room"):
+def setup_global_collections(load_dir="", starting_player_location="dining_room"):
 
     i: List[Item] = load_items_from_file(get_file_name("templates/items.json", root_dir))
     r: List[Room] = load_rooms_from_file(get_file_name('templates/rooms.json', root_dir))

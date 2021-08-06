@@ -1,247 +1,372 @@
-[{
+[
+  {
     "name": "coat",
-	"display_name": "COAT",
-	"article": "a",
-	"description": "You search the COAT for clues about the owner.  As you dig around, your hand finds a piece of paper with a NOTE written on it.",
-	"type": "Scenery"
-},{
-    "name": "china cabinet",
-	"display_name": "CHINA CABINET",
-	"article": "a",
-	"description": "The CHINA CABINET is locked.  You consider the value of the dinnerware, but the risk of breaking it ends that thought.  Just as you are turning away from the cabinet, you see a SMALL POUCH jutting out of a hidden corner not easily seen through the glass.",
-    "events": [{"unlock": "You unlock the china cabinet."}, {"lock": "You lock the china cabinet."}],
-	"type": "Scenery"
-},{
-    "name": "wall mount",
-	"display_name": "WALL MOUNT",
-	"article": "a",
-	"description": "There are various badges hanging from the WALL MOUNT from conferences and meetings.  Hidden amongst those is a SMALL KEY.",
-	"type": "Scenery"
-},{
-    "name": "painting",
-	"display_name": "PAINTING",
-	"article": "a",
-	"description": "The PAINTING depicts a cave.  Through the mouth of the cave is a brilliant light.  Inside is a man, with his back to the mouth of the cave, staring at the shadows cast by the jagged rocks reaching from the floor and the ceiling behind him.",
-	"type": "Scenery"
-},{
-    "name": "podium",
-	"display_name": "PODIUM",
-	"article": "a",
-	"description": "Looking in the glass case on the PODIUM, you see a GUEST BOOK.",
-	"type": "Scenery"
-},{
-    "name": "guest book",
-	"display_name": "GUEST BOOK",
-	"article": "a",
-	"description": "The last name entered in the GUEST BOOK you see is John Little.",
-	"type": "Scenery"
-},{
-    "name": "chairs",
-	"display_name": "CHAIRS",
-	"article": "the",
-	"description": "The CHAIRS appear to be normal, waiting room chairs for visitors.  They sit around a SMALL TABLE.",
-	"type": "Scenery"
-},{
-    "name": "small table",
-	"display_name": "SMALL TABLE",
-	"article": "the",
-	"description": "On the SMALL TABLE is a blank NOTEPAD that appears to have had the top page hastily ripped off.",
-	"type": "Scenery"
-},{
-    "name": "desk",
-	"display_name": "DESK",
-	"article": "a",
-	"description": "The DESK is relatively bare.  You see a line of walkie talkies and some pens.",
-	"type": "Scenery"
-},{
-    "name": "guard",
-	"display_name": "GUARD",
-	"article": "a",
-	"description": "The GUARD'S badge says 'Tuck'.",
-    "events": [{"fight": "You try to fight the guard, but you are no match for him.  He knocks you out, and when you wake, you find yourself in a jail cell.  GAME OVER."}, {"bribe": "Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut."}, {"persuade": "You remember the note from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the note to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the note several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room."}],
-	"type": "Scenery"
-},{
-    "name": "night stand",
-	"display_name": "NIGHT STAND",
-	"article": "a",
-	"description": "Opening the drawer to the NIGHT STAND, you see a GLOVE.",
-	"type": "Scenery"
-},{
-    "name": "window",
-	"display_name": "WINDOW",
-	"article": "a",
-	"description": "Looking out the WINDOW, you see a dark yard but the sky is slowly lightening.  You need to move along if you hope to finish your task under cover of night.",
-	"type": "Scenery"
-},{
-    "name": "shelf",
-	"display_name": "SHELF",
-	"article": "a",
-	"description": "You go to the SHELF and you see a PORTABLE RADIO.",
-	"type": "Scenery"
-},{
-    "name": "mirror",
-	"display_name": "MIRROR",
-	"article": "a",
-	"description": "As you approach the MIRROR, a loud voice yells out “Are you ready to take your workout to the next level?” in a hyped up, perky tone.  You jump in surprise before realizing that this is one of the smart mirrors that you can watch while working out.  The screen on the MIRROR flickers on to show a pre-recorded personal trainer and a list of workouts to begin.",
-	"type": "Scenery"
-},{
-    "name": "microwave",
-	"display_name": "MICROWAVE",
-	"article": "a",
-	"description": "The MICROWAVE emits an occasional beep.  You try to peer in the dark door, seeing a small container of FAST FOOD sitting in the middle for reheating.  You put your hand on the door.  It is cool to the touch.",
-	"type": "Scenery"
-},{
-    "name": "island",
-	"display_name": "ISLAND",
-	"article": "an",
-	"description": "Going over to the ISLAND, you see a bowl of fruit with vibrant red APPLES and a BLUE JAR with a paw print on it.",
-	"type": "Scenery"
-},{
-    "name": "blue jar",
-	"display_name": "BLUE JAR",
-	"article": "a",
-	"description": "You pull back the lid on the BLUE JAR to find DOG TREATS that smell strongly of bacon.",
-	"type": "Scenery"
-},{
-    "name": "fireplace",
-	"display_name": "FIREPLACE",
-	"article": "the",
-	"description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT NOTE stuck between the bottom logs.",
-	"type": "Scenery"
-},{
-    "name": "strip of paper",
-	"display_name": "strip of paper",
-	"article": "a",
-	"description": "As you look closer at the STRIP OF PAPER, you notice that it is a receipt from John Little’s Lock & Key.",
-	"type": "Scenery"
-},{
-    "name": "alarm",
-	"display_name": "ALARM",
-	"article": "an",
-	"description": "The alarm appears to be quite old and outdated.  You are not even sure it’s fully mounted into the wall or whether it is simply hanging like a photo would be.  There is a RED BUTTON on the alarm.  Should you press it?",
-    "events": [{"enter code": "Nothing happens"}],
-	"type": "Scenery"
-},{
-    "name": "large poster",
-	"display_name": "LARGE POSTER",
-	"article": "a",
-	"description": "You see a poster of the night sky.  You search the poster trying to figure out what its meaning is when you recognize the bright star Vega, and from there, you trace the constellation Lyra in your mind.",
-	"type": "Scenery"
-},{
-    "name": "red button",
-	"display_name": "RED BUTTON",
-	"article": "a",
-	"description": "A big shiny RED BUTTON",
-    "events": [{"press": "You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it’s hard to resist the temptation."}],
-	"type": "Scenery"
-},{
-    "name": "dog",
-	"display_name": "DOG",
-	"article": "a",
-	"description": "You approach the DOG carefully.  As you get closer, it bares its teeth in warning.  Suddenly, it shakes its head as if shaking off some irritation and you notice a SILVER KEY hanging from the collar where a tag would be.  Is there way to soothe this savage beast to get the key?",
-    "events": [{"feed": "You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.", "play music": "A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner."}],
-	"type": "Scenery"
-},{
-    "name": "crate",
-	"display_name": "CRATE",
-	"article": "a",
-	"description": "There’s a sliding latch on the wireframe crate.",
-    "events": [{"open": "The DOG ignores you and stays sleeping."}],
-	"type": "Scenery"
-},{
-    "name": "bed",
-	"display_name": "BED",
-	"article": "a",
-	"description": "The BED is covered in a comforter that feels softer than any other you’ve seen when you press your hand into it.  The bed was decked out for a king with drapes that could be drawn around with the richest fabrics on it.",
+    "display_name": "COAT",
+    "article": "a",
+    "description": "You search the COAT for clues about the owner.  As you dig around, your hand finds a piece of paper with a NOTE written on it.",
     "type": "Scenery"
-},{
+  },
+  {
+    "name": "china cabinet",
+    "display_name": "CHINA CABINET",
+    "article": "a",
+    "description": "The CHINA CABINET is locked.  You consider the value of the dinnerware, but the risk of breaking it ends that thought.  Just as you are turning away from the cabinet, you see a SMALL POUCH jutting out of a hidden corner not easily seen through the glass.",
+    "events": {
+      "unlock": {
+        "events": [
+          "You unlock the china cabinet."
+        ]
+      },
+      "lock": {
+        "events": [
+          "You lock the china cabinet."
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
+    "name": "wall mount",
+    "display_name": "WALL MOUNT",
+    "article": "a",
+    "description": "There are various badges hanging from the WALL MOUNT from conferences and meetings.  Hidden amongst those is a SMALL KEY.",
+    "type": "Scenery"
+  },
+  {
+    "name": "painting",
+    "display_name": "PAINTING",
+    "article": "a",
+    "description": "The PAINTING depicts a cave.  Through the mouth of the cave is a brilliant light.  Inside is a man, with his back to the mouth of the cave, staring at the shadows cast by the jagged rocks reaching from the floor and the ceiling behind him.",
+    "type": "Scenery"
+  },
+  {
+    "name": "podium",
+    "display_name": "PODIUM",
+    "article": "a",
+    "description": "Looking in the glass case on the PODIUM, you see a GUEST BOOK.",
+    "type": "Scenery"
+  },
+  {
+    "name": "guest book",
+    "display_name": "GUEST BOOK",
+    "article": "a",
+    "description": "The last name entered in the GUEST BOOK you see is John Little.",
+    "type": "Scenery"
+  },
+  {
+    "name": "chairs",
+    "display_name": "CHAIRS",
+    "article": "the",
+    "description": "The CHAIRS appear to be normal, waiting room chairs for visitors.  They sit around a SMALL TABLE.",
+    "type": "Scenery"
+  },
+  {
+    "name": "small table",
+    "display_name": "SMALL TABLE",
+    "article": "the",
+    "description": "On the SMALL TABLE is a blank NOTEPAD that appears to have had the top page hastily ripped off.",
+    "type": "Scenery"
+  },
+  {
+    "name": "desk",
+    "display_name": "DESK",
+    "article": "a",
+    "description": "The DESK is relatively bare.  You see a line of walkie talkies and some pens.",
+    "type": "Scenery"
+  },
+  {
+    "name": "guard",
+    "display_name": "GUARD",
+    "article": "a",
+    "description": "The GUARD'S badge says 'Tuck'.",
+    "events": {
+      "fight": {
+        "events": [
+          "You try to fight the guard, but you are no match for him.  He knocks you out, and when you wake, you find yourself in a jail cell.  GAME OVER."
+        ]
+      },
+      "bribe": {
+        "events": [
+          "Tuck raises his eyebrows at you curiously.  There's a moment of silence between the two of you as he considers the offer.\n\n'I'm too old for this crap,' he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut."
+        ]
+      },
+      "persuade": {
+        "events": [
+          "You remember the note from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the note to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what's written.\n\n'Where did you...' he starts to say.  He looks between you and the note several times before finally sighing.  'I quit.  Hell, I'm probably out of a job anyway after falling asleep here.  As far as I'm concerned, I never saw you.'\n\nWith that, he walks out of the room."
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
+    "name": "night stand",
+    "display_name": "NIGHT STAND",
+    "article": "a",
+    "description": "Opening the drawer to the NIGHT STAND, you see a GLOVE.",
+    "type": "Scenery"
+  },
+  {
+    "name": "window",
+    "display_name": "WINDOW",
+    "article": "a",
+    "description": "Looking out the WINDOW, you see a dark yard but the sky is slowly lightening.  You need to move along if you hope to finish your task under cover of night.",
+    "type": "Scenery"
+  },
+  {
+    "name": "shelf",
+    "display_name": "SHELF",
+    "article": "a",
+    "description": "You go to the SHELF and you see a PORTABLE RADIO.",
+    "type": "Scenery"
+  },
+  {
+    "name": "mirror",
+    "display_name": "MIRROR",
+    "article": "a",
+    "description": "As you approach the MIRROR, a loud voice yells out 'Are you ready to take your workout to the next level?' in a hyped up, perky tone.  You jump in surprise before realizing that this is one of the smart mirrors that you can watch while working out.  The screen on the MIRROR flickers on to show a pre-recorded personal trainer and a list of workouts to begin.",
+    "type": "Scenery"
+  },
+  {
+    "name": "microwave",
+    "display_name": "MICROWAVE",
+    "article": "a",
+    "description": "The MICROWAVE emits an occasional beep.  You try to peer in the dark door, seeing a small container of FAST FOOD sitting in the middle for reheating.  You put your hand on the door.  It is cool to the touch.",
+    "type": "Scenery"
+  },
+  {
+    "name": "island",
+    "display_name": "ISLAND",
+    "article": "an",
+    "description": "Going over to the ISLAND, you see a bowl of fruit with vibrant red APPLES and a BLUE JAR with a paw print on it.",
+    "type": "Scenery"
+  },
+  {
+    "name": "blue jar",
+    "display_name": "BLUE JAR",
+    "article": "a",
+    "description": "You pull back the lid on the BLUE JAR to find DOG TREATS that smell strongly of bacon.",
+    "type": "Scenery"
+  },
+  {
+    "name": "fireplace",
+    "display_name": "FIREPLACE",
+    "article": "the",
+    "description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT NOTE stuck between the bottom logs.",
+    "type": "Scenery"
+  },
+  {
+    "name": "strip of paper",
+    "display_name": "strip of paper",
+    "article": "a",
+    "description": "As you look closer at the STRIP OF PAPER, you notice that it is a receipt from John Little's Lock & Key.",
+    "type": "Scenery"
+  },
+  {
+    "name": "alarm",
+    "display_name": "ALARM",
+    "article": "an",
+    "description": "The alarm appears to be quite old and outdated.  You are not even sure it's fully mounted into the wall or whether it is simply hanging like a photo would be.  There is a RED BUTTON on the alarm.  Should you press it?",
+    "events": {
+      "enter code": {
+        "events": [
+          "Nothing happens"
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
+    "name": "large poster",
+    "display_name": "LARGE POSTER",
+    "article": "a",
+    "description": "You see a poster of the night sky.  You search the poster trying to figure out what its meaning is when you recognize the bright star Vega, and from there, you trace the constellation Lyra in your mind.",
+    "type": "Scenery"
+  },
+  {
+    "name": "red button",
+    "display_name": "RED BUTTON",
+    "article": "a",
+    "description": "A big shiny RED BUTTON",
+    "events": {
+      "press": {
+        "events": [
+          "You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it's hard to resist the temptation."
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
+    "name": "dog",
+    "display_name": "DOG",
+    "article": "a",
+    "description": "You approach the DOG carefully.  As you get closer, it bares its teeth in warning.  Suddenly, it shakes its head as if shaking off some irritation and you notice a SILVER KEY hanging from the collar where a tag would be.  Is there way to soothe this savage beast to get the key?",
+    "events": {
+      "feed": {
+        "events": [
+          "You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down."
+        ]
+      },
+      "play music": {
+        "events": [
+          "A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner."
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
+    "name": "crate",
+    "display_name": "CRATE",
+    "article": "a",
+    "description": "There's a sliding latch on the wireframe crate.",
+    "events": {
+      "open": {
+        "events": [
+          "The DOG ignores you and stays sleeping."
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
+    "name": "bed",
+    "display_name": "BED",
+    "article": "a",
+    "description": "The BED is covered in a comforter that feels softer than any other you've seen when you press your hand into it.  The bed was decked out for a king with drapes that could be drawn around with the richest fabrics on it.",
+    "type": "Scenery"
+  },
+  {
     "name": "waste basket",
-	"display_name": "WASTE BASKET",
-	"article": "a",
-	"description": "The WASTE BASKET is empty.",
-	"type": "Scenery"
-},{
+    "display_name": "WASTE BASKET",
+    "article": "a",
+    "description": "The WASTE BASKET is empty.",
+    "type": "Scenery"
+  },
+  {
     "name": "medicine cabinet",
-	"display_name": "MEDICINE CABINET",
-	"article": "a",
-	"description": "The MEDICINE CABINET looks to be the kind with a mirror on front and a front-facing door that swings open.",
-    "events": [{"open": "You open the MEDICINE CABINET and see various toiletries and vitamins.  There is a single unmarked BOTTLE OF PILLS on a shelf"}],
-	"type": "Scenery"
-},{
+    "display_name": "MEDICINE CABINET",
+    "article": "a",
+    "description": "The MEDICINE CABINET looks to be the kind with a mirror on front and a front-facing door that swings open.",
+    "events": {
+      "open": {
+        "events": [
+          "You open the MEDICINE CABINET and see various toiletries and vitamins.  There is a single unmarked BOTTLE OF PILLS on a shelf"
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
     "name": "trunk",
-	"display_name": "TRUNK",
-	"article": "a",
-	"description": "The TRUNK is old and sturdy.  It has no lock.",
-    "events": [{"open": "School awards and trophies are stacked inside the TRUNK.  You see some for science projects and others for academic decathlons."}],
-	"type": "Scenery"
-},{
+    "display_name": "TRUNK",
+    "article": "a",
+    "description": "The TRUNK is old and sturdy.  It has no lock.",
+    "events": {
+      "open": {
+        "events": [
+          "School awards and trophies are stacked inside the TRUNK.  You see some for science projects and others for academic decathlons."
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
     "name": "bookcase",
-	"display_name": "BOOKCASE",
-	"article": "a",
-	"description": "Numerous books fill the BOOKCASE in front of you.  You see books like GULLIVER’S TRAVELS, THE ODYSSEY, and CRIME AND PUNISHMENT and more modern works like NINETEEN EIGHTY-FOUR and even HITCHHIKER’S GUIDE TO THE GALAXY.",
-	"type": "Scenery"
-},{
+    "display_name": "BOOKCASE",
+    "article": "a",
+    "description": "Numerous books fill the BOOKCASE in front of you.  You see books like GULLIVER'S TRAVELS, THE ODYSSEY, and CRIME AND PUNISHMENT and more modern works like NINETEEN EIGHTY-FOUR and even HITCHHIKER'S GUIDE TO THE GALAXY.",
+    "type": "Scenery"
+  },
+  {
     "name": "Gulliver's Travels",
-	"display_name": "GULLIVER'S TRAVELS",
-	"article": "the",
-	"description": "You pick up the book and flip through it.  The book is in excellent condition.",
-	"type": "Scenery"
-},{
+    "display_name": "GULLIVER'S TRAVELS",
+    "article": "the",
+    "description": "You pick up the book and flip through it.  The book is in excellent condition.",
+    "type": "Scenery"
+  },
+  {
     "name": "Crime and Punishment",
-	"display_name": "CRIME AND PUNISHMENT",
-	"article": "the",
-	"description": "You pick up the book and flip through it.  The book is in excellent condition.",
-	"type": "Scenery"
-},{
+    "display_name": "CRIME AND PUNISHMENT",
+    "article": "the",
+    "description": "You pick up the book and flip through it.  The book is in excellent condition.",
+    "type": "Scenery"
+  },
+  {
     "name": "Nineteen Eighty-Four",
-	"display_name": "NINETEEN EIGHTY-FOUR",
-	"article": "the",
-	"description": "You pick up the book and flip through it.  The book is in excellent condition.",
-	"type": "Scenery"
-},{
+    "display_name": "NINETEEN EIGHTY-FOUR",
+    "article": "the",
+    "description": "You pick up the book and flip through it.  The book is in excellent condition.",
+    "type": "Scenery"
+  },
+  {
     "name": "Hitchhiker's Guide to the Galaxy",
-	"display_name": "HITCHHIKER'S GUIDE TO THE GALAXY",
-	"article": "the",
-	"description": "You pick up the book and flip through it.  The book is in excellent condition.",
-	"type": "Scenery"
-},{
+    "display_name": "HITCHHIKER'S GUIDE TO THE GALAXY",
+    "article": "the",
+    "description": "You pick up the book and flip through it.  The book is in excellent condition.",
+    "type": "Scenery"
+  },
+  {
     "name": "Odyssey",
-	"display_name": "ODYSSEY",
-	"article": "the",
-	"description": "As you try to pick up the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.",
-	"type": "Scenery"
-},{
+    "display_name": "ODYSSEY",
+    "article": "the",
+    "description": "As you try to pick up the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.",
+    "type": "Scenery"
+  },
+  {
     "name": "keypad",
-	"display_name": "KEYPAD",
-	"article": "the",
-	"description": "",
-    "events": [{"enter code 9338": "You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE."}],
-	"type": "Scenery"
-},{
+    "display_name": "KEYPAD",
+    "article": "the",
+    "description": "",
+    "events": {
+      "enter code 9338": {
+        "events": [
+          "You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE."
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
     "name": "keypad",
-	"display_name": "KEYPAD",
-	"article": "the",
-	"description": "",
-    "events": [{"enter code 9338": "You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE."}],
-	"type": "Scenery"
-},{
+    "display_name": "KEYPAD",
+    "article": "the",
+    "description": "",
+    "events": {
+      "enter code 9338": {
+        "events": [
+          "You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE."
+        ]
+      }
+    },
+    "type": "Scenery"
+  },
+  {
     "name": "boxes",
-	"display_name": "BOXES",
-	"article": "the",
-	"description": "The BOXES are filled with old family albums.  You flip through seeing pictures of a family that might once have understood the struggles you and yours currently deal with.  That struggle has long been forgotten by them.",
-	"type": "Scenery"
-},{
+    "display_name": "BOXES",
+    "article": "the",
+    "description": "The BOXES are filled with old family albums.  You flip through seeing pictures of a family that might once have understood the struggles you and yours currently deal with.  That struggle has long been forgotten by them.",
+    "type": "Scenery"
+  },
+  {
     "name": "electronics",
-	"display_name": "ELECTRONICS",
-	"article": "the",
-	"description": "You look through the ELECTRONICS piled in the closet.  You see old consoles and handheld units from Atari to Gameboy.  You can still recall playing some of these and you remember the games fondly.",
-	"type": "Scenery"
-},{
+    "display_name": "ELECTRONICS",
+    "article": "the",
+    "description": "You look through the ELECTRONICS piled in the closet.  You see old consoles and handheld units from Atari to Gameboy.  You can still recall playing some of these and you remember the games fondly.",
+    "type": "Scenery"
+  },
+  {
     "name": "lockbox",
-	"display_name": "LOCKBOX",
-	"article": "a",
-	"description": "A separate LOCKBOX is stored inside the safe.  It is still locked even though the safe is open.  How do you get in there?",
-    "events": [{"unlock": "You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood."}],
-	"type": "Scenery"
-}
+    "display_name": "LOCKBOX",
+    "article": "a",
+    "description": "A separate LOCKBOX is stored inside the safe.  It is still locked even though the safe is open.  How do you get in there?",
+    "events": {
+      "unlock": {
+        "events": [
+          "You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood."
+        ]
+      }
+    },
+    "type": "Scenery"
+  }
 ]

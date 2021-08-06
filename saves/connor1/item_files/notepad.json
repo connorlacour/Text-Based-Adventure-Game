@@ -1,0 +1,149 @@
+[
+  {
+    "name": "notepad",
+    "display_name": "NOTEPAD",
+    "article": "the",
+    "events": {}
+  },
+  {
+    "name": "glove",
+    "display_name": "GLOVE",
+    "article": "a",
+    "events": {
+      "wear": {
+        "events": [
+          "You put on the glove."
+        ],
+        "repeatable": true,
+        "passive_obj": ""
+      }
+    }
+  },
+  {
+    "name": "note",
+    "display_name": "NOTE",
+    "article": "the",
+    "events": {}
+  },
+  {
+    "name": "katana",
+    "display_name": "KATANA",
+    "article": "the",
+    "events": {
+      "use": {
+        "events": [
+          "You swing the blade, but it has been dulled and is nothing more than decorative at this point."
+        ],
+        "repeatable": true,
+        "passive_obj": ""
+      },
+      "fight with": {
+        "events": [
+          "You swing the KATANA, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.  GAME OVER"
+        ],
+        "repeatable": true,
+        "passive_obj": ""
+      }
+    }
+  },
+  {
+    "name": "burnt note",
+    "display_name": "BURNT NOTE",
+    "article": "a",
+    "events": {}
+  },
+  {
+    "name": "fast food",
+    "display_name": "FAST FOOD",
+    "article": "the",
+    "events": {
+      "eat": {
+        "events": [
+          "The FAST FOOD tastes cold and leaves you feeling hungrier than you were before."
+        ],
+        "repeatable": true,
+        "passive_obj": ""
+      }
+    }
+  },
+  {
+    "name": "apples",
+    "display_name": "APPLES",
+    "article": "the",
+    "events": {
+      "eat": {
+        "events": [
+          "You take a bite of the brightest red APPLE from the basket.  As you chew, you suddenly feel dizzy.  While your vision goes dark, you realize: the APPLE was poisoned.  GAME OVER."
+        ],
+        "repeatable": true,
+        "passive_obj": ""
+      }
+    }
+  },
+  {
+    "name": "small pouch",
+    "display_name": "SMALL POUCH",
+    "article": "the",
+    "events": {}
+  },
+  {
+    "name": "portable radio",
+    "display_name": "PORTABLE RADIO",
+    "article": "the",
+    "events": {
+      "turn on": {
+        "events": [
+          "A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner."
+        ],
+        "repeatable": true,
+        "passive_obj": ""
+      }
+    }
+  },
+  {
+    "name": "bottle of pills",
+    "display_name": "BOTTLE OF PILLS",
+    "article": "a",
+    "events": {
+      "swallow": {
+        "events": [
+          "You swallow one of the unmarked pills.  You continue walking around for a bit before the house seems like it's moving in a circle.  Colors pop out at you in bright detail and you swear you hear a dragon snarling in a nearby room.  The next thing you know the floor is rushing up at you and hits your head, knocking you out.  You wake up hours later with a dry mouth and find yourself in a jail cell.  GAME OVER"
+        ],
+        "repeatable": true,
+        "passive_obj": ""
+      }
+    }
+  },
+  {
+    "name": "silver key",
+    "display_name": "SILVER KEY",
+    "article": "a",
+    "events": {
+      "use": {
+        "events": [
+          "You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood."
+        ],
+        "repeatable": true,
+        "passive_obj": ""
+      }
+    }
+  },
+  {
+    "name": "cash",
+    "display_name": "CASH",
+    "article": "the",
+    "events": {}
+  },
+  {
+    "name": "gold",
+    "display_name": "GOLD",
+    "article": "the",
+    "events": {}
+  },
+  {
+    "name": "jewels",
+    "display_name": "JEWELS",
+    "article": "the",
+    "events": {}
+  }
+]

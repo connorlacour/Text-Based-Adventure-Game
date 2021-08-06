@@ -3,6 +3,7 @@ from game_objects.event import *
 from game_objects.synonyms import *
 from game_objects.global_collections import *
 
+
 class GameLoop:
 
     def __init__(self):
@@ -62,6 +63,7 @@ def look_at_object(obj_name):
         return obj.description
     else:
         return "There is no {obj_name} to look at."
+
 
 def take_object(verb, object_name):
     narration = ""
@@ -259,6 +261,7 @@ def main():
         if val == "exit":
             break
         print(get_next_narration(val))
+
 
 if __name__ == "__main__":
     main()

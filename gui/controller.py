@@ -5,6 +5,23 @@ import main_menu_gui
 import load_gui
 
 
+class IntroMusic:
+    def __init__(self):
+        game.mixer.init()
+        self.main_theme = game.mixer.Sound(r"../audio/mainTheme1.wav")
+
+    def start_music(self):
+        game.mixer.Sound.play(self.main_theme, loops=-1)
+
+    def stop_music(self):
+        self.main_theme.stop()
+        game.mixer.quit()
+
+
+music = IntroMusic()
+music.start_music()
+
+
 def controller() -> None:
     """
     Takes no parameters,
@@ -24,9 +41,11 @@ def controller() -> None:
     #   elif main_return is 'load game' -> load game
     #   else -> rerun mainMenu
     if main_return == 'new game':
+        music.stop_music()
         print('starting new game\none moment..')
         start_new_game()
     elif main_return == 'exit':
+        music.stop_music()
         print('okay.. exiting..')
         game.quit()
         sys.exit()
@@ -60,6 +79,7 @@ def load_game() -> None:
     load = load_gui.LoadGameGUI().main()
 
     if load == 'load':
+        music.stop_music()
         start_new_game()
     elif load == 'back':
         controller()

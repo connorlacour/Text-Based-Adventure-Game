@@ -125,6 +125,7 @@ class ItemSetupTests(unittest.TestCase):
         schema = RoomSchema()
         result = load_rooms_from_file(get_test_file_name('templates/rooms.json'))
         self.assertTrue(len(result) == 4)
+        print("here")
         pprint(result)
 
     def testGenerateRoomDescription(self):
@@ -247,16 +248,16 @@ scroll = InventoryItem(
     can_take=False
 )
 
-# plates = CollectiveItem(
-#     name="plates",
-#     display_name="PLATES",
-#     description="Dirty, nasty plates. You'd have these cleaned in a jiffy if you hadn't "
-#                 "already eaten all the Tide Pods.",
-#     singular_display_name="PLATE",
-#     singular_description="A grody PLATE you grabbed from the DINING TABLE.  You probably wouldn't eat on it.",
-#     max_count=5,
-#     events={"WASH": ItemEvent(["print You try to $$verb the plate, with what? Your tongue?"])}
-# )
+plates = CollectiveItem(
+    name="plates",
+    display_name="PLATES",
+    description="Dirty, nasty plates. You'd have these cleaned in a jiffy if you hadn't "
+                "already eaten all the Tide Pods.",
+    singular_display_name="PLATE",
+    singular_description="A grody PLATE you grabbed from the DINING TABLE.  You probably wouldn't eat on it.",
+    max_count=5,
+    events={"WASH": Event(["print You try to $$verb the plate, with what? Your tongue?"])}
+)
 
 chairs = CollectiveItem(
     name="chairs",
@@ -266,5 +267,4 @@ chairs = CollectiveItem(
     singular_description="A fine CHAIR. Should come in handy if you get in a wrestling match.",
     max_count=5
 )
-
 

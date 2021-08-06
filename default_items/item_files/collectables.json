@@ -1,92 +1,157 @@
-[{
-	"name": "notepad",
-	"display_name": "NOTEPAD",
-	"article": "the",
-	"description": "The NOTEPAD is blank.",
-	"type": "Inventory"
-}, {
-	"name": "glove",
-	"display_name": "GLOVE",
-	"article": "a",
-	"description": "The GLOVE is in good shape and is made of flexible faux leather.",
-    "events": [{"wear": "You put on the glove."}],
-	"type": "Inventory"
-}, {
-	"name": "note",
-	"display_name": "NOTE",
-	"article": "the",
-	"description": "The NOTE reads,\n\nDear Tuck,\nPlease come home.  I feel like I go weeks without seeing you.  For what?  You said yourself that no one would find the way in unless they were looking for it.  The least these people could do is give you a decent place to rest while you’re here.  You should be home with your family.  We can find another way.  Come home.\n\nYours,\nCarole",
-	"type": "Inventory"
-}, {
-	"name": "katana",
-	"display_name": "KATANA",
-	"article": "the",
-	"description": "The hilt of the KATANA is etched with two dragons and the blade has a string of kanji going down one side.  It is light and effortless to swing.",
-    "events": [{"use": "You swing the blade, but it has been dulled and is nothing more than decorative at this point."}, {"fight with": "You swing the KATANA, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.  GAME OVER"}],
-	"type": "Inventory"
-}, {
-	"name": "burnt note",
-	"display_name": "BURNT NOTE",
-	"article": "a",
-	"description": "Most of the note has been burned beyond recognition, but you think you make out the letters Y - E - E - T.",
-	"type": "Inventory"
-}, {
-	"name": "fast food",
-	"display_name": "FAST FOOD",
-	"article": "the",
-	"description": "There are reheated nuggets in a cardboard box.",
-    "events": [{"eat": "The FAST FOOD tastes cold and leaves you feeling hungrier than you were before."}],
-	"type": "Inventory"
-}, {
-	"name": "apples",
-	"display_name": "APPLES",
-	"article": "the",
-	"description": "Shiny, bright red apples",
-    "events": [{"eat": "You take a bite of the brightest red APPLE from the basket.  As you chew, you suddenly feel dizzy.  While your vision goes dark, you realize: the APPLE was poisoned.  GAME OVER."}],
-	"type": "Inventory"
-}, {
-	"name": "small pouch",
-	"display_name": "SMALL POUCH",
-	"article": "the",
-	"description": "The SMALL POUCH is small enough to fit in your pocket, but it contains a handful of bills rolled up.  It is not the large score you are after, but it is something to add to the pile.",
-	"type": "Inventory"
-}, {
-	"name": "portable radio",
-	"display_name": "PORTABLE RADIO",
-	"article": "the",
-	"description": "Picking up the PORTABLE RADIO, you see that it’s tuned to an easy listening station.",
-    "events": [{"turn on": "A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner."}],
-	"type": "Inventory"
-}, {
-	"name": "bottle of pills",
-	"display_name": "BOTTLE OF PILLS",
-	"article": "a",
-	"description": "An unmarked bottle of pills",
-    "events": [{"swallow": "You swallow one of the unmarked pills.  You continue walking around for a bit before the house seems like it’s moving in a circle.  Colors pop out at you in bright detail and you swear you hear a dragon snarling in a nearby room.  The next thing you know the floor is rushing up at you and hits your head, knocking you out.  You wake up hours later with a dry mouth and find yourself in a jail cell.  GAME OVER"}],
-	"type": "Inventory"
-}, {
-	"name": "silver key",
-	"display_name": "SILVER KEY",
-	"article": "a",
-	"description": "This key looks like it's made for something more than an ordinary door.",
-    "events": [{"use": "You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood."}],
-	"type": "Inventory"
-}, {
-	"name": "cash",
-	"display_name": "CASH",
-	"article": "the",
-	"description": "There must be more money than you ever expected to see in your lifetime right before your very eyes.",
-	"type": "Inventory"
-}, {
-	"name": "gold",
-	"display_name": "GOLD",
-	"article": "the",
-	"description": "All kinds of gold coins.  Are you a modern-day Robin Hood or a pirate?  Why not both?!",
-	"type": "Inventory"
-}, {
-	"name": "jewels",
-	"display_name": "JEWELS",
-	"article": "the",
-	"description": "Emeralds, Rubies, Diamonds. Oh my!",
-	"type": "Inventory"
-}]
+[
+  {
+    "name": "notepad",
+    "display_name": "NOTEPAD",
+    "article": "the",
+    "description": "The NOTEPAD is blank.",
+    "type": "Inventory"
+  },
+  {
+    "name": "glove",
+    "display_name": "GLOVE",
+    "article": "a",
+    "description": "The GLOVE is in good shape and is made of flexible faux leather.",
+    "events": {
+      "wear": {
+        "events": [
+          "You put on the glove."
+        ]
+      }
+    },
+    "type": "Inventory"
+  },
+  {
+    "name": "note",
+    "display_name": "NOTE",
+    "article": "the",
+    "description": "The NOTE reads,\n\nDear Tuck,\nPlease come home.  I feel like I go weeks without seeing you.  For what?  You said yourself that no one would find the way in unless they were looking for it.  The least these people could do is give you a decent place to rest while you're here.  You should be home with your family.  We can find another way.  Come home.\n\nYours,\nCarole",
+    "type": "Inventory"
+  },
+  {
+    "name": "katana",
+    "display_name": "KATANA",
+    "article": "the",
+    "description": "The hilt of the KATANA is etched with two dragons and the blade has a string of kanji going down one side.  It is light and effortless to swing.",
+    "events": {
+      "use": {
+        "events": [
+          "You swing the blade, but it has been dulled and is nothing more than decorative at this point."
+        ]
+      },
+      "fight with": {
+        "events": [
+          "You swing the KATANA, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.  GAME OVER"
+        ]
+      }
+    },
+    "type": "Inventory"
+  },
+  {
+    "name": "burnt note",
+    "display_name": "BURNT NOTE",
+    "article": "a",
+    "description": "Most of the note has been burned beyond recognition, but you think you make out the letters Y - E - E - T.",
+    "type": "Inventory"
+  },
+  {
+    "name": "fast food",
+    "display_name": "FAST FOOD",
+    "article": "the",
+    "description": "There are reheated nuggets in a cardboard box.",
+    "events": {
+        "eat": {
+          "events": [
+            "The FAST FOOD tastes cold and leaves you feeling hungrier than you were before."
+          ]
+        }
+      }
+    ,
+    "type": "Inventory"
+  },
+  {
+    "name": "apples",
+    "display_name": "APPLES",
+    "article": "the",
+    "description": "Shiny, bright red apples",
+    "events": {
+        "eat": {
+          "events": [
+            "You take a bite of the brightest red APPLE from the basket.  As you chew, you suddenly feel dizzy.  While your vision goes dark, you realize: the APPLE was poisoned.  GAME OVER."
+          ]
+      }
+    },
+    "type": "Inventory"
+  },
+  {
+    "name": "small pouch",
+    "display_name": "SMALL POUCH",
+    "article": "the",
+    "description": "The SMALL POUCH is small enough to fit in your pocket, but it contains a handful of bills rolled up.  It is not the large score you are after, but it is something to add to the pile.",
+    "type": "Inventory"
+  },
+  {
+    "name": "portable radio",
+    "display_name": "PORTABLE RADIO",
+    "article": "the",
+    "description": "Picking up the PORTABLE RADIO, you see that it's tuned to an easy listening station.",
+    "events":
+      {
+        "turn on": {
+          "events": [
+            "A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner."
+            ]
+        }
+      },
+    "type": "Inventory"
+  },
+  {
+    "name": "bottle of pills",
+    "display_name": "BOTTLE OF PILLS",
+    "article": "a",
+    "description": "An unmarked bottle of pills",
+    "events":
+      {
+        "swallow": {
+          "events": [
+            "You swallow one of the unmarked pills.  You continue walking around for a bit before the house seems like it's moving in a circle.  Colors pop out at you in bright detail and you swear you hear a dragon snarling in a nearby room.  The next thing you know the floor is rushing up at you and hits your head, knocking you out.  You wake up hours later with a dry mouth and find yourself in a jail cell.  GAME OVER"
+            ]
+        }
+      },
+    "type": "Inventory"
+  },
+  {
+    "name": "silver key",
+    "display_name": "SILVER KEY",
+    "article": "a",
+    "description": "This key looks like it's made for something more than an ordinary door.",
+    "events": {
+        "use": {
+          "events": [
+            "You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood."
+            ]
+        }
+      },
+    "type": "Inventory"
+  },
+  {
+    "name": "cash",
+    "display_name": "CASH",
+    "article": "the",
+    "description": "There must be more money than you ever expected to see in your lifetime right before your very eyes.",
+    "type": "Inventory"
+  },
+  {
+    "name": "gold",
+    "display_name": "GOLD",
+    "article": "the",
+    "description": "All kinds of gold coins.  Are you a modern-day Robin Hood or a pirate?  Why not both?!",
+    "type": "Inventory"
+  },
+  {
+    "name": "jewels",
+    "display_name": "JEWELS",
+    "article": "the",
+    "description": "Emeralds, Rubies, Diamonds. Oh my!",
+    "type": "Inventory"
+  }
+]
