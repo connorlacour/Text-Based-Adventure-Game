@@ -6,6 +6,7 @@ from unit_tests.item_setup_tests import *
 import os
 import marshmallow
 import json
+import unittest
 
 
 class Save:
@@ -55,9 +56,11 @@ class Save:
             )
 
         for item_collection in jsons_to_load["items"]:
-            path = os.path.join(item_dir, item_collection)
-            result = load_items_from_file(path)
-            items_loaded.append(result)
+            items_loaded.append(
+                load_items_from_file(
+                    os.path.join(item_dir, item_collection)
+                )
+            )
 
         self.game_data["room_files"] = rooms_loaded
         self.game_data["item_files"] = items_loaded
@@ -77,6 +80,9 @@ class Save:
             os.mkdir(self.save_file_name)
         os.chdir(self.save_file_name)
 
+        items = []
+        rooms = []
+
         for sub_dir in self.game_data.keys():
 
             if sub_dir not in os.listdir():
@@ -84,21 +90,25 @@ class Save:
             os.chdir(sub_dir)
 
             if sub_dir == "scroll":
-                path = open("scroll.txt", mode="w+", encoding="utf-8")
+                path = open("scroll.txt", mode="w+")
                 for line in self.game_data["text_scroll"]:
                     path.writelines(str(line) + "\n")
                 path.close()
 
             else:
                 for element in self.game_data[sub_dir]:
-                    print(element)
+                    if sub_dir == "item_files":
+                        items.append(element)
+                    elif sub_dir == "room_files":
+                        rooms.append(element)
                     dumped = schema.dumps(element, many=True)
-                    path = open(str(element[0]) + ".json", mode="w+", encoding="utf-8")
+                    path = open(str(element[0]) + ".json", mode="w+")
                     path.write(dumped)
                     path.close()
 
             os.chdir("..")
         os.chdir(self.home_dir)
+        return items, rooms
 
 
 class LoadGame:
@@ -173,8 +183,25 @@ class LoadGame:
             self.scroll.append("")
 
 
-test_scroll = Scroll(test=1)
-Save("connor1", test_scroll).save_data()
+class initGameTest(unittest.TestCase):
+
+    def test_init(self):
+        test_scroll = Scroll(test=1)
+        test = Save("connor2", test_scroll)
+
+        # collect files to "load"
+        test.get_json_file_list()
+
+        # calls load_items_from_file() and load_rooms_from_file()
+        items, rooms = test.save_data()
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+# test_scroll = Scroll(test=1)
+# Save("connor1", test_scroll).save_data()
 
 # LoadGame("connor7").load_scroll()
 
