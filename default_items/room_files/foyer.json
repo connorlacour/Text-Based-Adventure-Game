@@ -6,7 +6,7 @@
 	"name": "foyer",
 	"item_setup_dict": {
         "chairs": "There is a sitting area with CHAIRS and ",
-        "table": "a SMALL TABLE in one corner, and ",
+        "small_table": "a SMALL TABLE in one corner, and ",
         "desk": "there is a DESK along the SOUTH wall by the main entrance."
     },
 	"short_description": "You are in the foyer. ",
@@ -15,13 +15,13 @@
 	"display_name": "FOYER",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "Two doors lead out of the room and further into the building: one in the $$direction wall that goes to the $$room_name and ",
+		"narrative_text": "Two doors lead out of the room and further into the building: one in the NORTH wall that goes to the DOWNSTAIRS HALLWAY and ",
 		"article": "the",
-		"room_name": "downstairs hallway",
+		"room_name": "downstairs_hallway",
 		"direction": "NORTH"
 	}, {
 		"known_to_player": true,
-		"narrative_text": "one in the $$direction wall leading to a $$room_name.",
+		"narrative_text": "one in the EAST wall leading to a CLOSET.",
 		"article": "a",
 		"room_name": "closet",
 		"direction": "EAST"

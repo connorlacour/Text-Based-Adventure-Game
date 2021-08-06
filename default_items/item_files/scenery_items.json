@@ -5,17 +5,17 @@
 	"description": "You search the COAT for clues about the owner.  As you dig around, your hand finds a piece of paper with a NOTE written on it.",
 	"type": "Scenery"
 },{
-    "name": "china cabinet",
+    "name": "china_cabinet",
 	"display_name": "CHINA CABINET",
 	"article": "a",
 	"description": "The CHINA CABINET is locked.  You consider the value of the dinnerware, but the risk of breaking it ends that thought.  Just as you are turning away from the cabinet, you see a SMALL POUCH jutting out of a hidden corner not easily seen through the glass.",
-    "events": {"UNLOCK,SMALL KEY": {"events": ["print You unlock the china cabinet.", "change SMALL POUCH can_take to true"],
-		"repeatable": false,
-		"passive_obj": "SMALL KEY"}
-		},
-	"type": "Scenery"
+	"type": "Scenery",
+    "events": {
+		"UNLOCK,SMALL_KEY": {
+			"events": ["print You unlock the china cabinet.", "change small_pouch can_take to true"]}
+		}
 },{
-    "name": "wall mount",
+    "name": "wall_mount",
 	"display_name": "WALL MOUNT",
 	"article": "a",
 	"description": "There are various badges hanging from the WALL MOUNT from conferences and meetings.  Hidden amongst those is a SMALL KEY.",
@@ -33,7 +33,7 @@
 	"description": "Looking in the glass case on the PODIUM, you see a GUEST BOOK.",
 	"type": "Scenery"
 },{
-    "name": "guest book",
+    "name": "guest_book",
 	"display_name": "GUEST BOOK",
 	"article": "a",
 	"description": "The last name entered in the GUEST BOOK you see is John Little.",
@@ -45,7 +45,7 @@
 	"description": "The CHAIRS appear to be normal, waiting room chairs for visitors.  They sit around a SMALL TABLE.",
 	"type": "Scenery"
 },{
-    "name": "small table",
+    "name": "small_table",
 	"display_name": "SMALL TABLE",
 	"article": "the",
 	"description": "On the SMALL TABLE is a blank NOTEPAD that appears to have had the top page hastily ripped off.",
@@ -61,22 +61,23 @@
 	"display_name": "GUARD",
 	"article": "a",
 	"description": "The GUARD'S badge says 'Tuck'.",
-    "events": {"FIGHT": {"events": ["print You try to fight the guard, but you are no match for him.  He knocks you out, and when you wake, you find yourself in a jail cell.", "game over"],
-		"repeatable": false,
-		"passive_obj": ""},
-		"FIGHT,KATANA": {"events": ["print You swing the KATANA, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"],
-			"repeatable": false,
-			"passive_obj": "KATANA"},
-		"BRIBE,SMALL POUCH": {"events": ["print Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut.", "move player to guest room"],
-			"repeatable": false,
-			"passive_obj": "SMALL POUCH"},
-		"PERSUADE,NOTE": {"events": ["print You remember the note from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the note to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the note several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "move player to guest room"],
-			"repeatable": false,
-			"passive_obj": "NOTE"}
+	"type": "Scenery",
+    "events": {
+		"FIGHT": {
+			"events": ["print You try to fight the guard, but you are no match for him.  He knocks you out, and when you wake, you find yourself in a jail cell.", "game over"]
 		},
-	"type": "Scenery"
+		"FIGHT,KATANA": {
+			"events": ["print You swing the KATANA, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"]
+		},
+		"BRIBE,SMALL_POUCH": {
+			"events": ["print Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut.", "move player to guest_bedroom"]
+			},
+		"PERSUADE,NOTE": {
+			"events": ["print You remember the note from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the note to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the note several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "move player to guest_bedroom"]
+			}
+		}
 },{
-    "name": "night stand",
+    "name": "night_stand",
 	"display_name": "NIGHT STAND",
 	"article": "a",
 	"description": "Opening the drawer to the NIGHT STAND, you see a GLOVE.",
@@ -112,7 +113,7 @@
 	"description": "Going over to the ISLAND, you see a bowl of fruit with vibrant red APPLES and a BLUE JAR with a paw print on it.",
 	"type": "Scenery"
 },{
-    "name": "blue jar",
+    "name": "blue_jar",
 	"display_name": "BLUE JAR",
 	"article": "a",
 	"description": "You pull back the lid on the BLUE JAR to find DOG TREATS that smell strongly of bacon.",
@@ -124,7 +125,7 @@
 	"description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT NOTE stuck between the bottom logs.",
 	"type": "Scenery"
 },{
-    "name": "strip of paper",
+    "name": "strip_of_paper",
 	"display_name": "strip of paper",
 	"article": "a",
 	"description": "As you look closer at the STRIP OF PAPER, you notice that it is a receipt from John Little’s Lock & Key.",
@@ -134,50 +135,53 @@
 	"display_name": "ALARM",
 	"article": "an",
 	"description": "The alarm appears to be quite old and outdated.  You are not even sure it’s fully mounted into the wall or whether it is simply hanging like a photo would be.  There is a RED BUTTON on the alarm.  Should you press it?",
-    "events": {"ENTER": {"events": ["print Nothing happens."],
-		"repeatable": true,
-		"passive_obj": ""}
-		},
-	"type": "Scenery"
+	"type": "Scenery",
+    "events": {
+		"ENTER CODE": {
+			"events": ["print Nothing happens."]}
+		}
 },{
-    "name": "large poster",
+    "name": "large_poster",
 	"display_name": "LARGE POSTER",
 	"article": "a",
 	"description": "You see a poster of the night sky.  You search the poster trying to figure out what its meaning is when you recognize the bright star Vega, and from there, you trace the constellation Lyra in your mind.",
 	"type": "Scenery"
 },{
-    "name": "red button",
+    "name": "red_button",
 	"display_name": "RED BUTTON",
 	"article": "a",
 	"description": "A big shiny RED BUTTON",
-    "events": {"PRESS": {"events": ["print You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it’s hard to resist the temptation."],
-		"repeatable": true,
-		"passive_obj": ""}
-		},
-	"type": "Scenery"
+	"type": "Scenery",
+    "events": {
+		"PRESS": {
+			"events": ["print You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it’s hard to resist the temptation."]
+			}
+		}
 },{
-    "name": "angry dog",
+    "name": "dog",
 	"display_name": "ANGRY DOG",
 	"article": "a",
 	"description": "You approach the DOG carefully.  As you get closer, it bares its teeth in warning.  Suddenly, it shakes its head as if shaking off some irritation and you notice a SILVER KEY hanging from the collar where a tag would be.  Is there way to soothe this savage beast to get the key?",
-    "events": {"FEED,DOG TREATS": {"events": ["print You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.", "rename ANGRY DOG to CALM DOG", "change SILVER KEY can_take to true"],
-		"repeatable": false,
-		"passive_obj": "DOG TREATS"},
-		"TURN ON,PORTABLE RADIO": {"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "rename ANGRY DOG to CALM DOG", "change SILVER KEY can_take to true"],
-		"repeatable": false,
-		"passive_obj": "PORTABLE RADIO"}
+	"type": "Scenery",
+    "events": {
+		"FEED,DOG_TREATS": {
+			"events": ["print You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.", "change dog display_name to `CALM DOG`", "change silver_key can_take to true"]
 		},
-	"type": "Scenery"
+		"TURN ON,PORTABLE_RADIO": {
+			"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "change dog display_name to `CALM DOG`", "change silver_key can_take to true"]
+		}
+	}
 },{
     "name": "crate",
 	"display_name": "CRATE",
 	"article": "a",
 	"description": "There’s a sliding latch on the wireframe crate.",
-    "events": {"OPEN": {"events": ["print The DOG ignores you and stays sleeping."],
-		"repeatable": false,
-		"passive_obj": ""}
-		},
-	"type": "Scenery"
+	"type": "Scenery",
+    "events": {
+		"OPEN": {
+			"events": ["print The DOG ignores you and stays sleeping."]
+			}
+		}
 },{
     "name": "bed",
 	"display_name": "BED",
@@ -185,31 +189,33 @@
 	"description": "The BED is covered in a comforter that feels softer than any other you’ve seen when you press your hand into it.  The bed was decked out for a king with drapes that could be drawn around with the richest fabrics on it.",
     "type": "Scenery"
 },{
-    "name": "waste basket",
+    "name": "waste_basket",
 	"display_name": "WASTE BASKET",
 	"article": "a",
 	"description": "The WASTE BASKET is empty.",
 	"type": "Scenery"
 },{
-    "name": "medicine cabinet",
+    "name": "medicine_cabinet",
 	"display_name": "MEDICINE CABINET",
 	"article": "a",
 	"description": "The MEDICINE CABINET looks to be the kind with a mirror on front and a front-facing door that swings open.",
-    "events": {"OPEN": {"events": ["print You open the MEDICINE CABINET and see various toiletries and vitamins.  There is a single unmarked BOTTLE OF PILLS on a shelf"],
-		"repeatable": true,
-		"passive_obj": ""}
-		},
-	"type": "Scenery"
+	"type": "Scenery",
+    "events": {
+		"OPEN": {
+			"events": ["print You open the MEDICINE CABINET and see various toiletries and vitamins.  There is a single unmarked BOTTLE OF PILLS on a shelf"]
+		}
+	}
 },{
     "name": "trunk",
 	"display_name": "TRUNK",
 	"article": "a",
 	"description": "The TRUNK is old and sturdy.  It has no lock.",
-    "events": {"OPEN": {"events": ["print School awards and trophies are stacked inside the TRUNK.  You see some for science projects and others for academic decathlons."],
-		"repeatable": true,
-		"passive_obj": ""}
-		},
-	"type": "Scenery"
+	"type": "Scenery",
+    "events": {
+		"OPEN": {
+			"events": ["print School awards and trophies are stacked inside the TRUNK.  You see some for science projects and others for academic decathlons."]
+			}
+		}
 },{
     "name": "bookcase",
 	"display_name": "BOOKCASE",
@@ -217,52 +223,54 @@
 	"description": "Numerous books fill the BOOKCASE in front of you.  You see books like GULLIVER’S TRAVELS, THE ODYSSEY, and CRIME AND PUNISHMENT and more modern works like NINETEEN EIGHTY-FOUR and even HITCHHIKER’S GUIDE TO THE GALAXY.",
 	"type": "Scenery"
 },{
-    "name": "Gulliver's Travels",
+    "name": "gulliver_travels",
 	"display_name": "GULLIVER'S TRAVELS",
 	"article": "the",
 	"description": "A normal copy of Gulliver's Travel's",
 	"type": "Scenery"
 },{
-    "name": "Crime and Punishment",
+    "name": "crime_and_punishment",
 	"display_name": "CRIME AND PUNISHMENT",
 	"article": "the",
 	"description": "A normal copy of Crime and Punishment",
 	"type": "Scenery"
 },{
-    "name": "Nineteen Eighty-Four",
+    "name": "nineteen_eightyfour",
 	"display_name": "NINETEEN EIGHTY-FOUR",
 	"article": "the",
 	"description": "A normal copy of Nineteen Eighty-Four",
 	"type": "Scenery"
 },{
-    "name": "Hitchhiker's Guide to the Galaxy",
+    "name": "hitchhikers_guide_to_the_galaxy",
 	"display_name": "HITCHHIKER'S GUIDE TO THE GALAXY",
 	"article": "the",
 	"description": "A normal copy of Hitchhiker's Guide to the Galaxy",
 	"type": "Scenery"
 },{
-    "name": "Odyssey",
+    "name": "odyssey",
 	"display_name": "ODYSSEY",
 	"article": "the",
 	"description": "As you look at the copy of the ODYSSEY, you notice that it is sticking out more than the other books.  Was this picked up recently?",
-	"events": {"PICK UP": {"events": ["print As you try to pick up the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.", "change SAFE known_to_player to true"],
-		"repeatable": true,
-		"passive_obj": ""}
-		},
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"PICK UP": {
+			"events": ["print As you try to pick up the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.", "change attic.direction.north narrative_text to `The BOOKCASE slides to the side revealing a walk-in safe with a KEYPAD.`"]
+			}
+		}
 },{
     "name": "keypad",
 	"display_name": "KEYPAD",
 	"article": "the",
-	"description": "",
-    "events": {"ENTER CODE 9338": {"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "go to safe"],
-		"repeatable": true,
-		"passive_obj": ""},
-		"ENTER CODE YEET": {"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "go to safe"],
-			"repeatable": true,
-			"passive_obj": ""}
-	},
-	"type": "Scenery"
+	"description": "A digital KEYPAD with numbers 0-9",
+	"type": "Scenery",
+    "events": {
+		"ENTER CODE 9338": {
+			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"]
+			},
+		"ENTER CODE YEET": {
+			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"]
+		}
+	}
 },{
     "name": "boxes",
 	"display_name": "BOXES",
@@ -280,9 +288,10 @@
 	"display_name": "LOCKBOX",
 	"article": "a",
 	"description": "A separate LOCKBOX is stored inside the safe.  It is still locked even though the safe is open.  How do you get in there?",
-    "events": {"UNLOCK,SILVER KEY": {"events": ["print You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood.", "game win"],
-		"repeatable": false,
-		"passive_obj": "SILVER KEY"}
-		},
-	"type": "Scenery"
+	"type": "Scenery",
+    "events": {
+		"UNLOCK,SILVER_KEY": {
+			"events": ["print You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood.", "game win"]
+			}
+		}
 }]

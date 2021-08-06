@@ -1,6 +1,6 @@
 [
 {
-    "name": "attic closet",
+    "name": "attic_closet",
     "item_setup_dict": {
         "boxes": "BOXES are stacked against the walls and ",
         "electronics": "ELECTRONICS sit in piles around the closet. "
@@ -11,7 +11,7 @@
     "display_name": "ATTIC CLOSET",
     "room_list": [{
         "known_to_player": true,
-        "narrative_text": " The door in the $$direction wall goes back to the $$room_name. ",
+        "narrative_text": " The door in the NORTH goes back to the ATTIC. ",
         "article": "the",
         "room_name": "attic",
         "direction": "NORTH"
@@ -28,28 +28,28 @@
 	"display_name": "ATTIC",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "A door in the $$direction wall opens to an $$room_name and ",
+		"narrative_text": "A door in the SOUTH wall opens to an ATTIC CLOSET and ",
 		"article": "the",
-		"room_name": "attic closet",
+		"room_name": "attic_closet",
 		"direction": "SOUTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the stairs in the $$direction wall go back down to the $$room_name.",
+		"narrative_text": "the stairs in the WEST go back down to the UPSTAIRS HALLWAY.",
 		"article": "the",
-		"room_name": "upstairs hallway",
+		"room_name": "upstairs_hallway",
 		"direction": "WEST"
 	},{
 		"known_to_player": false,
-		"narrative_text": "The BOOKCASE slides to the side revealing a walk-in $$room_name with a KEYPAD.",
+		"narrative_text": "",
 		"article": "the",
-		"room_name": "locked safe",
+		"room_name": "safe",
 		"direction": "NORTH"
 	}]
 },{
 	"name": "bathroom",
 	"item_setup_dict": {
-        "medicine cabinet": "There is a MEDICINE CABINET above the sink set in the NORTH wall and ",
-        "waste basket": "a WASTE BASKET against the EAST wall. "
+        "medicine_cabinet": "There is a MEDICINE CABINET above the sink set in the NORTH wall and ",
+        "waste_basket": "a WASTE BASKET against the EAST wall. "
     },
 	"short_description": "You are in the bathroom. ",
 	"article": "the",
@@ -57,9 +57,9 @@
 	"display_name": "BATHROOM",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "The door in the $$direction wall leads back to the $$room_name. ",
+		"narrative_text": "The door in the WEST wall leads back to the MAIN BEDROOM. ",
 		"article": "the",
-		"room_name": "main bedroom",
+		"room_name": "main_bedroom",
 		"direction": "WEST"
 	}]
 },{
@@ -74,16 +74,16 @@
 	"display_name": "CLOSET",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "The lone door in the $$direction wall leads back to the $$room_name.",
+		"narrative_text": "The lone door in the WEST wall leads back to the FOYER.",
 		"article": "the",
 		"room_name": "foyer",
 		"direction": "WEST"
 	}]
 },{
-	"name": "dining room",
+	"name": "dining_room",
 	"item_setup_dict": {
-        "china cabinet": "A CHINA CABINET and ",
-        "wall mount": "WALL MOUNT are along the WEST wall"
+        "china_cabinet": "A CHINA CABINET and ",
+        "wall_mount": "WALL MOUNT are along the WEST wall"
     },
 	"short_description": "You are in the dining room. ",
 	"article": "a",
@@ -91,19 +91,19 @@
 	"display_name": "DINING ROOM",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "There are two doors, one in the $$direction wall to the $$room_name and ",
+		"narrative_text": "There are two doors, one in the SOUTH wall to the LIVING ROOM and ",
 		"article": "the",
-		"room_name": "living room",
+		"room_name": "living_room",
 		"direction": "SOUTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "another in the $$direction wall to the $$room_name.",
+		"narrative_text": "another in the EAST wall to the KITCHEN.",
 		"article": "the",
 		"room_name": "kitchen",
 		"direction": "EAST"
 	}]
 },{
-	"name": "downstairs hallway",
+	"name": "downstairs_hallway",
 	"item_setup_dict": {
         "painting": "A PAINTING and ",
         "podium": "PODIUM are also along the EAST wall."
@@ -114,34 +114,34 @@
 	"display_name": "DINING ROOM",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "The door in the $$direction wall leads to the $$room_name, ",
+		"narrative_text": "The door in the NORTH wall leads to the KITCHEN, ",
 		"article": "the",
 		"room_name": "kitchen",
 		"direction": "NORTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the door in the $$direction wall leads to the $$room_name, and ",
+		"narrative_text": "the door in the WEST wall leads to the LIVING ROOM, and ",
 		"article": "the",
-		"room_name": "living room",
+		"room_name": "living_room",
 		"direction": "WEST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the door in the $$direction wall leads to the $$room_name. ",
+		"narrative_text": "the door in the SOUTH wall leads to the FOYER. ",
 		"article": "the",
 		"room_name": "foyer",
 		"direction": "SOUTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "There are STAIRS leading to the $$room_name in the $$direction wall. ",
+		"narrative_text": "There are STAIRS leading to the UPSTAIRS HALLWAY in the NORTH wall. ",
 		"article": "the",
-		"room_name": "upstairs hallway",
+		"room_name": "upstairs_hallway",
 		"direction": "NORTH"
 	}]
 },{
 	"name": "foyer",
 	"item_setup_dict": {
         "chairs": "There is a sitting area with CHAIRS and ",
-        "small table": "a SMALL TABLE in one corner, and ",
+        "small_table": "a SMALL TABLE in one corner, and ",
         "desk": "there is a DESK along the SOUTH wall by the main entrance."
     },
 	"short_description": "You are in the foyer. ",
@@ -150,22 +150,22 @@
 	"display_name": "FOYER",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "Two doors lead out of the room and further into the building: one in the $$direction wall that goes to the $$room_name and ",
+		"narrative_text": "Two doors lead out of the room and further into the building: one in the NORTH wall that goes to the DOWNSTAIRS HALLWAY and ",
 		"article": "the",
-		"room_name": "downstairs hallway",
+		"room_name": "downstairs_hallway",
 		"direction": "NORTH"
 	}, {
 		"known_to_player": true,
-		"narrative_text": "one in the $$direction wall leading to a $$room_name.",
+		"narrative_text": "one in the EAST wall leading to a CLOSET.",
 		"article": "a",
 		"room_name": "closet",
 		"direction": "EAST"
 	}]
 },{
-	"name": "guest bedroom",
+	"name": "guest_bedroom",
 	"item_setup_dict": {
         "window": "There is a WINDOW and ",
-        "night stand": "a NIGHT STAND beside the bed against the NORTH wall."
+        "night_stand": "a NIGHT STAND beside the bed against the NORTH wall."
     },
 	"short_description": "You are in the guest room. ",
 	"article": "the",
@@ -173,13 +173,13 @@
 	"display_name": "GUEST ROOM",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "The only door in or out is in the $$direction wall back to the $$room_name. ",
+		"narrative_text": "The only door in or out is in the SOUTH wall back to the UPSTAIRS HALLWAY. ",
 		"article": "the",
-		"room_name": "upstairs hallway",
+		"room_name": "upstairs_hallway",
 		"direction": "SOUTH"
 	}]
 },{
-	"name": "home gym",
+	"name": "home_gym",
 	"item_setup_dict": {
         "shelf": "There's a SHELF on the EAST wall and ",
         "mirror": " a MIRROR hangs on the WEST wall."
@@ -190,9 +190,9 @@
 	"display_name": "HOME GYM",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "The only door in or out is in the $$direction wall back to the $$room_name.",
+		"narrative_text": "The only door in or out is in the NORTH wall back to the UPSTAIRS HALLWAY.",
 		"article": "the",
-		"room_name": "upstairs hallway",
+		"room_name": "upstairs_hallway",
 		"direction": "NORTH"
 	}]
 },{
@@ -209,23 +209,23 @@
 	"display_name": "KITCHEN",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "There are two doors, one in the $$direction wall to the $$room_name and ",
+		"narrative_text": "There are two doors, one in the WEST wall to the DINING ROOM and ",
 		"article": "the",
-		"room_name": "dining room",
+		"room_name": "dining_room",
 		"direction": "WEST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "another in the $$direction wall to the $$room_name. ",
+		"narrative_text": "another in the SOUTH wall to the DOWNSTAIRS HALLWAY. ",
 		"article": "the",
-		"room_name": "downstairs hallway",
+		"room_name": "downstairs_hallway",
 		"direction": "SOUTH"
 	}]
 },{
-	"name": "living room",
+	"name": "living_room",
 	"item_setup_dict": {
         "fireplace": "A FIREPLACE is set in the WEST wall",
         "katana": " with a KATANA above it",
-        "strip of paper": ". A coffee table with a STRIP OF PAPER on it rests in the middle of the room."
+        "strip_of_paper": ". A coffee table with a STRIP OF PAPER on it rests in the middle of the room."
     },
 	"short_description": "You are in the living room. ",
 	"article": "the",
@@ -233,19 +233,19 @@
 	"display_name": "LIVING ROOM",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "There are two doors, one in the $$direction wall to the $$room_name and ",
+		"narrative_text": "There are two doors, one in the NORTH wall to the DINING ROOM and ",
 		"article": "the",
-		"room_name": "dining room",
+		"room_name": "dining_room",
 		"direction": "NORTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "another in the $$direction wall to the $$room_name. ",
+		"narrative_text": "another in the EAST wall to the DOWNSTAIRS HALLWAY. ",
 		"article": "the",
-		"room_name": "downstairs hallway",
+		"room_name": "downstairs_hallway",
 		"direction": "EAST"
 	}]
 },{
-	"name": "main bedroom",
+	"name": "main_bedroom",
 	"item_setup_dict": {
         "bed": "There is a canopy BED against the far wall and ",
         "window": "a WINDOW to the side of it. "
@@ -256,19 +256,19 @@
 	"display_name": "MAIN BEDROOM",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "There are two doors, one in the $$direction wall that goes back to the $$room_name and ",
+		"narrative_text": "There are two doors, one in the SOUTH wall that goes back to the UPSTAIRS HALLWAY and ",
 		"article": "the",
-		"room_name": "upstairs hallway",
+		"room_name": "upstairs_hallway",
 		"direction": "SOUTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "another in the $$direction wall that leads to a $$room_name. ",
+		"narrative_text": "another in the EAST wall that leads to a BATHROOM. ",
 		"article": "the",
 		"room_name": "bathroom",
 		"direction": "EAST"
 	}]
 },{
-	"name": "locked safe",
+	"name": "safe",
 	"item_setup_dict": {
         "cash": "CASH is available for the taking now.",
         "lockbox": "A LOCKBOX sits inside the safe as well.  What could be in there?"
@@ -279,7 +279,7 @@
 	"display_name": "LOCKED SAFE",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": " The door in the $$direction wall goes back to the $$room_name.",
+		"narrative_text": " The door in the SOUTH wall goes back to the ATTIC.",
 		"article": "the",
 		"room_name": "attic",
 		"direction": "SOUTH"
@@ -296,16 +296,16 @@
 	"display_name": "STUDY",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "The only door in or out is in the $$direction wall back to the $$room_name. ",
+		"narrative_text": "The only door in or out is in the NORTH wall back to the UPSTAIRS HALLWAY. ",
 		"article": "the",
-		"room_name": "upstairs hallway",
+		"room_name": "upstairs_hallway",
 		"direction": "NORTH"
 	}]
 },{
-	"name": "upstairs hallway",
+	"name": "upstairs_hallway",
 	"item_setup_dict": {
         "alarm": "An ALARM is positioned on the wall between the bedrooms and ",
-        "large poster": "a LARGE POSTER is between the doors in the SOUTH wall."
+        "large_poster": "a LARGE POSTER is between the doors in the SOUTH wall."
     },
 	"short_description": "You are in the upstairs hallway, with ",
 	"article": "the",
@@ -313,39 +313,39 @@
 	"display_name": "UPSTAIRS HALLWAY",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "stairs in the $$direction wall leading down to the $$room_name and ",
+		"narrative_text": "stairs in the EAST wall leading down to the DOWNSTAIRS HALLWAY and ",
 		"article": "the",
-		"room_name": "downstairs hallway",
+		"room_name": "downstairs_hallway",
 		"direction": "EAST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "stairs in the $$direction wall leading up to the $$room_name. There are four doors total. ",
+		"narrative_text": "stairs in the WEST wall leading up to the ATTIC. There are four doors total. ",
 		"article": "the",
 		"room_name": "attic",
 		"direction": "WEST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "The two in the $$direction wall go to the $$room_name and ",
+		"narrative_text": "The two in the NORTH wall go to the MAIN BEDROOM and ",
 		"article": "the",
-		"room_name": "main bedroom",
+		"room_name": "main_bedroom",
 		"direction": "NORTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the $$room_name while ",
+		"narrative_text": "the GUEST BEDROOM while ",
 		"article": "the",
-		"room_name": "guest bedroom",
+		"room_name": "guest_bedroom",
 		"direction": "NORTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the two in the $$direction wall go to the $$room_name and ",
+		"narrative_text": "the two in the SOUTH wall go to the STUDY and ",
 		"article": "the",
 		"room_name": "study",
 		"direction": "SOUTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "a $$room_name.",
+		"narrative_text": "a HOME GYM.",
 		"article": "a",
-		"room_name": "home gym",
+		"room_name": "home_gym",
 		"direction": "SOUTH"
 	}]
 }]

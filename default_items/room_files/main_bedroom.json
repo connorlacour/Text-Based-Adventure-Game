@@ -1,5 +1,5 @@
 [{
-	"name": "main bedroom",
+	"name": "main_bedroom",
 	"item_setup_dict": {
         "bed": "There is a canopy BED against the far wall and ",
         "window": "a WINDOW to the side of it. "
@@ -10,13 +10,13 @@
 	"display_name": "MAIN BEDROOM",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "There are two doors, one in the $$direction wall that goes back to the $$room_name and ",
+		"narrative_text": "There are two doors, one in the SOUTH wall that goes back to the UPSTAIRS HALLWAY and ",
 		"article": "the",
-		"room_name": "upstairs hallway",
+		"room_name": "upstairs_hallway",
 		"direction": "SOUTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "another in the $$direction wall that leads to a $$room_name. ",
+		"narrative_text": "another in the EAST wall that leads to a BATHROOM. ",
 		"article": "the",
 		"room_name": "bathroom",
 		"direction": "EAST"

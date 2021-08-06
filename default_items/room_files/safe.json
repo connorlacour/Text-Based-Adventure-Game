@@ -1,5 +1,5 @@
 [{
-	"name": "locked safe",
+	"name": "safe",
 	"item_setup_dict": {
         "cash": "CASH is available for the taking now.",
         "lockbox": "A LOCKBOX sits inside the safe as well.  What could be in there?"
@@ -10,7 +10,7 @@
 	"display_name": "LOCKED SAFE",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": " The door in the $$direction wall goes back to the $$room_name.",
+		"narrative_text": " The door in the SOUTH wall goes back to the ATTIC.",
 		"article": "the",
 		"room_name": "attic",
 		"direction": "SOUTH"

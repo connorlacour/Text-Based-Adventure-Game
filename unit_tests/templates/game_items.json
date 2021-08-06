@@ -36,20 +36,20 @@
 			}
 	}
 }, {
-	"name": "burnt note",
+	"name": "burnt_note",
 	"display_name": "BURNT NOTE",
 	"article": "a",
 	"description": "Most of the note has been burned beyond recognition, but you think you make out the letters Y - E - E - T.",
 	"type": "Inventory"
 }, {
-	"name": "fast food",
+	"name": "fast_food",
 	"display_name": "FAST FOOD",
 	"article": "the",
 	"description": "There are reheated nuggets in a cardboard box.",
 	"type": "Inventory",
     "events": {
 		"EAT": {
-			"events": ["print The FAST FOOD tastes cold and leaves you feeling hungrier than you were before.."]
+			"events": ["print The FAST FOOD tastes cold and leaves you feeling hungrier than you were before..."]
 		}
 	}
 }, {
@@ -64,25 +64,25 @@
 			}
 		}
 }, {
-	"name": "small pouch",
+	"name": "small_pouch",
 	"display_name": "SMALL POUCH",
 	"article": "the",
 	"description": "The SMALL POUCH is small enough to fit in your pocket, but it contains a handful of bills rolled up.  It is not the large score you are after, but it is something to add to the pile.",
 	"can_take": false,
 	"type": "Inventory"
 }, {
-	"name": "portable radio",
+	"name": "portable_radio",
 	"display_name": "PORTABLE RADIO",
 	"article": "the",
 	"description": "Picking up the PORTABLE RADIO, you see that it’s tuned to an easy listening station.",
 	"type": "Inventory",
     "events": {
 		"TURN ON": {
-			"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "change dog display_name to `CALM DOG`", "change SILVER KEY can_take to true"]
+			"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "change dog display_name to `CALM DOG`", "change silver_key can_take to true"]
 			}
 		}
 }, {
-	"name": "bottle of pills",
+	"name": "bottle_of_pills",
 	"display_name": "BOTTLE OF PILLS",
 	"article": "a",
 	"description": "An unmarked bottle of pills",
@@ -93,7 +93,7 @@
 			}
 		}
 }, {
-	"name": "silver key",
+	"name": "silver_key",
 	"display_name": "SILVER KEY",
 	"article": "a",
 	"description": "This key looks like it's made for something more than an ordinary door.",
@@ -129,17 +129,17 @@
 	"description": "You search the COAT for clues about the owner.  As you dig around, your hand finds a piece of paper with a NOTE written on it.",
 	"type": "Scenery"
 },{
-    "name": "china cabinet",
+    "name": "china_cabinet",
 	"display_name": "CHINA CABINET",
 	"article": "a",
 	"description": "The CHINA CABINET is locked.  You consider the value of the dinnerware, but the risk of breaking it ends that thought.  Just as you are turning away from the cabinet, you see a SMALL POUCH jutting out of a hidden corner not easily seen through the glass.",
 	"type": "Scenery",
     "events": {
-		"UNLOCK,SMALL KEY": {
-			"events": ["print You unlock the china cabinet.", "change SMALL POUCH can_take to true"]}
+		"UNLOCK,SMALL_KEY": {
+			"events": ["print You unlock the china cabinet.", "change small_pouch can_take to true"]}
 		}
 },{
-    "name": "wall mount",
+    "name": "wall_mount",
 	"display_name": "WALL MOUNT",
 	"article": "a",
 	"description": "There are various badges hanging from the WALL MOUNT from conferences and meetings.  Hidden amongst those is a SMALL KEY.",
@@ -157,7 +157,7 @@
 	"description": "Looking in the glass case on the PODIUM, you see a GUEST BOOK.",
 	"type": "Scenery"
 },{
-    "name": "guest book",
+    "name": "guest_book",
 	"display_name": "GUEST BOOK",
 	"article": "a",
 	"description": "The last name entered in the GUEST BOOK you see is John Little.",
@@ -169,7 +169,7 @@
 	"description": "The CHAIRS appear to be normal, waiting room chairs for visitors.  They sit around a SMALL TABLE.",
 	"type": "Scenery"
 },{
-    "name": "small table",
+    "name": "small_table",
 	"display_name": "SMALL TABLE",
 	"article": "the",
 	"description": "On the SMALL TABLE is a blank NOTEPAD that appears to have had the top page hastily ripped off.",
@@ -193,15 +193,15 @@
 		"FIGHT,KATANA": {
 			"events": ["print You swing the KATANA, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"]
 		},
-		"BRIBE,SMALL POUCH": {
-			"events": ["print Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut.", "move player to guest room"]
+		"BRIBE,SMALL_POUCH": {
+			"events": ["print Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut.", "move player to guest_bedroom"]
 			},
 		"PERSUADE,NOTE": {
-			"events": ["print You remember the note from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the note to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the note several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "move player to guest room"]
+			"events": ["print You remember the note from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the note to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the note several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "move player to guest_bedroom"]
 			}
 		}
 },{
-    "name": "night stand",
+    "name": "night_stand",
 	"display_name": "NIGHT STAND",
 	"article": "a",
 	"description": "Opening the drawer to the NIGHT STAND, you see a GLOVE.",
@@ -237,7 +237,7 @@
 	"description": "Going over to the ISLAND, you see a bowl of fruit with vibrant red APPLES and a BLUE JAR with a paw print on it.",
 	"type": "Scenery"
 },{
-    "name": "blue jar",
+    "name": "blue_jar",
 	"display_name": "BLUE JAR",
 	"article": "a",
 	"description": "You pull back the lid on the BLUE JAR to find DOG TREATS that smell strongly of bacon.",
@@ -249,7 +249,7 @@
 	"description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT NOTE stuck between the bottom logs.",
 	"type": "Scenery"
 },{
-    "name": "strip of paper",
+    "name": "strip_of_paper",
 	"display_name": "strip of paper",
 	"article": "a",
 	"description": "As you look closer at the STRIP OF PAPER, you notice that it is a receipt from John Little’s Lock & Key.",
@@ -265,13 +265,13 @@
 			"events": ["print Nothing happens."]}
 		}
 },{
-    "name": "large poster",
+    "name": "large_poster",
 	"display_name": "LARGE POSTER",
 	"article": "a",
 	"description": "You see a poster of the night sky.  You search the poster trying to figure out what its meaning is when you recognize the bright star Vega, and from there, you trace the constellation Lyra in your mind.",
 	"type": "Scenery"
 },{
-    "name": "red button",
+    "name": "red_button",
 	"display_name": "RED BUTTON",
 	"article": "a",
 	"description": "A big shiny RED BUTTON",
@@ -288,11 +288,11 @@
 	"description": "You approach the DOG carefully.  As you get closer, it bares its teeth in warning.  Suddenly, it shakes its head as if shaking off some irritation and you notice a SILVER KEY hanging from the collar where a tag would be.  Is there way to soothe this savage beast to get the key?",
 	"type": "Scenery",
     "events": {
-		"FEED,DOG TREATS": {
-			"events": ["print You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.", "change dog display_name to `CALM DOG`", "change SILVER KEY can_take to true"]
+		"FEED,DOG_TREATS": {
+			"events": ["print You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.", "change dog display_name to `CALM DOG`", "change silver_key can_take to true"]
 		},
-		"TURN ON,PORTABLE RADIO": {
-			"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "change dog display_name to `CALM DOG`", "change SILVER KEY can_take to true"]
+		"TURN ON,PORTABLE_RADIO": {
+			"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "change dog display_name to `CALM DOG`", "change silver_key can_take to true"]
 		}
 	}
 },{
@@ -313,13 +313,13 @@
 	"description": "The BED is covered in a comforter that feels softer than any other you’ve seen when you press your hand into it.  The bed was decked out for a king with drapes that could be drawn around with the richest fabrics on it.",
     "type": "Scenery"
 },{
-    "name": "waste basket",
+    "name": "waste_basket",
 	"display_name": "WASTE BASKET",
 	"article": "a",
 	"description": "The WASTE BASKET is empty.",
 	"type": "Scenery"
 },{
-    "name": "medicine cabinet",
+    "name": "medicine_cabinet",
 	"display_name": "MEDICINE CABINET",
 	"article": "a",
 	"description": "The MEDICINE CABINET looks to be the kind with a mirror on front and a front-facing door that swings open.",
@@ -347,25 +347,25 @@
 	"description": "Numerous books fill the BOOKCASE in front of you.  You see books like GULLIVER’S TRAVELS, THE ODYSSEY, and CRIME AND PUNISHMENT and more modern works like NINETEEN EIGHTY-FOUR and even HITCHHIKER’S GUIDE TO THE GALAXY.",
 	"type": "Scenery"
 },{
-    "name": "gulliver travels",
+    "name": "gulliver_travels",
 	"display_name": "GULLIVER'S TRAVELS",
 	"article": "the",
 	"description": "A normal copy of Gulliver's Travel's",
 	"type": "Scenery"
 },{
-    "name": "crime and punishment",
+    "name": "crime_and_punishment",
 	"display_name": "CRIME AND PUNISHMENT",
 	"article": "the",
 	"description": "A normal copy of Crime and Punishment",
 	"type": "Scenery"
 },{
-    "name": "nineteen eightyfour",
+    "name": "nineteen_eightyfour",
 	"display_name": "NINETEEN EIGHTY-FOUR",
 	"article": "the",
 	"description": "A normal copy of Nineteen Eighty-Four",
 	"type": "Scenery"
 },{
-    "name": "hitchhikers guide to the galaxy",
+    "name": "hitchhikers_guide_to_the_galaxy",
 	"display_name": "HITCHHIKER'S GUIDE TO THE GALAXY",
 	"article": "the",
 	"description": "A normal copy of Hitchhiker's Guide to the Galaxy",
@@ -378,7 +378,7 @@
 	"type": "Scenery",
 	"events": {
 		"PICK UP": {
-			"events": ["print As you try to pick up the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.", "change SAFE known_to_player to true"]
+			"events": ["print As you try to pick up the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.", "change attic.direction.north narrative_text to `The BOOKCASE slides to the side revealing a walk-in safe with a KEYPAD.`"]
 			}
 		}
 },{
@@ -389,10 +389,10 @@
 	"type": "Scenery",
     "events": {
 		"ENTER CODE 9338": {
-			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "go to safe"]
+			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"]
 			},
 		"ENTER CODE YEET": {
-			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "go to safe"]
+			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"]
 		}
 	}
 },{
@@ -414,7 +414,7 @@
 	"description": "A separate LOCKBOX is stored inside the safe.  It is still locked even though the safe is open.  How do you get in there?",
 	"type": "Scenery",
     "events": {
-		"UNLOCK,SILVER KEY": {
+		"UNLOCK,SILVER_KEY": {
 			"events": ["print You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood.", "game win"]
 			}
 		}
