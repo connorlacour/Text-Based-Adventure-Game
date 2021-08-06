@@ -1,14 +1,19 @@
 import os
+from PyDictionary import PyDictionary
+pydict = PyDictionary()
 
 
 def print_warning(str):
     print(f"Warning! {str}")
 
+
 def debug_print(str):
     print(str)
 
+
 def get_file_name(filename, dir_name):
     return os.path.join(dir_name, f'{filename}')
+
 
 def warning_room_not_found(room):
     if room is None:

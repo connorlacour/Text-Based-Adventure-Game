@@ -11,6 +11,13 @@
 	"article": "the",
 	"long_description": "You walk briskly in to the dining room with a grand DINING TABLE.  At once you notice that the former occupants must have left in great haste, for there are the blackened remnants of food on the PLATES, and the CHAIRS have been pushed away with little regard. Rats skitter away form the putrid remains of the forsaken dinner as you enter \nThe rats haven't seemed to have touched the main dish - a fully intact PIG lies upon the table, and a ROLLED UP SCROLL has been wedged in its mouth.",
 	"display_name": "DINING ROOM",
+	"events": {
+		"BARF": {
+			"events": [
+				"print You $$verb because the smell is so bad."
+			]
+		}
+	},
 	"room_list": [{
 		"known_to_player": false,
 		"narrative_text": "To your",
@@ -20,7 +27,7 @@
 	}, {
 		"known_to_player": true,
 		"narrative_text": "There are $$this heading $$direction",
-		"connector_item_name": "stairs_to_foyer",
+		"connector_item_name": "stairs_to_bathroom",
 		"article": "the",
 		"room_name": "bathroom",
 		"direction": "UPWARDS"
@@ -54,5 +61,15 @@
 	"article": "a",
 	"long_description": "Idk long descr whatever",
 	"display_name": "BATHROOM",
+	"room_list": []
+},{
+	"name": "limbo",
+	"item_setup_dict": {
+		"pig_scroll": "a PIG WITH A SCROLL. That's whack."
+	},
+	"short_description": "You shouldn't be here",
+	"article": "a",
+	"long_description": "YOU CAN'T BE HERE",
+	"display_name": "LIMBO",
 	"room_list": []
 }]

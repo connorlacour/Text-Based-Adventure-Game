@@ -6,7 +6,7 @@ from marshmallow import Schema, fields, post_load, post_dump
 from marshmallow.fields import Int, Str, Bool
 from marshmallow_oneofschema import OneOfSchema
 
-from game_objects.item_event import ItemEvent
+from game_objects.event import Event
 from game_objects.items import Item, InventoryItem, SceneryItem, CollectiveItem
 from game_objects.room import Room, RoomConnector
 
@@ -26,16 +26,25 @@ def load_rooms_from_file(filename: str) -> List[Room]:
 
     return RoomSchema().load(j, many=True)
 
+def load_events_from_file(filename: str) -> List[Room]:
+    with open(filename) as file:
+        j = json.load(file)
 
-class ItemEventSchema(Schema):
-    SKIP_VALUES = {None}
+    return RoomSchema().load(j, many=True)
+
+
+class EventSchema(Schema):
 
     events = fields.List(Str())
+    repeatable = Bool()
     passive_obj = Str()
+
+    class Meta:
+        ordered = True
 
     @post_load
     def make_item(self, data, **kwargs):
-        return ItemEvent(**data)
+        return Event(**data)
 
     @post_dump
     def remove_skip_values(self, data, **kwargs):
@@ -45,12 +54,11 @@ class ItemEventSchema(Schema):
         }
 
 
-
 class InventoryItemSchema(Schema):
     item_type = "Inventory"
     name = Str()
     display_name = Str()
-    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
+    events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
     article = Str()
     description = Str()
     can_take = Bool()
@@ -67,7 +75,7 @@ class SceneryItemSchema(Schema):
     item_type = "Scenery"
     name = Str()
     display_name = Str()
-    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
+    events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
     article = Str()
     description = Str()
 
@@ -83,7 +91,7 @@ class CollectiveItemSchema(Schema):
     item_type = "Scenery"
     name = Str()
     display_name = Str()
-    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
+    events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
     article = Str()
     description = Str()
     singular_display_name = Str()
@@ -127,6 +135,7 @@ class RoomConnectorSchema(Schema):
     room_name = Str()
     connector_item_name = Str(required=False)
     narrative_text = Str()
+    traversable = Bool()
     known_to_player = Bool()
     article = Str()
 
@@ -149,6 +158,10 @@ class RoomSchema(Schema):
     short_description = Str()
     item_setup_dict = fields.Dict(keys=Str(), values=Str())
     room_list = fields.List(fields.Nested(RoomConnectorSchema))
+    events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
+
+    class Meta:
+        ordered = True
 
     @post_load
     def make_room(self, data, **kwargs):
