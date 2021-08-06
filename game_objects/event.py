@@ -205,8 +205,7 @@ class Event:
             self.synonyms = synonym_dict[self.verb]
         elif len(self.synonyms) == 0:
             if len(self.verb.split(" ")) == 1:
-                if pydict.synonym(self.verb) is not None:
-                    self.synonyms = [x.upper() for x in pydict.synonym(self.verb)]
+                self.synonyms = [x.upper() for x in pydict.synonym(self.verb)]
             else:
                 print_warning(f"Custom Synonym not found for multi-word verb {self.verb}")
 
@@ -218,6 +217,7 @@ class Event:
             word_list = event.split(sep=" ")
             verb = word_list[0]
             this_event_narration = ""
+
             if verb == "print":
                 this_event_narration = do_print(user_verb, event, item_name)
             elif verb == "change":
@@ -226,6 +226,12 @@ class Event:
                 this_event_narration = drop(word_list[1], room)
             elif verb == "move":
                 this_event_narration = move(event)
+            elif event == "game over":
+                this_event_narration = "_game_over_"
+            elif event == "game win":
+                this_event_narration = "_game_win_"
+            else:
+                print_warning(f"Event {event} seems to be improperly formatted")
 
             if this_event_narration != "":
                 narration += f"{this_event_narration}\n"

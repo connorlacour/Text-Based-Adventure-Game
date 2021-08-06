@@ -57,6 +57,11 @@ def parse_entry(usr_cmd: str) -> (str, str, str ,str):
     for word in word_list:
         start_time = time.time()
         word_type = pydict.meaning(word, disable_errors=True)
+
+        if word_type is None:  # Hacky resolve not finding plurals
+            if word[len(word) - 1] == 'S':
+                word_type = pydict.meaning(word.strip('S'), disable_errors=True)
+
         print("meaning call: --- %s seconds ---" % (time.time() - start_time))
 
         # Save directional words first
@@ -90,6 +95,8 @@ def parse_entry(usr_cmd: str) -> (str, str, str ,str):
 
     if passive_obj == "" and active_object != "":
         passive_obj = active_object
+    elif passive_obj != "" and active_object == "":
+        active_object = passive_obj
 
     return verb, direction, passive_obj, active_object
 
