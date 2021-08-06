@@ -41,14 +41,16 @@ class ItemEvent:
     def change(self, event: str) -> str:
         tic_list = event.split(sep="`")  #designate string with spaces value field with tics
         word_list = event.split(sep=" ")
-
-        if len(tic_list) > 1:   #if true value field is string w/spaces like `Big big dog`
-            value = tic_list[1]
-
+        
         if len(tic_list[0].split(sep=" ")) != 5: #First half of tic list should always be 4. If tics exist
             print_warning(f"Error, not correct length, improperly made action '{event}'")
             return "You get the sense something was supposed to occur, but it didn't.\n"
-        else: value = word_list[4]
+        else: 
+            if len(tic_list) > 1:
+            #if true value field is string w/spaces like `Big big dog`
+                value = tic_list[1]
+            else:
+                value = word_list[4]
 
         field = word_list[2]
         if len(word_list[1].split(sep=".")) == 3:

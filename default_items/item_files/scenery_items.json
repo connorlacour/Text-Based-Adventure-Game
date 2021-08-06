@@ -9,7 +9,10 @@
 	"display_name": "CHINA CABINET",
 	"article": "a",
 	"description": "The CHINA CABINET is locked.  You consider the value of the dinnerware, but the risk of breaking it ends that thought.  Just as you are turning away from the cabinet, you see a SMALL POUCH jutting out of a hidden corner not easily seen through the glass.",
-    "events": [{"unlock": "You unlock the china cabinet."}, {"lock": "You lock the china cabinet."}],
+    "events": {"UNLOCK,SMALL KEY": {"events": ["print You unlock the china cabinet.", "change SMALL POUCH can_take to true"],
+		"repeatable": false,
+		"passive_obj": "SMALL KEY"}
+		},
 	"type": "Scenery"
 },{
     "name": "wall mount",
@@ -58,7 +61,19 @@
 	"display_name": "GUARD",
 	"article": "a",
 	"description": "The GUARD'S badge says 'Tuck'.",
-    "events": [{"fight": "You try to fight the guard, but you are no match for him.  He knocks you out, and when you wake, you find yourself in a jail cell.  GAME OVER."}, {"bribe": "Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut."}, {"persuade": "You remember the note from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the note to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the note several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room."}],
+    "events": {"FIGHT": {"events": ["print You try to fight the guard, but you are no match for him.  He knocks you out, and when you wake, you find yourself in a jail cell.", "game over"],
+		"repeatable": false,
+		"passive_obj": ""},
+		"FIGHT,KATANA": {"events": ["print You swing the KATANA, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"],
+			"repeatable": false,
+			"passive_obj": "KATANA"},
+		"BRIBE,SMALL POUCH": {"events": ["print Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut.", "move player to guest room"],
+			"repeatable": false,
+			"passive_obj": "SMALL POUCH"},
+		"PERSUADE,NOTE": {"events": ["print You remember the note from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the note to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the note several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "move player to guest room"],
+			"repeatable": false,
+			"passive_obj": "NOTE"}
+		},
 	"type": "Scenery"
 },{
     "name": "night stand",
@@ -119,7 +134,10 @@
 	"display_name": "ALARM",
 	"article": "an",
 	"description": "The alarm appears to be quite old and outdated.  You are not even sure it’s fully mounted into the wall or whether it is simply hanging like a photo would be.  There is a RED BUTTON on the alarm.  Should you press it?",
-    "events": [{"enter code": "Nothing happens"}],
+    "events": {"ENTER": {"events": ["print Nothing happens."],
+		"repeatable": true,
+		"passive_obj": ""}
+		},
 	"type": "Scenery"
 },{
     "name": "large poster",
@@ -132,21 +150,33 @@
 	"display_name": "RED BUTTON",
 	"article": "a",
 	"description": "A big shiny RED BUTTON",
-    "events": [{"press": "You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it’s hard to resist the temptation."}],
+    "events": {"PRESS": {"events": ["print You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it’s hard to resist the temptation."],
+		"repeatable": true,
+		"passive_obj": ""}
+		},
 	"type": "Scenery"
 },{
-    "name": "dog",
-	"display_name": "DOG",
+    "name": "angry dog",
+	"display_name": "ANGRY DOG",
 	"article": "a",
 	"description": "You approach the DOG carefully.  As you get closer, it bares its teeth in warning.  Suddenly, it shakes its head as if shaking off some irritation and you notice a SILVER KEY hanging from the collar where a tag would be.  Is there way to soothe this savage beast to get the key?",
-    "events": [{"feed": "You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.", "play music": "A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner."}],
+    "events": {"FEED,DOG TREATS": {"events": ["print You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.", "rename ANGRY DOG to CALM DOG", "change SILVER KEY can_take to true"],
+		"repeatable": false,
+		"passive_obj": "DOG TREATS"},
+		"TURN ON,PORTABLE RADIO": {"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "rename ANGRY DOG to CALM DOG", "change SILVER KEY can_take to true"],
+		"repeatable": false,
+		"passive_obj": "PORTABLE RADIO"}
+		},
 	"type": "Scenery"
 },{
     "name": "crate",
 	"display_name": "CRATE",
 	"article": "a",
 	"description": "There’s a sliding latch on the wireframe crate.",
-    "events": [{"open": "The DOG ignores you and stays sleeping."}],
+    "events": {"OPEN": {"events": ["print The DOG ignores you and stays sleeping."],
+		"repeatable": false,
+		"passive_obj": ""}
+		},
 	"type": "Scenery"
 },{
     "name": "bed",
@@ -165,14 +195,20 @@
 	"display_name": "MEDICINE CABINET",
 	"article": "a",
 	"description": "The MEDICINE CABINET looks to be the kind with a mirror on front and a front-facing door that swings open.",
-    "events": [{"open": "You open the MEDICINE CABINET and see various toiletries and vitamins.  There is a single unmarked BOTTLE OF PILLS on a shelf"}],
+    "events": {"OPEN": {"events": ["print You open the MEDICINE CABINET and see various toiletries and vitamins.  There is a single unmarked BOTTLE OF PILLS on a shelf"],
+		"repeatable": true,
+		"passive_obj": ""}
+		},
 	"type": "Scenery"
 },{
     "name": "trunk",
 	"display_name": "TRUNK",
 	"article": "a",
 	"description": "The TRUNK is old and sturdy.  It has no lock.",
-    "events": [{"open": "School awards and trophies are stacked inside the TRUNK.  You see some for science projects and others for academic decathlons."}],
+    "events": {"OPEN": {"events": ["print School awards and trophies are stacked inside the TRUNK.  You see some for science projects and others for academic decathlons."],
+		"repeatable": true,
+		"passive_obj": ""}
+		},
 	"type": "Scenery"
 },{
     "name": "bookcase",
@@ -184,45 +220,48 @@
     "name": "Gulliver's Travels",
 	"display_name": "GULLIVER'S TRAVELS",
 	"article": "the",
-	"description": "You pick up the book and flip through it.  The book is in excellent condition.",
+	"description": "A normal copy of Gulliver's Travel's",
 	"type": "Scenery"
 },{
     "name": "Crime and Punishment",
 	"display_name": "CRIME AND PUNISHMENT",
 	"article": "the",
-	"description": "You pick up the book and flip through it.  The book is in excellent condition.",
+	"description": "A normal copy of Crime and Punishment",
 	"type": "Scenery"
 },{
     "name": "Nineteen Eighty-Four",
 	"display_name": "NINETEEN EIGHTY-FOUR",
 	"article": "the",
-	"description": "You pick up the book and flip through it.  The book is in excellent condition.",
+	"description": "A normal copy of Nineteen Eighty-Four",
 	"type": "Scenery"
 },{
     "name": "Hitchhiker's Guide to the Galaxy",
 	"display_name": "HITCHHIKER'S GUIDE TO THE GALAXY",
 	"article": "the",
-	"description": "You pick up the book and flip through it.  The book is in excellent condition.",
+	"description": "A normal copy of Hitchhiker's Guide to the Galaxy",
 	"type": "Scenery"
 },{
     "name": "Odyssey",
 	"display_name": "ODYSSEY",
 	"article": "the",
-	"description": "As you try to pick up the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.",
+	"description": "As you look at the copy of the ODYSSEY, you notice that it is sticking out more than the other books.  Was this picked up recently?",
+	"events": {"PICK UP": {"events": ["print As you try to pick up the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.", "change SAFE known_to_player to true"],
+		"repeatable": true,
+		"passive_obj": ""}
+		},
 	"type": "Scenery"
 },{
     "name": "keypad",
 	"display_name": "KEYPAD",
 	"article": "the",
 	"description": "",
-    "events": [{"enter code 9338": "You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE."}],
-	"type": "Scenery"
-},{
-    "name": "keypad",
-	"display_name": "KEYPAD",
-	"article": "the",
-	"description": "",
-    "events": [{"enter code 9338": "You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE."}],
+    "events": {"ENTER CODE 9338": {"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "go to safe"],
+		"repeatable": true,
+		"passive_obj": ""},
+		"ENTER CODE YEET": {"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "go to safe"],
+			"repeatable": true,
+			"passive_obj": ""}
+	},
 	"type": "Scenery"
 },{
     "name": "boxes",
@@ -241,7 +280,9 @@
 	"display_name": "LOCKBOX",
 	"article": "a",
 	"description": "A separate LOCKBOX is stored inside the safe.  It is still locked even though the safe is open.  How do you get in there?",
-    "events": [{"unlock": "You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood."}],
+    "events": {"UNLOCK,SILVER KEY": {"events": ["print You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood.", "game win"],
+		"repeatable": false,
+		"passive_obj": "SILVER KEY"}
+		},
 	"type": "Scenery"
-}
-]
+}]

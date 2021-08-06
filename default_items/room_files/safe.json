@@ -1,5 +1,5 @@
 [{
-	"name": "safe",
+	"name": "locked safe",
 	"item_setup_dict": {
         "cash": "CASH is available for the taking now.",
         "lockbox": "A LOCKBOX sits inside the safe as well.  What could be in there?"
@@ -7,7 +7,7 @@
 	"short_description": "You are in the safe! ",
 	"article": "the",
 	"long_description": "Congratulations!  You made it to the SAFE.  The hidden door you came through in the South Door provides your escape back through the house.  There is CASH out filled with items as your reward for your mission. A LOCKBOX is stored inside the safe as well but is still locked.  Can you figure out how to open it to get the final items?",
-	"display_name": "SAFE",
+	"display_name": "LOCKED SAFE",
 	"room_list": [{
 		"known_to_player": true,
 		"narrative_text": " The door in the $$direction wall goes back to the $$room_name.",

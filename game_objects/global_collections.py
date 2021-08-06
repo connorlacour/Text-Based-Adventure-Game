@@ -34,18 +34,22 @@ def setup_rooms_and_items(i: List[Item], r: List[Room], starting_player_location
     player_location.set(rooms[starting_player_location])
 
 
-def setup_global_collections(starting_player_location="dining_room"):
+def setup_global_collections(starting_player_location="foyer"):
 
-    i: List[Item] = load_items_from_file(get_file_name("templates/items.json"), root_dir)
-    r: List[Room] = load_rooms_from_file(get_file_name('templates/rooms.json'), root_dir)
+#    i: List[Item] = load_items_from_file(get_file_name("templates/items.json"), root_dir)
+#    r: List[Room] = load_rooms_from_file(get_file_name('templates/rooms.json'), root_dir)
+    i: List[Item] = load_items_from_file(get_file_name("templates/game_items.json"), root_dir)
+    r: List[Room] = load_rooms_from_file(get_file_name('templates/game_rooms.json'), root_dir)
 
     setup_rooms_and_items(i, r, starting_player_location)
 
 
-def setup_global_collections_for_test(test_dir: str, starting_player_location="dining_room"):
+def setup_global_collections_for_test(test_dir: str, starting_player_location="foyer"):
 
-    i: List[Item] = load_items_from_file(get_file_name("templates/items.json", test_dir))
-    r: List[Room] = load_rooms_from_file(get_file_name('templates/rooms.json', test_dir))
+#    i: List[Item] = load_items_from_file(get_file_name("templates/items.json", test_dir))
+#    r: List[Room] = load_rooms_from_file(get_file_name('templates/rooms.json', test_dir))
+    i: List[Item] = load_items_from_file(get_file_name("templates/game_items.json", test_dir))
+    r: List[Room] = load_rooms_from_file(get_file_name('templates/game_rooms.json', test_dir))
 
     setup_rooms_and_items(i, r, starting_player_location)
 

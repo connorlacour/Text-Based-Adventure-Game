@@ -12,14 +12,16 @@ from game_objects.room import Room, RoomConnector
 
 
 def load_items_from_file(filename: str) -> List[Item]:
-    with open(filename) as file:
+#    with open(filename, encoding='utf8') as file:
+    with open(filename, encoding='utf8') as file:
         j = json.load(file)
 
     return ItemSchema().load(j, many=True)
 
 
 def load_rooms_from_file(filename: str) -> List[Room]:
-    with open(filename) as file:
+#    with open(filename, encoding='utf8') as file:
+    with open(filename, encoding='utf8') as file:
         j = json.load(file)
 
     return RoomSchema().load(j, many=True)
