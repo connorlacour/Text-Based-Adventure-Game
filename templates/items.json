@@ -8,7 +8,14 @@
 	"name": "stairs_to_bathroom",
 	"display_name": "STAIRS",
 	"description": "I warned you bro, I warned you about the STAIRS...",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"TAKE": {
+			"events": [
+			"print You TAKE THEM STAIRS.",
+			"move player to bathroom"
+		]}
+	}
 }, {
 	"name": "dining_table",
 	"display_name": "DINING TABLE",

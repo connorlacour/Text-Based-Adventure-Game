@@ -3,6 +3,7 @@ from game_objects.event import *
 from game_objects.synonyms import *
 from game_objects.global_collections import *
 
+
 class GameLoop:
 
     def __init__(self):
@@ -41,7 +42,7 @@ def get_next_narration(user_text) -> str:
         return narration
 
     elif verb in take_synonyms:
-        return take_object(verb, active_object)
+        return take_item(verb, passive_object, active_object)
 
     elif verb in drop_synonyms:
         return drop_object(active_object)
@@ -56,12 +57,24 @@ def get_next_narration(user_text) -> str:
         return narration
 
 
+def take_item(verb,active_object, passive_object) -> str:
+    connector_obj = player_location.room.get_connector_item_dict().get(active_object)
+
+    if connector_obj is not None:
+        event = connector_obj.get_event_from_verb(verb)
+        if event is not None:
+            return event.do_event(player_location.room, verb)
+
+    return take_object(verb, active_object)
+
+
 def look_at_object(obj_name):
     obj = get_item_in_player_scope(obj_name)
     if obj is not None:
         return obj.description
     else:
         return "There is no {obj_name} to look at."
+
 
 def take_object(verb, object_name):
     narration = ""
@@ -91,7 +104,7 @@ def drop_object(object_name):
 def resolve_event_item(verb, active, passive):
     in_scope_event_map = in_scope_event_synonym_mapping()
 
-    if verb in in_scope_event_map:  # verb exists in room, room.items, or inventory.items event lists map
+    if verb in in_scope_event_map:  # verb exists in room.items, discard, or inventory.items event lists map
         verb_items = in_scope_event_map[verb]
 
         if active in verb_items:  # active object exists in player scope
@@ -117,13 +130,16 @@ def resolve_event_item(verb, active, passive):
                             return f"You try to {verb} with a {active} and {passive}, but nothing happens"
 
             # If passive item not specified or nothing is found with the passive object, search for active object
-            if verb in active_item.events:
+            active_event = active_item.get_event_from_verb(verb)
+            if active_event is not None:
                 return active_item.do_event(verb)
             elif active != passive:
                 passive_item = get_item_in_player_scope(passive)
                 # If nothing is found with just active object, search for passive object
-                if passive_item is not None and verb in passive_item.events:
-                    return passive_item.do_event(verb)
+                if passive_item is not None:
+                    passive_event = passive_item.get_event_from_verb(verb)
+                    if passive_event is not None:
+                        return passive_item.do_event(verb)
 
                 # I have no idea how you would get to this line, logically.
                 return f"You can't {verb} with a {active} and {passive}!"

@@ -9,6 +9,7 @@ test_dir = os.path.dirname(__file__)
 def get_test_file_name(filename: str):
     return os.path.join(test_dir, f'{filename}')
 
+
 class NarrationTests(unittest.TestCase):
 
 
@@ -141,7 +142,6 @@ class NarrationTests(unittest.TestCase):
         self.assertTrue("scroll" in player_inventory)
         self.assertFalse("pig" in rooms["dining_room"].item_list)
         self.assertTrue(rooms["foyer"].get_item_from_room("pig") is not None)
-
 
 
     def testChangeEvents(self):
