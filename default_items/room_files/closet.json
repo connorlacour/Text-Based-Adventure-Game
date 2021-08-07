@@ -10,7 +10,7 @@
 	"display_name": "CLOSET",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "The lone door in the $$direction wall leads back to the $$room_name.",
+		"narrative_text": "The lone door in the WEST wall leads back to the FOYER.",
 		"article": "the",
 		"room_name": "foyer",
 		"direction": "WEST"

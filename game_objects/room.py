@@ -54,7 +54,7 @@ class Room:
         return self.cached_item_event_synonym_mapping
 
     def update_item_event_mapping_cache(self):
-        self.cached_item_event_synonym_mapping = self.item_event_synonym_mapping
+        self.cached_item_event_synonym_mapping = self.item_event_synonym_mapping()
 
     def item_event_synonym_mapping(self) -> Dict[str, str]: # return synonym -> item_name
         room_verb_dict: [str, str] = {}
@@ -66,18 +66,18 @@ class Room:
             else:
                 room_verb_dict[verb].append(e)
 
-        for item in self.item_list.values():
-            for verb, event in item.item.events.items():
-                addToDict(event.verb, item.item.name)
-                for s in event.synonyms:
-                    addToDict(s, item.item.name)
+        # for item in self.item_list.values():
+        #     for verb, event in item.item.events.items():
+        #         addToDict(event.verb, item.item.name)
+        #         for s in event.synonyms:
+        #             addToDict(s, item.item.name)
+        #
+        # for item in self.discarded_items.values():
+        #     for verb, event in item.events.items():
+        #         addToDict(event.verb, item.name)
 
-        for item in self.discarded_items.values():
-            for verb, event in item.events.items():
-                addToDict(event.verb, item.item.name)
-
-                for s in event.synonyms:
-                    addToDict(s, item.name)
+                # for s in event.synonyms:
+                #     addToDict(s, item.name)
 
         return room_verb_dict
 
@@ -94,20 +94,25 @@ class Room:
     def set_item_list(self, item_description_dict: Dict[str, str]):
         self.item_list = {key: RoomItem(key, value) for (key, value) in item_description_dict.items()}
 
-    def add_item(self, item: RoomItem):
-        self.item_list[item.item.name] = item
 
     def delete_item(self, item_name: str):
         if item_name in self.item_list:
             del self.item_list[item_name]
+            self.update_item_event_mapping_cache()
         elif item_name in self.discarded_items:
             del self.discarded_items[item_name]
+            self.update_item_event_mapping_cache()
+
         else:
             print_warning(f"Couldn't delete {item_name} from {self.name}, doesn't exist")
 
     # Separate initializer method for room list to simplify constructor
     def set_room_map(self, connector_list: List[RoomConnector]):
         self.connecting_rooms = {v.direction: v for v in connector_list}
+
+    def get_connector_item_dict(self) -> Dict[str, Item]:
+        from game_objects.global_collections import player_location
+        return {x.connector_item_name: x.connector_item for x in player_location.room.connecting_rooms.values()}
 
     def get_item_from_room(self, item_name) -> Optional[RoomItem]:
         item = self.item_list.get(item_name)

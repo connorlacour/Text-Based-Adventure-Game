@@ -1,7 +1,9 @@
 import pygame as game
 from pygame.locals import *
 import sys
+import os
 import colors
+from datetime import datetime
 
 
 # STATIC FUNCTIONS
@@ -42,6 +44,7 @@ class LoadGameGUI:
         self.colors = colors.Colors().get_colors()
         self.load_game_rects = []
         self.back_button_rect = None
+        self.load_dict = {}
 
     def main(self) -> str:
         """
@@ -218,6 +221,18 @@ class LoadGameGUI:
         img = font.render('LOAD GAME', True, self.colors['off_white'])
         self.surface.blit(img, (165, 75))
 
+    def generate_load_dict(self):
+        os.chdir(r"..\saves")
+        count = 1
+
+        for save in os.listdir():
+            save_date = datetime.fromtimestamp(os.path.getmtime(save))
+            save_date = save_date.strftime("%d/%m/%Y")
+            save_dict = {"name": save, "date": save_date}
+            save_number = "Load " + str(count)
+            self.load_dict[save_number] = save_dict
+            count += 1
+
     def display_load_choices(self, highlighted: int = -1,
                              load_games: dict = None, init=False) -> None:
         """
@@ -232,10 +247,11 @@ class LoadGameGUI:
         Renders based on mouse_pos() as determined by and called in main()
         """
         load_font = game.font.SysFont('dubai', 26)
+        self.generate_load_dict()
 
         # TESTING
-        load_games = load_games_test_data()
-        entries = load_games.keys()
+        load_games = self.load_dict
+        entries = self.load_dict.keys()
 
         # starting values for load game rects
         x = 50
@@ -296,3 +312,6 @@ class LoadGameGUI:
             # increment positional arguments (y) and count
             y += (h + 20)
             load_rect_count += 1
+
+
+test = LoadGameGUI().generate_load_dict()

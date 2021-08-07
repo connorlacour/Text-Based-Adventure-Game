@@ -10,9 +10,9 @@
 	"display_name": "STUDY",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "The only door in or out is in the $$direction wall back to the $$room_name. ",
+		"narrative_text": "The only door in or out is in the NORTH wall back to the UPSTAIRS HALLWAY. ",
 		"article": "the",
-		"room_name": "upstairs hallway",
+		"room_name": "upstairs_hallway",
 		"direction": "NORTH"
 	}]
 }]

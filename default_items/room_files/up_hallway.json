@@ -1,8 +1,8 @@
 [{
-	"name": "upstairs hallway",
+	"name": "upstairs_hallway",
 	"item_setup_dict": {
         "alarm": "An ALARM is positioned on the wall between the bedrooms and ",
-        "large poster": "a LARGE POSTER is between the doors in the SOUTH wall."
+        "large_poster": "a LARGE POSTER is between the doors in the SOUTH wall."
     },
 	"short_description": "You are in the upstairs hallway, with ",
 	"article": "the",
@@ -10,39 +10,39 @@
 	"display_name": "UPSTAIRS HALLWAY",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "stairs in the $$direction wall leading down to the $$room_name and ",
+		"narrative_text": "stairs in the EAST wall leading down to the DOWNSTAIRS HALLWAY and ",
 		"article": "the",
-		"room_name": "downstairs hallway",
+		"room_name": "downstairs_hallway",
 		"direction": "EAST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "stairs in the $$direction wall leading up to the $$room_name. There are four doors total. ",
+		"narrative_text": "stairs in the WEST wall leading up to the ATTIC. There are four doors total. ",
 		"article": "the",
 		"room_name": "attic",
 		"direction": "WEST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "The two in the $$direction wall go to the $$room_name and ",
+		"narrative_text": "The two in the NORTH wall go to the MAIN BEDROOM and ",
 		"article": "the",
-		"room_name": "main bedroom",
+		"room_name": "main_bedroom",
 		"direction": "NORTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the $$room_name while ",
+		"narrative_text": "the GUEST BEDROOM while ",
 		"article": "the",
-		"room_name": "guest bedroom",
+		"room_name": "guest_bedroom",
 		"direction": "NORTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the two in the $$direction wall go to the $$room_name and ",
+		"narrative_text": "the two in the SOUTH wall go to the STUDY and ",
 		"article": "the",
 		"room_name": "study",
 		"direction": "SOUTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "a $$room_name.",
+		"narrative_text": "a HOME GYM.",
 		"article": "a",
-		"room_name": "home gym",
+		"room_name": "home_gym",
 		"direction": "SOUTH"
 	}]
 }]
