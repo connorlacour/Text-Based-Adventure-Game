@@ -79,11 +79,12 @@ class Room:
         for item in self.item_list.values():
             if item.item is None:
                 print(f"BAD BAD VERY BAD. {item.item_name} not found game officially set up WRONG!! CRASH IMMINENT")
-
-            for verb, event in item.item.events.items():
-                addToDict(event.verb, item.item.name)
-                for s in event.synonyms:
-                    addToDict(s, item.item.name)
+            
+            if item.item is not None and item.item.events is not None:
+                for verb, event in item.item.events.items():
+                    addToDict(event.verb, item.item.name)
+                    for s in event.synonyms:
+                        addToDict(s, item.item.name)
 
         for item in self.discarded_items.values():
             for verb, event in item.events.items():
