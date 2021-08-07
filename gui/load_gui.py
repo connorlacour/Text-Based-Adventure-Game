@@ -162,16 +162,16 @@ class LoadGameGUI:
         thickness: int = 3
 
         # draw outline
-        self.draw_outline(buffer, thickness, board_width, self.colors['white'])
+        self.render_outline(buffer, thickness, board_width, self.colors['white'])
         # write title
-        self.write_load_title()
+        self.render_load_title()
         # write back button
-        self.write_back_button(highlighted=back_highlighted, init=init)
+        self.render_back_button(highlighted=back_highlighted, init=init)
         # write menu choices
         self.display_load_choices(highlighted=load_highlighted, init=init)
 
-    def draw_outline(self, buffer: int, thickness: int,
-                     board_width: int, color: tuple) -> None:
+    def render_outline(self, buffer: int, thickness: int,
+                       board_width: int, color: tuple) -> None:
         """
         Takes 4 parameters: buffer, thickness, board_width, color
         Returns None
@@ -187,7 +187,7 @@ class LoadGameGUI:
         game.draw.rect(surface=self.surface, color=color,
                        rect=outline, width=thickness)
 
-    def write_back_button(self, highlighted: int = -1, init=False) -> None:
+    def render_back_button(self, highlighted: int = -1, init=False) -> None:
         """
         takes one parameter: highlighted (int)
         returns None
@@ -213,7 +213,7 @@ class LoadGameGUI:
         else:
             self.surface.blit(back_button, back_button_rect)
 
-    def write_load_title(self) -> None:
+    def render_load_title(self) -> None:
         """
         takes no parameters
         returns None
@@ -231,7 +231,7 @@ class LoadGameGUI:
             save_date = datetime.fromtimestamp(os.path.getmtime(
                 os.path.join(r"..\saves", save))
             )
-            save_date = save_date.strftime("%d/%m/%Y")
+            save_date = save_date.strftime("%m/%d/%Y")
             save_dict = {"name": save, "date": save_date}
             save_number = str(count)
             self.load_dict[save_number] = save_dict
@@ -329,4 +329,5 @@ class LoadGameGUI:
                 load_rect_count += 1
 
 
-LoadGameGUI().generate_load_dict()
+# TEST DATA
+# LoadGameGUI().generate_load_dict()

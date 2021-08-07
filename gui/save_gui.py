@@ -2,7 +2,8 @@ import pygame as game
 from pygame.locals import *
 import sys
 import colors
-#  from datetime import date
+import os
+from datetime import datetime
 
 
 # STATIC FUNCTIONS
@@ -41,7 +42,12 @@ class SaveGUI:
         self.colors = colors.Colors().get_colors()
         self.save_game_rects = []
         self.back_button_rect = None
-        self.save_game_data = generate_save_games_test_data()
+        self.next_page_rect = Rect(600, 715, 180, 30)
+        self.prev_page_rect = Rect(600, 740, 180, 30)
+        self.back_start_page_rect = Rect(330, 740, 200, 30)
+        self.save_dict = {}
+        self.cur_page = 1
+        self.max_pages = 0
 
     def main(self) -> str:
         """
@@ -56,7 +62,7 @@ class SaveGUI:
         game.init()
         game.display.set_caption('GAME TITLE')
 
-        # fill background with brown
+        # fill background with black
         background = game.Surface(self.surface.get_size())
         background = background.convert()
         background.fill(self.colors['dark_grey'])
@@ -71,80 +77,19 @@ class SaveGUI:
         while 1:
             # Constant check for game.QUIT
             for event in game.event.get():
-                if event == game.QUIT:
-                    game.quit()
-                    sys.exit()
 
-                # If mouse motion is detected, check new position
-                # If new position coincides with position of any options text,
-                #   re-render text/section as 'highlighted'
-                elif event.type == game.MOUSEMOTION:
-                    save_highlighted = -1
-                    back_highlighted = -1
+                status = self.check_event(event)
+                if status is not None:
+                    return status
 
-                    # get mouse pos
-                    mouse = game.mouse.get_pos()
-
-                    # rect count to iterate over save game rects
-                    rect_count = 0
-                    for save_rect in self.save_game_rects:
-                        if check_mouse_collide(mouse, save_rect):
-                            save_highlighted = rect_count
-                        rect_count += 1
-
-                    # Check for highlight over Back Button
-                    if check_mouse_collide(mouse, self.back_button_rect):
-                        # highlighted = 1 will render the back_button as
-                        #   'highlighted_grey'
-                        back_highlighted: int = 1
-
-                        # entire game_screen must be re-rendered, so we must
-                        #   ensure that all components are appropriately
-                        #   maintained
-                        self.set_game_screen(back_highlighted=back_highlighted)
-                    else:
-                        # only perform re-render if back_button was previously
-                        #   highlighted
-                        if back_highlighted == 1:
-                            back_highlighted: int = -1
-
-                            # entire game_screen must be re-rendered, so we
-                            #   must ensure that the scroll text and all other
-                            #   components are appropriately maintained
-                            self.set_game_screen(
-                                back_highlighted=back_highlighted)
-                    self.set_game_screen(save_highlighted=save_highlighted,
-                                         back_highlighted=back_highlighted)
-
-                # if click, check location
-                # if back button, return 'back' to render main menu
-                # if a save option, for now return 'save'
-                #   eventually, will return something like a save_id
-                elif event.type == game.MOUSEBUTTONDOWN:
-                    mouse = game.mouse.get_pos()
-                    click = game.mouse.get_pressed(3)
-                    if click[0] == 1:
-                        for save_rect in self.save_game_rects:
-                            if save_rect == self.save_game_rects[0]:
-                                if check_mouse_collide(mouse, save_rect):
-                                    save_status: str = self.new_save_entry()
-                                    if save_status == 'cancelled':
-                                        return 'refresh'
-                                    else:
-                                        return save_status
-                            elif check_mouse_collide(mouse, save_rect):
-                                return 'save'
-
-                        if check_mouse_collide(mouse, self.back_button_rect):
-                            return 'back'
             game.display.update()
 
     def set_game_screen(self, save_highlighted: int = -1,
-                        back_highlighted: int = -1, init=False) -> None:
+                        btn_highlighted: str = '', init=False) -> None:
         """
         takes 3 optional parameters:
             save_highlighted with a default state of -1
-            back_highlighted with a default state of -1
+            btn_highlighted with a default state of ''
             init with a default state of False
         Returns None
 
@@ -162,18 +107,53 @@ class SaveGUI:
         board_width: int = screen_width - (2 * buffer)
         thickness: int = 3
 
-        # draw outline
-        self.draw_outline(buffer, thickness, board_width, self.colors['white'])
-        # write title
-        self.write_save_title()
-        # write back button
-        self.write_button(btn_text='Back', pos=(730, 35),
-                          highlighted=back_highlighted, init=init)
-        # write menu choices
-        self.display_save_choices(highlighted=save_highlighted, init=init)
+        background = game.Surface(self.surface.get_size())
+        background = background.convert()
+        background.fill(self.colors['dark_grey'])
+        self.surface.blit(background, (0, 0))
 
-    def draw_outline(self, buffer: int, thickness: int,
-                     board_width: int, color: tuple) -> None:
+        # draw outline
+        self.render_outline(buffer, thickness, board_width, self.colors['white'])
+        # write title
+        self.render_save_title()
+        # write back button
+        self.render_button(btn_text='Back', pos=(730, 35),
+                           btn_highlighted=btn_highlighted, init=init)
+
+        if self.max_pages > 0:
+            if self.cur_page < self.max_pages:
+                self.render_button(
+                    btn_highlighted=btn_highlighted,
+                    btn_text="View Next Page", pos=(600, 715)
+                )
+            if self.cur_page > 0:
+                self.render_button(
+                    btn_highlighted=btn_highlighted,
+                    btn_text="View Previous Page", pos=(600, 740)
+                )
+                self.render_button(
+                    btn_highlighted=btn_highlighted,
+                    btn_text="Back to Start Page", pos=(330, 740)
+                )
+
+        # write menu choices
+        self.render_save_choices(highlighted=save_highlighted, init=init)
+
+    def generate_save_dict(self):
+        count = 0
+
+        for save in os.listdir(r"..\saves"):
+            save_date = datetime.fromtimestamp(os.path.getmtime(
+                os.path.join(r"..\saves", save))
+            )
+            save_date = save_date.strftime("%m/%d/%Y")
+            save_dict = {"name": save, "date": save_date}
+            save_number = str(count)
+            self.save_dict[save_number] = save_dict
+            count += 1
+
+    def render_outline(self, buffer: int, thickness: int,
+                       board_width: int, color: tuple) -> None:
         """
         Takes 4 parameters: buffer, thickness, board_width, color
         Returns None
@@ -189,8 +169,8 @@ class SaveGUI:
         game.draw.rect(surface=self.surface, color=color,
                        rect=outline, width=thickness)
 
-    def write_button(self, btn_text: str, pos: tuple, highlighted: int = -1,
-                     init=False) -> None:
+    def render_button(self, btn_text: str, pos: tuple,
+                      btn_highlighted: str = '', init=False) -> None:
         """
         takes one parameter: highlighted (int)
         returns None
@@ -203,20 +183,20 @@ class SaveGUI:
         button_rect = Rect(pos[0], pos[1], 30, 30)
 
         if init:
-            self.back_button_rect = button_rect
+            if btn_text == 'Back':
+                self.back_button_rect = button_rect
 
         font = game.font.SysFont('dubai', 20)
-        back_button = font.render(btn_text, True, self.colors['grey'])
-        back_button_highlighted = font.render(btn_text, True,
-                                              self.colors['hl_grey'])
-        self.surface.blit(back_button, pos)
+        button = font.render(btn_text, True, self.colors['grey'])
+        button_highlighted = font.render(
+            btn_text, True, self.colors['hl_grey'])
 
-        if highlighted == 1:
-            self.surface.blit(back_button_highlighted, pos)
+        if btn_highlighted == btn_text:
+            self.surface.blit(button_highlighted, button_rect)
         else:
-            self.surface.blit(back_button, button_rect)
+            self.surface.blit(button, button_rect)
 
-    def write_save_title(self) -> None:
+    def render_save_title(self) -> None:
         """
         takes no parameters
         returns None
@@ -246,13 +226,13 @@ class SaveGUI:
                     mouse = game.mouse.get_pos()
                     if check_mouse_collide(mouse, cancel_btn_rect):
                         cancel_highlighted = 1
-                        self.write_button('Cancel', pos=(670, 700),
-                                          highlighted=cancel_highlighted)
+                        self.render_button('Cancel', pos=(670, 700),
+                                           btn_highlighted=cancel_highlighted)
                     else:
                         if cancel_highlighted == 1:
                             cancel_highlighted = 0
-                            self.write_button('Cancel', pos=(670, 700),
-                                              highlighted=cancel_highlighted)
+                            self.render_button('Cancel', pos=(670, 700),
+                                               btn_highlighted=cancel_highlighted)
 
                 elif event.type == game.MOUSEBUTTONDOWN:
                     mouse = game.mouse.get_pos()
@@ -306,9 +286,17 @@ class SaveGUI:
         self.surface.blit(save_prompt, (60, 380))
 
         # render cancel btn
-        self.write_button('Cancel', pos=(670, 700))
+        self.render_button('Cancel', pos=(670, 700))
 
-    def display_save_choices(self, highlighted: int = -1, init=False) -> None:
+    def handle_saves_size(self, btn_highlighted: str = ''):
+        no_of_saves = len(self.save_dict.keys())
+        if no_of_saves > 3:
+            if no_of_saves % 3 == 0:
+                self.max_pages = (no_of_saves // 3) - 1
+            else:
+                self.max_pages = no_of_saves // 3
+
+    def render_save_choices(self, highlighted: int = -1, init=False) -> None:
         """
         takes 3 optional parameters:
             highlighted with default state of -1
@@ -322,7 +310,11 @@ class SaveGUI:
         new_save_font = game.font.SysFont('dubai', 50)
 
         # TESTING
-        entries = self.save_game_data.keys()
+        # entries = self.save_game_data.keys()
+
+        self.generate_save_dict()
+        self.handle_saves_size()
+        entries = self.save_dict.keys()
 
         # starting values for save game rects
         x = 50
@@ -358,8 +350,20 @@ class SaveGUI:
         y += (h + 20)
         save_rect_count += 1
 
-        # iterate over games in save_games (or, for testing entries) dict
-        for games in entries:
+        # determine how many entries to display and their respective indices
+        no_of_entries = len(self.save_dict.keys())
+        entries_to_display = []
+        if no_of_entries > 3:
+            entry_no = self.cur_page * 3
+            while entry_no < no_of_entries and len(entries_to_display) < 3:
+                entries_to_display.append(entry_no)
+                entry_no += 1
+        else:
+            for i in range(0, no_of_entries):
+                entries_to_display.append(i)
+
+        # iterate over games in save_games
+        for save_idx in entries_to_display:
             save_rect = Rect(x, y, w, h)
 
             # initialize self.save_game_rects list
@@ -367,14 +371,14 @@ class SaveGUI:
                 self.save_game_rects.append(save_rect)
 
             # establish strings for Name and Date
-            name_text = 'Name: ' + self.save_game_data[games]['name']
-            date_text = 'Date Saved: ' + self.save_game_data[games]['date']
+            name_text = 'Name: ' + self.save_dict[str(save_idx)]['name']
+            date_text = 'Date Saved: ' + self.save_dict[str(save_idx)]['date']
 
             # if highlighted, render rects and text with highlight colors
             if highlighted == save_rect_count:
                 # outline of rect
-                game.draw.rect(self.surface, self.colors['white'], save_rect,
-                               width=2)
+                game.draw.rect(self.surface, self.colors['white'],
+                               save_rect, width=2)
 
                 # interior fill of rect
                 save_rect = Rect(x + 2, y + 2, w - 4, h - 4)
@@ -408,3 +412,97 @@ class SaveGUI:
             # increment positional arguments (y) and count
             y += (h + 20)
             save_rect_count += 1
+
+    def check_event(self, event):
+        if event == game.QUIT:
+            game.quit()
+            sys.exit()
+
+        # If mouse motion is detected, check new position
+        # If new position coincides with position of any options text,
+        #   re-render text/section as 'highlighted'
+        elif event.type == game.MOUSEMOTION:
+            self.handle_mouse_motion_event()
+
+        # if click, check location
+        # if back button, return 'back' to render main menu
+        # if a save option, for now return 'save'
+        #   eventually, will return something like a save_id
+        elif event.type == game.MOUSEBUTTONDOWN:
+            status = self.handle_mouse_click_event()
+            return status
+
+    def handle_mouse_motion_event(self):
+        save_highlighted = -1
+        btn_highlighted = ''
+
+        # get mouse pos
+        mouse = game.mouse.get_pos()
+
+        # rect count to iterate over save game rects
+        rect_count = 0
+        for save_rect in self.save_game_rects:
+            if check_mouse_collide(mouse, save_rect):
+                save_highlighted = rect_count
+            rect_count += 1
+
+        # Check for highlight over Back Button
+        if check_mouse_collide(mouse, self.back_button_rect):
+            btn_highlighted: str = 'Back'
+
+        elif self.cur_page > 0:
+            if check_mouse_collide(mouse, self.prev_page_rect):
+                btn_highlighted = "View Previous Page"
+
+            elif check_mouse_collide(mouse, self.back_start_page_rect):
+                btn_highlighted = "Back to Start Page"
+
+        elif self.max_pages > 0 and self.cur_page != self.max_pages:
+            if check_mouse_collide(mouse, self.next_page_rect):
+                btn_highlighted = "View Next Page"
+
+        else:
+            # only perform re-render if back_button was previously
+            #   highlighted
+            if btn_highlighted != '':
+                btn_highlighted: str = ''
+
+        self.set_game_screen(save_highlighted=save_highlighted,
+                             btn_highlighted=btn_highlighted)
+
+    def handle_mouse_click_event(self):
+        mouse = game.mouse.get_pos()
+        click = game.mouse.get_pressed(3)
+        if click[0] == 1:
+            for save_rect in self.save_game_rects:
+                if save_rect == self.save_game_rects[0]:
+                    if check_mouse_collide(mouse, save_rect):
+                        save_status: str = self.new_save_entry()
+                        if save_status == 'cancelled':
+                            return 'refresh'
+                        else:
+                            return save_status
+                elif check_mouse_collide(mouse, save_rect):
+                    idx = str(self.save_game_rects.index(
+                        save_rect) + (self.cur_page * 3) - 1
+                              )
+                    save_name = self.save_dict[idx]["name"]
+                    return save_name
+
+            if check_mouse_collide(mouse, self.back_button_rect):
+                return 'back'
+
+            if self.cur_page > 0:
+                if check_mouse_collide(mouse, self.prev_page_rect):
+                    self.cur_page -= 1
+                    self.set_game_screen()
+
+                if check_mouse_collide(mouse, self.back_start_page_rect):
+                    self.cur_page = 0
+                    self.set_game_screen()
+
+            if self.max_pages > 0 and self.cur_page != self.max_pages:
+                if check_mouse_collide(mouse, self.next_page_rect):
+                    self.cur_page += 1
+                    self.set_game_screen()
+

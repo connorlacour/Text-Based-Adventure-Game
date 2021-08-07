@@ -74,12 +74,19 @@ class GameGUI:
     def set_game_start(self) -> None:
         if self.is_load:
             os.chdir("..")
-            save_load.LoadGame(load_file_name=self.load_name)
+            load = save_load.LoadGame(load_file_name=self.load_name)
             os.chdir("gui")
+            self.scroll.text_in_scroll = load.scroll
+            # TEST
+            self.handle_game_text(
+                init_text=player_location.room.get_room_narration())
+            # END TEST
+            self.set_game_screen()
         else:
-            setup_global_collections()
-        self.handle_game_text(
-            init_text=player_location.room.get_room_narration())
+            # REPLACE WITH STANDARD INIT NEW GAME METHOD
+            save_load.test_global_collections_emulation()
+            self.handle_game_text(
+                init_text=player_location.room.get_room_narration())
         self.game_start = False
 
     def set_game_screen(self) -> None:
@@ -433,8 +440,15 @@ class GameGUI:
             if 760 > mouse[0] > 730 and 60 > mouse[1] > 40:
                 while 1:
                     save_game: str = save_gui.SaveGUI().main()
-                    print(save_game)
-                    if save_game != 'refresh':
+                    if save_game == 'back':
+                        break
+                    elif save_game != 'refresh':
+                        save_file_name = save_game
+                        new_save = save_load.SaveGame(
+                            save_file_name=save_file_name,
+                            cur_scroll=self.scroll
+                        )
+                        print("attempting to save: ", save_file_name)
                         break
                 self.set_game_screen()
             # elif in area of exit btn

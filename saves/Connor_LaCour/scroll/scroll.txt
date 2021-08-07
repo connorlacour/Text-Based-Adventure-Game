@@ -25,4 +25,8 @@ x
 y
 z
 
+> entering some sample text
+
+Hello I am the game and I have responded
+
 >

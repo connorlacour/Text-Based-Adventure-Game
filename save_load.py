@@ -56,7 +56,7 @@ def test_global_collections_emulation():
     else:
         items_loaded = items_loaded[0]
 
-    setup_rooms_and_items(items_loaded, rooms_loaded, "attic")
+    setup_rooms_and_items(items_loaded, rooms_loaded, "foyer")
 
     # add some stuff to player inventory
     global_collections.player_inventory[
@@ -78,6 +78,8 @@ class SaveGame:
         self.save_file_name = save_file_name
         self.home_dir = os.getcwd()
         self.scroll = cur_scroll
+
+        self.save_data()
 
     @staticmethod
     def get_rooms():
@@ -241,9 +243,10 @@ class LoadGame:
                     )
                     self.game_data["item_files"] = loaded_items
                 except marshmallow.exceptions.ValidationError as e:
+                    print("tried path : ", str(os.path.join(item_dir, item_json)))
                     print("Validation Error with: " + str(item_json) + str(e))
 
-        print("items -> ",str(self.game_data["item_files"]))
+        print("items -> ", str(self.game_data["item_files"]))
         print("items length = ", str(len((self.game_data["item_files"]))))
 
     def load_scroll(self):
@@ -286,22 +289,20 @@ class LoadGame:
             file.close()
 
 
-class initGameTest(unittest.TestCase):
-
-    @staticmethod
-    def test_save():
-        test_global_collections_emulation()
-        test_scroll = Scroll(test=1)
-        SaveGame("Connor_LaCour", test_scroll).save_data()
-        print("something")
-        f = SaveGame("Connor_LaCour", test_scroll).save_data()
-
-    @staticmethod
-    def test_load():
-        f = LoadGame("Connor_LaCour")
-        print("hi")
-
-
-
-if __name__ == '__main__':
-    unittest.main()
+# class initGameTest(unittest.TestCase):
+#
+#     @staticmethod
+#     def test_save():
+#         test_global_collections_emulation()
+#         test_scroll = Scroll(test=1)
+#         SaveGame("Emily_Sorg", test_scroll)
+#         print("something")
+#
+#     @staticmethod
+#     def test_load():
+#         f = LoadGame("Connor_LaCour")
+#         print("hi")
+#
+#
+# if __name__ == '__main__':
+#     unittest.main()
