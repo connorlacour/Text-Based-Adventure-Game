@@ -107,16 +107,9 @@ class SaveGame:
             if sub_dir not in os.listdir():
                 os.mkdir(sub_dir)
 
-        # write scroll
         self.write_scroll()
-
-        # write items
         self.write_items()
-
-        # write rooms
         self.write_rooms()
-
-        # write player info
         self.write_player_info()
 
         os.chdir(self.home_dir)
@@ -291,7 +284,8 @@ class initGameTest(unittest.TestCase):
     def test_save():
         test_global_collections_emulation()
         test_scroll = Scroll(test=1)
-        SaveGame("Caroline Borden", test_scroll).save_data()
+        SaveGame("Caroline_Borden", test_scroll).save_data()
+        print("something")
 
     # @staticmethod
     # def test_load():
