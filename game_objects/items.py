@@ -56,6 +56,7 @@ class Item:
     def __str__(self):
         return self.name
 
+
 class InventoryItem(Item):
 
     def __init__(self, name, display_name, description, events={}, article="the", can_take=True):

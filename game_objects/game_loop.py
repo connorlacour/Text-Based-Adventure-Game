@@ -261,11 +261,6 @@ def do_direction_command(verb: str, direction: str, item: str = "", room: Room =
         else:
             return f"You can't {verb} {direction}!"
 
-
-def do_look():
-    return "hi"
-
-
 def main():
     setup_global_collections()
     while True:
@@ -274,6 +269,7 @@ def main():
         if val == "exit":
             break
         print(get_next_narration(val))
+
 
 if __name__ == "__main__":
     main()

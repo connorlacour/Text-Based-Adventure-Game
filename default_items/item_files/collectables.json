@@ -19,7 +19,7 @@
 	"name": "note",
 	"display_name": "NOTE",
 	"article": "the",
-	"description": "The NOTE reads,\n\nDear Tuck,\nPlease come home.  I feel like I go weeks without seeing you.  For what?  You said yourself that no one would find the way in unless they were looking for it.  The least these people could do is give you a decent place to rest while you’re here.  You should be home with your family.  We can find another way.  Come home.\n\nYours,\nCarole",
+	"description": "The NOTE reads,\n\nDear Tuck,\nPlease come home.  I feel like I go weeks without seeing you.  For what?  You said yourself that no one would find the way in unless they were looking for it.  The least these people could do is give you a decent place to rest while you're here.  You should be home with your family.  We can find another way.  Come home.\n\nYours,\nCarole",
 	"type": "Inventory"
 }, {
 	"name": "katana",
@@ -74,7 +74,7 @@
 	"name": "portable_radio",
 	"display_name": "PORTABLE RADIO",
 	"article": "the",
-	"description": "Picking up the PORTABLE RADIO, you see that it’s tuned to an easy listening station.",
+	"description": "Picking up the PORTABLE RADIO, you see that it's tuned to an easy listening station.",
 	"type": "Inventory",
     "events": {
 		"TURN ON": {
@@ -89,7 +89,7 @@
 	"type": "Inventory",
     "events": {
 		"SWALLOW,PILL": {
-			"events": ["print You swallow one of the unmarked pills.  You continue walking around for a bit before the house seems like it’s moving in a circle.  Colors pop out at you in bright detail and you swear you hear a dragon snarling in a nearby room.  The next thing you know the floor is rushing up at you and hits your head, knocking you out.  You wake up hours later with a dry mouth and find yourself in a jail cell.", "game over"]
+			"events": ["print You swallow one of the unmarked pills.  You continue walking around for a bit before the house seems like it's moving in a circle.  Colors pop out at you in bright detail and you swear you hear a dragon snarling in a nearby room.  The next thing you know the floor is rushing up at you and hits your head, knocking you out.  You wake up hours later with a dry mouth and find yourself in a jail cell.", "game over"]
 			}
 		}
 }, {

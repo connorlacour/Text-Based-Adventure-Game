@@ -6,7 +6,7 @@
     },
 	"short_description": "You are in the attic. ",
 	"article": "the",
-	"long_description": "The attic is not what you expected.  You imagined a messy room where memories are sent for storage.  Instead, it could easily be turned into another bedroom.  There’s a circular window that lets in the light from the moon.  The only clutter is a TRUNK in the center of the room and a BOOKCASE against the NORTH wall.\n\nThere is a single door in the SOUTH wall that opens up to an ATTIC CLOSET.  The only other entryway/exit that you see are the stairs you took to enter this room that go back to the UPSTAIRS HALLWAY.",
+	"long_description": "The attic is not what you expected.  You imagined a messy room where memories are sent for storage.  Instead, it could easily be turned into another bedroom.  There's a circular window that lets in the light from the moon.  The only clutter is a TRUNK in the center of the room and a BOOKCASE against the NORTH wall.\n\nThere is a single door in the SOUTH wall that opens up to an ATTIC CLOSET.  The only other entryway/exit that you see are the stairs you took to enter this room that go back to the UPSTAIRS HALLWAY.",
 	"display_name": "ATTIC",
 	"room_list": [{
 		"known_to_player": true,
