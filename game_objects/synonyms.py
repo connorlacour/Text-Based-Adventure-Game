@@ -16,51 +16,51 @@ drop_synonyms = {
 }
 
 wear_synonyms = {
-    "WEAR", "PUT ON", "EQUIP"
+    "PUT ON", "EQUIP"
 }
 
 press_synonyms = {
-    "PRESS", "TOUCH", "MASH"
+     "TOUCH", "MASH"
 }
 
 fight_synonyms = {
-    "FIGHT", "FIGHT WITH", "ATTACK", "BATTLE", "CHALLENGE", "RESIST", "BRAWL", "DUEL", "FEUD", "QUARREL", "SPAR", "STRUGGLE", "WRESTLE", "BOX"
+     "FIGHT WITH", "ATTACK", "BATTLE", "CHALLENGE", "RESIST", "BRAWL", "DUEL", "FEUD", "QUARREL", "SPAR", "STRUGGLE", "WRESTLE", "BOX"
 }
 
 eat_synonyms = {
-    "EAT", "BITE", "CHEW", "CONSUME", "DEVOUR", "DINE", "GOBBLE", "NIBBLE", "GRAZE", "MUNCH", "SCARF", "SNACK"
+    "BITE", "CHEW", "CONSUME", "DEVOUR", "DINE", "GOBBLE", "NIBBLE", "GRAZE", "MUNCH", "SCARF", "SNACK"
 }
 
 turn_on_synonyms = {
-    "TURN ON", "ACTIVATE", "SWITCH ON", "START UP"
+    "ACTIVATE", "SWITCH ON", "START UP"
 }
 
 swallow_synonyms = {
-    "SWALLOW", "CONSUME", "GULP", "IMBIBE", "INGEST"
+    "CONSUME", "GULP", "IMBIBE", "INGEST"
 }
 
 unlock_synonyms = {
-    "UNLOCK", "UNLOCK WITH", "OPEN WITH"    
+    "UNLOCK WITH", "OPEN WITH"
 }
 
 use_synonyms = {
-    "USE", "APPLY", "EMPLOY", "OPERATE", "UTILIZE", "WEILD"
+    "APPLY", "EMPLOY", "OPERATE", "UTILIZE", "WEILD"
 }
 
 bribe_synonyms = {
-    "BRIBE", "BUY OFF", "ENTICE", "PAY OFF", "TEMPT"
+    "BUY OFF", "ENTICE", "PAY OFF", "TEMPT", "GIVE"
 }
 
 persuade_synonyms = {
-    "PERSUADE", "COAX", "SWAY", "TALK INTO", "URGE", "WIN OVER"
+    "COAX", "SWAY", "TALK INTO", "URGE", "WIN OVER"
 }
 
 enter_code_synonyms = {
-    "ENTER", "ENTER CODE", "INSERT", "PUT IN"
+    "ENTER CODE", "INSERT", "PUT IN"
 }
 
 feed_synonyms = {
-    "GIVE", "NOURISH", "PROVIDE", "SATISFY", "STUFF", "SUPPLY", "HAND"
+    "NOURISH", "PROVIDE", "SATISFY", "STUFF", "SUPPLY", "HAND", "GIVE"
 }
 
 open_synonyms = {
@@ -77,7 +77,7 @@ synonym_dict = {
     "DROP": list(drop_synonyms),
     "BRIBE": list(bribe_synonyms),
     "EAT": list(eat_synonyms),
-    "ENTER CODE": list(enter_code_synonyms),
+    "INSERT": list(enter_code_synonyms),
     "FEED": list(feed_synonyms),
     "FIGHT": list(fight_synonyms),
     "OPEN": list(open_synonyms),

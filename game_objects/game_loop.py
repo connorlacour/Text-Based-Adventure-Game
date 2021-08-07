@@ -262,7 +262,8 @@ def do_direction_command(verb: str, direction: str, item: str = "", room: Room =
             return f"You can't {verb} {direction}!"
 
 def main():
-    setup_global_collections()
+    from save_load import start_new_game
+    start_new_game()
     while True:
         print(player_location.room.get_room_narration())
         val = input(">>")

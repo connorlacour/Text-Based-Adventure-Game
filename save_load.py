@@ -10,7 +10,7 @@ base_dir = os.path.dirname(__file__)
 saves = os.path.join(base_dir, r"saves")
 
 
-def test_global_collections_emulation():
+def start_new_game():
     room_dir = os.path.join(base_dir, r"default_items/room_files")
     item_dir = os.path.join(base_dir, r"default_items/item_files")
 
@@ -56,15 +56,7 @@ def test_global_collections_emulation():
     else:
         items_loaded = items_loaded[0]
 
-    setup_rooms_and_items(items_loaded, rooms_loaded, "attic")
-
-    # add some stuff to player inventory
-    global_collections.player_inventory[
-        items["small_pouch"].name] = "small_pouch"
-    global_collections.player_inventory[items["mirror"].name] = "mirror"
-
-    # add some stuff to discard
-    global_collections.rooms["attic"].add_to_discard(items["small_pouch"])
+    setup_rooms_and_items(items_loaded, rooms_loaded, "upstairs_hallway")
 
 
 
@@ -290,7 +282,7 @@ class initGameTest(unittest.TestCase):
 
     @staticmethod
     def test_save():
-        test_global_collections_emulation()
+        start_new_game()
         test_scroll = Scroll(test=1)
         SaveGame("Connor_LaCour", test_scroll).save_data()
         print("something")
