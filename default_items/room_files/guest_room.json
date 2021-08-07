@@ -1,7 +1,3 @@
-/* NEED FIRST ENTRY INTRO CHECK:
-'As soon as you enter the GUEST ROOM, you spot a guard lying on the bed.  His eyes pop open in surprise at your entrance, and he jumps up from his rest.  You notice his eyes dart sheepishly to the bed before he marches over to you.\n\n“This is private property.  You can’t be here,” he growls, grabbing your arm.  Whether he’s angrier at your intrusion or the fact that you caught him sleeping is unclear.\n\nYou’ve been caught.  As you think of something to get away from this guard, you size up your odds against him.  He’s a large man, and while he doesn’t seem like someone who wants to fight, you can tell there’s strength behind his bulk.  You notice his name badge says, “Tuck Abbot”.'
-*/
-
 [{
 	"name": "guest_bedroom",
 	"item_setup_dict": {
