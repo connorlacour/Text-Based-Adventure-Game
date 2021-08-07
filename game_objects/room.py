@@ -16,7 +16,8 @@ class Room:
                  short_description,
                  item_setup_dict=None,
                  room_list: List[RoomConnector] = [],
-                 events: Dict[str, Event] = {}):
+                 events: Dict[str, Event] = {},
+                 setup_discard_list: List[str] = []):
 
         self.name: str = name
         self.display_name = display_name
@@ -35,9 +36,11 @@ class Room:
         self.connecting_rooms: Dict[str, RoomConnector] = {v.direction: v for v in room_list}
         self.events = events
         self.cached_item_event_synonym_mapping: Dict[str, str] = {}
+        self.setup_discard_list = setup_discard_list
 
     # initialize rooms
     def setup_on_start(self):
+        from game_objects.global_collections import get_item
 
         for connector in self.connecting_rooms.values():
             connector.setup_on_start()
@@ -48,10 +51,17 @@ class Room:
         for verb in self.events.keys():
             self.events[verb].set_verb_and_synonyms(verb)
 
+        for item in self.setup_discard_list:
+            self.discarded_items[item] = get_item(item)
+
         self.cached_item_event_synonym_mapping = self.item_event_synonym_mapping()
 
     def get_item_event_synonym_mapping(self):
         return self.cached_item_event_synonym_mapping
+
+    def add_to_discard(self, item:Item):
+        self.discarded_items[item.name] = item
+        self.setup_discard_list = list(self.discarded_items.keys())
 
     def update_item_event_mapping_cache(self):
         self.cached_item_event_synonym_mapping = self.item_event_synonym_mapping()
@@ -66,18 +76,21 @@ class Room:
             else:
                 room_verb_dict[verb].append(e)
 
-        # for item in self.item_list.values():
-        #     for verb, event in item.item.events.items():
-        #         addToDict(event.verb, item.item.name)
-        #         for s in event.synonyms:
-        #             addToDict(s, item.item.name)
-        #
-        # for item in self.discarded_items.values():
-        #     for verb, event in item.events.items():
-        #         addToDict(event.verb, item.name)
+        for item in self.item_list.values():
+            if item.item is None:
+                print(f"BAD BAD VERY BAD. {item.item_name} not found game officially set up WRONG!! CRASH IMMINENT")
 
-                # for s in event.synonyms:
-                #     addToDict(s, item.name)
+            for verb, event in item.item.events.items():
+                addToDict(event.verb, item.item.name)
+                for s in event.synonyms:
+                    addToDict(s, item.item.name)
+
+        for item in self.discarded_items.values():
+            for verb, event in item.events.items():
+                addToDict(event.verb, item.name)
+
+                for s in event.synonyms:
+                    addToDict(s, item.name)
 
         return room_verb_dict
 
@@ -201,7 +214,7 @@ class Room:
 
         item_to_discard = player_inventory.get(item_name)
         if item_to_discard is not None:
-            self.discarded_items[item_to_discard.name] = item_to_discard
+            self.add_to_discard(item_to_discard)
             del player_inventory[item_name]
             update_inventory_synonym_mapping()
             return f"You drop the {item_name} to the ground."
@@ -210,7 +223,7 @@ class Room:
         else:
             room, item_to_discard = find_room_item(item_name)
             room.delete_item(item_to_discard.name)
-            self.discarded_items[item_to_discard.name] = item_to_discard
+            self.add_to_discard(item_to_discard)
             return f"You drop {item_to_discard.get_article} {item_to_discard.display_name}"
 
     def __str__(self):
