@@ -1,8 +1,10 @@
-from game_objects.global_collections import setup_global_collections, rooms
+from game_objects.global_collections import *
 from parse_cmd import *
 import unittest
 
+test_dir = os.path.dirname(__file__)
 class TestParse(unittest.TestCase):
+
 
     def test1(self):
         verb, direction, passive_obj, active_object = parse_entry("Put key in lock")
@@ -30,7 +32,13 @@ class TestParse(unittest.TestCase):
         self.assertTrue(verb == "PICK UP")
         self.assertTrue(active_object == "APPLE")
 
+    def test_two_obj_no_prep(self):
+        verb, direction, passive_obj, active_object = parse_entry("COMBINE PIG AND SCROLL")
+        self.assertTrue(active_object == "PIG")
+        self.assertTrue(passive_obj == "SCROLL")
+
     def test3(self):
+        setup_global_collections_for_test(test_dir)
         verb, direction, passive_obj, active_object = parse_entry("Go North")
         self.assertTrue(verb == "GO")
         self.assertTrue(direction == "NORTH")
@@ -39,8 +47,6 @@ class TestParse(unittest.TestCase):
         test_cmd = act_exists("select")
         expect_exist = "CHOOSE"
         self.assertTrue(test_cmd == expect_exist)
-
-    setup_global_collections()
 
 if __name__ == '__main__':
     unittest.main()

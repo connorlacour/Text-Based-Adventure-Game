@@ -1,0 +1,24 @@
+[{
+	"name": "dining room",
+	"item_setup_dict": {
+        "china cabinet": "A CHINA CABINET and ",
+        "wall mount": "WALL MOUNT are along the WEST wall"
+    },
+	"short_description": "You are in the dining room. ",
+	"article": "a",
+	"long_description": "The dining room is furnished with a table large enough to fit twelve people and a large CHINA CABINET full of delicate, ornate dinnerware against the WEST wall. To the side of the cabinet, you see a 4 hook WALL MOUNT.  You imagine stuffy business meetings are the most common dinner parties, but it would be a lovely room for family and friends to share a meal.  There's a door in the SOUTH wall to the LIVING ROOM and another in the EAST wall goes to the KITCHEN.",
+	"display_name": "DINING ROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "There are two doors, one in the $$direction wall to the $$room_name and ",
+		"article": "the",
+		"room_name": "living room",
+		"direction": "SOUTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "another in the $$direction wall to the $$room_name.",
+		"article": "the",
+		"room_name": "kitchen",
+		"direction": "EAST"
+	}]
+}]

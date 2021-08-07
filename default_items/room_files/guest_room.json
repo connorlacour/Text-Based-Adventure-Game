@@ -1,0 +1,18 @@
+[{
+	"name": "guest room",
+	"item_setup_dict": {
+        "window": "There is a WINDOW and ",
+        "night stand": "a NIGHT STAND beside the bed against the NORTH wall."
+    },
+	"short_description": "You are in the guest room. ",
+	"article": "the",
+	"long_description": "With the absence of the guard, you are finally able to explore the guest bedroom.  The door in the SOUTH wall leads back to the UPSTAIRS HALLWAY.  It is the only door in or out of the room.  The bed that you originally saw the guard resting on is furnished with a simple white plush comforter.  There is a NIGHT STAND against the NORTH wall beside the bed and a WINDOW looking out over the back of the house.  It is a simple room, but it's comfortable",
+	"display_name": "GUEST ROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The only door in or out is in the $$direction wall back to the $$room_name. ",
+		"article": "the",
+		"room_name": "upstairs hallway",
+		"direction": "SOUTH"
+	}]
+}]

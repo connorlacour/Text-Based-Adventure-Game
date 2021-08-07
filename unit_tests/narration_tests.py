@@ -9,7 +9,23 @@ test_dir = os.path.dirname(__file__)
 def get_test_file_name(filename: str):
     return os.path.join(test_dir, f'{filename}')
 
+
 class NarrationTests(unittest.TestCase):
+
+
+    # def testGetMeanins(self):
+    #     import time
+    #     import PyDictionary
+    #
+    #     d =PyDictionary.PyDictionary()
+    #
+    #     a = "The quick brown fox jumped over the lazy dog"
+    #     for word in a.split(" "):
+    #         start_time = time.time()
+    #         d.meaning(word)
+    #         print("meaning call: --- %s seconds ---" % (time.time() - start_time))
+    #
+    #
 
     def testNarration_pickup_drop(self):
         setup_global_collections_for_test(test_dir)
@@ -21,6 +37,15 @@ class NarrationTests(unittest.TestCase):
         e = player_location.room.get_discard_narration()
         self.assertTrue(len(player_location.room.discarded_items) == 1)
         print(e)
+
+    def test_scope_mapping(self):
+
+        setup_global_collections_for_test(test_dir)
+
+        e = get_next_narration("pick up scroll")
+        self.assertTrue(player_inventory.get("scroll") is not None)
+
+        print(in_scope_event_synonym_mapping())
 
 
     def testusingTestFolder(self):
@@ -117,7 +142,6 @@ class NarrationTests(unittest.TestCase):
         self.assertTrue("scroll" in player_inventory)
         self.assertFalse("pig" in rooms["dining_room"].item_list)
         self.assertTrue(rooms["foyer"].get_item_from_room("pig") is not None)
-
 
 
     def testChangeEvents(self):

@@ -6,61 +6,6 @@ from game_objects.synonyms import synonym_dict
 if TYPE_CHECKING:
     from game_objects.room import Room
 
-class Event:
-
-    def __init__(self,
-                 events: List[str] = [],
-                 syn_list="",
-                 repeatable=True
-    ):
-        self.passive_obj: str = ""
-        self.events: List[str] = events
-        self.verb = ""
-        self.repeatable = repeatable
-
-        if syn_list in synonym_dict:
-            self.synonyms = synonym_dict[syn_list],
-        else:
-            self.synonyms = []
-
-    def __str__(self):
-        if self.verb != "":
-            return str(self.events)
-        else: return self.verb
-
-    def set_verb_and_synonyms(self, verb_obj_dict_key: str = ""):
-        hi = verb_obj_dict_key.split(",")
-        if len(hi) > 1:
-            self.verb = hi[0]
-            self.passive_obj = hi[1]
-        else: self.verb = verb_obj_dict_key
-        if len(self.synonyms) == 0:
-            if len(self.verb.split(" ")) == 1:
-                self.synonyms = [x.upper() for x in pydict.synonym(self.verb)]
-            else:
-                print_warning(f"Custom Synonym not found for multi-word verb {self.verb}")
-
-    def do_event(self, room: Room) -> str:
-
-        narration = ""
-        for event in self.events:
-            word_list = event.split(sep=" ")
-            verb = word_list[0]
-            this_event_narration = ""
-            if verb == "print":
-                this_event_narration = do_print(verb, event)
-            elif verb == "change":
-                this_event_narration = change(event)
-            elif verb == "drop":
-                this_event_narration = drop(word_list[1], room)
-            elif verb == "move":
-                this_event_narration = move(event)
-
-            if this_event_narration != "":
-                narration += f"{this_event_narration}\n"
-
-        return narration
-
 
 def get_room_connector(room_name: str, direction_name: str) -> (str, object):
     from game_objects.global_collections import rooms, get_room
@@ -68,6 +13,7 @@ def get_room_connector(room_name: str, direction_name: str) -> (str, object):
     narration = ""
     room = get_room(room_name)
     direction = None
+
     if room is not None:
         if direction_name in room.connecting_rooms:
             direction = room.connecting_rooms[direction_name]
@@ -93,12 +39,12 @@ def get_object(object_name: str) -> (str, object):
     return narration, obj
 
 
-def do_print(verb: str, to_print: str) -> str:
+def do_print(verb: str, to_print: str, object_name = "") -> str:
     if len(to_print.split(sep=" ", maxsplit=2)) < 2:
         print_warning("Tried to split event {to_print} but was wonky}")
         return "You get the feeling narration was supposed to occur, but your head is blank"
     else:
-        return to_print.split(sep=" ", maxsplit=1)[1].replace("$$verb", verb.upper())
+        return to_print.split(sep=" ", maxsplit=1)[1].replace("$$verb", verb.upper()).replace("$$this", object_name)
 
 
 # "change pig display_name to `BIG PIG`",
@@ -172,7 +118,7 @@ def change_obj_attr(obj, object_name, field, value):
 # "move pig to limbo"
 # "move pig to player_inventory
 def move(event: str, room_to_check: Optional[Room] = None) -> str:
-    from game_objects.global_collections import player_location, get_room, find_room_item, player_inventory
+    from game_objects.global_collections import player_location, get_room, find_room_item, player_inventory, update_inventory_synonym_mapping
 
     word_list: List[str] = event.split(sep=" ")
     target_name = word_list[1]
@@ -198,17 +144,23 @@ def move(event: str, room_to_check: Optional[Room] = None) -> str:
                 player_location.set(destination)
                 print(f"Setting player location to {destination_name}")
                 return ""
-            else: destination = destination.item_list
+            else:
+                destination = destination.item_list
 
     if room_to_check is not None: # If a room is specified, will fail if not in room's item list
-        target_object = room_to_check.get_item_from_room(target_name)
+        target_object = room_to_check.get_item_from_room_or_discard(target_name)
         if target_object is None:
             return f"You feel like {target_name} was supposed to move from {destination_name} but it couldn't be found."
     else:
         room_to_check, target_object = find_room_item(target_name)
 
-    if destination_name == "player_inventory": target_object = target_object.item
-    destination[target_name] = target_object
+    if destination_name == "player_inventory":
+        destination[target_name] = target_object
+        update_inventory_synonym_mapping()
+    else:
+        target_object = room_to_check.get_item_from_room(target_name)
+        destination[target_name] = target_object
+
     room_to_check.delete_item(target_name)
     debug_print(f"Successfully moved {target_object} from {room_to_check} to {destination_name}")
 
@@ -219,3 +171,69 @@ def drop(item_name: str, current_room: Room, in_inventory = False) -> str:
 
     return current_room.discard_item(item_name, in_inventory)
 
+class Event:
+
+    def __init__(self,
+                 events: List[str] = [],
+                 syn_list="",
+                 repeatable=True
+    ):
+        self.passive_obj: str = ""
+        self.events: List[str] = events
+        self.verb = ""
+        self.repeatable = repeatable
+
+        if syn_list in synonym_dict:
+            self.synonyms = synonym_dict[syn_list],
+        else:
+            self.synonyms = []
+
+    def __str__(self):
+        if self.verb != "":
+            return str(self.events)
+        else: return self.verb
+
+    def set_verb_and_synonyms(self, verb_obj_dict_key: str = ""):
+        from game_objects.synonyms import synonym_dict
+        hi = verb_obj_dict_key.split(",")
+        if len(hi) > 1:
+            self.verb = hi[0]
+            self.passive_obj = hi[1]
+        else: self.verb = verb_obj_dict_key
+
+        if self.verb in synonym_dict:
+            self.synonyms = synonym_dict[self.verb]
+        elif len(self.synonyms) == 0:
+            if len(self.verb.split(" ")) == 1:
+                self.synonyms = [x.upper() for x in pydict.synonym(self.verb)]
+            else:
+                print_warning(f"Custom Synonym not found for multi-word verb {self.verb}")
+
+    def do_event(self, room: Room, user_verb = "", item_name="", ) -> str:
+
+        if user_verb == "": user_verb = self.verb
+        narration = ""
+        for event in self.events:
+            word_list = event.split(sep=" ")
+            verb = word_list[0]
+            this_event_narration = ""
+
+            if verb == "print":
+                this_event_narration = do_print(user_verb, event, item_name)
+            elif verb == "change":
+                this_event_narration = change(event)
+            elif verb == "drop":
+                this_event_narration = drop(word_list[1], room)
+            elif verb == "move":
+                this_event_narration = move(event)
+            elif event == "game over":
+                this_event_narration = "_game_over_"
+            elif event == "game win":
+                this_event_narration = "_game_win_"
+            else:
+                print_warning(f"Event {event} seems to be improperly formatted")
+
+            if this_event_narration != "":
+                narration += f"{this_event_narration}\n"
+
+        return narration

@@ -15,7 +15,8 @@
 		"BARF": {
 			"events": [
 				"print You $$verb because the smell is so bad."
-			]
+			],
+			"repeatable": false
 		}
 	},
 	"room_list": [{
@@ -23,7 +24,7 @@
 		"narrative_text": "To your",
 		"article": "a",
 		"room_name": "kitchen",
-		"direction": "RIGHT"
+		"direction": "NORTH"
 	}, {
 		"known_to_player": true,
 		"narrative_text": "There are $$this heading $$direction",
@@ -36,7 +37,7 @@
 		"narrative_text": "$$direction you is the $$this",
 		"article": "the",
 		"room_name": "foyer",
-		"direction": "BEHIND"
+		"direction": "SOUTH"
 	}]
 }, {
 	"name": "foyer",
@@ -45,7 +46,11 @@
 	"article": "the",
 	"long_description": "Idk long descr whatever",
 	"display_name": "FOYER",
-	"room_list": []
+	"room_list": [
+		{
+			"room_name": "dining_room",
+			"direction": "NORTH"
+		}]
 }, {
 	"name": "kitchen",
 	"item_setup_dict": {},
@@ -53,7 +58,11 @@
 	"article": "a",
 	"long_description": "Idk long descr whatever",
 	"display_name": "KITCHEN",
-	"room_list": []
+	"room_list": [
+		{
+			"room_name": "dining_room",
+			"direction": "SOUTH"
+		}]
 }, {
 	"name": "bathroom",
 	"item_setup_dict": {},

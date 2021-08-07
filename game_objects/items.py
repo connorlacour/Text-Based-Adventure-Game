@@ -1,7 +1,7 @@
 from typing import Optional, List, Dict
 
 from game_objects.event import Event
-
+from game_objects.game_util import print_warning
 
 class Item:
 
@@ -19,14 +19,43 @@ class Item:
         for e in self.events.keys():
             self.events[e].set_verb_and_synonyms(e)
 
+    def get_event_from_verb(self, verb) -> Optional[Event]:
+        if verb in self.events:
+            return self.events[verb]
+
+        for e in self.events.values():
+            if verb in e.synonyms:
+                return e
+
+        print_warning(f"No verb or synonym found for {verb} for item {self}")
+        return None
+
     def get_article(self) -> str:
         if self.display_name[0] in self.vowels:
             return "an"
         else:
             return "a"
 
+    def do_event(self, verb, room = None) -> str:
+        from game_objects.global_collections import player_location
+        narration = ""
+        event = self.get_event_from_verb(verb)
+        if room is None: room = player_location.room
+        if event is not None:
+            if not event.repeatable:
+                narration = event.do_event(room, verb, self.display_name)
+                del self.events[verb]
+                room.update_item_event_mapping_cache()
+            else:
+                narration = event.do_event(room, verb, self.display_name)
+        else:
+            print_warning(f"Couldn't find {verb} in {self}")
+        return narration
+
+
     def __str__(self):
         return self.name
+
 
 class InventoryItem(Item):
 

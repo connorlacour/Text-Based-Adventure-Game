@@ -12,17 +12,18 @@ from game_objects.room import Room, RoomConnector
 
 
 def load_items_from_file(filename: str) -> List[Item]:
-    with open(filename) as file:
-        j = json.load(file)
+    with open(filename, encoding="utf-8") as file:
+        j = json.load(file, encoding="utf-8")
 
     return ItemSchema().load(j, many=True)
 
 
 def load_rooms_from_file(filename: str) -> List[Room]:
-    with open(filename) as file:
-        j = json.load(file)
+    with open(filename, encoding="utf-8") as file:
+        j = json.load(file, encoding="utf-8")
 
     return RoomSchema().load(j, many=True)
+
 
 def load_events_from_file(filename: str) -> List[Room]:
     with open(filename) as file:
@@ -31,9 +32,10 @@ def load_events_from_file(filename: str) -> List[Room]:
     return RoomSchema().load(j, many=True)
 
 
-class ItemEventSchema(Schema):
+class EventSchema(Schema):
 
     events = fields.List(Str())
+    repeatable = Bool()
     passive_obj = Str()
 
     class Meta:
@@ -55,7 +57,7 @@ class InventoryItemSchema(Schema):
     item_type = "Inventory"
     name = Str()
     display_name = Str()
-    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
+    events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
     article = Str()
     description = Str()
     can_take = Bool()
@@ -72,7 +74,7 @@ class SceneryItemSchema(Schema):
     item_type = "Scenery"
     name = Str()
     display_name = Str()
-    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
+    events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
     article = Str()
     description = Str()
 
@@ -88,7 +90,7 @@ class CollectiveItemSchema(Schema):
     item_type = "Scenery"
     name = Str()
     display_name = Str()
-    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
+    events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
     article = Str()
     description = Str()
     singular_display_name = Str()
@@ -124,6 +126,7 @@ class ItemSchema(OneOfSchema):
     class Meta:
         ordered = True
 
+
 class RoomConnectorSchema(Schema):
 
     SKIP_VALUES = {None}
@@ -147,6 +150,7 @@ class RoomConnectorSchema(Schema):
             if value not in self.SKIP_VALUES
         }
 
+
 class RoomSchema(Schema):
     name = Str()
     display_name = Str()
@@ -155,7 +159,7 @@ class RoomSchema(Schema):
     short_description = Str()
     item_setup_dict = fields.Dict(keys=Str(), values=Str())
     room_list = fields.List(fields.Nested(RoomConnectorSchema))
-    events = fields.Dict(keys=Str(), values=fields.Nested(ItemEventSchema))
+    events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
 
     class Meta:
         ordered = True
