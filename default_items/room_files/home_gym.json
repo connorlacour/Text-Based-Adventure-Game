@@ -1,7 +1,7 @@
 [{
 	"name": "home_gym",
 	"item_setup_dict": {
-        "shelf": "There's a SHELF on the EAST wall and ",
+        "shelf": "There is a SHELF on the EAST wall and ",
         "mirror": " a MIRROR hangs on the WEST wall."
     },
 	"short_description": "You are in the home gym. ",
