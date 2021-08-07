@@ -261,7 +261,7 @@
 	"description": "The alarm appears to be quite old and outdated.  You are not even sure it’s fully mounted into the wall or whether it is simply hanging like a photo would be.  There is a RED BUTTON on the alarm.  Should you press it?",
 	"type": "Scenery",
     "events": {
-		"ENTER CODE": {
+		"INSERT": {
 			"events": ["print Nothing happens."]}
 		}
 },{
@@ -289,10 +289,16 @@
 	"type": "Scenery",
     "events": {
 		"FEED,DOG_TREATS": {
-			"events": ["print You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.", "change dog display_name to `CALM DOG`", "change silver_key can_take to true"]
+			"events": [
+				"print You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.",
+				"change dog display_name to `CALM DOG`",
+				"change silver_key can_take to true"]
 		},
 		"TURN ON,PORTABLE_RADIO": {
-			"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "change dog display_name to `CALM DOG`", "change silver_key can_take to true"]
+			"events": [
+				"print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.",
+				"change dog display_name to `CALM DOG`",
+				"change silver_key can_take to true"]
 		}
 	}
 },{
@@ -388,10 +394,13 @@
 	"description": "A digital KEYPAD with numbers 0-9",
 	"type": "Scenery",
     "events": {
-		"ENTER CODE 9338": {
+		"INSERT": {
+			"events": ["print $$verb what?"]
+			},
+		"INSERT 9338": {
 			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"]
 			},
-		"ENTER CODE YEET": {
+		"INSERT YEET": {
 			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"]
 		}
 	}

@@ -127,7 +127,7 @@ def setup_global_collections(starting_player_location="foyer"):
 
     setup_rooms_and_items(i, r, starting_player_location)
 
-def setup_global_collections_for_test(test_dir: str, starting_player_location="dining_room"):
+def setup_global_collections_for_test(test_dir: str, starting_player_location="foyer"):
     import time
     start_time = time.time()
 

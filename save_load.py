@@ -10,7 +10,7 @@ base_dir = os.path.dirname(__file__)
 saves = os.path.join(base_dir, r"saves")
 
 
-def test_global_collections_emulation():
+def start_new_game():
     room_dir = os.path.join(base_dir, r"default_items/room_files")
     item_dir = os.path.join(base_dir, r"default_items/item_files")
 
@@ -281,7 +281,7 @@ class initGameTest(unittest.TestCase):
 
     @staticmethod
     def test_save():
-        test_global_collections_emulation()
+        start_new_game()
         test_scroll = Scroll(test=1)
         SaveGame("Connor_LaCour", test_scroll).save_data()
         print("something")
