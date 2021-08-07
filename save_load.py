@@ -6,10 +6,14 @@ import marshmallow
 import json
 import unittest
 
+base_dir = os.path.dirname(__file__)
+saves = os.path.join(base_dir, r"saves")
+
 
 def test_global_collections_emulation():
-    room_dir = r".\default_items\room_files"
-    item_dir = r".\default_items\item_files"
+    room_dir = os.path.join(base_dir, r"default_items/room_files")
+    item_dir = os.path.join(base_dir, r"default_items/item_files")
+
     rooms_loaded = []
     items_loaded = []
 
@@ -59,6 +63,10 @@ def test_global_collections_emulation():
         items["small_pouch"].name] = "small_pouch"
     global_collections.player_inventory[items["mirror"].name] = "mirror"
 
+    # add some stuff to discard
+    global_collections.rooms["attic"].add_to_discard(items["small_pouch"])
+
+
 
 class SaveGame:
     def __init__(self, save_file_name: str, cur_scroll: Scroll):
@@ -98,9 +106,9 @@ class SaveGame:
 
         # create save dir if doesn't exist
         # nav to save dir
-        if self.save_file_name not in os.listdir(r".\saves"):
-            os.mkdir(os.path.join(r".\saves", self.save_file_name))
-        os.chdir(os.path.join(r".\saves", self.save_file_name))
+        if self.save_file_name not in os.listdir(saves):
+            os.mkdir(os.path.join(saves, self.save_file_name))
+        os.chdir(os.path.join(saves, self.save_file_name))
 
         # creat sub directories if they don't exist
         for sub_dir in self.game_data.keys():
@@ -187,7 +195,7 @@ class LoadGame:
             "player": {}}
         self.home_dir = os.getcwd()
         self.scroll = []
-        self.load_dir = os.path.join(r".\saves", self.load_file_name)
+        self.load_dir = os.path.join(saves, self.load_file_name)
 
         self.setup_game()
 
@@ -239,8 +247,8 @@ class LoadGame:
                         os.path.join(item_dir, item_json)
                     )
                     self.game_data["item_files"] = loaded_items
-                except marshmallow.exceptions.ValidationError:
-                    print("Validation Error with: " + str(item_json))
+                except marshmallow.exceptions.ValidationError as e:
+                    print("Validation Error with: " + str(item_json) + str(e))
 
         print("items -> ",str(self.game_data["item_files"]))
         print("items length = ", str(len((self.game_data["item_files"]))))
@@ -248,7 +256,7 @@ class LoadGame:
     def load_scroll(self):
         scroll_file_path = os.path.join(
             self.load_dir,
-            r"scroll\scroll.txt"
+            r"scroll/scroll.txt"
         )
 
         with open(scroll_file_path, mode="r") as file:
@@ -291,11 +299,13 @@ class initGameTest(unittest.TestCase):
     def test_save():
         test_global_collections_emulation()
         test_scroll = Scroll(test=1)
-        SaveGame("Caroline Borden", test_scroll).save_data()
+        f = SaveGame("Caroline Borden", test_scroll).save_data()
 
-    # @staticmethod
-    # def test_load():
-    #     LoadGame("connor_final1")
+    @staticmethod
+    def test_load():
+        f = LoadGame("Caroline Borden")
+        print("hi")
+
 
 
 if __name__ == '__main__':
