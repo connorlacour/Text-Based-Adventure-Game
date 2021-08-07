@@ -2,7 +2,8 @@
 	"name": "attic",
 	"item_setup_dict": {
         "bookcase": "There is a BOOKCASE on the NORTH wall and ",
-        "trunk": "a TRUNK in the middle of the room. "
+        "trunk": "a TRUNK in the middle of the room. ",
+		"keypad": ""
     },
 	"short_description": "You are in the attic. ",
 	"article": "the",
