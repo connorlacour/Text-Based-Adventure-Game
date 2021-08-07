@@ -142,7 +142,7 @@ def get_room(room_name) -> Optional[Room]:
     return room
 
 
-def get_item(item_name) -> Optional[Room]:
+def get_item(item_name) -> Optional[Item]:
     item = items.get(item_name)
     if item is None: print_warning(f"{item_name} not found in item list")
     return item

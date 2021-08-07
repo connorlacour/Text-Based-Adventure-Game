@@ -5,10 +5,11 @@ import save_gui
 import colors
 import text_scroll as scroll
 from game_objects.game_loop import *
+import save_load
 
 
 class GameGUI:
-    def __init__(self):
+    def __init__(self, is_load: bool, load_name: str=''):
         self.window_height = 800
         self.surface = game.display.set_mode((800, 800))
         self.scroll = scroll.Scroll(0)
@@ -18,6 +19,8 @@ class GameGUI:
         self.user_entry: str = ''
         self.highlighted: str = ''
         self.game_start = True
+        self.is_load = is_load
+        self.load_name = load_name
 
     def main(self) -> str:
         """
@@ -61,15 +64,23 @@ class GameGUI:
             # re-render text-entry box
             # if user_entry is not empty, also re-render that text within box
             if self.game_start:
-                setup_global_collections()
-                self.handle_game_text(
-                    init_text=player_location.room.get_room_narration())
-                self.game_start = False
+                self.set_game_start()
 
             self.render_text_entry_box()
             if self.user_entry != '':
                 self.display_user_text_in_box()
             game.display.update()
+
+    def set_game_start(self) -> None:
+        if self.is_load:
+            os.chdir("..")
+            save_load.LoadGame(load_file_name=self.load_name)
+            os.chdir("gui")
+        else:
+            setup_global_collections()
+        self.handle_game_text(
+            init_text=player_location.room.get_room_narration())
+        self.game_start = False
 
     def set_game_screen(self) -> None:
         """

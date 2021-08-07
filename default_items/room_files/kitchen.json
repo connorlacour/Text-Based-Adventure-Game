@@ -3,8 +3,8 @@
 	"item_setup_dict": {
         "microwave": "A MICROWAVE is embedded in the EAST wall over a countertop and ",
         "island": "an ISLAND counter with ",
-        "fruit": "fruit and ",
-        "jar": "a bright blue jar sit a few feet away from the wall."
+        "apples": "fruit and ",
+        "blue jar": "a bright blue jar sit a few feet away from the wall."
     },
 	"short_description": "You are in the kitchen. ",
 	"article": "the",
@@ -12,15 +12,15 @@
 	"display_name": "KITCHEN",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "There are two doors, one in the $$direction wall to the $$room_name and ",
+		"narrative_text": "There are two doors, one in the WEST wall to the DINING ROOM and ",
 		"article": "the",
-		"room_name": "dining room",
+		"room_name": "dining_room",
 		"direction": "WEST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "another in the $$direction wall to the $$room_name. ",
+		"narrative_text": "another in the SOUTH wall to the DOWNSTAIRS HALLWAY. ",
 		"article": "the",
-		"room_name": "downstairs hallway",
+		"room_name": "downstairs_hallway",
 		"direction": "SOUTH"
 	}]
 }]

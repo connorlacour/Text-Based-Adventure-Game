@@ -36,7 +36,6 @@ class EventSchema(Schema):
 
     events = fields.List(Str())
     repeatable = Bool()
-    passive_obj = Str()
 
     class Meta:
         ordered = True
@@ -158,6 +157,7 @@ class RoomSchema(Schema):
     long_description = Str()
     short_description = Str()
     item_setup_dict = fields.Dict(keys=Str(), values=Str())
+    setup_discard_list = fields.List(Str())
     room_list = fields.List(fields.Nested(RoomConnectorSchema))
     events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
 

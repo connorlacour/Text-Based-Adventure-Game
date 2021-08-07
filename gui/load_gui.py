@@ -1,7 +1,9 @@
 import pygame as game
 from pygame.locals import *
 import sys
+import os
 import colors
+from datetime import datetime
 
 
 # STATIC FUNCTIONS
@@ -42,6 +44,7 @@ class LoadGameGUI:
         self.colors = colors.Colors().get_colors()
         self.load_game_rects = []
         self.back_button_rect = None
+        self.load_dict = {}
 
     def main(self) -> str:
         """
@@ -126,7 +129,10 @@ class LoadGameGUI:
                     if click[0] == 1:
                         for load_rect in self.load_game_rects:
                             if check_mouse_collide(mouse, load_rect):
-                                return 'load'
+                                load_idx = str(
+                                    self.load_game_rects.index(load_rect)
+                                )
+                                return self.load_dict[load_idx]["name"]
 
                         if check_mouse_collide(mouse, self.back_button_rect):
                             return 'back'
@@ -218,6 +224,19 @@ class LoadGameGUI:
         img = font.render('LOAD GAME', True, self.colors['off_white'])
         self.surface.blit(img, (165, 75))
 
+    def generate_load_dict(self):
+        count = 0
+
+        for save in os.listdir(r"..\saves"):
+            save_date = datetime.fromtimestamp(os.path.getmtime(
+                os.path.join(r"..\saves", save))
+            )
+            save_date = save_date.strftime("%d/%m/%Y")
+            save_dict = {"name": save, "date": save_date}
+            save_number = str(count)
+            self.load_dict[save_number] = save_dict
+            count += 1
+
     def display_load_choices(self, highlighted: int = -1,
                              load_games: dict = None, init=False) -> None:
         """
@@ -232,10 +251,11 @@ class LoadGameGUI:
         Renders based on mouse_pos() as determined by and called in main()
         """
         load_font = game.font.SysFont('dubai', 26)
+        self.generate_load_dict()
 
         # TESTING
-        load_games = load_games_test_data()
-        entries = load_games.keys()
+        load_games = self.load_dict
+        entries = self.load_dict.keys()
 
         # starting values for load game rects
         x = 50
@@ -243,56 +263,70 @@ class LoadGameGUI:
         w = 700
         h = 100
 
-        # cou
         load_rect_count = 0
 
-        # iterate over games in load_games (or, for testing entries) dict
-        for games in entries:
+        # if load dict empty
+        if not self.load_dict:
+            load_font = game.font.SysFont('dubai', 40)
             load_rect = Rect(x, y, w, h)
+            empty_text = "No Save Data"
+            text = load_font.render(empty_text, True,
+                                    self.colors['off_white'])
+            game.draw.rect(self.surface, self.colors['white'], load_rect,
+                           width=2)
+            self.surface.blit(text, (x + 30, y + 20))
 
-            # initialize self.load_game_rects list
-            if init:
-                self.load_game_rects.append(load_rect)
+        # else, iterate over games in load_games (or, for testing entries) dict
+        else:
+            for games in entries:
+                load_rect = Rect(x, y, w, h)
 
-            # establish strings for Name and Date
-            name_text = 'Name: ' + load_games[games]['name']
-            date_text = 'Date Saved: ' + load_games[games]['date']
+                # initialize self.load_game_rects list
+                if init:
+                    self.load_game_rects.append(load_rect)
 
-            # if highlighted, render rects and text with highlight colors
-            if highlighted == load_rect_count:
-                # outline of rect
-                game.draw.rect(self.surface, self.colors['white'], load_rect,
-                               width=2)
+                # establish strings for Name and Date
+                name_text = 'Name: ' + load_games[games]['name']
+                date_text = 'Date Saved: ' + load_games[games]['date']
 
-                # interior fill of rect
-                load_rect = Rect(x + 2, y + 2, w - 4, h - 4)
-                game.draw.rect(self.surface, self.colors['dark_grey'],
-                               load_rect)
-                name = load_font.render(name_text, True,
-                                        self.colors['off_white'])
-                date = load_font.render(date_text, True,
-                                        self.colors['off_white'])
-                self.surface.blit(name, (x + 10, y + 10))
-                self.surface.blit(date, (x + 10, y + 50))
+                # if highlighted, render rects and text with highlight colors
+                if highlighted == load_rect_count:
+                    # outline of rect
+                    game.draw.rect(self.surface, self.colors['white'], load_rect,
+                                   width=2)
 
-            # Else, render rects and text with standard colors
-            else:
-                # outline of rect
-                game.draw.rect(self.surface, self.colors['off_white'],
-                               load_rect, width=2)
+                    # interior fill of rect
+                    load_rect = Rect(x + 2, y + 2, w - 4, h - 4)
+                    game.draw.rect(self.surface, self.colors['dark_grey'],
+                                   load_rect)
+                    name = load_font.render(name_text, True,
+                                            self.colors['off_white'])
+                    date = load_font.render(date_text, True,
+                                            self.colors['off_white'])
+                    self.surface.blit(name, (x + 10, y + 10))
+                    self.surface.blit(date, (x + 10, y + 50))
 
-                # interior of rect
-                load_rect = Rect(x + 2, y + 2, w - 4, h - 4)
-                game.draw.rect(self.surface, self.colors['black'],
-                               load_rect)
+                # Else, render rects and text with standard colors
+                else:
+                    # outline of rect
+                    game.draw.rect(self.surface, self.colors['off_white'],
+                                   load_rect, width=2)
 
-                name = load_font.render(name_text, True,
-                                        self.colors['off_white'])
-                date = load_font.render(date_text, True,
-                                        self.colors['off_white'])
-                self.surface.blit(name, (x + 10, y + 10))
-                self.surface.blit(date, (x + 10, y + 50))
+                    # interior of rect
+                    load_rect = Rect(x + 2, y + 2, w - 4, h - 4)
+                    game.draw.rect(self.surface, self.colors['black'],
+                                   load_rect)
 
-            # increment positional arguments (y) and count
-            y += (h + 20)
-            load_rect_count += 1
+                    name = load_font.render(name_text, True,
+                                            self.colors['off_white'])
+                    date = load_font.render(date_text, True,
+                                            self.colors['off_white'])
+                    self.surface.blit(name, (x + 10, y + 10))
+                    self.surface.blit(date, (x + 10, y + 50))
+
+                # increment positional arguments (y) and count
+                y += (h + 20)
+                load_rect_count += 1
+
+
+LoadGameGUI().generate_load_dict()

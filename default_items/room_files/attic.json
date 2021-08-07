@@ -10,19 +10,19 @@
 	"display_name": "ATTIC",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "A door in the $$direction wall opens to an $$room_name and ",
+		"narrative_text": "A door in the SOUTH wall opens to an ATTIC CLOSET and ",
 		"article": "the",
-		"room_name": "attic closet",
+		"room_name": "attic_closet",
 		"direction": "SOUTH"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the stairs in the $$direction wall go back down to the $$room_name.",
+		"narrative_text": "the stairs in the WEST go back down to the UPSTAIRS HALLWAY.",
 		"article": "the",
-		"room_name": "upstairs hallway",
+		"room_name": "upstairs_hallway",
 		"direction": "WEST"
 	},{
 		"known_to_player": false,
-		"narrative_text": "The BOOKCASE slides to the side revealing a walk-in $$room_name with a KEYPAD.",
+		"narrative_text": "",
 		"article": "the",
 		"room_name": "safe",
 		"direction": "NORTH"
