@@ -1,6 +1,4 @@
 from parse_cmd import *
-#import sys
-#sys.path.append('../')
 from game_objects.event import *
 from game_objects.synonyms import *
 from game_objects.global_collections import *
@@ -243,6 +241,7 @@ def resolve_noun_to_item_name(active, passive, room: Room = None) -> (str, str):
 def do_direction_command(verb: str, direction: str, item: str = "", room: Room = None) -> str:
     if room is None: room = player_location.room
     dir = ""
+
     if item != "":
         for conn in room.connecting_rooms.values():
             if conn.connector_item_name == item:
@@ -251,24 +250,15 @@ def do_direction_command(verb: str, direction: str, item: str = "", room: Room =
                 else:
                     return f"You try to {verb} through the" \
                            f" {conn.connector_item.display_name} but you can't. "
+        # Check if room name was passed in instead of direction and pull direction for processing
+        if dir == "":
+            for x in room.connecting_rooms:
+                if item.lower() in room.connecting_rooms[x].room_name:
+                    dir = x
+                    break
     else:
         if direction in room.connecting_rooms.keys():
             dir = direction
-        else:
-            # Check if room name was passed in instead of direction and pull direction for processing
-            for k in room.connecting_rooms.keys():
-                direction = direction.strip("_")
-            
-                count = 0
-                for k in room.connecting_rooms:
-                    for val in direction:
-                        if val.lower() in room.connecting_rooms[k].room_name:
-                            count += 1
-                    if count == len(direction):
-                        dir = k
-                        break
-                    else:
-                        count = 0
 
     if dir != "":
         return move_player(dir, verb)

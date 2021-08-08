@@ -3,7 +3,7 @@
 	"item_setup_dict": {
         "fireplace": "A FIREPLACE is set in the WEST wall",
         "katana": " with a KATANA above it",
-        "strip_of_paper": ". A coffee table with a STRIP OF PAPER on it rests in the middle of the room.",
+        "paper": ". A coffee table with a STRIP OF PAPER on it rests in the middle of the room.",
 		"burnt_note": ""
     },
 	"short_description": "You are in the living room. ",

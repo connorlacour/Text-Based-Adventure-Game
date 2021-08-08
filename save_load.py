@@ -1,7 +1,7 @@
 from game_objects import global_collections
 from gui.text_scroll import Scroll
-import sys
-sys.path.append('../')
+#import sys
+#sys.path.append('../')
 from unit_tests.item_setup_tests import *
 import os
 import marshmallow

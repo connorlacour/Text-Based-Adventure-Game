@@ -8,7 +8,7 @@ from PyDictionary import PyDictionary
 pydict = PyDictionary()
 
 # Set up defined directions, determiners, and prepositions
-directions = {"NORTH", "SOUTH", "EAST", "WEST", "NORTHWEST", "NORTHEAST", "SOUTHEAST", "SOUTHWEST"}
+directions = {"NORTH", "SOUTH", "EAST", "WEST", "SOUTHEAST", "SOUTHWEST", "NORTHWEST", "NORTHEAST"}
 
 det = {"A", "AN", "ANY", "EVERY", "FEW", "HER", "ITS", "HIS", "LITTLE", "MANY", "MORE", "MY", "OUR",
     "SOME", "THAT", "THE", "THEIR", "THESE", "THIS", "THOSE", "YOUR"}
@@ -32,7 +32,6 @@ def setup_parser():
     from game_objects.global_collections import rooms
     #Add all exisiting directions to dirs
     for room in rooms.values():
-        directions.add(room.display_name)
         for direction in room.connecting_rooms.keys():
             directions.add(direction.upper())
 
@@ -63,7 +62,7 @@ def parse_entry(usr_cmd: str) -> (str, str, str ,str):
             if word[len(word) - 1] == 'S':
                 word_type = pydict.meaning(word.strip('S'), disable_errors=True)
 
-#        print("meaning call: --- %s seconds ---" % (time.time() - start_time))
+        print("meaning call: --- %s seconds ---" % (time.time() - start_time))
 
         # Save directional words first
         if after_verb:

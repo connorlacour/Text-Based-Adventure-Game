@@ -8,7 +8,7 @@
 	"short_description": "You are in the downstairs hallway. ",
 	"article": "the",
 	"long_description": "The downstairs hallway appears completely empty at first glance.  The door in the NORTH wall leads to the KITCHEN; the door in the WEST wall to the LIVING ROOM; and finally, the door in the SOUTH wall leads to the FOYER. On the EAST wall, you see a PAINTING hanging directly across from the LIVING ROOM.  Underneath the PAINTING is a PODIUM with a glass case on top of it.  Next to the PODIUM, leading up from the side of the EAST wall, are STAIRS that take you to the UPSTAIRS HALLWAY.",
-	"display_name": "DINING ROOM",
+	"display_name": "DOWNSTAIRS HALLWAY",
 	"room_list": [{
 		"known_to_player": true,
 		"narrative_text": "The door in the NORTH wall leads to the KITCHEN, ",

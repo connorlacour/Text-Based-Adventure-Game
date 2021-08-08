@@ -10,7 +10,7 @@
     "display_name": "ATTIC CLOSET",
     "room_list": [{
         "known_to_player": true,
-        "narrative_text": " The door to the NORTH goes back to the ATTIC. ",
+        "narrative_text": " The door in the NORTH goes back to the ATTIC. ",
         "article": "the",
         "room_name": "attic",
         "direction": "NORTH"
