@@ -172,11 +172,10 @@ class Room:
             return narration
         else:
             if self.special_intro:
-                self.special_intro = False
                 if self.display_name == "FOYER":
+                    self.special_intro = False
                     return foyer_intro + "\n\n" + self.long_description + "\n" + self.room_list_narration()
                 elif self.display_name == "GUEST BEDROOM":
-                    self.special_intro = False
                     return guest_bed_intro + "\n\n" + self.room_list_narration()
             else:
                 self.visited = True

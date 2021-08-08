@@ -16,23 +16,23 @@
 		}
 	}
 }, {
-	"name": "note",
-	"display_name": "NOTE",
+	"name": "letter",
+	"display_name": "LETTER",
 	"article": "the",
-	"description": "The NOTE reads,\n\nDear Tuck,\nPlease come home.  I feel like I go weeks without seeing you.  For what?  You said yourself that no one would find the way in unless they were looking for it.  The least these people could do is give you a decent place to rest while you’re here.  You should be home with your family.  We can find another way.  Come home.\n\nYours,\nCarole",
+	"description": "The LETTER reads,\n\nDear Tuck,\nPlease come home.  I feel like I go weeks without seeing you.  For what?  You said yourself that no one would find the way in unless they were looking for it.  The least these people could do is give you a decent place to rest while you’re here.  You should be home with your family.  We can find another way.  Come home.\n\nYours,\nCarole",
 	"type": "Inventory"
 }, {
-	"name": "katana",
-	"display_name": "KATANA",
+	"name": "sword",
+	"display_name": "SWORD",
 	"article": "the",
-	"description": "The hilt of the KATANA is etched with two dragons and the blade has a string of kanji going down one side.  It is light and effortless to swing.",
+	"description": "The hilt of the SWORD is etched with two dragons and the blade has a string of kanji going down one side.  It is light and effortless to swing.",
 	"type": "Inventory",
     "events": {
 		"USE": {
 			"events": ["print You swing the blade, but it has been dulled and is nothing more than decorative at this point."]
 		},
 		"FIGHT,GUARD": {
-			"events": ["print You swing the KATANA, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"]
+			"events": ["print You swing the SWORD, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"]
 			}
 	}
 }, {
@@ -71,8 +71,8 @@
 	"can_take": false,
 	"type": "Inventory"
 }, {
-	"name": "small_key",
-	"display_name": "SMALL KEY",
+	"name": "key",
+	"display_name": "KEY",
 	"article": "the",
 	"description": "A small key.",
 	"type": "Inventory"
@@ -88,13 +88,24 @@
 			}
 		}
 }, {
-	"name": "bottle_of_pills",
-	"display_name": "BOTTLE OF PILLS",
+	"name": "bottle",
+	"display_name": "BOTTLE",
 	"article": "a",
 	"description": "An unmarked bottle of pills",
 	"type": "Inventory",
     "events": {
-		"SWALLOW,PILL": {
+		"OPEN": {
+			"events": ["print You open the bottle of pills to find a PILL inside.  You wonder what it does."]
+			}
+		}
+}, {
+	"name": "pill",
+	"display_name": "PILL",
+	"article": "a",
+	"description": "An unmarked white pill.  What could this be for?",
+	"type": "Inventory",
+    "events": {
+		"SWALLOW": {
 			"events": ["print You swallow one of the unmarked pills.  You continue walking around for a bit before the house seems like it’s moving in a circle.  Colors pop out at you in bright detail and you swear you hear a dragon snarling in a nearby room.  The next thing you know the floor is rushing up at you and hits your head, knocking you out.  You wake up hours later with a dry mouth and find yourself in a jail cell.", "game over"]
 			}
 		}
@@ -132,7 +143,7 @@
     "name": "coat",
 	"display_name": "COAT",
 	"article": "a",
-	"description": "You search the COAT for clues about the owner.  As you dig around, your hand finds a piece of paper with a NOTE written on it.",
+	"description": "You search the COAT for clues about the owner.  As you dig around, your hand finds a piece of paper with a LETTER written on it.",
 	"type": "Scenery"
 },{
     "name": "china_cabinet",
@@ -143,14 +154,14 @@
     "events": {
 		"UNLOCK": {
 			"events": ["print With what?"]},
-		"UNLOCK,SMALL_KEY": {
-			"events": ["print You unlock the china cabinet.", "change small_pouch can_take to true"]}
+		"UNLOCK,KEY": {
+			"events": ["print You unlock the china cabinet.", "change small_pouch can_take to true", "change china_cabinet description to `The CHINA CABINET is unlocked.`"]}
 		}
 },{
     "name": "wall_mount",
 	"display_name": "WALL MOUNT",
 	"article": "a",
-	"description": "There are various badges hanging from the WALL MOUNT from conferences and meetings.  Hidden amongst those is a SMALL KEY.",
+	"description": "There are various badges hanging from the WALL MOUNT from conferences and meetings.  Hidden amongst those is a KEY.",
 	"type": "Scenery"
 },{
     "name": "painting",
@@ -198,14 +209,14 @@
 		"FIGHT": {
 			"events": ["print You try to fight the guard, but you are no match for him.  He knocks you out, and when you wake, you find yourself in a jail cell.", "game over"]
 		},
-		"FIGHT,KATANA": {
-			"events": ["print You swing the KATANA, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"]
+		"FIGHT,SWORD": {
+			"events": ["print You swing the SWORD, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"]
 		},
 		"BRIBE,SMALL_POUCH": {
-			"events": ["print Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut.", "move player to guest_bedroom"]
+			"events": ["print Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut.", "change guest_bedroom special_intro to false"]
 			},
-		"PERSUADE,NOTE": {
-			"events": ["print You remember the note from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the note to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the note several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "move player to guest_bedroom"]
+		"PERSUADE,LETTER": {
+			"events": ["print You remember the letter from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the letter to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the letter several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "change guest_bedroom special_intro to false"]
 			}
 		}
 },{
@@ -248,13 +259,13 @@
     "name": "blue_jar",
 	"display_name": "BLUE JAR",
 	"article": "a",
-	"description": "You pull back the lid on the BLUE JAR to find DOG TREATS that smell strongly of bacon.",
+	"description": "You pull back the lid on the BLUE JAR to find MILK BONES that smell strongly of bacon.",
 	"type": "Scenery"
 },{
-    "name": "dog_treats",
-	"display_name": "DOG TREATS",
+    "name": "milk_bone",
+	"display_name": "MILK BONE",
 	"article": "the",
-	"description": "Bacon-flavored dog treats",
+	"description": "Milk bone dog treats",
 	"type": "Inventory"
 },{
     "name": "fireplace",
@@ -264,7 +275,7 @@
 	"type": "Scenery"
 },{
     "name": "paper",
-	"display_name": "strip of paper",
+	"display_name": "STRIP OF PAPER",
 	"article": "a",
 	"description": "As you look closer at the STRIP OF PAPER, you notice that it is a receipt from John Little’s Lock & Key.",
 	"type": "Scenery"
@@ -302,9 +313,9 @@
 	"description": "You approach the DOG carefully.  As you get closer, it bares its teeth in warning.  Suddenly, it shakes its head as if shaking off some irritation and you notice a SILVER KEY hanging from the collar where a tag would be.  Is there way to soothe this savage beast to get the key?",
 	"type": "Scenery",
     "events": {
-		"FEED,DOG_TREATS": {
+		"FEED,MILK_BONE": {
 			"events": [
-				"print You slip a treat to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.",
+				"print You slip a milk bone to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.",
 				"change dog display_name to `CALM DOG`",
 				"change silver_key can_take to true"]
 		},
@@ -346,7 +357,7 @@
 	"type": "Scenery",
     "events": {
 		"OPEN": {
-			"events": ["print You open the MEDICINE CABINET and see various toiletries and vitamins.  There is a single unmarked BOTTLE OF PILLS on a shelf"]
+			"events": ["print You open the MEDICINE CABINET and see various toiletries and vitamins.  There is a single unmarked BOTTLE on a shelf"]
 		}
 	}
 },{
@@ -394,11 +405,11 @@
     "name": "odyssey",
 	"display_name": "ODYSSEY",
 	"article": "the",
-	"description": "As you look at the copy of the ODYSSEY, you notice that it is sticking out more than the other books.  Was this picked up recently?",
+	"description": "As you look at the copy of the ODYSSEY, you notice that it is sticking out more than the other books.  You wonder if you should pull it off the shelf.",
 	"type": "Scenery",
 	"events": {
 		"PICK UP": {
-			"events": ["print As you try to pick up the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.", "change attic.direction.north narrative_text to `The BOOKCASE slides to the side revealing a walk-in safe with a KEYPAD.`"]
+			"events": ["print As you try to pull the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.", "change attic.direction.north narrative_text to `The BOOKCASE slides to the side revealing a walk-in safe with a KEYPAD.`"]
 			}
 		}
 },{
@@ -419,10 +430,10 @@
 		}
 	}
 },{
-    "name": "boxes",
-	"display_name": "BOXES",
+    "name": "containers",
+	"display_name": "CONTAINERS",
 	"article": "the",
-	"description": "The BOXES are filled with old family albums.  You flip through seeing pictures of a family that might once have understood the struggles you and yours currently deal with.  That struggle has long been forgotten by them.",
+	"description": "The storage CONTAINERS are filled with old family albums.  You flip through seeing pictures of a family that might once have understood the struggles you and yours currently deal with.  That struggle has long been forgotten by them.",
 	"type": "Scenery"
 },{
     "name": "electronics",

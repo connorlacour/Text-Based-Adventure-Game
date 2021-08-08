@@ -56,7 +56,7 @@ persuade_synonyms = {
 }
 
 enter_code_synonyms = {
-    "ENTER CODE", "INSERT", "PUT IN"
+    "ENTER CODE", "INSERT", "PUT IN", "ENTER", "ENTER CODE 9338", "ENTER CODE YEET", "ENTER 8338", "ENTER YEET"
 }
 
 feed_synonyms = {

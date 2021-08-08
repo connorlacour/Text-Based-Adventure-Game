@@ -3,7 +3,7 @@
 	"item_setup_dict": {
         "china_cabinet": "A CHINA CABINET and ",
         "wall_mount": "WALL MOUNT are along the WEST wall.",
-		"small_key": "",
+		"key": "",
 		"small_pouch": ""
     },
 	"short_description": "You are in the dining room. ",

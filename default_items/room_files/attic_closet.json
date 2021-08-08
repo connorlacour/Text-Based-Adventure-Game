@@ -1,12 +1,12 @@
 [{
     "name": "attic_closet",
     "item_setup_dict": {
-        "boxes": "BOXES are stacked against the walls and ",
+        "containers": "Storage CONTAINERS are stacked against the walls and ",
         "electronics": "ELECTRONICS sit in piles around the closet. "
     },
     "short_description": "You are in the attic closet. ",
     "article": "the",
-    "long_description": "The attic closet resembles the cluttered attic you had imagined.  BOXES are stacked and line the walls around the closet and ELECTRONICS are scattered around in piles. This is where items go to be stored for years.  The only door is the one you entered through in the NORTH wall that leads back to the ATTIC.",
+    "long_description": "The attic closet resembles the cluttered attic you had imagined.  Storage CONTAINERS are stacked and line the walls around the closet and ELECTRONICS are scattered around in piles. This is where items go to be stored for years.  The only door is the one you entered through in the NORTH wall that leads back to the ATTIC.",
     "display_name": "ATTIC CLOSET",
     "room_list": [{
         "known_to_player": true,

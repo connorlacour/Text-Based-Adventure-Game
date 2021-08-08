@@ -3,7 +3,7 @@
 	"item_setup_dict": {
         "glove": "Next to the door is a single GLOVE. ",
         "coat": "A COAT hangs to the side.",
-		"note": ""
+		"letter": ""
     },
 	"short_description": "You are in the closet. ",
 	"article": "a",
