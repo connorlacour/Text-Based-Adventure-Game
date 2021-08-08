@@ -102,8 +102,8 @@ def in_scope_event_synonym_mapping():
             new_dict[key].append(value)
     return new_dict
 
-
-def setup_rooms_and_items(i: List[Item], r: List[Room], starting_player_location = "dining_room"):
+# Game default starts in foyer
+def setup_rooms_and_items(i: List[Item], r: List[Room], starting_player_location = "foyer"):
 
     for item in i:
         items[item.name] = item

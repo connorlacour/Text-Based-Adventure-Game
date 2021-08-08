@@ -22,27 +22,27 @@
 		"direction": "WEST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "The two in the NORTH wall go to the MAIN BEDROOM and ",
+		"narrative_text": "The door in the NORTHWEST wall goes to the MAIN BEDROOM and ",
 		"article": "the",
 		"room_name": "main_bedroom",
-		"direction": "NORTH"
+		"direction": "NORTHWEST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the GUEST BEDROOM while ",
+		"narrative_text": "the door in the NORTHEAST wall goes to the GUEST BEDROOM while ",
 		"article": "the",
 		"room_name": "guest_bedroom",
-		"direction": "NORTH"
+		"direction": "NORTHEAST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "the two in the SOUTH wall go to the STUDY and ",
+		"narrative_text": "the door in the SOUTHWEST wall goes to the STUDY and ",
 		"article": "the",
 		"room_name": "study",
-		"direction": "SOUTH"
+		"direction": "SOUTHWEST"
 	},{
 		"known_to_player": true,
-		"narrative_text": "a HOME GYM.",
+		"narrative_text": "the door in the SOUTHEAST wall goes to a HOME GYM.",
 		"article": "a",
 		"room_name": "home_gym",
-		"direction": "SOUTH"
+		"direction": "SOUTHEAST"
 	}]
 }]

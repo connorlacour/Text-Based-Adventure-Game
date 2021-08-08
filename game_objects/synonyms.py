@@ -78,6 +78,8 @@ synonym_dict = {
     "BRIBE": list(bribe_synonyms),
     "EAT": list(eat_synonyms),
     "INSERT": list(enter_code_synonyms),
+    "INSERT 9338": list(enter_code_synonyms),
+    "INSERT YEET": list(enter_code_synonyms),
     "FEED": list(feed_synonyms),
     "FIGHT": list(fight_synonyms),
     "OPEN": list(open_synonyms),
