@@ -58,15 +58,6 @@ def test_global_collections_emulation():
 
     setup_rooms_and_items(items_loaded, rooms_loaded, "foyer")
 
-    # add some stuff to player inventory
-    global_collections.player_inventory[
-        items["small_pouch"].name] = "small_pouch"
-    global_collections.player_inventory[items["mirror"].name] = "mirror"
-
-    # add some stuff to discard
-    global_collections.rooms["attic"].add_to_discard(items["small_pouch"])
-
-
 
 class SaveGame:
     def __init__(self, save_file_name: str, cur_scroll: Scroll):
@@ -289,20 +280,20 @@ class LoadGame:
             file.close()
 
 
-# class initGameTest(unittest.TestCase):
-#
-#     @staticmethod
-#     def test_save():
-#         test_global_collections_emulation()
-#         test_scroll = Scroll(test=1)
-#         SaveGame("Emily_Sorg", test_scroll)
-#         print("something")
-#
-#     @staticmethod
-#     def test_load():
-#         f = LoadGame("Connor_LaCour")
-#         print("hi")
-#
-#
-# if __name__ == '__main__':
-#     unittest.main()
+class initGameTest(unittest.TestCase):
+
+    @staticmethod
+    def test_save():
+        test_global_collections_emulation()
+        test_scroll = Scroll(test=1)
+        SaveGame("Emily_Sorg", test_scroll)
+        print("something")
+
+    @staticmethod
+    def test_load():
+        f = LoadGame("Connor_LaCour")
+        print("hi")
+
+
+if __name__ == '__main__':
+    unittest.main()
