@@ -99,7 +99,7 @@ def in_scope_event_synonym_mapping():
 
     for d in (room_dict, inventory_dict):
         for key, value in d.items():
-            new_dict[key].append(value)
+            new_dict[key].extend(value)
     return new_dict
 
 # Game default starts in foyer
