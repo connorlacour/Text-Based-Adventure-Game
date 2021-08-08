@@ -56,7 +56,7 @@ def test_global_collections_emulation():
     else:
         items_loaded = items_loaded[0]
 
-    setup_rooms_and_items(items_loaded, rooms_loaded, "foyer")
+    setup_rooms_and_items(items_loaded, rooms_loaded, "upstairs_hallway")
 
 
 class SaveGame:
