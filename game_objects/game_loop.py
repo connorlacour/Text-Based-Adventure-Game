@@ -241,6 +241,7 @@ def resolve_noun_to_item_name(active, passive, room: Room = None) -> (str, str):
 def do_direction_command(verb: str, direction: str, item: str = "", room: Room = None) -> str:
     if room is None: room = player_location.room
     dir = ""
+
     if item != "":
         for conn in room.connecting_rooms.values():
             if conn.connector_item_name == item:
@@ -249,6 +250,12 @@ def do_direction_command(verb: str, direction: str, item: str = "", room: Room =
                 else:
                     return f"You try to {verb} through the" \
                            f" {conn.connector_item.display_name} but you can't. "
+        # Check if room name was passed in instead of direction and pull direction for processing
+        if dir == "":
+            for x in room.connecting_rooms:
+                if item.lower() in room.connecting_rooms[x].room_name:
+                    dir = x
+                    break
     else:
         if direction in room.connecting_rooms.keys():
             dir = direction
@@ -262,7 +269,8 @@ def do_direction_command(verb: str, direction: str, item: str = "", room: Room =
             return f"You can't {verb} {direction}!"
 
 def main():
-    setup_global_collections()
+    from save_load import start_new_game
+    start_new_game()
     while True:
         print(player_location.room.get_room_narration())
         val = input(">>")

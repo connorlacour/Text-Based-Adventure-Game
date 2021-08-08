@@ -8,7 +8,7 @@ from PyDictionary import PyDictionary
 pydict = PyDictionary()
 
 # Set up defined directions, determiners, and prepositions
-directions = {"NORTH", "SOUTH", "EAST", "WEST"}
+directions = {"NORTH", "SOUTH", "EAST", "WEST", "SOUTHEAST", "SOUTHWEST", "NORTHWEST", "NORTHEAST"}
 
 det = {"A", "AN", "ANY", "EVERY", "FEW", "HER", "ITS", "HIS", "LITTLE", "MANY", "MORE", "MY", "OUR",
     "SOME", "THAT", "THE", "THEIR", "THESE", "THIS", "THOSE", "YOUR"}
@@ -29,11 +29,20 @@ actions = {'GO',
 
 
 def setup_parser():
-    from game_objects.global_collections import rooms
+    from game_objects.global_collections import rooms, items
     #Add all exisiting directions to dirs
     for room in rooms.values():
         for direction in room.connecting_rooms.keys():
             directions.add(direction.upper())
+
+    for item in items.values():
+        for e in item.events.values():
+            if len(e.verb.split(sep=" ")) > 1:
+                actions.add(e.verb)
+            for syn in e.synonyms:
+                if len(syn.split(sep=" ")) > 1:
+                    actions.add(syn)
+
 
 
 
@@ -57,6 +66,11 @@ def parse_entry(usr_cmd: str) -> (str, str, str ,str):
     for word in word_list:
         start_time = time.time()
         word_type = pydict.meaning(word, disable_errors=True)
+
+        if word_type is None:  # Hacky resolve not finding plurals
+            if word[len(word) - 1] == 'S':
+                word_type = pydict.meaning(word.strip('S'), disable_errors=True)
+
         print("meaning call: --- %s seconds ---" % (time.time() - start_time))
 
         # Save directional words first
@@ -90,6 +104,8 @@ def parse_entry(usr_cmd: str) -> (str, str, str ,str):
 
     if passive_obj == "" and active_object != "":
         passive_obj = active_object
+    elif passive_obj != "" and active_object == "":
+        active_object = passive_obj
 
     return verb, direction, passive_obj, active_object
 
