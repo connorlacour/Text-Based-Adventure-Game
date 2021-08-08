@@ -72,6 +72,8 @@ class SaveGame:
         self.home_dir = os.getcwd()
         self.scroll = cur_scroll
 
+        self.save_data()
+
     @staticmethod
     def get_rooms():
         return global_collections.rooms
@@ -99,6 +101,10 @@ class SaveGame:
 
         # create save dir if doesn't exist
         # nav to save dir
+
+        if "saves" not in os.listdir(base_dir):
+            os.mkdir(os.path.join(base_dir, "saves"))
+
         if self.save_file_name not in os.listdir(saves):
             os.mkdir(os.path.join(saves, self.save_file_name))
         os.chdir(os.path.join(saves, self.save_file_name))
@@ -234,9 +240,10 @@ class LoadGame:
                     )
                     self.game_data["item_files"] = loaded_items
                 except marshmallow.exceptions.ValidationError as e:
+                    print("tried path : ", str(os.path.join(item_dir, item_json)))
                     print("Validation Error with: " + str(item_json) + str(e))
 
-        print("items -> ",str(self.game_data["item_files"]))
+        print("items -> ", str(self.game_data["item_files"]))
         print("items length = ", str(len((self.game_data["item_files"]))))
 
     def load_scroll(self):
@@ -285,15 +292,13 @@ class initGameTest(unittest.TestCase):
     def test_save():
         start_new_game()
         test_scroll = Scroll(test=1)
-        SaveGame("Connor_LaCour", test_scroll).save_data()
+        SaveGame("Emily_Sorg", test_scroll)
         print("something")
-        f = SaveGame("Connor_LaCour", test_scroll).save_data()
 
     @staticmethod
     def test_load():
         f = LoadGame("Connor_LaCour")
         print("hi")
-
 
 
 if __name__ == '__main__':

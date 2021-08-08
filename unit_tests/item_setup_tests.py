@@ -13,65 +13,65 @@ test_dir = os.path.dirname(__file__)
 def get_test_file_name(filename: str):
     return os.path.join(test_dir, f'{filename}')
 
-class ItemSetupTests(unittest.TestCase):
-
-    def usingTestFolder(self):
-        self.assertTrue("unit_tests" in get_test_file_name("templates/items"))
-
-    def testPrintEvent(self):
-        setup_global_collections_for_test(test_dir)
-
-        print_events_1 = [
-            """print Hi!""",
-            """print You are a smelly sock""",
-        ]
-        print_events_output_1 = Event(print_events_1).do_event(player_location.room)
-
-        expected_output_1 = 'Hi!\nYou are a smelly sock\n'
-
-        print_events_2 = [
-            "print \"Hi!\"",
-        ]
-        expected_output_2 =  "\"Hi!\"\n"
-
-        print_events_output_2 = Event(print_events_2).do_event(player_location.room)
-        self.assertTrue(print_events_output_1 == expected_output_1)
-        self.assertTrue(print_events_output_2 == expected_output_2)
-
-        print("Print Event Output: \n" + print_events_output_1 + print_events_output_2)
-
-
-    def testItemSerialization(self):
-        setup_global_collections_for_test(test_dir)
-        test_json = """[{"name": "door_to_kitchen", "display_name": "CLOSED DOOR", "events": {}, "article": "the", "description": "It's a closed door. You don't live in a barn.", "type": "Scenery"}, {"name": "stairs_to_bathroom", "display_name": "STAIRS", "events": {}, "article": "the", "description": "I warned you bro, I warned you about the STAIRS...", "type": "Scenery"}, {"name": "dining_table", "display_name": "DINING TABLE", "events": {}, "article": "the", "description": "Strewn with rotting food and even a stuffed pig. Who could have left it in such a state?", "type": "Scenery"}, {"name": "pig_scroll", "display_name": "PIG WITH SCROLL", "events": {}, "article": "the", "description": "It's a pig... it's got a scroll... that's whack", "can_take": true, "type": "Inventory"}, {"name": "pig", "display_name": "PIG", "events": {"COMBINE,SCROLL": {"events": ["print You combine the PIG and the SCROLL.", "move scroll to limbo", "move pig to limbo", "move pig_scroll to player_room"], "repeatable": true, "passive_obj": "SCROLL"}, "COMBINE,PLATES": {"events": ["print What the heck are you talking about??"], "repeatable": true, "passive_obj": "PLATES"}}, "article": "the", "description": "A stuffed pig.  It seems in bad taste.", "type": "Scenery"}, {"name": "scroll", "display_name": "ROLLED-UP SCROLL", "events": {}, "article": "the", "description": "You grab the scroll, unroll it and see that there is only one words, written in blood: \\"YEET\\"", "can_take": true, "type": "Inventory"}, {"name": "plates", "display_name": "PLATES", "events": {"WASH": {"events": ["print You try to $$verb the plate, with what? Your tongue?"], "repeatable": true, "passive_obj": ""}}, "article": "the", "description": "Dirty, nasty plates. You'd have these cleaned in a jiffy if you hadn't already eaten all the Tide Pods.", "singular_display_name": "PLATE", "singular_description": "A grody PLATE you grabbed from the DINING TABLE.  You probably wouldn't eat on it.", "max_count": 5, "type": "Collective"}, {"name": "chairs", "display_name": "CHAIRS", "events": {"WASH": {"events": ["print You try to $$verb the plate, with what? Your tongue?"], "repeatable": true, "passive_obj": ""}, "PLACE,PIG": {"events": ["print You place on the chair. Goodbye."], "repeatable": true, "passive_obj": "PIG"}}, "article": "the", "description": "Fine wooden chairs with attached seat cushions.", "singular_display_name": "CHAIR", "singular_description": "A fine CHAIR. Should come in handy if you get in a wrestling match.", "max_count": 5, "type": "Collective"}]"""
-        serialized_items = ItemSchema().dumps(items.values(), many=True)
-        self.assertTrue(test_json == serialized_items)
-        pprint(serialized_items)
-
-    def testItemDeserialization(self):
-
-        result = load_items_from_file(get_test_file_name("templates/items.json"))
-        self.assertTrue(len(result) == 8)
-        pprint(result)
-
-    def testRoomSerialization(self):
-        setup_global_collections_for_test(test_dir)
-
-        schema = RoomSchema()
-        room = rooms.values()
-        result = schema.dumps(room, many=True)
-        pprint(result)
-
-    def testRoomDeserialization(self):
-
-        schema = RoomSchema()
-        result = load_rooms_from_file(get_test_file_name('templates/rooms.json'))
-        self.assertTrue(len(result) == 5)
-        pprint(result)
-
-
-if __name__ == '__main__':
-    unittest.main()
+# class ItemSetupTests(unittest.TestCase):
+#
+#     def usingTestFolder(self):
+#         self.assertTrue("unit_tests" in get_test_file_name("templates/items"))
+#
+#     def testPrintEvent(self):
+#         setup_global_collections_for_test(test_dir)
+#
+#         print_events_1 = [
+#             """print Hi!""",
+#             """print You are a smelly sock""",
+#         ]
+#         print_events_output_1 = Event(print_events_1).do_event(player_location.room)
+#
+#         expected_output_1 = 'Hi!\nYou are a smelly sock\n'
+#
+#         print_events_2 = [
+#             "print \"Hi!\"",
+#         ]
+#         expected_output_2 =  "\"Hi!\"\n"
+#
+#         print_events_output_2 = Event(print_events_2).do_event(player_location.room)
+#         self.assertTrue(print_events_output_1 == expected_output_1)
+#         self.assertTrue(print_events_output_2 == expected_output_2)
+#
+#         print("Print Event Output: \n" + print_events_output_1 + print_events_output_2)
+#
+#
+#     def testItemSerialization(self):
+#         setup_global_collections_for_test(test_dir)
+#         test_json = """[{"name": "door_to_kitchen", "display_name": "CLOSED DOOR", "events": {}, "article": "the", "description": "It's a closed door. You don't live in a barn.", "type": "Scenery"}, {"name": "stairs_to_bathroom", "display_name": "STAIRS", "events": {}, "article": "the", "description": "I warned you bro, I warned you about the STAIRS...", "type": "Scenery"}, {"name": "dining_table", "display_name": "DINING TABLE", "events": {}, "article": "the", "description": "Strewn with rotting food and even a stuffed pig. Who could have left it in such a state?", "type": "Scenery"}, {"name": "pig_scroll", "display_name": "PIG WITH SCROLL", "events": {}, "article": "the", "description": "It's a pig... it's got a scroll... that's whack", "can_take": true, "type": "Inventory"}, {"name": "pig", "display_name": "PIG", "events": {"COMBINE,SCROLL": {"events": ["print You combine the PIG and the SCROLL.", "move scroll to limbo", "move pig to limbo", "move pig_scroll to player_room"], "repeatable": true, "passive_obj": "SCROLL"}, "COMBINE,PLATES": {"events": ["print What the heck are you talking about??"], "repeatable": true, "passive_obj": "PLATES"}}, "article": "the", "description": "A stuffed pig.  It seems in bad taste.", "type": "Scenery"}, {"name": "scroll", "display_name": "ROLLED-UP SCROLL", "events": {}, "article": "the", "description": "You grab the scroll, unroll it and see that there is only one words, written in blood: \\"YEET\\"", "can_take": true, "type": "Inventory"}, {"name": "plates", "display_name": "PLATES", "events": {"WASH": {"events": ["print You try to $$verb the plate, with what? Your tongue?"], "repeatable": true, "passive_obj": ""}}, "article": "the", "description": "Dirty, nasty plates. You'd have these cleaned in a jiffy if you hadn't already eaten all the Tide Pods.", "singular_display_name": "PLATE", "singular_description": "A grody PLATE you grabbed from the DINING TABLE.  You probably wouldn't eat on it.", "max_count": 5, "type": "Collective"}, {"name": "chairs", "display_name": "CHAIRS", "events": {"WASH": {"events": ["print You try to $$verb the plate, with what? Your tongue?"], "repeatable": true, "passive_obj": ""}, "PLACE,PIG": {"events": ["print You place on the chair. Goodbye."], "repeatable": true, "passive_obj": "PIG"}}, "article": "the", "description": "Fine wooden chairs with attached seat cushions.", "singular_display_name": "CHAIR", "singular_description": "A fine CHAIR. Should come in handy if you get in a wrestling match.", "max_count": 5, "type": "Collective"}]"""
+#         serialized_items = ItemSchema().dumps(items.values(), many=True)
+#         self.assertTrue(test_json == serialized_items)
+#         pprint(serialized_items)
+#
+#     def testItemDeserialization(self):
+#
+#         result = load_items_from_file(get_test_file_name("templates/items.json"))
+#         self.assertTrue(len(result) == 8)
+#         pprint(result)
+#
+#     def testRoomSerialization(self):
+#         setup_global_collections_for_test(test_dir)
+#
+#         schema = RoomSchema()
+#         room = rooms.values()
+#         result = schema.dumps(room, many=True)
+#         pprint(result)
+#
+#     def testRoomDeserialization(self):
+#
+#         schema = RoomSchema()
+#         result = load_rooms_from_file(get_test_file_name('templates/rooms.json'))
+#         self.assertTrue(len(result) == 5)
+#         pprint(result)
+#
+#
+# if __name__ == '__main__':
+#     unittest.main()
 
 def setup_global_collections_from_code_obj():
 

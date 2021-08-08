@@ -45,6 +45,11 @@ class LoadGameGUI:
         self.load_game_rects = []
         self.back_button_rect = None
         self.load_dict = {}
+        self.max_pages = 0
+        self.cur_page = 0
+        self.next_page_rect = Rect(600, 715, 180, 30)
+        self.prev_page_rect = Rect(600, 740, 180, 30)
+        self.back_start_page_rect = Rect(330, 740, 200, 30)
 
     def main(self) -> str:
         """
@@ -74,72 +79,15 @@ class LoadGameGUI:
         while 1:
             # Constant check for game.QUIT
             for event in game.event.get():
-                if event == game.QUIT:
-                    game.quit()
-                    sys.exit()
 
-                # If mouse motion is detected, check new position
-                # If new position coincides with position of any options text,
-                #   re-render text/section as 'highlighted'
-                elif event.type == game.MOUSEMOTION:
-                    load_highlighted = -1
-                    back_highlighted = -1
+                status = self.check_event(event)
+                if status is not None:
+                    return status
 
-                    # get mouse pos
-                    mouse = game.mouse.get_pos()
-
-                    # rect count to iterate over load game rects
-                    rect_count = 0
-                    for load_rect in self.load_game_rects:
-                        if check_mouse_collide(mouse, load_rect):
-                            load_highlighted = rect_count
-                        rect_count += 1
-
-                    # Check for highlight over Back Button
-                    if check_mouse_collide(mouse, self.back_button_rect):
-                        # highlighted = 1 will render the back_button as
-                        #   'highlighted_grey'
-                        back_highlighted: int = 1
-
-                        # entire game_screen must be re-rendered, so we must
-                        #   ensure that all components are appropriately
-                        #   maintained
-                        self.set_game_screen(back_highlighted=back_highlighted)
-                    else:
-                        # only perform re-render if back_button was previously
-                        #   highlighted
-                        if back_highlighted == 1:
-                            back_highlighted: int = -1
-
-                            # entire game_screen must be re-rendered, so we
-                            #   must ensure that the scroll text and all other
-                            #   components are appropriately maintained
-                            self.set_game_screen(
-                                back_highlighted=back_highlighted)
-                    self.set_game_screen(load_highlighted=load_highlighted,
-                                         back_highlighted=back_highlighted)
-
-                # if click, check location
-                # if back button, return 'back' to render main menu
-                # if a load option, for now return 'load'
-                #   eventually, will return something like a load_id
-                elif event.type == game.MOUSEBUTTONDOWN:
-                    mouse = game.mouse.get_pos()
-                    click = game.mouse.get_pressed(3)
-                    if click[0] == 1:
-                        for load_rect in self.load_game_rects:
-                            if check_mouse_collide(mouse, load_rect):
-                                load_idx = str(
-                                    self.load_game_rects.index(load_rect)
-                                )
-                                return self.load_dict[load_idx]["name"]
-
-                        if check_mouse_collide(mouse, self.back_button_rect):
-                            return 'back'
             game.display.update()
 
     def set_game_screen(self, load_highlighted: int = -1,
-                        back_highlighted: int = -1, init=False) -> None:
+                        btn_highlighted: str = '', init=False) -> None:
         """
         takes 3 optional parameters:
             load_highlighted with a default state of -1
@@ -161,17 +109,39 @@ class LoadGameGUI:
         board_width: int = screen_width - (2 * buffer)
         thickness: int = 3
 
-        # draw outline
-        self.draw_outline(buffer, thickness, board_width, self.colors['white'])
-        # write title
-        self.write_load_title()
-        # write back button
-        self.write_back_button(highlighted=back_highlighted, init=init)
-        # write menu choices
-        self.display_load_choices(highlighted=load_highlighted, init=init)
+        background = game.Surface(self.surface.get_size())
+        background = background.convert()
+        background.fill(self.colors['dark_grey'])
+        self.surface.blit(background, (0, 0))
 
-    def draw_outline(self, buffer: int, thickness: int,
-                     board_width: int, color: tuple) -> None:
+        # draw outline
+        self.render_outline(buffer, thickness, board_width, self.colors['white'])
+        # write title
+        self.render_load_title()
+        # write back button
+        self.render_button(btn_text='Back', pos=(730, 35),
+                           btn_highlighted=btn_highlighted, init=init)
+        # write menu choices
+        self.render_load_choices(highlighted=load_highlighted, init=init)
+
+        if self.max_pages > 0:
+            if self.cur_page < self.max_pages:
+                self.render_button(
+                    btn_highlighted=btn_highlighted,
+                    btn_text="View Next Page", pos=(600, 715)
+                )
+            if self.cur_page > 0:
+                self.render_button(
+                    btn_highlighted=btn_highlighted,
+                    btn_text="View Previous Page", pos=(600, 740)
+                )
+                self.render_button(
+                    btn_highlighted=btn_highlighted,
+                    btn_text="Back to Start Page", pos=(330, 740)
+                )
+
+    def render_outline(self, buffer: int, thickness: int,
+                       board_width: int, color: tuple) -> None:
         """
         Takes 4 parameters: buffer, thickness, board_width, color
         Returns None
@@ -187,7 +157,8 @@ class LoadGameGUI:
         game.draw.rect(surface=self.surface, color=color,
                        rect=outline, width=thickness)
 
-    def write_back_button(self, highlighted: int = -1, init=False) -> None:
+    def render_button(self, btn_text: str, pos: tuple,
+                      btn_highlighted: str = '', init=False) -> None:
         """
         takes one parameter: highlighted (int)
         returns None
@@ -197,23 +168,23 @@ class LoadGameGUI:
         If highlighted == 1: render back_button in highlighted_grey
         Else: render button_button in grey
         """
-        back_button_rect = Rect(730, 35, 30, 30)
+        back_button_rect = Rect(pos[0], pos[1], 30, 30)
 
         if init:
-            self.back_button_rect = back_button_rect
+            if btn_text == 'Back':
+              self.back_button_rect = back_button_rect
 
         font = game.font.SysFont('dubai', 20)
-        back_button = font.render('Back', True, self.colors['grey'])
-        back_button_highlighted = font.render('Back', True,
+        button = font.render(btn_text, True, self.colors['grey'])
+        button_highlighted = font.render(btn_text, True,
                                               self.colors['hl_grey'])
-        self.surface.blit(back_button, (730, 35))
 
-        if highlighted == 1:
-            self.surface.blit(back_button_highlighted, (730, 35))
+        if btn_highlighted == btn_text:
+            self.surface.blit(button_highlighted, pos)
         else:
-            self.surface.blit(back_button, back_button_rect)
+            self.surface.blit(button, back_button_rect)
 
-    def write_load_title(self) -> None:
+    def render_load_title(self) -> None:
         """
         takes no parameters
         returns None
@@ -231,14 +202,21 @@ class LoadGameGUI:
             save_date = datetime.fromtimestamp(os.path.getmtime(
                 os.path.join(r"..\saves", save))
             )
-            save_date = save_date.strftime("%d/%m/%Y")
+            save_date = save_date.strftime("%m/%d/%Y")
             save_dict = {"name": save, "date": save_date}
             save_number = str(count)
             self.load_dict[save_number] = save_dict
             count += 1
 
-    def display_load_choices(self, highlighted: int = -1,
-                             load_games: dict = None, init=False) -> None:
+    def handle_loads_size(self):
+        no_of_loads = len(self.load_dict.keys())
+        if no_of_loads > 4:
+            if no_of_loads % 4 == 0:
+                self.max_pages = (no_of_loads // 3) - 1
+            else:
+                self.max_pages = no_of_loads // 4
+
+    def render_load_choices(self, highlighted: int = -1, init=False) -> None:
         """
         takes 3 optional parameters:
             highlighted with default state of -1
@@ -252,6 +230,7 @@ class LoadGameGUI:
         """
         load_font = game.font.SysFont('dubai', 26)
         self.generate_load_dict()
+        self.handle_loads_size()
 
         # TESTING
         load_games = self.load_dict
@@ -278,7 +257,18 @@ class LoadGameGUI:
 
         # else, iterate over games in load_games (or, for testing entries) dict
         else:
-            for games in entries:
+            no_of_entries = len(self.load_dict.keys())
+            entries_to_display = []
+            if no_of_entries > 4:
+                entry_no = self.cur_page * 4
+                while entry_no < no_of_entries and len(entries_to_display) < 4:
+                    entries_to_display.append(entry_no)
+                    entry_no += 1
+            else:
+                for i in range(0, no_of_entries):
+                    entries_to_display.append(i)
+
+            for load_idx in entries_to_display:
                 load_rect = Rect(x, y, w, h)
 
                 # initialize self.load_game_rects list
@@ -286,8 +276,9 @@ class LoadGameGUI:
                     self.load_game_rects.append(load_rect)
 
                 # establish strings for Name and Date
-                name_text = 'Name: ' + load_games[games]['name']
-                date_text = 'Date Saved: ' + load_games[games]['date']
+                name_text = 'Name: ' + self.load_dict[str(load_idx)]['name']
+                date_text = 'Date Saved: ' + \
+                            self.load_dict[str(load_idx)]['date']
 
                 # if highlighted, render rects and text with highlight colors
                 if highlighted == load_rect_count:
@@ -328,5 +319,86 @@ class LoadGameGUI:
                 y += (h + 20)
                 load_rect_count += 1
 
+    def check_event(self, event):
+        if event == game.QUIT:
+            game.quit()
+            sys.exit()
 
-LoadGameGUI().generate_load_dict()
+        # If mouse motion is detected, check new position
+        # If new position coincides with position of any options text,
+        #   re-render text/section as 'highlighted'
+        elif event.type == game.MOUSEMOTION:
+            self.handle_mouse_motion_event()
+
+        # if click, check location
+        # if back button, return 'back' to render main menu
+        # if a load option, for now return 'load'
+        #   eventually, will return something like a load_id
+        elif event.type == game.MOUSEBUTTONDOWN:
+            status = self.handle_mouse_click_event()
+            return status
+
+    def handle_mouse_motion_event(self) -> None:
+        load_highlighted = -1
+        btn_highlighted = ''
+
+        # get mouse pos
+        mouse = game.mouse.get_pos()
+
+        # rect count to iterate over load game rects
+        rect_count = 0
+        for load_rect in self.load_game_rects:
+            if check_mouse_collide(mouse, load_rect):
+                load_highlighted = rect_count
+            rect_count += 1
+
+        if check_mouse_collide(mouse, self.back_button_rect):
+            btn_highlighted: str = 'Back'
+
+        elif self.cur_page > 0:
+
+            if check_mouse_collide(mouse, self.prev_page_rect):
+                btn_highlighted = "View Previous Page"
+
+            elif check_mouse_collide(mouse, self.back_start_page_rect):
+                btn_highlighted = "Back to Start Page"
+
+        elif self.max_pages > 0 and self.cur_page != self.max_pages:
+            if check_mouse_collide(mouse, self.next_page_rect):
+                btn_highlighted = "View Next Page"
+
+        else:
+            if btn_highlighted != '':
+                btn_highlighted: str = ''
+
+        self.set_game_screen(load_highlighted=load_highlighted,
+                             btn_highlighted=btn_highlighted)
+
+    def handle_mouse_click_event(self) -> str:
+        mouse = game.mouse.get_pos()
+        click = game.mouse.get_pressed(3)
+        if click[0] == 1:
+            for load_rect in self.load_game_rects:
+                if check_mouse_collide(mouse, load_rect):
+                    load_idx = str(
+                        self.load_game_rects.index(load_rect) +
+                        (self.cur_page * 4))
+                    load_name = self.load_dict[load_idx]["name"]
+                    return load_name
+
+            if check_mouse_collide(mouse, self.back_button_rect):
+                return 'back'
+
+            if self.cur_page > 0:
+                if check_mouse_collide(mouse, self.prev_page_rect):
+                    self.cur_page -= 1
+                    self.set_game_screen()
+
+                if check_mouse_collide(mouse, self.back_start_page_rect):
+                    self.cur_page = 0
+                    self.set_game_screen()
+
+            if self.max_pages > 0 and self.cur_page != self.max_pages:
+                if check_mouse_collide(mouse, self.next_page_rect):
+                    self.cur_page += 1
+                    self.set_game_screen()

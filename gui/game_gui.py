@@ -6,6 +6,7 @@ import colors
 import text_scroll as scroll
 from game_objects.game_loop import *
 import save_load
+from time import sleep
 
 
 class GameGUI:
@@ -49,6 +50,8 @@ class GameGUI:
         # Blit background to the screen
         self.surface.blit(background, (0, 0))
         game.display.flip()
+
+        self.loading_screen()
         self.set_game_screen()
 
         # while 1 loop maintains display updates and should only terminate
@@ -68,18 +71,31 @@ class GameGUI:
 
             self.render_text_entry_box()
             if self.user_entry != '':
-                self.display_user_text_in_box()
+                self.render_user_text_in_box()
             game.display.update()
+
+    def loading_screen(self) -> None:
+        font = game.font.SysFont('dubai', 40)
+        text = 'loading...'
+        text_render = font.render(text, True, self.colors['grey'])
+        self.surface.blit(text_render, (350, 400))
 
     def set_game_start(self) -> None:
         if self.is_load:
             os.chdir("..")
-            save_load.LoadGame(load_file_name=self.load_name)
+            load = save_load.LoadGame(load_file_name=self.load_name)
             os.chdir("gui")
+            self.scroll.text_in_scroll = load.scroll
+            # TEST
+            self.handle_game_text(
+                init_text=player_location.room.get_room_narration())
+            # END TEST
+            self.set_game_screen()
         else:
-            setup_global_collections()
-        self.handle_game_text(
-            init_text=player_location.room.get_room_narration())
+            # REPLACE WITH STANDARD INIT NEW GAME METHOD
+            save_load.test_global_collections_emulation()
+            self.handle_game_text(
+                init_text=player_location.room.get_room_narration())
         self.game_start = False
 
     def set_game_screen(self) -> None:
@@ -121,7 +137,7 @@ class GameGUI:
             self.render_button(btn_text='Back to Current Page', pos=(300, 65))
 
         # display any scroll text that needs displayed
-        self.display_text_in_scroll()
+        self.render_text_in_scroll()
 
     def render_outline(self, buffer: int, thickness: int,
                        window_width: int, color: tuple) -> None:
@@ -205,7 +221,7 @@ class GameGUI:
                 # anytime we want to display text from self.text_in_scroll
                 #   we need to ensure it is of appropriate size, and thus need
                 #   to call self.scroll.handle_scroll_size()
-                self.display_text_in_scroll()
+                self.render_text_in_scroll()
                 self.game_typing = True
             elif event.key == game.K_BACKSPACE:
                 if self.user_entry != '':
@@ -213,7 +229,7 @@ class GameGUI:
             else:
                 self.user_entry += event.unicode
 
-    def display_text_in_scroll(self) -> None:
+    def render_text_in_scroll(self) -> None:
         """
         takes no parameters
         renders self.text_in_scroll within scroll-text box
@@ -241,7 +257,7 @@ class GameGUI:
                 self.surface.blit(text_img, (x, y))
                 y += 20
 
-    def display_user_text_in_box(self) -> None:
+    def render_user_text_in_box(self) -> None:
         """
         takes one parameter: user_text (str)
         renders that text within the text-entry box
@@ -276,7 +292,7 @@ class GameGUI:
                        'accounts for where the last space char exists so ' \
                        'words do not get split in the middle'
         text_list = []
-        max_chars = 68
+        max_chars = 64
 
         if init_text != '':
             game_text = init_text
@@ -291,10 +307,10 @@ class GameGUI:
             split_index: list = [0]
 
             for x in range(0, strings_count):
-                # for a string up to 75 chars, find the last occurrence of
-                #   a ' ' char. This is where we will split the string so
+                # for a string up to length max_chars, find the last occurrence
+                #   of a ' ' char. This is where we will split the string so
                 #   the splitting does not occur in the middle of words
-                if (75 + split_index[x]) >= len(game_text):
+                if (max_chars + split_index[x]) >= len(game_text):
                     y = len(game_text)
                     split_index.append(y)
                     to_list = game_text[split_index[x]:split_index[x + 1]]
@@ -337,7 +353,7 @@ class GameGUI:
                 # anytime we want to display text from self.text_in_scroll
                 #   we need to ensure it is of appropriate size, and thus need
                 #   to call self.scroll.handle_scroll_size()
-                self.display_text_in_scroll()
+                self.render_text_in_scroll()
                 game.display.update()
                 game.time.wait(wait_val)
             game.time.wait(wait_val * 2)
@@ -345,7 +361,7 @@ class GameGUI:
         self.scroll.text_in_scroll.append('')
         self.scroll.text_in_scroll.append('>')
         self.render_scroll_text_box()
-        self.display_text_in_scroll()
+        self.render_text_in_scroll()
         game.display.update()
 
         self.user_entry = ''
@@ -433,8 +449,15 @@ class GameGUI:
             if 760 > mouse[0] > 730 and 60 > mouse[1] > 40:
                 while 1:
                     save_game: str = save_gui.SaveGUI().main()
-                    print(save_game)
-                    if save_game != 'refresh':
+                    if save_game == 'back':
+                        break
+                    elif save_game != 'refresh':
+                        save_file_name = save_game
+                        new_save = save_load.SaveGame(
+                            save_file_name=save_file_name,
+                            cur_scroll=self.scroll
+                        )
+                        print("attempting to save: ", save_file_name)
                         break
                 self.set_game_screen()
             # elif in area of exit btn
