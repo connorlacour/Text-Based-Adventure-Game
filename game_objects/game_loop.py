@@ -25,7 +25,7 @@ def get_next_narration(user_text) -> str:
     elif verb in go_synonyms:
         return do_direction_command(verb, direction, active_object)
 
-    elif verb in look_synonyms:
+    elif verb in look_synonyms or active_object == "INVENTORY":
 
         if active_object == "":
             player_location.room.visited = False
@@ -34,6 +34,20 @@ def get_next_narration(user_text) -> str:
             return print_inventory()
         else:
             return look_at_object(active_object)
+
+    elif verb == "HELP":
+        str = "GAME COMMANDS:\n" \
+              "   LOOK AROUND: check surroundings\n" \
+              "   LOOK at [item]: view item description\n" \
+              "   GO [direction, room name]: travel to room\n" \
+              "   TAKE [item]: add item to inventory\n" \
+              "   DROP [item]: remove item from inventory\n" \
+              "   CHECK INVENTORY: view held items\n" \
+              "   VERB [itemA] on [itemB]: VERB one item on another\n"
+
+        verb_set = f"Other verbs to try: {list(player_location.room.get_item_event_synonym_mapping().keys())}"
+
+        return str + verb_set
 
     elif active_object == "":
         narration = resolve_itemless_events(verb)
@@ -156,7 +170,7 @@ def resolve_event_item(verb, active, passive):
 def resolve_itemless_events(verb):
     player_room  = player_location.room
     narration = ""
-    if verb in global_events:
+    if verb in list(global_events):
         event = global_events[verb]
         narration = event.do_event(player_room, verb)
         if event.repeatable:
