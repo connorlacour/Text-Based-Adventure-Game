@@ -1,5 +1,7 @@
 from game_objects import global_collections
 from gui.text_scroll import Scroll
+#import sys
+#sys.path.append('../')
 from unit_tests.item_setup_tests import *
 import os
 import marshmallow
@@ -56,8 +58,7 @@ def start_new_game():
     else:
         items_loaded = items_loaded[0]
 
-    setup_rooms_and_items(items_loaded, rooms_loaded, "upstairs_hallway")
-
+    setup_rooms_and_items(items_loaded, rooms_loaded, "foyer")
 
 
 class SaveGame:

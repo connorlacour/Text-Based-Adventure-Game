@@ -71,6 +71,12 @@
 	"can_take": false,
 	"type": "Inventory"
 }, {
+	"name": "small_key",
+	"display_name": "SMALL KEY",
+	"article": "the",
+	"description": "A small key.",
+	"type": "Inventory"
+}, {
 	"name": "portable_radio",
 	"display_name": "PORTABLE RADIO",
 	"article": "the",
@@ -135,6 +141,8 @@
 	"description": "The CHINA CABINET is locked.  You consider the value of the dinnerware, but the risk of breaking it ends that thought.  Just as you are turning away from the cabinet, you see a SMALL POUCH jutting out of a hidden corner not easily seen through the glass.",
 	"type": "Scenery",
     "events": {
+		"UNLOCK": {
+			"events": ["print With what?"]},
 		"UNLOCK,SMALL_KEY": {
 			"events": ["print You unlock the china cabinet.", "change small_pouch can_take to true"]}
 		}
@@ -204,7 +212,7 @@
     "name": "night_stand",
 	"display_name": "NIGHT STAND",
 	"article": "a",
-	"description": "Opening the drawer to the NIGHT STAND, you see a GLOVE.",
+	"description": "Opening the drawer to the NIGHT STAND, you see a glove.",
 	"type": "Scenery"
 },{
     "name": "window",
@@ -243,13 +251,19 @@
 	"description": "You pull back the lid on the BLUE JAR to find DOG TREATS that smell strongly of bacon.",
 	"type": "Scenery"
 },{
+    "name": "dog_treats",
+	"display_name": "DOG TREATS",
+	"article": "the",
+	"description": "Bacon-flavored dog treats",
+	"type": "Inventory"
+},{
     "name": "fireplace",
 	"display_name": "FIREPLACE",
 	"article": "the",
 	"description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT NOTE stuck between the bottom logs.",
 	"type": "Scenery"
 },{
-    "name": "strip_of_paper",
+    "name": "paper",
 	"display_name": "strip of paper",
 	"article": "a",
 	"description": "As you look closer at the STRIP OF PAPER, you notice that it is a receipt from John Little’s Lock & Key.",
@@ -365,7 +379,7 @@
 	"description": "A normal copy of Crime and Punishment",
 	"type": "Scenery"
 },{
-    "name": "nineteen_eightyfour",
+    "name": "nineteen_eighty-four",
 	"display_name": "NINETEEN EIGHTY-FOUR",
 	"article": "the",
 	"description": "A normal copy of Nineteen Eighty-Four",
@@ -414,7 +428,7 @@
     "name": "electronics",
 	"display_name": "ELECTRONICS",
 	"article": "the",
-	"description": "You look through the ELECTRONICS piled in the closet.  You see old consoles and handheld units from Atari to Gameboy.  You can still recall playing some of these and you remember the games fondly.",
+	"description": "You look through the ELECTRONICS piled in the little attic closet.  You see old consoles and handheld units from Atari to Gameboy.  You can still recall playing some of these and you remember the games fondly.",
 	"type": "Scenery"
 },{
     "name": "lockbox",
