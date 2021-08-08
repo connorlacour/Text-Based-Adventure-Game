@@ -7,6 +7,23 @@ from datetime import datetime
 
 
 # STATIC FUNCTIONS
+def validate_user_entry(user_entry: str):
+    valid_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+                   'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+                   'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
+                   'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+                   'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3',
+                   '4', '5', '6', '7', '8', '9', '0', '-', '_']
+    if user_entry == 'back':
+        return False
+
+    for char in user_entry:
+        if char not in valid_chars:
+            print(char, ' is an invalid character!')
+            return False
+
+    return True
+
 
 def check_mouse_collide(mouse: tuple, rect: Rect) -> bool:
     """
@@ -46,8 +63,10 @@ class SaveGUI:
         self.prev_page_rect = Rect(600, 740, 180, 30)
         self.back_start_page_rect = Rect(330, 740, 200, 30)
         self.save_dict = {}
-        self.cur_page = 1
+        self.cur_page = 0
         self.max_pages = 0
+        self.user_entry = ''
+        self.cancel_highlighted = ''
 
     def main(self) -> str:
         """
@@ -71,6 +90,7 @@ class SaveGUI:
         self.surface.blit(background, (0, 0))
         game.display.flip()
         self.set_game_screen(init=True)
+        game.display.update()
 
         # while 1 loop maintains display updates and should only terminate
         #   upon game ending
@@ -120,6 +140,9 @@ class SaveGUI:
         self.render_button(btn_text='Back', pos=(730, 35),
                            btn_highlighted=btn_highlighted, init=init)
 
+        # write menu choices
+        self.render_save_choices(highlighted=save_highlighted, init=init)
+
         if self.max_pages > 0:
             if self.cur_page < self.max_pages:
                 self.render_button(
@@ -135,9 +158,6 @@ class SaveGUI:
                     btn_highlighted=btn_highlighted,
                     btn_text="Back to Start Page", pos=(330, 740)
                 )
-
-        # write menu choices
-        self.render_save_choices(highlighted=save_highlighted, init=init)
 
     def generate_save_dict(self):
         count = 0
@@ -187,9 +207,14 @@ class SaveGUI:
                 self.back_button_rect = button_rect
 
         font = game.font.SysFont('dubai', 20)
-        button = font.render(btn_text, True, self.colors['grey'])
-        button_highlighted = font.render(
-            btn_text, True, self.colors['hl_grey'])
+        if btn_text == 'Cancel':
+            button = font.render(btn_text, True, self.colors['darker_grey'])
+            button_highlighted = font.render(btn_text,
+                                             True, self.colors['hl_dark_grey'])
+        else:
+            button = font.render(btn_text, True, self.colors['grey'])
+            button_highlighted = font.render(btn_text,
+                                             True, self.colors['hl_grey'])
 
         if btn_highlighted == btn_text:
             self.surface.blit(button_highlighted, button_rect)
@@ -208,60 +233,21 @@ class SaveGUI:
         self.surface.blit(img, (165, 75))
 
     def new_save_entry(self) -> str:
-        cancel_btn_rect = Rect(670, 700, 50, 30)
         self.render_new_save_box()
-
-        # loop vars
-        user_text: str = ''
-        cancel_highlighted: int = 0
 
         # enter while loop for new save text entry
         while 1:
             for event in game.event.get():
-                if event == game.QUIT:
-                    game.quit()
-                    sys.exit()
-
-                elif event.type == game.MOUSEMOTION:
-                    mouse = game.mouse.get_pos()
-                    if check_mouse_collide(mouse, cancel_btn_rect):
-                        cancel_highlighted = 1
-                        self.render_button('Cancel', pos=(670, 700),
-                                           btn_highlighted=cancel_highlighted)
-                    else:
-                        if cancel_highlighted == 1:
-                            cancel_highlighted = 0
-                            self.render_button('Cancel', pos=(670, 700),
-                                               btn_highlighted=cancel_highlighted)
-
-                elif event.type == game.MOUSEBUTTONDOWN:
-                    mouse = game.mouse.get_pos()
-                    click = game.mouse.get_pressed(3)
-                    if check_mouse_collide(mouse, cancel_btn_rect):
-                        if click[0] == 1:
-                            return 'cancelled'
-
-                elif event.type == game.KEYDOWN:
-                    if user_text != '':
-                        if event.key == game.K_BACKSPACE:
-                            user_text = user_text[:-1]
-                        elif event.key == game.K_RETURN:
-                            return user_text
-                        else:
-                            user_text += event.unicode
-                    elif event.key != game.K_BACKSPACE and \
-                            event.key != game.K_RETURN:
-                        user_text += event.unicode
-
-                    self.render_text_entry(user_text=user_text)
-
+                entry_status = self.check_event_in_save_entry(event)
+                if entry_status is not None:
+                    return entry_status
                 game.display.update()
 
     def render_text_entry(self, user_text: str):
         font = game.font.SysFont('dubai', 26)
         user_entry = font.render(user_text, True, self.colors['off_white'])
         text_entry_rect = Rect(60, 430, 680, 40)
-        game.draw.rect(self.surface, color=self.colors['darker_grey'],
+        game.draw.rect(self.surface, color=self.colors['dark_grey'],
                        rect=text_entry_rect)
         self.surface.blit(user_entry, (65, 435))
 
@@ -271,24 +257,24 @@ class SaveGUI:
         new_save_rect_outline = Rect(44, 364, 712, 382)
         text_entry_rect = Rect(60, 430, 680, 40)
 
-        game.draw.rect(self.surface, color=self.colors['hl_dark_grey'],
+        game.draw.rect(self.surface, color=self.colors['grey'],
                        rect=new_save_rect)
         game.draw.rect(self.surface, color=self.colors['dark_grey'],
                        rect=new_save_rect_outline, width=4)
-        game.draw.rect(self.surface, color=self.colors['darker_grey'],
+        game.draw.rect(self.surface, color=self.colors['dark_grey'],
                        rect=text_entry_rect)
 
         # render prompt
         save_prompt_text = 'Enter save file name: '
         font = game.font.SysFont('dubai', 26)
         save_prompt = font.render(save_prompt_text, True,
-                                  self.colors['off_white'])
+                                  self.colors['darker_grey'])
         self.surface.blit(save_prompt, (60, 380))
 
         # render cancel btn
         self.render_button('Cancel', pos=(670, 700))
 
-    def handle_saves_size(self, btn_highlighted: str = ''):
+    def handle_saves_size(self):
         no_of_saves = len(self.save_dict.keys())
         if no_of_saves > 3:
             if no_of_saves % 3 == 0:
@@ -309,12 +295,8 @@ class SaveGUI:
         save_font = game.font.SysFont('dubai', 26)
         new_save_font = game.font.SysFont('dubai', 50)
 
-        # TESTING
-        # entries = self.save_game_data.keys()
-
         self.generate_save_dict()
         self.handle_saves_size()
-        entries = self.save_dict.keys()
 
         # starting values for save game rects
         x = 50
@@ -322,10 +304,7 @@ class SaveGUI:
         w = 700
         h = 100
 
-        # count
         save_rect_count = 0
-
-        # New save
         save_rect = Rect(x, y, w, h)
 
         if init:
@@ -413,6 +392,51 @@ class SaveGUI:
             y += (h + 20)
             save_rect_count += 1
 
+    def check_event_in_save_entry(self, event):
+        cancel_btn_rect = Rect(670, 700, 50, 30)
+
+        if event == game.QUIT:
+            game.quit()
+            sys.exit()
+
+        elif event.type == game.MOUSEMOTION:
+            mouse = game.mouse.get_pos()
+            if check_mouse_collide(mouse, cancel_btn_rect):
+                self.cancel_highlighted = 'Cancel'
+                self.render_button('Cancel', pos=(670, 700),
+                                   btn_highlighted=self.cancel_highlighted)
+            else:
+                if self.cancel_highlighted != '':
+                    self.cancel_highlighted = ''
+                    self.render_button('Cancel', pos=(670, 700),
+                                       btn_highlighted=self.cancel_highlighted)
+                    self.render_new_save_box()
+
+        elif event.type == game.MOUSEBUTTONDOWN:
+            mouse = game.mouse.get_pos()
+            click = game.mouse.get_pressed(3)
+            if check_mouse_collide(mouse, cancel_btn_rect):
+                if click[0] == 1:
+                    return 'cancelled'
+
+        elif event.type == game.KEYDOWN:
+            if self.user_entry != '':
+                if event.key == game.K_BACKSPACE:
+                    self.user_entry = self.user_entry[:-1]
+                elif event.key == game.K_RETURN:
+                    if validate_user_entry(self.user_entry):
+                        return self.user_entry
+                    else:
+                        print('invalid save name!')
+                        self.user_entry = ''
+                else:
+                    self.user_entry += event.unicode
+            elif event.key != game.K_BACKSPACE and \
+                    event.key != game.K_RETURN:
+                self.user_entry += event.unicode
+
+            self.render_text_entry(user_text=self.user_entry)
+
     def check_event(self, event):
         if event == game.QUIT:
             game.quit()
@@ -462,8 +486,6 @@ class SaveGUI:
                 btn_highlighted = "View Next Page"
 
         else:
-            # only perform re-render if back_button was previously
-            #   highlighted
             if btn_highlighted != '':
                 btn_highlighted: str = ''
 

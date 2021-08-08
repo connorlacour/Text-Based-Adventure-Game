@@ -42,7 +42,6 @@ def controller() -> None:
         start_game()
     elif main_return == 'exit':
         music.stop_music()
-        print('okay.. exiting..')
         game.quit()
         sys.exit()
     elif main_return == 'load game':
@@ -59,8 +58,6 @@ def start_game(is_load: bool = False, load_name: str = '') -> None:
     if game_return == "main menu":
         music.start_music()
         controller()
-    if game_return == "save game":
-        save_game()
 
 
 def load_game() -> None:
@@ -75,21 +72,12 @@ def load_game() -> None:
     # saved state
     load = load_gui.LoadGameGUI().main()
     if load == 'back':
-        music.start_music()
         controller()
     else:
         print("loading -> ", load)
         music.stop_music()
         sleep(3)
         start_game(is_load=True, load_name=load)
-
-
-def save_game() -> None:
-    """
-    Instantiates a SaveGameGUI() object and calls main()
-    """
-    print('saving game..')
-    controller()
 
 
 music = IntroMusic()

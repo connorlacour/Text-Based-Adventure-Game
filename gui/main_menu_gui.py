@@ -90,6 +90,11 @@ class MainMenuGUI:
         board_width: int = screen_width - (2 * buffer)
         thickness: int = 3
 
+        background = game.Surface(self.surface.get_size())
+        background = background.convert()
+        background.fill(self.colors['black'])
+        self.surface.blit(background, (0, 0))
+
         # draw outline
         self.draw_outline(buffer, thickness, board_width, self.colors['white'])
 
@@ -147,15 +152,15 @@ class MainMenuGUI:
         """
         font = game.font.SysFont('dubai', 55)
 
-        new_game = font.render('New Game', True, self.colors['off_white'])
+        new_game = font.render('New Game', True, self.colors['grey'])
         new_game_highlight = font.render('New Game', True,
-                                         self.colors['hl_dark_grey'])
-        load_game = font.render('Load Game', True, self.colors['off_white'])
+                                         self.colors['white'])
+        load_game = font.render('Load Game', True, self.colors['grey'])
         load_game_highlighted = font.render('Load Game', True,
-                                            self.colors['hl_dark_grey'])
-        exit_game = font.render('Exit', True, self.colors['off_white'])
+                                            self.colors['white'])
+        exit_game = font.render('Exit', True, self.colors['grey'])
         exit_game_highlight = font.render('Exit', True,
-                                          self.colors['hl_dark_grey'])
+                                          self.colors['white'])
 
         if highlighted == 1:
             self.surface.blit(new_game_highlight, (280, 400))

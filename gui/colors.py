@@ -9,6 +9,7 @@ class Colors:
         self.colors['dark_grey']: tuple = (30, 30, 30)
         self.colors['darker_grey']: tuple = (20, 20, 20)
         self.colors['hl_grey']: tuple = (200, 200, 225)
+        self.colors['med_grey']: tuple = (60, 60, 60)
         self.colors['hl_dark_grey']: tuple = (135, 135, 135)
         self.colors['grey']: tuple = (100, 100, 100)
         self.colors['off_white']: tuple = (220, 220, 220)
