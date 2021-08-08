@@ -100,6 +100,10 @@ class SaveGame:
 
         # create save dir if doesn't exist
         # nav to save dir
+
+        if "saves" not in os.listdir(base_dir):
+            os.mkdir(os.path.join(base_dir, "saves"))
+
         if self.save_file_name not in os.listdir(saves):
             os.mkdir(os.path.join(saves, self.save_file_name))
         os.chdir(os.path.join(saves, self.save_file_name))
