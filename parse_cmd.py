@@ -32,7 +32,7 @@ def setup_parser():
     from game_objects.global_collections import rooms
     #Add all exisiting directions to dirs
     for room in rooms.values():
-#        directions.add(room.display_name)
+        directions.add(room.display_name)
         for direction in room.connecting_rooms.keys():
             directions.add(direction.upper())
 

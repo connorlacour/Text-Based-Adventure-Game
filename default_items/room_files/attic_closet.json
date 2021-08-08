@@ -6,11 +6,11 @@
     },
     "short_description": "You are in the attic closet. ",
     "article": "the",
-    "long_description": "The attic closet resembles the clutter attic you had imagined.  BOXES are stacked and line the walls around the closet and ELECTRONICS are scattered around in piles. This is where items go to be stored for years.  The only door is the one you entered through in the NORTH wall that leads back to the ATTIC.",
+    "long_description": "The attic closet resembles the cluttered attic you had imagined.  BOXES are stacked and line the walls around the closet and ELECTRONICS are scattered around in piles. This is where items go to be stored for years.  The only door is the one you entered through in the NORTH wall that leads back to the ATTIC.",
     "display_name": "ATTIC CLOSET",
     "room_list": [{
         "known_to_player": true,
-        "narrative_text": " The door in the NORTH goes back to the ATTIC. ",
+        "narrative_text": " The door to the NORTH goes back to the ATTIC. ",
         "article": "the",
         "room_name": "attic",
         "direction": "NORTH"

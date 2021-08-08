@@ -2,7 +2,8 @@
 	"name": "study",
 	"item_setup_dict": {
         "crate": "A CRATE with a ",
-        "dog": "DOG is across the room from the door."
+        "dog": "DOG is across the room from the door.",
+		"silver_key": ""
     },
 	"short_description": "You are in the study. ",
 	"article": "the",

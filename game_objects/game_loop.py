@@ -1,4 +1,6 @@
 from parse_cmd import *
+#import sys
+#sys.path.append('../')
 from game_objects.event import *
 from game_objects.synonyms import *
 from game_objects.global_collections import *
@@ -252,6 +254,21 @@ def do_direction_command(verb: str, direction: str, item: str = "", room: Room =
     else:
         if direction in room.connecting_rooms.keys():
             dir = direction
+        else:
+            # Check if room name was passed in instead of direction and pull direction for processing
+            for k in room.connecting_rooms.keys():
+                direction = direction.strip("_")
+            
+                count = 0
+                for k in room.connecting_rooms:
+                    for val in direction:
+                        if val.lower() in room.connecting_rooms[k].room_name:
+                            count += 1
+                    if count == len(direction):
+                        dir = k
+                        break
+                    else:
+                        count = 0
 
     if dir != "":
         return move_player(dir, verb)

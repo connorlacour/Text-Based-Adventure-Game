@@ -152,7 +152,8 @@ class Room:
     def room_list_narration(self) -> str:
         narration = ""
         for roomConnector in self.connecting_rooms.values():
-            narration += roomConnector.get_narration() + ". "
+#            narration += roomConnector.get_narration() + ". "
+            narration += roomConnector.get_narration()
         return narration
 
     # EX:  CHAIRS litter the ground and PLATES are scattered on the a DINING TABLE.

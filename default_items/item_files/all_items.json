@@ -71,6 +71,12 @@
 	"can_take": false,
 	"type": "Inventory"
 }, {
+	"name": "small_key",
+	"display_name": "SMALL KEY",
+	"article": "the",
+	"description": "A small key.",
+	"type": "Inventory"
+}, {
 	"name": "portable_radio",
 	"display_name": "PORTABLE RADIO",
 	"article": "the",
@@ -204,7 +210,7 @@
     "name": "night_stand",
 	"display_name": "NIGHT STAND",
 	"article": "a",
-	"description": "Opening the drawer to the NIGHT STAND, you see a GLOVE.",
+	"description": "Opening the drawer to the NIGHT STAND, you see a glove.",
 	"type": "Scenery"
 },{
     "name": "window",
@@ -242,6 +248,12 @@
 	"article": "a",
 	"description": "You pull back the lid on the BLUE JAR to find DOG TREATS that smell strongly of bacon.",
 	"type": "Scenery"
+},{
+    "name": "dog_treats",
+	"display_name": "DOG TREATS",
+	"article": "the",
+	"description": "Bacon-flavored dog treats",
+	"type": "Inventory"
 },{
     "name": "fireplace",
 	"display_name": "FIREPLACE",
@@ -365,7 +377,7 @@
 	"description": "A normal copy of Crime and Punishment",
 	"type": "Scenery"
 },{
-    "name": "nineteen_eightyfour",
+    "name": "nineteen_eighty-four",
 	"display_name": "NINETEEN EIGHTY-FOUR",
 	"article": "the",
 	"description": "A normal copy of Nineteen Eighty-Four",

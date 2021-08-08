@@ -2,7 +2,8 @@
 	"name": "home_gym",
 	"item_setup_dict": {
         "shelf": "There's a SHELF on the EAST wall and ",
-        "mirror": " a MIRROR hangs on the WEST wall."
+        "mirror": " a MIRROR hangs on the WEST wall.",
+		"portable_radio": ""
     },
 	"short_description": "You are in the home gym. ",
 	"article": "the",

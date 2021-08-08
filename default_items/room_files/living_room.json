@@ -3,11 +3,12 @@
 	"item_setup_dict": {
         "fireplace": "A FIREPLACE is set in the WEST wall",
         "katana": " with a KATANA above it",
-        "strip_of_paper": ". A coffee table with a STRIP OF PAPER on it rests in the middle of the room."
+        "strip_of_paper": ". A coffee table with a STRIP OF PAPER on it rests in the middle of the room.",
+		"burnt_note": ""
     },
 	"short_description": "You are in the living room. ",
 	"article": "the",
-	"long_description": "The living room is spacious and lined with more art.  Despite the FIREPLACE set in the WEST wall directly across from the EAST HALLWAY door, the room is cold.  Above the FIREPLACE is a curved blade.  It is a traditional KATANA.  The furniture in the room consists of a large sectional and two modern wingback chairs.  A second door leading to the DINING ROOM sits in the NORTH wall.\n\nThe furniture looks rigid and barely used.  It is a living room, but there is not much life in it.  The only sign that anyone had been in the room is a coffee table with coasters and a STRIP OF PAPER.",
+	"long_description": "The living room is spacious and lined with more art.  Despite the FIREPLACE set in the WEST wall directly across from the EAST door leading back to the DOWNSTAIRS HALLWAY, the room is cold.  Above the FIREPLACE is a curved blade.  It is a traditional KATANA.  The furniture in the room consists of a large sectional and two modern wingback chairs.  A second door leading to the DINING ROOM sits in the NORTH wall.\n\nThe furniture looks rigid and barely used.  It is a living room, but there is not much life in it.  The only sign that anyone had been in the room is a coffee table with coasters and a STRIP OF PAPER.",
 	"display_name": "LIVING ROOM",
 	"room_list": [{
 		"known_to_player": true,
