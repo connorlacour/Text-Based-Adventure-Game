@@ -59,6 +59,7 @@ def test_global_collections_emulation():
     setup_rooms_and_items(items_loaded, rooms_loaded, "upstairs_hallway")
 
 
+
 class SaveGame:
     def __init__(self, save_file_name: str, cur_scroll: Scroll):
         self.game_data = {
