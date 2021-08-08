@@ -1,0 +1,18 @@
+[{
+	"name": "closet",
+	"item_setup_dict": {
+        "glove": "Next to the door is a single GLOVE.",
+        "coat": " A COAT hangs to the side."
+    },
+	"short_description": "You are in the closet. ",
+	"article": "a",
+	"long_description": "The closet is empty save for a solitary COAT and a single GLOVE that appears to have been dropped beside the only door, the one in the WESTERN wall you entered through.  You wonder who the coat might have belonged to since it is the only one left in the closet.  Did the owner leave it intentionally?  Are they coming back.",
+	"display_name": "CLOSET",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The lone door in the WEST wall leads back to the FOYER.",
+		"article": "the",
+		"room_name": "foyer",
+		"direction": "WEST"
+	}]
+}]

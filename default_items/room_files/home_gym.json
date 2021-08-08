@@ -1,0 +1,18 @@
+[{
+	"name": "home_gym",
+	"item_setup_dict": {
+        "shelf": "There's a SHELF on the EAST wall and ",
+        "mirror": " a MIRROR hangs on the WEST wall."
+    },
+	"short_description": "You are in the home gym. ",
+	"article": "the",
+	"long_description": "The home gym that you are standing in is equipped with a state of the art treadmill and weights scattered around the room.  A SHELF on the EAST wall is lined with various electronics.  Across from this, a floor length MIRROR hangs on the WEST wall.  The door in the NORTH wall leads back to the UPSTAIRS HALLWAY.",
+	"display_name": "HOME GYM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The only door in or out is in the NORTH wall back to the UPSTAIRS HALLWAY.",
+		"article": "the",
+		"room_name": "upstairs_hallway",
+		"direction": "NORTH"
+	}]
+}]

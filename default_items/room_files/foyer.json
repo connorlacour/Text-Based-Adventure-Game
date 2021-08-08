@@ -1,0 +1,29 @@
+/* NEED GAME INTRO:
+"You enter Chateau Prime in the dead of night.  Friends, family, and neighbors have all suffered at the hands of corporate greed.  This is the home of one of the men who profited from their loss.  Not his primary residence, you scoff to yourself.  But you’re sure there’s enough money in there to change the lives of your friends and family.\n\nYour mission: Find the safe to retrieve enough money to return to the people in your town."
+*/
+
+[{
+	"name": "foyer",
+	"item_setup_dict": {
+        "chairs": "There is a sitting area with CHAIRS and ",
+        "small_table": "a SMALL TABLE in one corner, and ",
+        "desk": "there is a DESK along the SOUTH wall by the main entrance."
+    },
+	"short_description": "You are in the foyer. ",
+	"article": "the",
+	"long_description": "The only light in the foyer is from the two large windows in the southern wall.  Not wanting anyone outside to see you in the building, you let your eyes adjust to the dim light and take in your surroundings.  Looking around the room, you see a sitting area with CHAIRS and a SMALL TABLE in one corner.  The vacant greeter's DESK is positioned just to the side of the entrance to the house.  A door in the NORTH wall leads the DOWNSTAIRS HALLWAY while a door in the EAST wall contains a door leading to a CLOSET visitor's can hang their coats.",
+	"display_name": "FOYER",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "Two doors lead out of the room and further into the building: one in the NORTH wall that goes to the DOWNSTAIRS HALLWAY and ",
+		"article": "the",
+		"room_name": "downstairs_hallway",
+		"direction": "NORTH"
+	}, {
+		"known_to_player": true,
+		"narrative_text": "one in the EAST wall leading to a CLOSET.",
+		"article": "a",
+		"room_name": "closet",
+		"direction": "EAST"
+	}]
+}]

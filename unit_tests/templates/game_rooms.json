@@ -1,0 +1,351 @@
+[
+{
+    "name": "attic_closet",
+    "item_setup_dict": {
+        "boxes": "BOXES are stacked against the walls and ",
+        "electronics": "ELECTRONICS sit in piles around the closet. "
+    },
+    "short_description": "You are in the attic closet. ",
+    "article": "the",
+    "long_description": "The attic closet resembles the clutter attic you had imagined.  BOXES are stacked and line the walls around the closet and ELECTRONICS are scattered around in piles. This is where items go to be stored for years.  The only door is the one you entered through in the NORTH wall that leads back to the ATTIC.",
+    "display_name": "ATTIC CLOSET",
+    "room_list": [{
+        "known_to_player": true,
+        "narrative_text": " The door in the NORTH goes back to the ATTIC. ",
+        "article": "the",
+        "room_name": "attic",
+        "direction": "NORTH"
+    }]
+},{
+	"name": "attic",
+	"item_setup_dict": {
+        "bookcase": "There is a BOOKCASE on the NORTH wall and ",
+        "trunk": "a TRUNK in the middle of the room. "
+    },
+	"short_description": "You are in the attic. ",
+	"article": "the",
+	"long_description": "The attic is not what you expected.  You imagined a messy room where memories are sent for storage.  Instead, it could easily be turned into another bedroom.  There’s a circular window that lets in the light from the moon.  The only clutter is a TRUNK in the center of the room and a BOOKCASE against the NORTH wall.\n\nThere is a single door in the SOUTH wall that opens up to an ATTIC CLOSET.  The only other entryway/exit that you see are the stairs you took to enter this room that go back to the UPSTAIRS HALLWAY.",
+	"display_name": "ATTIC",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "A door in the SOUTH wall opens to an ATTIC CLOSET and ",
+		"article": "the",
+		"room_name": "attic_closet",
+		"direction": "SOUTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "the stairs in the WEST go back down to the UPSTAIRS HALLWAY.",
+		"article": "the",
+		"room_name": "upstairs_hallway",
+		"direction": "WEST"
+	},{
+		"known_to_player": false,
+		"narrative_text": "",
+		"article": "the",
+		"room_name": "safe",
+		"direction": "NORTH"
+	}]
+},{
+	"name": "bathroom",
+	"item_setup_dict": {
+        "medicine_cabinet": "There is a MEDICINE CABINET above the sink set in the NORTH wall and ",
+        "waste_basket": "a WASTE BASKET against the EAST wall. "
+    },
+	"short_description": "You are in the bathroom. ",
+	"article": "the",
+	"long_description": "You look around the bathroom quickly.  It is a large room with a tub big enough for two or three people, but it is a bathroom nevertheless.  The white tile reflects what little light it catches and makes the room easy to look around.  You notice the MEDICINE CABINET set in the NORTH wall and a WASTE BASKET against the EAST wall.  The door in the WEST wall leads back to the MAIN BEDROOM.",
+	"display_name": "BATHROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The door in the WEST wall leads back to the MAIN BEDROOM. ",
+		"article": "the",
+		"room_name": "main_bedroom",
+		"direction": "WEST"
+	}]
+},{
+	"name": "closet",
+	"item_setup_dict": {
+        "glove": "Next to the door is a single GLOVE.",
+        "coat": " A COAT hangs to the side."
+    },
+	"short_description": "You are in the closet. ",
+	"article": "a",
+	"long_description": "The closet is empty save for a solitary COAT and a single GLOVE that appears to have been dropped beside the only door, the one in the WESTERN wall you entered through.  You wonder who the coat might have belonged to since it is the only one left in the closet.  Did the owner leave it intentionally?  Are they coming back.",
+	"display_name": "CLOSET",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The lone door in the WEST wall leads back to the FOYER.",
+		"article": "the",
+		"room_name": "foyer",
+		"direction": "WEST"
+	}]
+},{
+	"name": "dining_room",
+	"item_setup_dict": {
+        "china_cabinet": "A CHINA CABINET and ",
+        "wall_mount": "WALL MOUNT are along the WEST wall"
+    },
+	"short_description": "You are in the dining room. ",
+	"article": "a",
+	"long_description": "The dining room is furnished with a table large enough to fit twelve people and a large CHINA CABINET full of delicate, ornate dinnerware against the WEST wall. To the side of the cabinet, you see a 4 hook WALL MOUNT.  You imagine stuffy business meetings are the most common dinner parties, but it would be a lovely room for family and friends to share a meal.  There’s a door in the SOUTH wall to the LIVING ROOM and another in the EAST wall goes to the KITCHEN.",
+	"display_name": "DINING ROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "There are two doors, one in the SOUTH wall to the LIVING ROOM and ",
+		"article": "the",
+		"room_name": "living_room",
+		"direction": "SOUTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "another in the EAST wall to the KITCHEN.",
+		"article": "the",
+		"room_name": "kitchen",
+		"direction": "EAST"
+	}]
+},{
+	"name": "downstairs_hallway",
+	"item_setup_dict": {
+        "painting": "A PAINTING and ",
+        "podium": "PODIUM are also along the EAST wall."
+    },
+	"short_description": "You are in the downstairs hallway. ",
+	"article": "the",
+	"long_description": "The downstairs hallway appears completely empty at first glance.  The door in the NORTH wall leads to the KITCHEN; the door in the WEST wall to the LIVING ROOM; and finally, the door in the SOUTH wall leads to the FOYER. On the EAST wall, you see a PAINTING hanging directly across from the LIVING ROOM.  Underneath the PAINTING is a PODIUM with a glass case on top of it.  Next to the PODIUM, leading up from the side of the EAST wall, are STAIRS leading to the SECOND FLOOR.",
+	"display_name": "DINING ROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The door in the NORTH wall leads to the KITCHEN, ",
+		"article": "the",
+		"room_name": "kitchen",
+		"direction": "NORTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "the door in the WEST wall leads to the LIVING ROOM, and ",
+		"article": "the",
+		"room_name": "living_room",
+		"direction": "WEST"
+	},{
+		"known_to_player": true,
+		"narrative_text": "the door in the SOUTH wall leads to the FOYER. ",
+		"article": "the",
+		"room_name": "foyer",
+		"direction": "SOUTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "There are STAIRS leading to the UPSTAIRS HALLWAY in the NORTH wall. ",
+		"article": "the",
+		"room_name": "upstairs_hallway",
+		"direction": "NORTH"
+	}]
+},{
+	"name": "foyer",
+	"item_setup_dict": {
+        "chairs": "There is a sitting area with CHAIRS and ",
+        "small_table": "a SMALL TABLE in one corner, and ",
+        "desk": "there is a DESK along the SOUTH wall by the main entrance."
+    },
+	"short_description": "You are in the foyer. ",
+	"article": "the",
+	"long_description": "The only light in the foyer is from the two large windows in the southern wall.  Not wanting anyone outside to see you in the building, you let your eyes adjust to the dim light and take in your surroundings.  Looking around the room, you see a sitting area with CHAIRS and a SMALL TABLE in one corner.  The vacant greeter’s DESK is positioned just to the side of the entrance to the house.  A door in the NORTH wall leads the DOWNSTAIRS HALLWAY while a door in the EAST wall contains a door leading to a CLOSET visitor’s can hang their coats.",
+	"display_name": "FOYER",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "Two doors lead out of the room and further into the building: one in the NORTH wall that goes to the DOWNSTAIRS HALLWAY and ",
+		"article": "the",
+		"room_name": "downstairs_hallway",
+		"direction": "NORTH"
+	}, {
+		"known_to_player": true,
+		"narrative_text": "one in the EAST wall leading to a CLOSET.",
+		"article": "a",
+		"room_name": "closet",
+		"direction": "EAST"
+	}]
+},{
+	"name": "guest_bedroom",
+	"item_setup_dict": {
+        "window": "There is a WINDOW and ",
+        "night_stand": "a NIGHT STAND beside the bed against the NORTH wall."
+    },
+	"short_description": "You are in the guest room. ",
+	"article": "the",
+	"long_description": "With the absence of the guard, you are finally able to explore the guest bedroom.  The door in the SOUTH wall leads back to the UPSTAIRS HALLWAY.  It is the only door in or out of the room.  The bed that you originally saw the guard resting on is furnished with a simple white plush comforter.  There is a NIGHT STAND against the NORTH wall beside the bed and a WINDOW looking out over the back of the house.  It is a simple room, but it’s comfortable",
+	"display_name": "GUEST ROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The only door in or out is in the SOUTH wall back to the UPSTAIRS HALLWAY. ",
+		"article": "the",
+		"room_name": "upstairs_hallway",
+		"direction": "SOUTH"
+	}]
+},{
+	"name": "home_gym",
+	"item_setup_dict": {
+        "shelf": "There's a SHELF on the EAST wall and ",
+        "mirror": " a MIRROR hangs on the WEST wall."
+    },
+	"short_description": "You are in the home gym. ",
+	"article": "the",
+	"long_description": "The home gym that you are standing in is equipped with a state of the art treadmill and weights scattered around the room.  A SHELF on the EAST wall is lined with various electronics.  Across from this, a floor length MIRROR hangs on the WEST wall.  The door in the NORTH wall leads back to the UPSTAIRS HALLWAY.",
+	"display_name": "HOME GYM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The only door in or out is in the NORTH wall back to the UPSTAIRS HALLWAY.",
+		"article": "the",
+		"room_name": "upstairs_hallway",
+		"direction": "NORTH"
+	}]
+},{
+	"name": "kitchen",
+	"item_setup_dict": {
+        "microwave": "A MICROWAVE is embedded in the EAST wall over a countertop and ",
+        "island": "an ISLAND counter with ",
+        "apples": "fruit and ",
+        "blue jar": "a bright blue jar sit a few feet away from the wall."
+    },
+	"short_description": "You are in the kitchen. ",
+	"article": "the",
+	"long_description": "You’re not surprised to find the kitchen full of state of the art appliances.  Surrounded by the shining silver appliances feels akin to being in a wall of mirrors in its own way.  There’s a door in the WEST wall leading to the DINING ROOM and a second one in the SOUTH wall to the DOWNSTAIRS HALLWAY.  There’s an occasional beep from the MICROWAVE, which is embedded in the EAST wall above the countertop.  A brown paper bag is on the counter underneath it.\n\nA few feet in front of the EAST wall is an ISLAND counter.  There’s a bowl of fruit and a bright blue jar on the ISLAND.  These are the only pop of color in the otherwise white and silver room.",
+	"display_name": "KITCHEN",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "There are two doors, one in the WEST wall to the DINING ROOM and ",
+		"article": "the",
+		"room_name": "dining_room",
+		"direction": "WEST"
+	},{
+		"known_to_player": true,
+		"narrative_text": "another in the SOUTH wall to the DOWNSTAIRS HALLWAY. ",
+		"article": "the",
+		"room_name": "downstairs_hallway",
+		"direction": "SOUTH"
+	}]
+},{
+	"name": "living_room",
+	"item_setup_dict": {
+        "fireplace": "A FIREPLACE is set in the WEST wall",
+        "katana": " with a KATANA above it",
+        "strip_of_paper": ". A coffee table with a STRIP OF PAPER on it rests in the middle of the room."
+    },
+	"short_description": "You are in the living room. ",
+	"article": "the",
+	"long_description": "The living room is spacious and lined with more art.  Despite the FIREPLACE set in the WEST wall directly across from the EAST HALLWAY door, the room is cold.  Above the FIREPLACE is a curved blade.  It is a traditional KATANA.  The furniture in the room consists of a large sectional and two modern wingback chairs.  A second door leading to the DINING ROOM sits in the NORTH wall.\n\nThe furniture looks rigid and barely used.  It is a living room, but there is not much life in it.  The only sign that anyone had been in the room is a coffee table with coasters and a STRIP OF PAPER.",
+	"display_name": "LIVING ROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "There are two doors, one in the NORTH wall to the DINING ROOM and ",
+		"article": "the",
+		"room_name": "dining_room",
+		"direction": "NORTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "another in the EAST wall to the DOWNSTAIRS HALLWAY. ",
+		"article": "the",
+		"room_name": "downstairs_hallway",
+		"direction": "EAST"
+	}]
+},{
+	"name": "main_bedroom",
+	"item_setup_dict": {
+        "bed": "There is a canopy BED against the far wall and ",
+        "window": "a WINDOW to the side of it. "
+    },
+	"short_description": "You are in the main bedroom. ",
+	"article": "the",
+	"long_description": "The main bedroom is spacious and decorated in vibrant greens.  A large canopy BED takes up a majority of the room, and a WINDOW facing the front of the house.  There are heavy drapes covering the WINDOW to block out light when sleeping.  While this may be a smaller house for the owner, no expense was spared with making this bedroom comfortable for the occupant.  There is a BATHROOM off to the side beyond a door in the EAST wall.  The other door in the room, in the SOUTH wall, goes back to the UPSTAIRS HALLWAY.",
+	"display_name": "MAIN BEDROOM",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "There are two doors, one in the SOUTH wall that goes back to the UPSTAIRS HALLWAY and ",
+		"article": "the",
+		"room_name": "upstairs_hallway",
+		"direction": "SOUTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "another in the EAST wall that leads to a BATHROOM. ",
+		"article": "the",
+		"room_name": "bathroom",
+		"direction": "EAST"
+	}]
+},{
+	"name": "safe",
+	"item_setup_dict": {
+        "cash": "CASH is available for the taking now.",
+        "lockbox": "A LOCKBOX sits inside the safe as well.  What could be in there?"
+    },
+	"short_description": "You are in the safe! ",
+	"article": "the",
+	"long_description": "Congratulations!  You made it to the SAFE.  The hidden door you came through in the South Door provides your escape back through the house.  There is CASH out filled with items as your reward for your mission. A LOCKBOX is stored inside the safe as well but is still locked.  Can you figure out how to open it to get the final items?",
+	"display_name": "LOCKED SAFE",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": " The door in the SOUTH wall goes back to the ATTIC.",
+		"article": "the",
+		"room_name": "attic",
+		"direction": "SOUTH"
+	}]
+},{
+	"name": "study",
+	"item_setup_dict": {
+        "crate": "A CRATE with a ",
+        "dog": "DOG is across the room from the door."
+    },
+	"short_description": "You are in the study. ",
+	"article": "the",
+	"long_description": "The first thing you notice in the study is a CRATE with a DOG that you assume is an Australian Shepherd.  It watches you warily with its head lowered, a soft growl coming from it.  The crate is across from the door in the NORTH wall that goes back to the UPSTAIRS HALLWAY.",
+	"display_name": "STUDY",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "The only door in or out is in the NORTH wall back to the UPSTAIRS HALLWAY. ",
+		"article": "the",
+		"room_name": "upstairs_hallway",
+		"direction": "NORTH"
+	}]
+},{
+	"name": "upstairs_hallway",
+	"item_setup_dict": {
+        "alarm": "An ALARM is positioned on the wall between the bedrooms and ",
+        "large_poster": "a LARGE POSTER is between the doors in the SOUTH wall."
+    },
+	"short_description": "You are in the upstairs hallway, with ",
+	"article": "the",
+	"long_description": "The upstairs hallway extends down the length of the floor with stairs on either side, one set in the EAST wall leading back down to the DOWNSTAIRS HALLWAY ending and another in the WEST wall that go to the ATTIC.   The darkness of the hallway leaves you feeling uneasy.  Unlike the downstairs which had felt almost deserted, you have the feeling you are not entirely alone on this floor.\n\nThe two doors in the NORTH wall lead to a MAIN BEDROOM and a GUEST BEDROOM while the two doors in the SOUTH wall lead to a STUDY and a HOME GYM.  You can hear faint whimpering sounds coming from the STUDY.  Between the doors of the SOUTH wall hangs a LARGE POSTER.  It hangs at eye level and takes up a significant portion of the wall between the doors.  In contrast, a smaller ALARM is set between the two NORTH doors.",
+	"display_name": "UPSTAIRS HALLWAY",
+	"room_list": [{
+		"known_to_player": true,
+		"narrative_text": "stairs in the EAST wall leading down to the DOWNSTAIRS HALLWAY and ",
+		"article": "the",
+		"room_name": "downstairs_hallway",
+		"direction": "EAST"
+	},{
+		"known_to_player": true,
+		"narrative_text": "stairs in the WEST wall leading up to the ATTIC. There are four doors total. ",
+		"article": "the",
+		"room_name": "attic",
+		"direction": "WEST"
+	},{
+		"known_to_player": true,
+		"narrative_text": "The two in the NORTH wall go to the MAIN BEDROOM and ",
+		"article": "the",
+		"room_name": "main_bedroom",
+		"direction": "NORTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "the GUEST BEDROOM while ",
+		"article": "the",
+		"room_name": "guest_bedroom",
+		"direction": "NORTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "the two in the SOUTH wall go to the STUDY and ",
+		"article": "the",
+		"room_name": "study",
+		"direction": "SOUTH"
+	},{
+		"known_to_player": true,
+		"narrative_text": "a HOME GYM.",
+		"article": "a",
+		"room_name": "home_gym",
+		"direction": "SOUTH"
+	}]
+}]

@@ -1,0 +1,88 @@
+[{
+	"name": "door_to_kitchen",
+	"display_name": "CLOSED DOOR",
+	"article": "the",
+	"description": "It's a closed door. You don't live in a barn.",
+	"type": "Scenery"
+}, {
+	"name": "stairs_to_bathroom",
+	"display_name": "STAIRS",
+	"article": "the",
+	"description": "I warned you bro, I warned you about the STAIRS...",
+	"type": "Scenery"
+}, {
+	"name": "dining_table",
+	"display_name": "DINING TABLE",
+	"article": "the",
+	"description": "Strewn with rotting food and even a stuffed pig. Who could have left it in such a state?",
+	"type": "Scenery"
+},
+	{
+	"name": "pig_scroll",
+	"display_name": "PIG WITH SCROLL",
+	"article": "the",
+	"description": "It's a pig... it's got a scroll... that's whack",
+	"type": "Inventory"
+}, {
+	"name": "pig",
+	"display_name": "PIG",
+	"article": "the",
+	"description": "A stuffed pig.  It seems in bad taste.",
+	"type": "Scenery",
+	"events": {
+		"COMBINE,SCROLL": {
+			"events": [
+				"print You combine the PIG and the SCROLL.",
+				"move scroll to limbo",
+				"move pig to limbo",
+				"move pig_scroll to player_room"
+			]
+		},
+		"COMBINE,PLATES": {
+			"events": [
+				"print What the heck are you talking about??"
+			]
+		}
+	}
+}, {
+	"name": "scroll",
+	"display_name": "ROLLED-UP SCROLL",
+	"article": "the",
+	"description": "You grab the scroll, unroll it and see that there is only one words, written in blood: \"YEET\"",
+	"type": "Inventory"
+}, {
+	"name": "plates",
+	"display_name": "PLATES",
+	"article": "the",
+	"description": "Dirty, nasty plates. You'd have these cleaned in a jiffy if you hadn't already eaten all the Tide Pods.",
+	"singular_display_name": "PLATE",
+	"singular_description": "A grody PLATE you grabbed from the DINING TABLE.  You probably wouldn't eat on it.",
+	"type": "Collective",
+	"events": {
+		"WASH": {
+			"events": [
+				"print You try to $$verb the plate, with what? Your tongue?"
+			]
+		}
+	}
+}, {
+	"name": "chairs",
+	"display_name": "CHAIRS",
+	"article": "the",
+	"description": "Fine wooden chairs with attached seat cushions.",
+	"singular_display_name": "CHAIR",
+	"singular_description": "A fine CHAIR. Should come in handy if you get in a wrestling match.",
+	"type": "Collective",
+	"events": {
+		"WASH": {
+			"events": [
+				"print You try to $$verb the plate, with what? Your tongue?"
+			]
+		},
+		"PLACE,PIG": {
+			"events": [
+				"print You place on the chair. Goodbye."
+			]
+		}
+	}
+}]
