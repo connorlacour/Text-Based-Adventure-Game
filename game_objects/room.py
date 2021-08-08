@@ -76,21 +76,21 @@ class Room:
             else:
                 room_verb_dict[verb].append(e)
 
-        # for item in self.item_list.values():
-        #     if item.item is None:
-        #         print(f"BAD BAD VERY BAD. {item.item_name} not found game officially set up WRONG!! CRASH IMMINENT")
-        #
-        #     for verb, event in item.item.events.items():
-        #         addToDict(event.verb, item.item.name)
-        #         for s in event.synonyms:
-        #             addToDict(s, item.item.name)
-        #
-        # for item in self.discarded_items.values():
-        #     for verb, event in item.events.items():
-        #         addToDict(event.verb, item.name)
-        #
-        #         for s in event.synonyms:
-        #             addToDict(s, item.name)
+        for item in self.item_list.values():
+            if item.item is None:
+                print(f"BAD BAD VERY BAD. {item.item_name} not found game officially set up WRONG!! CRASH IMMINENT")
+
+            for verb, event in item.item.events.items():
+                addToDict(event.verb, item.item.name)
+                for s in event.synonyms:
+                    addToDict(s, item.item.name)
+
+        for item in self.discarded_items.values():
+            for verb, event in item.events.items():
+                addToDict(event.verb, item.name)
+
+                for s in event.synonyms:
+                    addToDict(s, item.name)
 
         return room_verb_dict
 
