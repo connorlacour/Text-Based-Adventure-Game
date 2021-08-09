@@ -1,9 +1,12 @@
 import pygame as game
 from pygame.locals import *
 import sys
-import colors
+from gui import colors
 import os
 from datetime import datetime
+
+base_dir = os.path.dirname(__file__)
+saves = os.path.join(base_dir, r"saves")
 
 
 # STATIC FUNCTIONS
@@ -162,9 +165,12 @@ class SaveGUI:
     def generate_save_dict(self):
         count = 0
 
-        for save in os.listdir(r"..\saves"):
+        if "saves" not in os.listdir(base_dir):
+            os.mkdir(os.path.join(base_dir, "saves"))
+
+        for save in os.listdir(saves):
             save_date = datetime.fromtimestamp(os.path.getmtime(
-                os.path.join(r"..\saves", save))
+                os.path.join(saves, save))
             )
             save_date = save_date.strftime("%m/%d/%Y")
             save_dict = {"name": save, "date": save_date}

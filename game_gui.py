@@ -2,11 +2,14 @@ import pygame as game
 from pygame.locals import *
 import sys
 import save_gui
-import colors
-import text_scroll as scroll
+from gui import colors
+import gui.text_scroll as scroll
 from game_objects.game_loop import *
 import save_load
-from time import sleep
+from math import ceil
+
+base_dir = os.path.dirname(__file__)
+saves = os.path.join(base_dir, r"saves")
 
 
 class GameGUI:
@@ -51,7 +54,6 @@ class GameGUI:
         self.surface.blit(background, (0, 0))
         game.display.flip()
 
-        self.loading_screen()
         self.set_game_screen()
 
         # while 1 loop maintains display updates and should only terminate
@@ -61,7 +63,7 @@ class GameGUI:
                 # GUI game loop abstracted to self.check_event() and
                 #   subsequent/related functions
                 status = self.check_event(event=event)
-                if status == 'main menu':
+                if status is not None:
                     return status
 
             # re-render text-entry box
@@ -74,26 +76,15 @@ class GameGUI:
                 self.render_user_text_in_box()
             game.display.update()
 
-    def loading_screen(self) -> None:
-        font = game.font.SysFont('dubai', 40)
-        text = 'loading...'
-        text_render = font.render(text, True, self.colors['grey'])
-        self.surface.blit(text_render, (350, 400))
-
     def set_game_start(self) -> None:
         if self.is_load:
-            os.chdir("..")
-            load = save_load.LoadGame(load_file_name=self.load_name)
-            os.chdir("gui")
+            load = save_load.LoadGame(
+                os.path.join(saves, self.load_name)
+            )
             self.scroll.text_in_scroll = load.scroll
-            # TEST
-            self.handle_game_text(
-                init_text=player_location.room.get_room_narration())
-            # END TEST
             self.set_game_screen()
         else:
-            # REPLACE WITH STANDARD INIT NEW GAME METHOD
-            save_load.test_global_collections_emulation()
+            save_load.start_new_game()
             self.handle_game_text(
                 init_text=player_location.room.get_room_narration())
         self.game_start = False
@@ -197,7 +188,7 @@ class GameGUI:
     # text-entry citation:
     #   https://www.semicolonworld.com/question/55305/
     #       how-to-create-a-text-input-box-with-pygame
-    def handle_text_entry(self, event: game.event) -> None:
+    def handle_text_entry(self, event: game.event) -> str:
         """
         takes two parameters: event (pygame.event), text (str)
         If event.key == 'return' -> add text to self.scroll.text_in_scroll
@@ -210,6 +201,13 @@ class GameGUI:
         #   self.scroll.text_in_scroll
         if not self.game_typing:
             if event.key == game.K_RETURN:
+
+                # # TESTING
+                # if self.user_entry == "_game_over_":
+                #     return self.user_entry
+                # if self.user_entry == "_game_win_":
+                #     return self.user_entry
+
                 # append to scroll var
                 self.scroll.text_in_scroll[-1] += self.user_entry
                 self.scroll.text_in_scroll.append('')
@@ -266,20 +264,22 @@ class GameGUI:
         text_img = font.render(self.user_entry, True, self.colors['off_white'])
         self.surface.blit(text_img, (110, 610))
 
-    def handle_game_text(self, init_text='') -> None:
+    def handle_game_text(self, init_text='') -> str:
         if init_text != '':
-            game_text = self.load_game_text(init_text=init_text)
+            game_text = self.parse_game_text(init_text=init_text)
         else:
-            game_text = self.load_game_text()
+            game_text = self.parse_game_text()
         self.render_game_text(text_list=game_text)
 
-    def load_game_text(self, init_text='') -> list:
+    def parse_game_text(self, init_text='') -> list:
         """
         takes one parameter: text (str)
         returns a list of strings in the form that is displayable:
             ie. fewer than 75 chars per line, split at space chars, and with
             newline chars accounted for
         """
+
+        # TESTING
         # INTEGRATE WITH TEXT-PARSING, ETC
         # sample_text to be replaced by function parameter 'text'
         # sample_text = 'This is text for testing.. \n' \
@@ -291,13 +291,28 @@ class GameGUI:
                        '\nnote the newline chars accounted for\nit also ' \
                        'accounts for where the last space char exists so ' \
                        'words do not get split in the middle'
+
+        if init_text == '_game_over_':
+            self.game_over()
+        if init_text == '_game_win_':
+            self.game_win()
+
+        caps = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+                'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+                'Y', 'Z']
+
         text_list = []
-        max_chars = 64
+        max_chars = 75
 
         if init_text != '':
             game_text = init_text
         else:
             game_text = get_next_narration(self.user_entry)
+
+        if game_text.lower().startswith('you go') \
+            or game_text.lower().startswith('you look around'):
+            print("here")
+            game_text += '\n\n' + player_location.room.get_room_narration()
 
         # check for \n as they don't play nicely with pygame rendering
         # if \n, split text into a list of single lines to be displayed
@@ -306,16 +321,50 @@ class GameGUI:
                             game_text.count('\n')
             split_index: list = [0]
 
-            for x in range(0, strings_count):
+            parse_done = False
+            x = 0
+
+            while not parse_done:
+                max_chars = 75
+
                 # for a string up to length max_chars, find the last occurrence
                 #   of a ' ' char. This is where we will split the string so
                 #   the splitting does not occur in the middle of words
                 if (max_chars + split_index[x]) >= len(game_text):
                     y = len(game_text)
-                    split_index.append(y)
-                    to_list = game_text[split_index[x]:split_index[x + 1]]
+                    w = y - split_index[x]
+
+                    for char in game_text[split_index[x]:y]:
+                        if char in caps:
+                            max_chars -= 0.75
+
+                    max_chars = ceil(max_chars)
+
+                    if w > max_chars:
+                        y = split_index[x] + max_chars
+                        split_index.append(game_text[split_index[x]:y].
+                                           rindex(' ') + split_index[x] + 1)
+
+                        to_list = game_text[split_index[x]:split_index[x + 1]]
+                    else:
+                        parse_done = True
+                        split_index.append(y)
+                        to_list = game_text[split_index[x]:split_index[x + 1]]
+
                 else:
                     y = split_index[x] + max_chars
+
+                    temp = 0
+                    for char in game_text[split_index[x]:y]:
+                        if char in caps:
+                            max_chars -= 0.75
+                            temp += 0.75
+
+                    max_chars = ceil(max_chars)
+
+                    if temp > 0:
+                        y = split_index[x] + max_chars
+
                     split_index.append(game_text[split_index[x]:y].
                                        rindex(' ') + split_index[x] + 1)
                     to_list = game_text[split_index[x]:split_index[x + 1]]
@@ -328,10 +377,22 @@ class GameGUI:
                     to_list = game_text[split_index[x]:split_index[x + 1]]
 
                 text_list.append(to_list)
+                x += 1
         else:
             text_list.append(game_text)
 
         return text_list
+
+    def game_over(self):
+        window = Rect(200, 200, 400, 400)
+        outline = Rect(204, 204, 392, 392)
+
+        game.draw.rect(self.surface, self.colors["grey"], window)
+        game.draw.rect(self.surface, self.colors["dark_grey"], outline,
+                       width=3)
+
+    def game_win(self):
+        pass
 
     def render_game_text(self, text_list: list) -> None:
         """
@@ -408,10 +469,10 @@ class GameGUI:
             if status == 'main menu':
                 return status
 
-        # if user is typing, handle text-entry by calling
-        #   self.handle_text_entry()
         elif event.type == game.KEYDOWN:
-            self.handle_keydown_event(events=event)
+            status = self.handle_keydown_event(events=event)
+            if status is not None:
+                return status
 
     def handle_mouse_motion_event(self):
         mouse = game.mouse.get_pos()
@@ -479,8 +540,17 @@ class GameGUI:
         if not self.game_typing:
             self.scroll_page = 0
             self.set_game_screen()
-            self.handle_text_entry(event=events)
+            status = self.handle_text_entry(event=events)
+            if status == '_game_over_':
+                return status
+            if status == '_game_win_':
+                return status
+
         if events.key == game.K_RETURN and self.game_typing:
             self.render_text_entry_box()
             game.display.update()
-            self.handle_game_text()
+            status = self.handle_game_text()
+            if status == '_game_over_':
+                return status
+            if status == '_game_win_':
+                return status

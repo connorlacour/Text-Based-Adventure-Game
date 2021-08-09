@@ -2,7 +2,7 @@ import pygame as game
 from pygame.locals import *
 import sys
 import os
-import colors
+from gui import colors
 
 
 class MainMenuGUI:

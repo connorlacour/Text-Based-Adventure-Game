@@ -1,7 +1,5 @@
 from game_objects import global_collections
 from gui.text_scroll import Scroll
-#import sys
-#sys.path.append('../')
 from unit_tests.item_setup_tests import *
 import os
 import marshmallow
@@ -142,13 +140,12 @@ class SaveGame:
 
         keys = list(self.game_data["room_files"].keys())
 
-        for x in keys:
-            path = open(str(x) + ".json", mode="w+")
-            path.write(
-                RoomSchema().dumps(
-                    [self.game_data["room_files"][x]], many=True
+        for room in keys:
+            path = open(str(room) + ".json", mode="w+")
+            to_write = RoomSchema().dumps(
+                    [self.game_data["room_files"][room]], many=True
                 )
-            )
+            path.write(to_write)
             path.close()
 
         os.chdir("..")
@@ -204,8 +201,7 @@ class LoadGame:
         )
 
         for x in self.game_data["player"]["inventory"]:
-            global_collections.player_inventory[
-                items[x].name] = x
+            global_collections.player_inventory[x] = items[x]
 
     def load_rooms(self):
         room_dir = os.path.join(self.load_dir, "room_files")
@@ -297,7 +293,7 @@ class initGameTest(unittest.TestCase):
 
     @staticmethod
     def test_load():
-        f = LoadGame("Connor_LaCour")
+        f = LoadGame("connor")
         print("hi")
 
 
