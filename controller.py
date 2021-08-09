@@ -14,14 +14,23 @@ class IntroMusic:
     def __init__(self):
         game.mixer.init()
         self.main_theme = game.mixer.Sound(
-            os.path.join(audio, "mainTheme3.wav")
+            os.path.join(audio, "kissMerryTuck.wav")
+        )
+        self.in_game = game.mixer.Sound(
+            os.path.join(audio, "tuckNeverlasting.flac")
         )
 
-    def start_music(self):
+    def start_main_theme(self):
         game.mixer.Sound.play(self.main_theme, loops=-1)
 
-    def stop_music(self):
+    def start_in_game_music(self):
+        game.mixer.Sound.play(self.in_game, loops=-1)
+
+    def stop_main_theme(self):
         self.main_theme.fadeout(3000)
+
+    def stop_in_game_music(self):
+        self.in_game.fadeout(3000)
 
 
 def controller() -> None:
@@ -43,11 +52,12 @@ def controller() -> None:
     #   elif main_return is 'load game' -> load game
     #   else -> rerun mainMenu
     if main_return == 'new game':
-        music.stop_music()
+        music.stop_main_theme()
         sleep(3)
+        music.start_in_game_music()
         start_game()
     elif main_return == 'exit':
-        music.stop_music()
+        music.stop_main_theme()
         game.quit()
         sys.exit()
     elif main_return == 'load game':
@@ -62,7 +72,9 @@ def start_game(is_load: bool = False, load_name: str = '') -> None:
 
     # 'main menu' is returned upon clicking the exit_button in game_gui
     if game_return == "main menu":
-        music.start_music()
+        music.stop_in_game_music()
+        sleep(3)
+        music.start_main_theme()
         controller()
     elif game_return == "_game_over_":
         end("_game_over_")
@@ -85,13 +97,15 @@ def load_game() -> None:
         controller()
     else:
         print("loading -> ", load)
-        music.stop_music()
+        music.stop_main_theme()
         sleep(3)
         start_game(is_load=True, load_name=load)
 
 
 def end(status) -> None:
-    music.start_music()
+    music.stop_in_game_music()
+    sleep(3)
+    music.start_main_theme()
     end_return = game_end.GameEnd(status).main()
     if end_return == 'load':
         load_game()
@@ -101,6 +115,6 @@ def end(status) -> None:
 
 
 music = IntroMusic()
-music.start_music()
+music.start_main_theme()
 
 controller()
