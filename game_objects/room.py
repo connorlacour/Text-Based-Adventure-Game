@@ -175,6 +175,7 @@ class Room:
                 # Show special intro on game start
                 if self.display_name == "FOYER":
                     self.special_intro = False
+                    self.visited = True
                     return foyer_intro + "\n\n" + self.long_description + "\n" + self.room_list_narration()
                 # Show special intro until user gets past guard.  Guard event will trigger special_intro setting change
                 elif self.display_name == "GUEST BEDROOM":
