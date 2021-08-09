@@ -4,7 +4,7 @@ from pprint import pprint
 from game_objects.game_loop import *
 from game_objects.global_collections import *
 from game_objects.object_schemas import *
-from game_objects.item_event import *
+from game_objects.event import *
 from game_objects.room import Room, RoomConnector
 
 test_dir = os.path.dirname(__file__)
