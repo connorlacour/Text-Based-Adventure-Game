@@ -149,7 +149,7 @@ def resolve_event_item(verb, active, passive):
     if active == passive: #Only one object specified. Might be a global event matching to a nonexistant item like CLAP hands. HUM song.
         narration = resolve_itemless_events(verb)
     if narration == "":
-        return f"You can't {verb} here!"
+        return f"{verb} didn't work! You might try rewording your entry or trying a different action."
     else: return narration
 
 
