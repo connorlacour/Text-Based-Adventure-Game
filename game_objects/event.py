@@ -44,7 +44,7 @@ def do_print(verb: str, to_print: str, object_name = "") -> str:
         print_warning("Tried to split event {to_print} but was wonky}")
         return "You get the feeling narration was supposed to occur, but your head is blank"
     else:
-        return to_print.split(sep=" ", maxsplit=1)[1].replace("$$verb", verb.upper()).replace("$$this", object_name)
+        return to_print.split(sep=" ", maxsplit=1)[1].replace("$$verb", verb.upper().split(sep=",")[0]).replace("$$this", object_name)
 
 
 # "change pig display_name to `BIG PIG`",

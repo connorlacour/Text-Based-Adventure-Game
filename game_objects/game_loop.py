@@ -8,7 +8,7 @@ class GameLoop:
 
     def __init__(self):
 
-        self.player_position = rooms["dining_room"]
+        self.player_position = rooms["foyer"]
         setup_global_collections()
 
 
@@ -121,13 +121,13 @@ def resolve_event_item(verb, active, passive):
     if verb in in_scope_event_map:  # verb exists in room.items, discard, or inventory.items event lists map
         verb_items = in_scope_event_map[verb]
 
-        if active in verb_items:  # active object exists in player scope
+        if active in verb_items or passive in verb_items:  # active object exists in player scope
             active_item = get_item_in_player_scope(active)
 
             if active != passive:  # passive item specified
 
                 dict_key = f"{verb},{passive}".upper()
-                if dict_key in active_item.events:
+                if active_item is not None and dict_key in active_item.events:
                     if get_item_in_player_scope(passive) is not None:
                         return active_item.do_event(dict_key)
                     else:  # passive item not in player scope
@@ -137,11 +137,11 @@ def resolve_event_item(verb, active, passive):
                 else:  # verb exists, active item exists, no event exists involving passive item.
                     passive_item = get_item_in_player_scope(passive)
                     if passive_item is not None:  # Swap passive and active and see if event exists b/c parser error maybe
-                        dict_key = f"{verb},{passive}".upper()
+                        dict_key = f"{verb},{active}".upper()
                         if dict_key in passive_item.events:
                             return passive_item.do_event(dict_key)
                         else:  # Passive item exists but nothing matched.
-                            return f"You try to {verb} with a {active} and {passive}, but nothing happens"
+                            return f"You try to {verb} with a {passive_item.display_name} and {active}, but nothing happens"
 
             # If passive item not specified or nothing is found with the passive object, search for active object
             active_event = active_item.get_event_from_verb(verb)
@@ -163,7 +163,7 @@ def resolve_event_item(verb, active, passive):
     if active == passive: #Only one object specified. Might be a global event matching to a nonexistant item like CLAP hands. HUM song.
         narration = resolve_itemless_events(verb)
     if narration == "":
-        return f"You can't {verb} here!"
+        return f"{verb} didn't work! You might try rewording your entry or trying a different action."
     else: return narration
 
 

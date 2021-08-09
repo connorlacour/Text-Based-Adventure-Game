@@ -9,6 +9,12 @@
 	"article": "the",
 	"long_description": "The first thing you notice in the study is a CRATE with a DOG that you assume is an Australian Shepherd.  It watches you warily with its head lowered, a soft growl coming from it.  The crate is across from the door in the NORTH wall that goes back to the UPSTAIRS HALLWAY.",
 	"display_name": "STUDY",
+	"events": {
+		"TURN ON,PORTABLE_RADIO": {
+			"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "change dog display_name to `CALM DOG`", "change silver_key can_take to true"],
+			"repeatable": false
+		}
+	},
 	"room_list": [{
 		"known_to_player": true,
 		"narrative_text": "The only door in or out is in the NORTH wall back to the UPSTAIRS HALLWAY. ",

@@ -61,7 +61,7 @@ def get_file_name(filename, dir_name=root_dir,):
 
 def update_inventory_synonym_mapping():  # return synonym -> item
 
-    for key in cached_inventory_synonym_mapping.keys():
+    for key in list(cached_inventory_synonym_mapping.keys()):
         del cached_inventory_synonym_mapping[key]
 
     def addToDict(verb: str, e: str):

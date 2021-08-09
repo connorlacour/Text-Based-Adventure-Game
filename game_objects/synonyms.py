@@ -1,10 +1,13 @@
 
+from typing import List
+
+
 go_synonyms = {
     "GO", "WALK", "RUN", "CRAWL", "TRAVEL"
 }
 
 look_synonyms = {
-    "LOOK", "CHECK", "CHECK OUT", "EXAMINE"
+    "LOOK", "CHECK", "CHECK OUT", "EXAMINE", "INSPECT"
 }
 
 take_synonyms = {
@@ -12,7 +15,7 @@ take_synonyms = {
 }
 
 drop_synonyms = {
-    "DROP", "PUT DOWN", "PLACE DOWN", "DISCARD", "CHUCK", "THROW OUT", "THROW AWAY"
+    "DROP", "PUT DOWN", "PLACE DOWN", "DISCARD", "CHUCK", "THROW OUT", "THROW AWAY", "THROW"
 }
 
 wear_synonyms = {
@@ -32,19 +35,19 @@ eat_synonyms = {
 }
 
 turn_on_synonyms = {
-    "ACTIVATE", "SWITCH ON", "START UP"
+    "ACTIVATE", "SWITCH ON", "START UP", "START"
 }
 
 swallow_synonyms = {
-    "CONSUME", "GULP", "IMBIBE", "INGEST"
+    "CONSUME", "GULP", "IMBIBE", "INGEST", "EAT", "DRINK"
 }
 
 unlock_synonyms = {
-    "UNLOCK WITH", "OPEN WITH"
+    "UNLOCK WITH", "OPEN WITH", "USE"
 }
 
 use_synonyms = {
-    "APPLY", "EMPLOY", "OPERATE", "UTILIZE", "WEILD"
+    "APPLY", "EMPLOY", "OPERATE", "UTILIZE", "WIELD", "SWING"
 }
 
 bribe_synonyms = {
@@ -52,11 +55,11 @@ bribe_synonyms = {
 }
 
 persuade_synonyms = {
-    "COAX", "SWAY", "TALK INTO", "URGE", "WIN OVER"
+    "COAX", "SWAY", "TALK INTO", "URGE", "WIN OVER", "GIVE", "SHOW"
 }
 
 enter_code_synonyms = {
-    "ENTER CODE", "INSERT", "PUT IN"
+    "ENTER CODE", "INSERT", "PUT IN", "ENTER", "ENTER CODE 9338", "ENTER CODE YEET", "ENTER 8338", "ENTER YEET"
 }
 
 feed_synonyms = {
@@ -68,7 +71,7 @@ open_synonyms = {
 }
 
 pick_up_synonyms = {
-    "PULL", "LIFT", "RAISE"
+    "PULL", "LIFT", "RAISE", "READ"
 }
 
 synonym_dict = {
@@ -77,6 +80,8 @@ synonym_dict = {
     "DROP": list(drop_synonyms),
     "BRIBE": list(bribe_synonyms),
     "EAT": list(eat_synonyms),
+    "ENTER YEET": list(enter_code_synonyms),
+    "ENTER 9338": list(enter_code_synonyms),
     "INSERT": list(enter_code_synonyms),
     "INSERT 9338": list(enter_code_synonyms),
     "INSERT YEET": list(enter_code_synonyms),
@@ -90,5 +95,18 @@ synonym_dict = {
     "TURN ON": list(turn_on_synonyms),
     "UNLOCK": list(unlock_synonyms),
     "USE": list(use_synonyms),
-    "WEAR": list(wear_synonyms)
+    "WEAR": list(wear_synonyms),
+    "ADMIRE": ["BEHOLD", "APPRECIATE"],
+    "SIT": ["SIT DOWN"],
+    "READ": ["FLIP THROUGH"],
+    "TURN OFF": ["SWITCH OFF"],
+    "CLOSE": ["SHUT"],
+    "TALK": ["TALK TO", "GREET", "WAVE TO", "PLEAD WITH", "BEG", "ANNOY", "YELL", "SMILE", "GLARE", "FROWN", "RUN AWAY"],
+    "KISS": ["SMOOCH", "HUG", "SNIFF", "FLATTER"],
+    "WORK OUT": ["EXERCISE", "FLEX", "DANCE"],
+    "ADMIRE SELF": ["CHECK YOURSELF"],
+    "COOK": ["MICROWAVE", "PUT", "ZAP"],
+    "TAKE OFF": ["REMOVE"],
+    "LIE DOWN": ["LIE ON", "LAY", "COLLAPSE", "NAP", "SLEEP"]
+
 }

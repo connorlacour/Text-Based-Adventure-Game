@@ -3,7 +3,8 @@
 	"item_setup_dict": {
         "medicine_cabinet": "There is a MEDICINE CABINET above the sink set in the NORTH wall and ",
         "waste_basket": "a WASTE BASKET against the EAST wall. ",
-		"bottle_of_pills": ""
+		"bottle": "",
+		"pill": ""
     },
 	"short_description": "You are in the bathroom. ",
 	"article": "the",

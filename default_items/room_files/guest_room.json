@@ -2,7 +2,8 @@
 	"name": "guest_bedroom",
 	"item_setup_dict": {
         "window": "There is a WINDOW and ",
-        "night_stand": "a NIGHT STAND beside the bed against the NORTH wall."
+        "night_stand": "a NIGHT STAND beside the bed against the NORTH wall.",
+		"guard": ""
     },
 	"short_description": "You are in the guest bedroom. ",
 	"article": "the",
