@@ -1,4 +1,7 @@
 
+from typing import List
+
+
 go_synonyms = {
     "GO", "WALK", "RUN", "CRAWL", "TRAVEL"
 }
@@ -44,7 +47,7 @@ unlock_synonyms = {
 }
 
 use_synonyms = {
-    "APPLY", "EMPLOY", "OPERATE", "UTILIZE", "WEILD"
+    "APPLY", "EMPLOY", "OPERATE", "UTILIZE", "WIELD"
 }
 
 bribe_synonyms = {
@@ -77,6 +80,8 @@ synonym_dict = {
     "DROP": list(drop_synonyms),
     "BRIBE": list(bribe_synonyms),
     "EAT": list(eat_synonyms),
+    "ENTER YEET": list(enter_code_synonyms),
+    "ENTER 9338": list(enter_code_synonyms),
     "INSERT": list(enter_code_synonyms),
     "INSERT 9338": list(enter_code_synonyms),
     "INSERT YEET": list(enter_code_synonyms),

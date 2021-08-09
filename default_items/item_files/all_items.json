@@ -31,7 +31,7 @@
 		"USE": {
 			"events": ["print You swing the blade, but it has been dulled and is nothing more than decorative at this point."]
 		},
-		"FIGHT,GUARD": {
+		"USE,GUARD": {
 			"events": ["print You swing the SWORD, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"]
 			}
 	}
@@ -81,18 +81,13 @@
 	"display_name": "PORTABLE RADIO",
 	"article": "the",
 	"description": "Picking up the PORTABLE RADIO, you see that it’s tuned to an easy listening station.",
-	"type": "Inventory",
-    "events": {
-		"TURN ON": {
-			"events": ["print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.", "change dog display_name to `CALM DOG`", "change silver_key can_take to true"]
-			}
-		}
+	"type": "Inventory"
 }, {
 	"name": "bottle",
 	"display_name": "BOTTLE",
 	"article": "a",
-	"description": "An unmarked bottle of pills",
-	"type": "Inventory",
+	"description": "An unmarked bottle with a PILL inside",
+	"type": "Scenery",
     "events": {
 		"OPEN": {
 			"events": ["print You open the bottle of pills to find a PILL inside.  You wonder what it does."]
@@ -203,7 +198,7 @@
     "name": "guard",
 	"display_name": "GUARD",
 	"article": "a",
-	"description": "The GUARD`S badge says `Tuck`.",
+	"description": "The GUARD'S badge says 'Tuck'.",
 	"type": "Scenery",
     "events": {
 		"FIGHT": {
@@ -259,13 +254,13 @@
     "name": "blue_jar",
 	"display_name": "BLUE JAR",
 	"article": "a",
-	"description": "You pull back the lid on the BLUE JAR to find MILK BONES that smell strongly of bacon.",
+	"description": "You pull back the lid on the BLUE JAR to find MILK BONES with a strong bacon smell.",
 	"type": "Scenery"
 },{
     "name": "milk_bone",
 	"display_name": "MILK BONE",
 	"article": "the",
-	"description": "Milk bone dog treats",
+	"description": "MILK BONE dog treats",
 	"type": "Inventory"
 },{
     "name": "fireplace",
@@ -303,7 +298,7 @@
 	"type": "Scenery",
     "events": {
 		"PRESS": {
-			"events": ["print You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it’s hard to resist the temptation."]
+			"events": ["print You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it is hard to resist the temptation."]
 			}
 		}
 },{
@@ -317,13 +312,15 @@
 			"events": [
 				"print You slip a milk bone to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.",
 				"change dog display_name to `CALM DOG`",
-				"change silver_key can_take to true"]
+				"change silver_key can_take to true",
+				"change dog description to `The dog sleeps peacefully in the corner of the crate.`"]
 		},
 		"TURN ON,PORTABLE_RADIO": {
 			"events": [
 				"print A piano melody begins playing from the radio as it turns on.  The music plays for a few minutes before the dog starts circling and curls up in a corner.",
 				"change dog display_name to `CALM DOG`",
-				"change silver_key can_take to true"]
+				"change silver_key can_take to true",
+				"change dog description to `The dog sleeps peacefully in the corner of the crate.`"]
 		}
 	}
 },{
@@ -334,7 +331,7 @@
 	"type": "Scenery",
     "events": {
 		"OPEN": {
-			"events": ["print The DOG ignores you and stays sleeping."]
+			"events": ["print You open the crate."]
 			}
 		}
 },{
@@ -379,9 +376,9 @@
 	"type": "Scenery"
 },{
     "name": "gulliver_travels",
-	"display_name": "GULLIVER`S TRAVELS",
+	"display_name": "GULLIVER'S TRAVELS",
 	"article": "the",
-	"description": "A normal copy of Gulliver`s Travels",
+	"description": "A normal copy of Gulliver's Travels",
 	"type": "Scenery"
 },{
     "name": "crime_and_punishment",
@@ -397,9 +394,9 @@
 	"type": "Scenery"
 },{
     "name": "hitchhikers_guide_to_the_galaxy",
-	"display_name": "HITCHHIKER`S GUIDE TO THE GALAXY",
+	"display_name": "HITCHHIKER'S GUIDE TO THE GALAXY",
 	"article": "the",
-	"description": "A normal copy of Hitchhiker`s Guide to the Galaxy",
+	"description": "A normal copy of Hitchhiker's Guide to the Galaxy",
 	"type": "Scenery"
 },{
     "name": "odyssey",
@@ -423,10 +420,10 @@
 			"events": ["print $$verb what?"]
 			},
 		"INSERT 9338": {
-			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"]
+			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM.", "move player to safe"]
 			},
 		"INSERT YEET": {
-			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"]
+			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM.", "move player to safe"]
 		}
 	}
 },{

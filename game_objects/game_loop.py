@@ -8,7 +8,7 @@ class GameLoop:
 
     def __init__(self):
 
-        self.player_position = rooms["dining_room"]
+        self.player_position = rooms["foyer"]
         setup_global_collections()
 
 
