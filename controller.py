@@ -1,15 +1,21 @@
 import pygame as game
 import sys
+from gui import main_menu_gui, game_end
 import game_gui
-import main_menu_gui
 import load_gui
 from time import sleep
+import os
+
+base_dir = os.path.dirname(__file__)
+audio = os.path.join(base_dir, r"audio")
 
 
 class IntroMusic:
     def __init__(self):
         game.mixer.init()
-        self.main_theme = game.mixer.Sound(r"..\audio\mainTheme3.wav")
+        self.main_theme = game.mixer.Sound(
+            os.path.join(audio, "mainTheme3.wav")
+        )
 
     def start_music(self):
         game.mixer.Sound.play(self.main_theme, loops=-1)
@@ -58,6 +64,10 @@ def start_game(is_load: bool = False, load_name: str = '') -> None:
     if game_return == "main menu":
         music.start_music()
         controller()
+    elif game_return == "_game_over_":
+        end("_game_over_")
+    elif game_return == "_game_win_":
+        end("_game_win_")
 
 
 def load_game() -> None:
@@ -78,6 +88,16 @@ def load_game() -> None:
         music.stop_music()
         sleep(3)
         start_game(is_load=True, load_name=load)
+
+
+def end(status) -> None:
+    music.start_music()
+    end_return = game_end.GameEnd(status).main()
+    if end_return == 'load':
+        load_game()
+    else:
+        print(end_return)
+        controller()
 
 
 music = IntroMusic()

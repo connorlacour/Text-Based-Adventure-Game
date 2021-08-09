@@ -33,6 +33,7 @@ class Room:
 
         self.item_list: Dict[str, RoomItem] = {key: RoomItem(key, value) for (key, value) in
                                                self.item_setup_dict.items()}
+        self.room_list = room_list
         self.discarded_items: Dict[str, Item] = {}
         self.connecting_rooms: Dict[str, RoomConnector] = {v.direction: v for v in room_list}
         self.events = events

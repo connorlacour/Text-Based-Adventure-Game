@@ -13,6 +13,7 @@ class Colors:
         self.colors['hl_dark_grey']: tuple = (135, 135, 135)
         self.colors['grey']: tuple = (100, 100, 100)
         self.colors['off_white']: tuple = (220, 220, 220)
+        self.colors['offer_white']: tuple = (200, 200, 200)
 
     def add_color(self, name, color_val) -> None:
         self.colors[name]: tuple = color_val
