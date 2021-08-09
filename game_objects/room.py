@@ -38,7 +38,7 @@ class Room:
         self.events = events
         self.cached_item_event_synonym_mapping: Dict[str, str] = {}
         self.setup_discard_list = setup_discard_list
-        self.special_intro = intro
+        self.special_intro = intro  # For Foyer and Guest Bedroom special intros
 
     # initialize rooms
     def setup_on_start(self):
@@ -152,7 +152,6 @@ class Room:
     def room_list_narration(self) -> str:
         narration = ""
         for roomConnector in self.connecting_rooms.values():
-#            narration += roomConnector.get_narration() + ". "
             narration += roomConnector.get_narration()
         return narration
 
@@ -164,6 +163,7 @@ class Room:
         return narration
 
     def get_room_narration(self) -> str:
+        # Special intros used once and defined in below variables:
         foyer_intro = "You enter Chateau Prime in the dead of night.  Friends, family, and neighbors have all suffered at the hands of corporate greed.  This is the home of one of the men who profited from their loss.  Not his primary residence, you scoff to yourself.  But you're sure there's enough money in there to change the lives of your friends and family.\n\nYour mission: Find the safe to retrieve enough money to return to the people in your town."
         guest_bed_intro = "As soon as you enter the GUEST BEDROOM, you spot a guard lying on the bed.  His eyes pop open in surprise at your entrance, and he jumps up from his rest.  You notice his eyes dart sheepishly to the bed before he marches over to you.\n\n 'This is private property.  You can't be here,' he growls, grabbing your arm.  Whether he's angrier at your intrusion or the fact that you caught him sleeping is unclear.\n\nYou've been caught.  As you think of something to get away from this guard, you size up your odds against him.  He's a large man, and while he doesn't seem like someone who wants to fight, you can tell there's strength behind his bulk.  You notice his name badge says, 'Tuck Abbot'."
 
@@ -172,9 +172,11 @@ class Room:
             return narration
         else:
             if self.special_intro:
+                # Show special intro on game start
                 if self.display_name == "FOYER":
                     self.special_intro = False
                     return foyer_intro + "\n\n" + self.long_description + "\n" + self.room_list_narration()
+                # Show special intro until user gets past guard.  Guard event will trigger special_intro setting change
                 elif self.display_name == "GUEST BEDROOM":
                     return guest_bed_intro + "\n\n" + self.room_list_narration()
             else:
