@@ -185,7 +185,7 @@ def resolve_itemless_events(verb):
         narration = event.do_event(player_room, verb)
 
         if not event.repeatable:
-            del player_room.events[verb]
+            del player_room.events[event.verb]
             player_room.update_item_event_mapping_cache()
 
     return narration
