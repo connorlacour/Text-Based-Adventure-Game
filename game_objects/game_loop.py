@@ -17,17 +17,15 @@ def get_next_narration(user_text) -> str:
     print(f"v: {verb}, d: {direction}, po: {passive_obj}, ao:{active_object}")
 
     active_object, passive_object = resolve_noun_to_item_name(active_object, passive_obj)
-    import time
-    start_time = time.time()
-    if verb == "":
-        return "Not even you know what you were trying to do."
 
-    elif verb in go_synonyms:
+    if verb in go_synonyms or direction != "":
         return do_direction_command(verb, direction, active_object)
+
+    elif verb == "":
+        return "Not even you know what you were trying to do."
 
     elif verb in look_synonyms or active_object == "INVENTORY" or verb == "INVENTORY":
         if active_object == "" and verb != "INVENTORY":
-            player_location.room.visited = False
             return "You LOOK AROUND."
         elif active_object == "INVENTORY" or verb == "INVENTORY":
             return print_inventory()
@@ -61,9 +59,7 @@ def get_next_narration(user_text) -> str:
         return drop_object(active_object)
 
     else:
-        start_time = time.time()
         narration = resolve_event_item(verb, active_object, passive_object)
-        print("Resolve event --- %s seconds ---" % (time.time() - start_time))
 
         if narration == "":
             narration = f"You try to {verb} to no avail."
@@ -189,7 +185,7 @@ def resolve_itemless_events(verb):
         narration = event.do_event(player_room, verb)
 
         if not event.repeatable:
-            del player_room.events[verb]
+            del player_room.events[event.verb]
             player_room.update_item_event_mapping_cache()
 
     return narration
@@ -258,8 +254,9 @@ def resolve_noun_to_item_name(active, passive, room: Room = None) -> (str, str):
 
 #go direction
 #go through directional item
-def do_direction_command(verb: str, direction: str, item: str = "", room: Room = None) -> str:
+def do_direction_command(verb: str = "GO", direction: str = "", item: str = "", room: Room = None) -> str:
     if room is None: room = player_location.room
+    if verb == "": verb = "GO"
     dir = ""
 
     if item != "":

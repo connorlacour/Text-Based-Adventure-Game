@@ -17,8 +17,7 @@
 	"type": "Inventory",
     "events": {
 		"WEAR": {
-			"events": ["print You are now wearing the glove."],
-			"repeatable": false
+			"events": ["print You are now wearing the glove."]
 		},
 		"TAKE OFF": {
 			"events": ["print You are no longer gloved."]
