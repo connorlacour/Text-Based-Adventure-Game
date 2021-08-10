@@ -412,9 +412,11 @@ class GameGUI:
                 parse_done = False
                 x = 0
                 y = len(game_text)
-                to_list = game_text
                 while not parse_done:
+                    to_list = game_text[split_index[x]:split_index[x+1]]
+                    print('starts with : ', to_list)
                     if '\n' in to_list:
+                        print('confirming')
                         nl_idx = to_list.index('\n')
                         split_index[x + 1] = nl_idx + split_index[x]
                         split_index.append(y)
