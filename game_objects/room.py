@@ -177,13 +177,13 @@ class Room:
                 if self.display_name == "FOYER":
                     self.special_intro = False
                     self.visited = True
-                    return foyer_intro + "\n\n" + self.long_description + "\n" + self.room_list_narration()
+                    return foyer_intro + "\n\n" + self.long_description + "\n"
                 # Show special intro until user gets past guard.  Guard event will trigger special_intro setting change
                 elif self.display_name == "GUEST BEDROOM":
                     return guest_bed_intro + "\n\n" + self.room_list_narration()
             else:
                 self.visited = True
-                return self.long_description + "\n" + self.room_list_narration()
+                return self.long_description + "\n"
 
     def get_discard_narration(self) -> str:
         discarded_count = len(self.discarded_items)
