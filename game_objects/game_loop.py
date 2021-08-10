@@ -56,7 +56,7 @@ def get_next_narration(user_text) -> str:
         return narration
 
     elif verb in take_synonyms:
-        return take_item(verb, passive_object, active_object)
+        return take_item(verb, active_object, passive_object)
 
     elif verb in drop_synonyms:
         return drop_object(active_object)
@@ -79,7 +79,10 @@ def take_item(verb,active_object, passive_object) -> str:
         if event is not None:
             return event.do_event(player_location.room, verb)
 
-    return take_object(verb, active_object)
+    if items.get(active_object) is None:
+        return take_object(verb, passive_object)
+    else:
+        return take_object(verb, active_object)
 
 
 def look_at_object(obj_name):

@@ -12,7 +12,7 @@
 	"type": "Inventory",
     "events": {
 		"WEAR": {
-			"events": ["print You are now wearing the glove."]
+			"events": ["print Your gargantuam hands can't fit in these tiny things."]
 		}
 	}
 }, {
