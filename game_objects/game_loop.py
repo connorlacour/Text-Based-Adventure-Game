@@ -127,21 +127,25 @@ def resolve_event_item(verb, active, passive):
             if active != passive:  # passive item specified
 
                 dict_key = f"{verb},{passive}".upper()
-                if active_item is not None and dict_key in active_item.events:
-                    if get_item_in_player_scope(passive) is not None:
-                        return active_item.do_event(dict_key)
-                    else:  # passive item not in player scope
-                        passive = items[passive]
-                        return f"You feel as though {passive.display_name} is out of reach!"
+                if active_item is not None:
+                    active_event = active_item.get_event_from_verb(dict_key)
+                    if active_event is not None:
 
-                else:  # verb exists, active item exists, no event exists involving passive item.
-                    passive_item = get_item_in_player_scope(passive)
-                    if passive_item is not None:  # Swap passive and active and see if event exists b/c parser error maybe
-                        dict_key = f"{verb},{active}".upper()
-                        if dict_key in passive_item.events:
-                            return passive_item.do_event(dict_key)
-                        else:  # Passive item exists but nothing matched.
-                            return f"You try to {verb} with a {passive_item.display_name} and {active}, but nothing happens"
+                        if get_item_in_player_scope(passive) is not None:
+                            return active_event.do_event(player_location.room, verb, get_item_in_player_scope(passive).display_name)
+                        else:  # passive item not in player scope
+                            passive = items[passive]
+                            return f"You feel as though {passive.display_name} is out of reach!"
+
+                    else:  # verb exists, active item exists, no event exists involving passive item.
+                        passive_item = get_item_in_player_scope(passive)
+                        if passive_item is not None:  # Swap passive and active and see if event exists b/c parser error maybe
+                            dict_key = f"{verb},{active}".upper()
+                            event = passive_item.get_event_from_verb(dict_key)
+                            if event is not None:
+                                return event.do_event(player_location.room, verb, )
+                            else:  # Passive item exists but nothing matched.
+                                return f"You try to {verb} with a {passive_item.display_name} and {active}, but nothing happens"
 
             # If passive item not specified or nothing is found with the passive object, search for active object
             active_event = active_item.get_event_from_verb(verb)

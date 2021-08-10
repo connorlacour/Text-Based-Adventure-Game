@@ -16,5 +16,5 @@
 		"room_name": "upstairs_hallway",
 		"direction": "SOUTH"
 	}],
-	"intro": true
+	"special_intro": true
 }]
