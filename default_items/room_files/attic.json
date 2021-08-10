@@ -17,13 +17,13 @@
 	"events": {
 		"ENTER YEET": {
 			"events": [
-				"print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"
+				"print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can go NORTH to the SAFE.", "change attic.direction.north narrative_text to `You have unlocked a HIDDEN ROOM and can go NORTH to the SAFE.`", "change safe display_name to SAFE"
 			],
 			"repeatable": false
 		},
 		"ENTER 9338": {
 			"events": [
-				"print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can enter the SAFE.", "move player to safe"
+				"print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM and can go NORTH to the SAFE.", "change attic.direction.north narrative_text to `You have unlocked a HIDDEN ROOM and can go NORTH to the SAFE.`", "change safe display_name to SAFE"
 			],
 			"repeatable": false
 		}

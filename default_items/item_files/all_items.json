@@ -26,7 +26,7 @@
 	"type": "Inventory",
 	"events": {
 		"READ": {
-			"events": ["print The LETTER reads,\\n\\nDear Tuck,\\nPlease come home.  I feel like I go weeks without seeing you.  For what?  You said yourself that no one would find the way in unless they were looking for it.  The least these people could do is give you a decent place to rest while you’re here.  You should be home with your family.  We can find another way.  Come home.\\n\\nYours,\\nCarole\"."]
+			"events": ["print The LETTER reads,\n\nDear Tuck,\nPlease come home.  I feel like I go weeks without seeing you.  For what?  You said yourself that no one would find the way in unless they were looking for it.  The least these people could do is give you a decent place to rest while you’re here.  You should be home with your family.  We can find another way.  Come home.\n\nYours,\nCarole"]
 			}
 		}
 }, {
@@ -563,10 +563,10 @@
 			"events": ["print Nothing happens."]
 			},
 		"INSERT 9338": {
-			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM.", "move player to safe"]
+			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM."]
 			},
 		"INSERT YEET": {
-			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM.", "move player to safe"]
+			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM."]
 		}
 	}
 },{
