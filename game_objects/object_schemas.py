@@ -160,7 +160,7 @@ class RoomSchema(Schema):
     setup_discard_list = fields.List(Str())
     room_list = fields.List(fields.Nested(RoomConnectorSchema))
     events = fields.Dict(keys=Str(), values=fields.Nested(EventSchema))
-    intro = Bool()
+    special_intro = fields.Bool()
 
     class Meta:
         ordered = True

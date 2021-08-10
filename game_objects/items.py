@@ -19,13 +19,25 @@ class Item:
         for e in self.events.keys():
             self.events[e].set_verb_and_synonyms(e)
 
-    def get_event_from_verb(self, verb) -> Optional[Event]:
-        if verb in self.events:
-            return self.events[verb]
+    def get_event_from_verb(self, key) -> Optional[Event]:
+
+        if key in self.events:
+            return self.events[key]
+
+        if len(key.split(sep=",")) > 1:
+            verb = key.split(sep=",")[0]
+            item = "," + key.split(sep=",")[1]
+        else:
+            verb = key
+            item = ""
 
         for e in self.events.values():
             if verb in e.synonyms:
-                return e
+                if f"{e.verb}{item}" in self.events:
+                    return self.events[f"{e.verb}{item}"]
+
+
+
 
         print_warning(f"No verb or synonym found for {verb} for item {self}")
         return None

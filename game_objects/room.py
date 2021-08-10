@@ -18,7 +18,7 @@ class Room:
                  room_list: List[RoomConnector] = [],
                  events: Dict[str, Event] = {},
                  setup_discard_list: List[str] = [],
-                 intro: bool = False):
+                 special_intro: bool = False):
 
         self.name: str = name
         self.display_name = display_name
@@ -39,7 +39,7 @@ class Room:
         self.events = events
         self.cached_item_event_synonym_mapping: Dict[str, str] = {}
         self.setup_discard_list = setup_discard_list
-        self.special_intro = intro  # For Foyer and Guest Bedroom special intros
+        self.special_intro = special_intro
 
     # initialize rooms
     def setup_on_start(self):
@@ -177,13 +177,13 @@ class Room:
                 if self.display_name == "FOYER":
                     self.special_intro = False
                     self.visited = True
-                    return foyer_intro + "\n\n" + self.long_description + "\n" + self.room_list_narration()
+                    return foyer_intro + "\n\n" + self.long_description + "\n"
                 # Show special intro until user gets past guard.  Guard event will trigger special_intro setting change
                 elif self.display_name == "GUEST BEDROOM":
-                    return guest_bed_intro + "\n\n" + self.room_list_narration()
+                    return guest_bed_intro + "\n\n"
             else:
                 self.visited = True
-                return self.long_description + "\n" + self.room_list_narration()
+                return self.long_description + "\n"
 
     def get_discard_narration(self) -> str:
         discarded_count = len(self.discarded_items)
