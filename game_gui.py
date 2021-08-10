@@ -314,10 +314,6 @@ class GameGUI:
             game_text = game_text[:idx]
             self.game_win = True
 
-        print('-----------------')
-        print(game_text)
-        print('-----------------')
-
         # check for \n as they don't play nicely with pygame rendering
         # if \n, split text into a list of single lines to be displayed
         if len(game_text) > max_chars:
