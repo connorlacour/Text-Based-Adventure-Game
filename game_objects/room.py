@@ -168,7 +168,7 @@ class Room:
         foyer_intro = "You enter Chateau Prime in the dead of night.  Friends, family, and neighbors have all suffered at the hands of corporate greed.  This is the home of one of the men who profited from their loss.  Not his primary residence, you scoff to yourself.  But you're sure there's enough money in there to change the lives of your friends and family.\n\nYour mission: Find the safe to retrieve enough money to return to the people in your town."
         guest_bed_intro = "As soon as you enter the GUEST BEDROOM, you spot a guard lying on the bed.  His eyes pop open in surprise at your entrance, and he jumps up from his rest.  You notice his eyes dart sheepishly to the bed before he marches over to you.\n\n 'This is private property.  You can't be here,' he growls, grabbing your arm.  Whether he's angrier at your intrusion or the fact that you caught him sleeping is unclear.\n\nYou've been caught.  As you think of something to get away from this guard, you size up your odds against him.  He's a large man, and while he doesn't seem like someone who wants to fight, you can tell there's strength behind his bulk.  You notice his name badge says, 'Tuck Abbot'."
 
-        if self.visited:
+        if self.visited and not self.special_intro:
             narration = f"{self.short_description} {self.item_list_narration()}{self.get_discard_narration()}\n{self.       room_list_narration()}"
             return narration
         else:

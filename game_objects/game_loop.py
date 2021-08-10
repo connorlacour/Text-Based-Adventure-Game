@@ -26,7 +26,6 @@ def get_next_narration(user_text) -> str:
 
     elif verb in look_synonyms or active_object == "INVENTORY" or verb == "INVENTORY":
         if active_object == "" and verb != "INVENTORY":
-            player_location.room.visited = False
             return "You LOOK AROUND."
         elif active_object == "INVENTORY" or verb == "INVENTORY":
             return print_inventory()
