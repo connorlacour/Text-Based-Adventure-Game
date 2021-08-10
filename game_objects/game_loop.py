@@ -90,7 +90,7 @@ def look_at_object(obj_name):
     if obj is not None:
         return obj.description
     else:
-        return "There is no {obj_name} to look at."
+        return f"There is no {obj_name} to look at."
 
 
 def take_object(verb, object_name):
