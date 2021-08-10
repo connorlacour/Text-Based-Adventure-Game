@@ -22,7 +22,7 @@ class MainMenuGUI:
 
         # initialize basic screen components
         game.init()
-        game.display.set_caption('GAME TITLE')
+        game.display.set_caption('Justified Thief Parody')
 
         # fill background with brown
         background = game.Surface(self.surface.get_size())
@@ -129,8 +129,12 @@ class MainMenuGUI:
         Performs rendering for Game Title text
         """
         font = game.font.SysFont('dubai', 95)
-        img = font.render('G A M E T I T L E', True, self.colors['off_white'])
-        self.surface.blit(img, (60, 75))
+        img = font.render('J U S T I F I E D', True, self.colors['off_white'])
+        img2 = font.render('T H I E F', True, self.colors['off_white'])
+        img3 = font.render('P A R O D Y', True, self.colors['off_white'])
+        self.surface.blit(img, (100, 50))
+        self.surface.blit(img2, (220, 140))
+        self.surface.blit(img3, (165, 230))
 
         # To get available fonts..
         #

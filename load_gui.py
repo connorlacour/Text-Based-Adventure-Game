@@ -65,7 +65,7 @@ class LoadGameGUI:
 
         # initialize basic screen components
         game.init()
-        game.display.set_caption('GAME TITLE')
+        game.display.set_caption('Justified Thief Parody')
 
         # fill background with brown
         background = game.Surface(self.surface.get_size())
@@ -200,6 +200,9 @@ class LoadGameGUI:
 
     def generate_load_dict(self):
         count = 0
+
+        if 'saves' not in os.listdir(base_dir):
+            os.mkdir('saves')
 
         for save in os.listdir(saves):
             save_date = datetime.fromtimestamp(os.path.getmtime(

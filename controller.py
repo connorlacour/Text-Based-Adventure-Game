@@ -99,6 +99,7 @@ def load_game() -> None:
         print("loading -> ", load)
         music.stop_main_theme()
         sleep(3)
+        music.start_in_game_music()
         start_game(is_load=True, load_name=load)
 
 
