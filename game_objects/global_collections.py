@@ -114,7 +114,7 @@ def setup_rooms_and_items(i: List[Item], r: List[Room], starting_player_location
     for room in rooms.values():
         room.setup_on_start()
 
-        player_location.set(rooms[starting_player_location])
+    player_location.set(rooms[starting_player_location])
     parse_cmd.setup_parser()
 
 
