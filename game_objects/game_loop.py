@@ -60,9 +60,7 @@ def get_next_narration(user_text) -> str:
         return drop_object(active_object)
 
     else:
-        start_time = time.time()
         narration = resolve_event_item(verb, active_object, passive_object)
-        print("Resolve event --- %s seconds ---" % (time.time() - start_time))
 
         if narration == "":
             narration = f"You try to {verb} to no avail."
