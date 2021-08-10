@@ -7,7 +7,7 @@ go_synonyms = {
 }
 
 look_synonyms = {
-    "LOOK", "CHECK", "CHECK OUT", "EXAMINE", "INSPECT"
+    "LOOK", "CHECK", "CHECK OUT", "EXAMINE", "INSPECT", "WHERE"
 }
 
 take_synonyms = {

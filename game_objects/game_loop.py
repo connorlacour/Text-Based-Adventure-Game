@@ -25,12 +25,11 @@ def get_next_narration(user_text) -> str:
     elif verb in go_synonyms:
         return do_direction_command(verb, direction, active_object)
 
-    elif verb in look_synonyms or active_object == "INVENTORY":
-
-        if active_object == "":
+    elif verb in look_synonyms or active_object == "INVENTORY" or verb == "INVENTORY":
+        if active_object == "" and verb != "INVENTORY":
             player_location.room.visited = False
             return "You LOOK AROUND."
-        elif active_object == "INVENTORY":
+        elif active_object == "INVENTORY" or verb == "INVENTORY":
             return print_inventory()
         else:
             return look_at_object(active_object)

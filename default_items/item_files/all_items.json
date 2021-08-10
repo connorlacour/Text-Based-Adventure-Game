@@ -3,7 +3,12 @@
 	"display_name": "NOTEPAD",
 	"article": "the",
 	"description": "The NOTEPAD is blank.",
-	"type": "Inventory"
+	"type": "Inventory",
+	"events": {
+		"READ": {
+			"events": ["print The rest of the NOTEPAD is blank, except for the last page which has a poorly drawn clown."]
+			}
+		}
 }, {
 	"name": "glove",
 	"display_name": "GLOVE",
@@ -232,12 +237,7 @@
 	"display_name": "SMALL TABLE",
 	"article": "the",
 	"description": "On the SMALL TABLE is a blank NOTEPAD that appears to have had the top page hastily ripped off.",
-	"type": "Scenery",
-	"events": {
-		"READ": {
-			"events": ["print The rest of the NOTEPAD is blank, except for the last page which has a poorly drawn clown."]
-			}
-		}
+	"type": "Scenery"
 },{
     "name": "desk",
 	"display_name": "DESK",
