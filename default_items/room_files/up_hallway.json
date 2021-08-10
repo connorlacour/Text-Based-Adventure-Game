@@ -11,7 +11,7 @@
 	"display_name": "UPSTAIRS HALLWAY",
 	"room_list": [{
 		"known_to_player": true,
-		"narrative_text": "stairs in the EAST wall leading down to the DOWNSTAIRS HALLWAY and ",
+		"narrative_text": " Stairs in the EAST wall leading down to the DOWNSTAIRS HALLWAY and ",
 		"article": "the",
 		"room_name": "downstairs_hallway",
 		"direction": "EAST"

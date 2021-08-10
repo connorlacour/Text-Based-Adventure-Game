@@ -177,6 +177,7 @@ class Room:
                 if self.display_name == "FOYER":
                     self.special_intro = False
                     self.visited = True
+
                     return foyer_intro + "\n\n" + self.long_description + "\n"
                 # Show special intro until user gets past guard.  Guard event will trigger special_intro setting change
                 elif self.display_name == "GUEST BEDROOM":
