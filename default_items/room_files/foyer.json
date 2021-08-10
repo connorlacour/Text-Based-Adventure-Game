@@ -23,5 +23,5 @@
 		"room_name": "closet",
 		"direction": "EAST"
 	}],
-	"intro": true
+	"special_intro": true
 }]

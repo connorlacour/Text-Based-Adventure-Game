@@ -25,6 +25,8 @@ class GameGUI:
         self.game_start = True
         self.is_load = is_load
         self.load_name = load_name
+        self.game_over = False
+        self.game_win = False
 
     def main(self) -> str:
         """
@@ -43,7 +45,7 @@ class GameGUI:
 
         # initialize basic screen components
         game.init()
-        game.display.set_caption('GAME TITLE')
+        game.display.set_caption('Justified Thief Parody')
 
         # fill background with black
         background = game.Surface(self.surface.get_size())
@@ -202,12 +204,6 @@ class GameGUI:
         if not self.game_typing:
             if event.key == game.K_RETURN:
 
-                # # TESTING
-                # if self.user_entry == "_game_over_":
-                #     return self.user_entry
-                # if self.user_entry == "_game_win_":
-                #     return self.user_entry
-
                 # append to scroll var
                 self.scroll.text_in_scroll[-1] += self.user_entry
                 self.scroll.text_in_scroll.append('')
@@ -269,6 +265,7 @@ class GameGUI:
             game_text = self.parse_game_text(init_text=init_text)
         else:
             game_text = self.parse_game_text()
+
         self.render_game_text(text_list=game_text)
 
     def parse_game_text(self, init_text='') -> list:
@@ -292,11 +289,6 @@ class GameGUI:
                        'accounts for where the last space char exists so ' \
                        'words do not get split in the middle'
 
-        if init_text == '_game_over_':
-            self.game_over()
-        if init_text == '_game_win_':
-            self.game_win()
-
         caps = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
                 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
                 'Y', 'Z']
@@ -311,8 +303,16 @@ class GameGUI:
 
         if game_text.lower().startswith('you go') \
             or game_text.lower().startswith('you look around'):
-            print("here")
             game_text += '\n\n' + player_location.room.get_room_narration()
+
+        if '_game_over_' in game_text:
+            idx = game_text.index('_game_over_')
+            game_text = game_text[:idx]
+            self.game_over = True
+        elif '_game_win_' in game_text:
+            idx = game_text.index('_game_win_')
+            game_text = game_text[:idx]
+            self.game_win = True
 
         # check for \n as they don't play nicely with pygame rendering
         # if \n, split text into a list of single lines to be displayed
@@ -336,7 +336,7 @@ class GameGUI:
 
                     for char in game_text[split_index[x]:y]:
                         if char in caps:
-                            max_chars -= 0.75
+                            max_chars -= 0.7
 
                     max_chars = ceil(max_chars)
 
@@ -347,9 +347,26 @@ class GameGUI:
 
                         to_list = game_text[split_index[x]:split_index[x + 1]]
                     else:
-                        parse_done = True
                         split_index.append(y)
                         to_list = game_text[split_index[x]:split_index[x + 1]]
+                        if '\\n' in to_list:
+                            nl_idx = to_list.index('\\n')
+                            split_index[x + 1] = nl_idx + split_index[x]
+                            split_index.append(y)
+                            game_text = game_text[:split_index[x + 1]] + \
+                                        game_text[(split_index[x + 1] + 2):]
+                            to_list = game_text[
+                                      split_index[x]:split_index[x + 1]]
+                        if '\n' in to_list:
+                            nl_idx = to_list.index('\n')
+                            split_index[x + 1] = nl_idx + split_index[x]
+                            split_index.append(y)
+                            game_text = game_text[:split_index[x + 1]] + \
+                                        game_text[(split_index[x + 1] + 1):]
+                            to_list = game_text[
+                                      split_index[x]:split_index[x + 1]]
+                        else:
+                            parse_done = True
 
                 else:
                     y = split_index[x] + max_chars
@@ -368,7 +385,12 @@ class GameGUI:
                     split_index.append(game_text[split_index[x]:y].
                                        rindex(' ') + split_index[x] + 1)
                     to_list = game_text[split_index[x]:split_index[x + 1]]
-
+                if '\\n' in to_list:
+                    nl_idx = to_list.index('\\n')
+                    split_index[x + 1] = nl_idx + split_index[x]
+                    game_text = game_text[:split_index[x + 1]] + \
+                                game_text[(split_index[x + 1] + 2):]
+                    to_list = game_text[split_index[x]:split_index[x + 1]]
                 if '\n' in to_list:
                     nl_idx = to_list.index('\n')
                     split_index[x + 1] = nl_idx + split_index[x]
@@ -379,20 +401,42 @@ class GameGUI:
                 text_list.append(to_list)
                 x += 1
         else:
-            text_list.append(game_text)
+
+            no_newline = True
+            for char in game_text:
+                if char == '\n':
+                    no_newline = False
+            if no_newline:
+                text_list.append(game_text)
+            else:
+                split_index: list = [0, len(game_text)]
+                parse_done = False
+                x = 0
+                y = len(game_text)
+                to_list = game_text
+                while not parse_done:
+                    if '\n' in to_list:
+                        nl_idx = to_list.index('\n')
+                        split_index[x + 1] = nl_idx + split_index[x]
+                        split_index.append(y)
+                        game_text = game_text[:split_index[x + 1]] + \
+                                    game_text[(split_index[x + 1] + 1):]
+                        to_list = game_text[split_index[x]:split_index[x+1]]
+                    if '\\n' in to_list:
+                        nl_idx = to_list.index('\\n')
+                        split_index[x + 1] = nl_idx + split_index[x]
+                        split_index.append(y)
+                        game_text = game_text[:split_index[x + 1]] + \
+                                    game_text[(split_index[x + 1] + 2):]
+                        to_list = game_text[split_index[x]:split_index[x+1]]
+                    else:
+                        to_list = game_text[split_index[x]:split_index[x+1]]
+                        parse_done = True
+
+                    text_list.append(to_list)
+                    x += 1
 
         return text_list
-
-    def game_over(self):
-        window = Rect(200, 200, 400, 400)
-        outline = Rect(204, 204, 392, 392)
-
-        game.draw.rect(self.surface, self.colors["grey"], window)
-        game.draw.rect(self.surface, self.colors["dark_grey"], outline,
-                       width=3)
-
-    def game_win(self):
-        pass
 
     def render_game_text(self, text_list: list) -> None:
         """
@@ -457,6 +501,11 @@ class GameGUI:
             self.handle_keydown_event()
         returns None
         """
+        if self.game_over:
+            return '_game_over_'
+        if self.game_win:
+            return '_game_win_'
+
         if event.type == game.QUIT:
             game.quit()
             sys.exit()
@@ -541,16 +590,16 @@ class GameGUI:
             self.scroll_page = 0
             self.set_game_screen()
             status = self.handle_text_entry(event=events)
-            if status == '_game_over_':
-                return status
-            if status == '_game_win_':
-                return status
+            if self.game_over:
+                return '_game_over_'
+            if self.game_win:
+                return '_game_win_'
 
         if events.key == game.K_RETURN and self.game_typing:
             self.render_text_entry_box()
             game.display.update()
             status = self.handle_game_text()
-            if status == '_game_over_':
-                return status
-            if status == '_game_win_':
-                return status
+            if self.game_over:
+                return '_game_over_'
+            if self.game_win:
+                return '_game_win_'

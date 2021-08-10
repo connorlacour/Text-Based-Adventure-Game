@@ -12,7 +12,9 @@
 	"type": "Inventory",
     "events": {
 		"WEAR": {
-			"events": ["print You are now wearing the glove."]
+			"events": ["print You are now wearing the glove.",
+				       "move glove to player_inventory"],
+			"repeatable": false
 		},
 		"TAKE OFF": {
 			"events": ["print You are no longer gloved."]
@@ -160,7 +162,15 @@
 	"display_name": "COAT",
 	"article": "a",
 	"description": "You search the COAT for clues about the owner.  As you dig around, your hand finds a piece of paper with a LETTER written on it.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"WEAR": {
+			"events": ["print You don't have the confidence to pull it off."]
+		},
+		"TAKE OFF": {
+			"events": ["print You aren't wearing the coat."]
+		}
+	}
 },{
     "name": "china_cabinet",
 	"display_name": "CHINA CABINET",

@@ -27,7 +27,7 @@ press_synonyms = {
 }
 
 fight_synonyms = {
-     "FIGHT WITH", "ATTACK", "BATTLE", "CHALLENGE", "RESIST", "BRAWL", "DUEL", "FEUD", "QUARREL", "SPAR", "STRUGGLE", "WRESTLE", "BOX"
+     "FIGHT WITH", "ATTACK", "BATTLE", "CHALLENGE", "RESIST", "BRAWL", "DUEL", "FEUD", "QUARREL", "SPAR", "STRUGGLE", "WRESTLE", "BOX", "PUNCH"
 }
 
 eat_synonyms = {

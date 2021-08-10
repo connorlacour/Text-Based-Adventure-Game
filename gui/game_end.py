@@ -17,7 +17,7 @@ class GameEnd:
     def main(self):
         # initialize basic screen components
         game.init()
-        game.display.set_caption('GAME TITLE')
+        game.display.set_caption('Justified Thief Parody')
 
         # fill background with black
         background = game.Surface(self.surface.get_size())

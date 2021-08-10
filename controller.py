@@ -99,12 +99,12 @@ def load_game() -> None:
         print("loading -> ", load)
         music.stop_main_theme()
         sleep(3)
+        music.start_in_game_music()
         start_game(is_load=True, load_name=load)
 
 
 def end(status) -> None:
-    music.stop_in_game_music()
-    sleep(3)
+    music.in_game.stop()
     music.start_main_theme()
     end_return = game_end.GameEnd(status).main()
     if end_return == 'load':
