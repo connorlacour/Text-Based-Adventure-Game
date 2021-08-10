@@ -1,6 +1,4 @@
 from parse_cmd import *
-import sys
-sys.path.append('../')
 from game_objects.event import *
 from game_objects.synonyms import *
 from game_objects.global_collections import *
