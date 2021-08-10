@@ -4,7 +4,7 @@
         "fireplace": "A FIREPLACE is set in the WEST wall",
         "sword": " with a SWORD above it",
         "paper": ". A coffee table with a STRIP OF PAPER on it rests in the middle of the room.",
-		"burnt_note": ""
+		"burnt_scrap": ""
     },
 	"short_description": "You are in the living room. ",
 	"article": "the",
