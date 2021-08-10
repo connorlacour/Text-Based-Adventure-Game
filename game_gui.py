@@ -43,7 +43,7 @@ class GameGUI:
 
         # initialize basic screen components
         game.init()
-        game.display.set_caption('GAME TITLE')
+        game.display.set_caption('Justified Thief Parody')
 
         # fill background with black
         background = game.Surface(self.surface.get_size())
@@ -269,6 +269,7 @@ class GameGUI:
             game_text = self.parse_game_text(init_text=init_text)
         else:
             game_text = self.parse_game_text()
+
         self.render_game_text(text_list=game_text)
 
     def parse_game_text(self, init_text='') -> list:
@@ -313,6 +314,11 @@ class GameGUI:
             or game_text.lower().startswith('you look around'):
             print("here")
             game_text += '\n\n' + player_location.room.get_room_narration()
+
+        print("text: ")
+        print("-----------")
+        print(game_text)
+        print("-----------")
 
         # check for \n as they don't play nicely with pygame rendering
         # if \n, split text into a list of single lines to be displayed
@@ -379,7 +385,36 @@ class GameGUI:
                 text_list.append(to_list)
                 x += 1
         else:
-            text_list.append(game_text)
+
+            no_newline = True
+            for char in game_text:
+                if char == '\n':
+                    no_newline = False
+            if no_newline:
+                text_list.append(game_text)
+            else:
+                split_index: list = [0, len(game_text)]
+                parse_done = False
+                x = 0
+                y = len(game_text)
+                to_list = game_text
+                while not parse_done:
+                    if '\n' in to_list:
+                        nl_idx = to_list.index('\n')
+                        print(split_index)
+                        split_index[x + 1] = nl_idx + split_index[x]
+                        print(split_index)
+                        split_index.append(y)
+                        print(split_index)
+                        game_text = game_text[:split_index[x + 1]] + \
+                                    game_text[(split_index[x + 1] + 1):]
+                        to_list = game_text[split_index[x]:split_index[x+1]]
+                    else:
+                        to_list = game_text[split_index[x]:split_index[x+1]]
+                        parse_done = True
+
+                    text_list.append(to_list)
+                    x += 1
 
         return text_list
 
