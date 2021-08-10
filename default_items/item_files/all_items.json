@@ -3,7 +3,39 @@
 	"display_name": "NOTEPAD",
 	"article": "the",
 	"description": "The NOTEPAD is blank.",
-	"type": "Inventory"
+	"type": "Inventory",
+	"events": {
+		"EAT": {
+			"events": ["print You COULD $$verb the NOTEPAD, but paper tasted better to you when you were five."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a NOTEPAD."]
+		},
+		"READ": {
+			"events": ["print The rest of the NOTEPAD is blank, except for the last page which has a poorly drawn clown."]
+			},
+		"PULL": {
+			"events": ["print You $$verb the NOTEPAD closer."]
+			},
+		"TALK": {
+			"events": ["print The NOTEPAD can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a NOTEPAD."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a NOTEPAD."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a NOTEPAD."]
+		},
+		"USE": {
+			"events": ["print $$verb how?  A blank NOTEPAD is nothing without a pen."]
+		},											
+		"CLOSE": {
+			"events": ["print You can't $$verb a NOTEPAD."]
+		}
+	}
 }, {
 	"name": "glove",
 	"display_name": "GLOVE",
@@ -16,6 +48,36 @@
 		},
 		"TAKE OFF": {
 			"events": ["print You are no longer gloved."]
+		},
+		"EAT": {
+			"events": ["print You can't $$verb a GLOVE."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a GLOVE."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a GLOVE."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the GLOVE closer."]
+		},
+		"TALK": {
+			"events": ["print The GLOVE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a GLOVE."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the GLOVE.  The inside is lined with a soft, silky material."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a GLOVE."]
+		},
+		"USE": {
+			"events": ["print You put on the GLOVE."]
+		},											
+		"CLOSE": {
+			"events": ["print You can't $$verb a GLOVE."]
 		}
 	}
 }, {
@@ -27,13 +89,43 @@
 	"events": {
 		"READ": {
 			"events": ["print The LETTER reads,\\n\\nDear Tuck,\\nPlease come home.  I feel like I go weeks without seeing you.  For what?  You said yourself that no one would find the way in unless they were looking for it.  The least these people could do is give you a decent place to rest while you’re here.  You should be home with your family.  We can find another way.  Come home.\\n\\nYours,\\nCarole\"."]
-			}
+		},
+		"EAT": {
+			"events": ["print You don't really want to $$verb the LETTER."]
+		},
+		"ENTER": {
+			"events": ["print If only Mary Poppins were here so you could $$verb the LETTER."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the LETTER closer."]
+		},
+		"TALK": {
+			"events": ["print The LETTER can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a LETTER."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the LETTER."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a LETTER."]
+		},
+		"USE": {
+			"events": ["print $$verb how?"]
+		},
+		"USE,GUARD": {
+			"events": ["print You remember the letter from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the letter to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the letter several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "change guest_bedroom special_intro to false"]
+		},
+		"CLOSE": {
+			"events": ["print You $$verb the LETTER."]
 		}
+	}
 }, {
 	"name": "sword",
 	"display_name": "SWORD",
 	"article": "the",
-	"description": "The hilt of the SWORD is etched with two dragons and the blade has a string of kanji going down one side.  It is light and effortless to swing.",
+	"description": "The hilt of the SWORD is etched with two dragons and the blade has a string of characters from a distant land going down one side.  It is light and effortless to swing.",
 	"type": "Inventory",
     "events": {
 		"USE": {
@@ -41,14 +133,73 @@
 		},
 		"USE,GUARD": {
 			"events": ["print You swing the SWORD, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"]
-			}
+		},
+		"EAT": {
+			"events": ["print You don't want to $$verb a SWORD."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a SWORD."]
+		},
+		"READ": {
+			"events": ["print The characters on the SWORD are from a distant land and you do not understand what they say."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the SWORD closer."]
+		},
+		"TALK": {
+			"events": ["print The SWORD can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a SWORD."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a SWORD."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a SWORD."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a SWORD."]
+		}
 	}
 }, {
 	"name": "burnt_note",
 	"display_name": "BURNT NOTE",
 	"article": "a",
 	"description": "Most of the note has been burned beyond recognition, but you think you make out the letters Y - E - E - T.",
-	"type": "Inventory"
+	"type": "Inventory",
+    "events": {
+		"EAT": {
+			"events": ["print If you don't like burnt toast, you definitely don't want to $$verb a BURNT NOTE."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a BURNT NOTE."]
+		},
+		"READ": {
+			"events": ["print Most of the note has been burned beyond recognition, but you think you make out the letters Y - E - E - T."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the BURNT NOTE closer."]
+		},
+		"TALK": {
+			"events": ["print The BURNT NOTE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a BURNT NOTE."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a BURNT NOTE."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a BURNT NOTE."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a BURNT NOTE."]
+		},											
+		"CLOSE": {
+			"events": ["print You can't $$verb a BURNT NOTE."]
+		}
+	}
 }, {
 	"name": "fast_food",
 	"display_name": "FAST FOOD",
@@ -58,6 +209,33 @@
     "events": {
 		"EAT": {
 			"events": ["print The FAST FOOD tastes cold and leaves you feeling hungrier than you were before."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb FAST FOOD."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb FAST FOOD."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the FAST FOOD closer."]
+		},
+		"TALK": {
+			"events": ["print The FAST FOOD can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb FAST FOOD."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the FAST FOOD."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the FAST FOOD."]
+		},
+		"USE": {
+			"events": ["print Do you want to EAT the FAST FOOD?"]
+		},											
+		"CLOSE": {
+			"events": ["print You can't $$verb the FAST FOOD."]
 		}
 	}
 }, {
@@ -68,22 +246,116 @@
 	"type": "Inventory",
     "events": {
 		"EAT": {
-			"events": ["print You take a bite of the brightest red APPLE from the basket.  As you chew, you suddenly feel dizzy.  While your vision goes dark, you realize: the APPLE was poisoned.", "game over"]
-			}
-		}
+			"events": ["print You take a bite of the brightest red APPLE from the basket.  As you chew, you suddenly feel dizzy.  While your vision goes dark, you realize: the APPLE was poisoned.  You should have learned better from Snow White.", "game over"]
+			},
+		"ENTER": {
+			"events": ["print You can't $$verb an APPLE."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb an APPLE."]
+		},
+		"PULL": {
+			"events": ["print You $$verb an APPLE closer."]
+		},
+		"TALK": {
+			"events": ["print The APPLE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb an APPLE.  Even doctors are no match."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb an APPLE."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb an APPLE."]
+		},
+		"USE": {
+			"events": ["print Do you want to EAT the APPLE?"]
+		},											
+		"CLOSE": {
+			"events": ["print You can't $$verb an APPLE."]
+		}	
+	}
 }, {
 	"name": "small_pouch",
 	"display_name": "SMALL POUCH",
 	"article": "the",
 	"description": "The SMALL POUCH is small enough to fit in your pocket, but it contains a handful of bills rolled up.  It is not the large score you are after, but it is something to add to the pile.",
 	"can_take": false,
-	"type": "Inventory"
+	"type": "Inventory",
+    "events": {
+		"EAT": {
+			"events": ["print You can't $$verb a SMALL POUCH."]
+			},
+		"ENTER": {
+			"events": ["print You can't $$verb a SMALL POUCH."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a SMALL POUCH."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the SMALL POUCH closer."]
+		},
+		"TALK": {
+			"events": ["print The SMALL POUCH can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a SMALL POUCH."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the SMALL POUCH to see a handful of gold coins."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a SMALL POUCH."]
+		},
+		"USE": {
+			"events": ["print $$verb how?  Are you trying to bribe someone?"]
+		},											
+		"CLOSE": {
+			"events": ["print You $$verb the SMALL POUCH."]
+		}	
+	}
 }, {
 	"name": "key",
 	"display_name": "KEY",
 	"article": "the",
 	"description": "A small key.",
-	"type": "Inventory"
+	"type": "Inventory",
+    "events": {
+		"EAT": {
+			"events": ["print You can't $$verb a KEY."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a KEY."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a KEY."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the KEY closer."]
+		},
+		"TALK": {
+			"events": ["print The KEY can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a KEY."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a KEY."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a KEY."]
+		},
+		"USE": {
+			"events": ["print $$verb on what?"]
+		},
+		"USE,CHINA_CABINET": {
+			"events": ["print You unlock the china cabinet.", "change small_pouch can_take to true", "change china_cabinet description to `The CHINA CABINET is unlocked.`"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a KEY."]
+		}	
+	}
 }, {
 	"name": "portable_radio",
 	"display_name": "PORTABLE RADIO",
@@ -100,9 +372,35 @@
 			"events": [
 				"print You hit the off button."
 			]
+		},
+		"EAT": {
+			"events": ["print You can't $$verb a PORTABLE RADIO."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a PORTABLE RADIO."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a PORTABLE RADIO."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the PORTABLE RADIO closer."]
+		},
+		"TALK": {
+			"events": ["print The PORTABLE RADIO can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a PORTABLE RADIO."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a PORTABLE RADIO."]
+		},
+		"USE": {
+			"events": ["print Do you want to TURN ON the PORTABLE RADIO?"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a PORTABLE RADIO."]
 		}
 	}
-
 }, {
 	"name": "bottle",
 	"display_name": "BOTTLE",
@@ -112,8 +410,35 @@
     "events": {
 		"OPEN": {
 			"events": ["print You open the bottle of pills to find a PILL inside.  You wonder what it does."]
-			}
-		}
+			},
+		"EAT": {
+			"events": ["print You can't $$verb a BOTTLE."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a BOTTLE."]
+		},
+		"READ": {
+			"events": ["print The BOTTLE is unmarked."]
+			},
+		"PULL": {
+			"events": ["print You $$verb the BOTTLE closer."]
+			},
+		"TALK": {
+			"events": ["print The BOTTLE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a BOTTLE."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a BOTTLE."]
+		},
+		"USE": {
+			"events": ["print $$verb how? Do you want to OPEN or TAKE it?"]
+		},											
+		"CLOSE": {
+			"events": ["print You $$verb the BOTTLE."]
+		}		
+	}
 }, {
 	"name": "pill",
 	"display_name": "PILL",
@@ -123,8 +448,38 @@
     "events": {
 		"SWALLOW": {
 			"events": ["print You swallow one of the unmarked pills.  You continue walking around for a bit before the house seems like it’s moving in a circle.  Colors pop out at you in bright detail and you swear you hear a dragon snarling in a nearby room.  The next thing you know the floor is rushing up at you and hits your head, knocking you out.  You wake up hours later with a dry mouth and find yourself in a jail cell.", "game over"]
-			}
-		}
+		},
+		"EAT": {
+			"events": ["print You swallow one of the unmarked pills.  You continue walking around for a bit before the house seems like it’s moving in a circle.  Colors pop out at you in bright detail and you swear you hear a dragon snarling in a nearby room.  The next thing you know the floor is rushing up at you and hits your head, knocking you out.  You wake up hours later with a dry mouth and find yourself in a jail cell.", "game over"]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a PILL."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a PILL."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the PILL closer."]
+			},
+		"TALK": {
+			"events": ["print The PILL can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a PILL."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a PILL."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a PILL."]
+		},
+		"USE": {
+			"events": ["print $$verb how? Do you want to SWALLOW the PILL?"]
+		},											
+		"CLOSE": {
+			"events": ["print You can't $$verb a PILL."]
+		}	
+	}
 }, {
 	"name": "silver_key",
 	"display_name": "SILVER KEY",
@@ -135,32 +490,190 @@
     "events": {
 		"USE,LOCKBOX": {
 			"events": ["print You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood.", "game win"]
-			}
+			},
+		"EAT": {
+			"events": ["print You can't $$verb a SILVER KEY."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a SILVER KEY."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a SILVER KEY."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the SILVER KEY closer."]
+			},
+		"TALK": {
+			"events": ["print The SILVER KEY can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a SILVER KEY."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a SILVER KEY."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a SILVER KEY."]
+		},
+		"USE": {
+			"events": ["print $$verb on what?"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a SILVER KEY."]
 		}
+	}
 }, {
 	"name": "cash",
 	"display_name": "CASH",
 	"article": "the",
 	"description": "There must be more money than you ever expected to see in your lifetime right before your very eyes.",
-	"type": "Inventory"
+	"type": "Inventory",
+	"events": {
+		"EAT": {
+			"events": ["print Really?  You came all this way to $$verb the CASH?"]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb the CASH."]
+		},
+		"READ": {
+			"events": ["print The CASH has more zeroes on it than you though paper bills could have."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the CASH closer."]
+		},
+		"TALK": {
+			"events": ["print The CASH can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the CASH."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the CASH."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the CASH."]
+		},
+		"USE": {
+			"events": ["print $$verb it back home and return it to your friends and family!"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the CASH"]
+		}
+	}	
 }, {
 	"name": "gold",
 	"display_name": "GOLD",
 	"article": "the",
 	"description": "All kinds of gold coins.  Are you a modern-day Robin Hood or a pirate?  Why not both?!",
-	"type": "Inventory"
+	"type": "Inventory",
+	"events": {
+		"EAT": {
+			"events": ["print Really?  You came all this way to $$verb the GOLD?"]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb the GOLD."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb the GOLD."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the GOLD closer."]
+		},
+		"TALK": {
+			"events": ["print The GOLD can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the GOLD."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the GOLD."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the GOLD."]
+		},
+		"USE": {
+			"events": ["print $$verb it back home and return it to your friends and family!"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the GOLD"]
+		}
+	}	
 }, {
 	"name": "jewels",
 	"display_name": "JEWELS",
 	"article": "the",
 	"description": "Emeralds, Rubies, Diamonds. Oh my!",
-	"type": "Inventory"
+	"type": "Inventory",
+	"events": {
+		"EAT": {
+			"events": ["print Really?  You came all this way to $$verb the JEWELS?"]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb the JEWELS."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb the JEWELS."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the JEWELS closer."]
+		},
+		"TALK": {
+			"events": ["print The JEWELS can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the JEWELS."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the JEWELS."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the JEWELS."]
+		},
+		"USE": {
+			"events": ["print $$verb it back home and return it to your friends and family!"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the JEWELS."]
+		}
+	}
 },{
     "name": "coat",
 	"display_name": "COAT",
 	"article": "a",
 	"description": "You search the COAT for clues about the owner.  As you dig around, your hand finds a piece of paper with a LETTER written on it.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb the COAT."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb the COAT."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb the COAT."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the COAT closer."]
+		},
+		"TALK": {
+			"events": ["print The COAT can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the COAT."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the COAT."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the COAT."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the COAT.  But maybe you can LOOK AT it and find something?"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the COAT."]
+		}
+	}
 },{
     "name": "china_cabinet",
 	"display_name": "CHINA CABINET",
@@ -171,14 +684,76 @@
 		"UNLOCK": {
 			"events": ["print With what?"]},
 		"UNLOCK,KEY": {
-			"events": ["print You unlock the china cabinet.", "change small_pouch can_take to true", "change china_cabinet description to `The CHINA CABINET is unlocked.`"]}
-		}
+			"events": ["print You unlock the china cabinet.", "change small_pouch can_take to true", "change china_cabinet description to `The CHINA CABINET is unlocked.`", "change china_cabinet events[OPEN] to `You open the CHINA CABINET.`", "change china_cabinet events[CLOSE] to `You close the CHINA CABINET.`"]}
+		},
+		"EAT": {
+			"events": ["print You can't $$verb a CHINA CABINET."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a CHINA CABINET."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a CHINA CABINET."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a CHINA CABINET."]
+		},
+		"TALK": {
+			"events": ["print The CHINA CABINET can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a CHINA CABINET."]
+		},
+		"OPEN": {
+			"events": ["print The CHINA CABINET is locked."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a CHINA CABINET."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a CHINA CABINET."]
+		},
+		"CLOSE": {
+			"events": ["print The CHINA CABINET is locked."]
+		}	
 },{
     "name": "wall_mount",
 	"display_name": "WALL MOUNT",
 	"article": "a",
 	"description": "There are various badges hanging from the WALL MOUNT from conferences and meetings.  Hidden amongst those is a KEY.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb a WALL MOUNT."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a WALL MOUNT."]
+		},
+		"READ": {
+			"events": ["print The WALL MOUNT says Home Sweet Home."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a WALL MOUNT.  It is nailed to the wall."]
+		},
+		"TALK": {
+			"events": ["print The WALL MOUNT can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a WALL MOUNT."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a WALL MOUNT."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a WALL MOUNT."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a WALL MOUNT."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a WALL MOUNT."]
+		}
+	}	
 },{
     "name": "painting",
 	"display_name": "PAINTING",
@@ -188,14 +763,76 @@
 	"events": {
 		"ADMIRE": {
 			"events": ["print You admire the painting.  You suddenly feel more cultured."]
-			}
-		}
+			},
+		"EAT": {
+			"events": ["print You can't $$verb a PAINTING."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a PAINTING.  Even the Pevensie children only got to Narnia that way once."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a PAINTING."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a PAINTING."]
+		},
+		"TALK": {
+			"events": ["print The PAINTING can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a PAINTING."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a PAINTING."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a PAINTING."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a PAINTING."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a PAINTING."]
+		}	
+	}
 },{
     "name": "podium",
 	"display_name": "PODIUM",
 	"article": "a",
 	"description": "Looking in the glass case on the PODIUM, you see a GUEST BOOK.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb a PODIUM."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a PODIUM."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a PODIUM."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the PODIUM but it barely moves."]
+		},
+		"TALK": {
+			"events": ["print The PODIUM can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a PODIUM."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a PODIUM."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a PODIUM."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a PODIUM."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a PODIUM."]
+		}	
+	}
 },{
     "name": "guest_book",
 	"display_name": "GUEST BOOK",
@@ -205,8 +842,35 @@
 	"events": {
 		"READ": {
 			"events": ["print You'd rather not."]
-			}
+			},
+		"EAT": {
+			"events": ["print You can't $$verb a GUEST BOOK."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a GUEST BOOK."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the GUEST BOOK."]
+		},
+		"TALK": {
+			"events": ["print The GUEST BOOK can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a GUEST BOOK."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the GUEST BOOK."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a GUEST BOOK."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a GUEST BOOK."]
+		},
+		"CLOSE": {
+			"events": ["print You $$verb the GUEST BOOK."]
 		}
+	}
 },{
     "name": "chairs",
 	"display_name": "CHAIRS",
@@ -216,8 +880,38 @@
 	"events": {
 		"SIT": {
 			"events": ["print You sit. Nothing happens. You get up. Nothing happens."]
-			}
-		}
+			},
+		"READ": {
+			"events": ["print You can't $$verb CHAIRS."]
+			},
+		"EAT": {
+			"events": ["print You can't $$verb CHAIRS."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb CHAIRS."]
+		},
+		"PULL": {
+			"events": ["print You $$verb a CHAIR."]
+		},
+		"TALK": {
+			"events": ["print The CHAIRS can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb CHAIRS."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb CHAIRS."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb CHAIRS."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb CHAIRS."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb CHAIRS."]
+		}	
+	}
 },{
     "name": "small_table",
 	"display_name": "SMALL TABLE",
@@ -225,16 +919,75 @@
 	"description": "On the SMALL TABLE is a blank NOTEPAD that appears to have had the top page hastily ripped off.",
 	"type": "Scenery",
 	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb a SMALL TABLE."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a SMALL TABLE."]
+		},
 		"READ": {
-			"events": ["print The rest of the NOTEPAD is blank, except for the last page which has a poorly drawn clown."]
-			}
+			"events": ["print You can't $$verb a SMALL TABLE."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the SMALL TABLE closer."]
+		},
+		"TALK": {
+			"events": ["print The SMALL TABLE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a SMALL TABLE."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a SMALL TABLE."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a SMALL TABLE."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a SMALL TABLE."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a SMALL TABLE."]
 		}
+	}
 },{
     "name": "desk",
 	"display_name": "DESK",
 	"article": "a",
 	"description": "The DESK is relatively bare.  You see a line of walkie talkies and some pens.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb a DESK."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a DESK."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a DESK."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the DESK but it does not move."]
+		},
+		"TALK": {
+			"events": ["print The DESK can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a DESK."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the DESK drawers, but they are empty."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a DESK."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a DESK."]
+		},
+		"CLOSE": {
+			"events": ["print You $$verb the DESK drawers."]
+		}
+	}	
 },{
     "name": "guard",
 	"display_name": "GUARD",
@@ -259,14 +1012,70 @@
 		},
 		"PERSUADE,LETTER": {
 			"events": ["print You remember the letter from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the letter to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the letter several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "change guest_bedroom special_intro to false"]
-			}
+		},
+		"EAT": {
+			"events": ["print Are you a cannibal now?  He could knock you out before you got done chewing your first bite."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a GUARD."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb the GUARD."]
+		},
+		"PULL": {
+			"events": ["print You try to $$verb the GUARD. He mutters something about not being paid enough for this and tightens his grip." ]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the GUARD."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the GUARD."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the GUARD."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the GUARD."]
 		}
+	}
 },{
     "name": "night_stand",
 	"display_name": "NIGHT STAND",
 	"article": "a",
 	"description": "Opening the drawer to the NIGHT STAND, you see a glove.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb a NIGHT STAND."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a NIGHT STAND."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a NIGHT STAND."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the NIGHT STAND closer, but it barely moves."]
+		},
+		"TALK": {
+			"events": ["print The NIGHT STAND can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a NIGHT STAND."]
+		},
+		"OPEN": {
+			"events": ["print Opening the drawer to the NIGHT STAND, you see a glove."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a NIGHT STAND."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a NIGHT STAND."]
+		},
+		"CLOSE": {
+			"events": ["print You $$verb the NIGHT STAND."]
+		}
+	}	
 },{
     "name": "window",
 	"display_name": "WINDOW",
@@ -283,15 +1092,70 @@
 			"events": [
 				"print You close the window. The inside air feels stuffier than you remember."
 			]
+		},
+		"EAT": {
+			"events": ["print You can't $$verb a WINDOW."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a WINDOW."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a WINDOW."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a WINDOW."]
+		},
+		"TALK": {
+			"events": ["print The WINDOW can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a WINDOW."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a WINDOW."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a WINDOW."]
 		}
 	}
-
 },{
     "name": "shelf",
 	"display_name": "SHELF",
 	"article": "a",
 	"description": "You go to the SHELF and you see a PORTABLE RADIO and a fine collection of FUNKO POPS. You pretend the FUNKO POPS don't exist.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb a SHELF."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a SHELF."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a SHELF."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a SHELF."]
+		},
+		"TALK": {
+			"events": ["print You can't $$verb a SHELF."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a SHELF."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a SHELF."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a SHELF."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a SHELF."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a SHELF."]
+		}
+	}	
 },{
     "name": "mirror",
 	"display_name": "MIRROR",
@@ -308,9 +1172,38 @@
 			"events": [
 				"print You wink saucily at yourself."
 			]
-		}
+		},
+		"EAT": {
+			"events": ["print You can't $$verb a MIRROR."]
+		},
+		"ENTER": {
+			"events": ["print If you could $$verb the MIRROR, you probably would not like it there."]
+		},
+		"READ": {
+			"events": ["print The MIRROR has various suggestions for improving your form and, of course, ads for more classes."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a MIRROR."]
+		},
+		"TALK": {
+			"events": ["print The MIRROR can't hear you despite the fact that the person on the screen keeps talking to you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a MIRROR.  I mean, you could.  But who wants seven years of bad luck?"]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a MIRROR."]
+		},
+		"TURN ON": {
+			"events": ["print You $$verb the MIRROR"]
+		},
+		"USE": {
+			"events": ["print $$verb how?  Do you want to WORK OUT?"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a MIRROR."]
+		}	
 	}
-
 },{
     "name": "microwave",
 	"display_name": "MICROWAVE",
@@ -342,21 +1235,111 @@
 			"events": [
 				"print WHYY??? NO??"
 			]
-		}
+		},
+		"EAT": {
+			"events": ["print You can't $$verb a MICROWAVE."]
+		},
+		"ENTER": {
+			"events": ["print You won't fit in there."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a MICROWAVE."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a MICROWAVE."]
+		},
+		"TALK": {
+			"events": ["print The MICROWAVE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a MICROWAVE."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the MICROWAVE ."]
+		},
+		"USE": {
+			"events": ["print $$verb how? Do you want to COOK something?"]
+		},
+		"CLOSE": {
+			"events": ["print You $$verb the MICROWAVE."]
+		}	
 	}
 },{
     "name": "island",
 	"display_name": "ISLAND",
 	"article": "an",
 	"description": "Going over to the ISLAND, you see a bowl of fruit with vibrant red APPLES and a BLUE JAR with a paw print on it.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb an ISLAND."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb an ISLAND.  Not this kind at least."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb an ISLAND."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb an ISLAND."]
+		},
+		"TALK": {
+			"events": ["print The ISLAND can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb an ISLAND."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb an ISLAND."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb an ISLAND."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb an ISLAND."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb an ISLAND."]
+		}
+	}	
 },{
     "name": "blue_jar",
 	"display_name": "BLUE JAR",
 	"article": "a",
 	"description": "You pull back the lid on the BLUE JAR to find MILK BONES with a strong bacon smell.",
-	"type": "Scenery"
-
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb the BLUE JAR."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb the BLUE JAR."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb the BLUE JAR."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the BLUE JAR closer."]
+		},
+		"TALK": {
+			"events": ["print The BLUE JAR can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the BLUE JAR."]
+		},
+		"OPEN": {
+			"events": ["print You pull back the lid on the BLUE JAR to find MILK BONES with a strong bacon smell."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the BLUE JAR."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the BLUE JAR."]
+		},
+		"CLOSE": {
+			"events": ["print You close $$verb the BLUE JAR."]
+		}
+	}	
 },{
     "name": "milk_bone",
 	"display_name": "MILK BONE",
@@ -368,20 +1351,111 @@
 			"events": [
 				"print Wow, that's a terrible idea.  What's next? Set out on a quest to find a fire hydrant?"
 			]
-		}
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a MILK BONE."]
+		},
+		"READ": {
+			"events": ["print It says Good Dog on the MILK BONE."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the MILK BONE closer."]
+		},
+		"TALK": {
+			"events": ["print The MILK BONE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a MILK BONE."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a MILK BONE."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a MILK BONE."]
+		},
+		"USE": {
+			"events": ["print $$verb how?  Perhaps you could feed it to something?"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a MILK BONE."]
+		}	
 	}
 },{
     "name": "fireplace",
 	"display_name": "FIREPLACE",
 	"article": "the",
 	"description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT NOTE stuck between the bottom logs.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb a FIREPLACE."]
+		},
+		"ENTER": {
+			"events": ["print This isn't a magical FIREPLACE to a secret wizard's market."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a FIREPLACE."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a FIREPLACE."]
+		},
+		"TALK": {
+			"events": ["print The FIREPLACE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a FIREPLACE."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a FIREPLACE."]
+		},
+		"TURN ON": {
+			"events": ["print You don't want to $$verb the FIREPLACE.  The best theives leave no trace."]
+		},
+		"USE": {
+			"events": ["print You don't want to $$verb the FIREPLACE.  The best theives leave no trace."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a FIREPLACE."]
+		}
+	}	
 },{
     "name": "paper",
 	"display_name": "STRIP OF PAPER",
 	"article": "a",
 	"description": "As you look closer at the STRIP OF PAPER, you notice that it is a receipt from John Little’s Lock & Key.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb the STRIP OF PAPER."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb the STRIP OF PAPER."]
+		},
+		"READ": {
+			"events": ["print The strip of paper is a receipt for a walk-in safe!"]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb the STRIP OF PAPER."]
+		},
+		"TALK": {
+			"events": ["print The STRIP OF PAPER can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the STRIP OF PAPER."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the STRIP OF PAPER."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the STRIP OF PAPER."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the STRIP OF PAPER."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the STRIP OF PAPER."]
+		}
+	}	
 },{
     "name": "alarm",
 	"display_name": "ALARM",
@@ -394,14 +1468,76 @@
 		},
 		"PRESS": {
 			"events": ["print You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it is hard to resist the temptation."]
-			}
+		},
+		"EAT": {
+			"events": ["print You can't $$verb an ALARM."]
+		},
+		"ENTER": {
+			"events": ["print Nothing happens."]
+		},
+		"READ": {
+			"events": ["print There are numbers from 0-9 on the ALARM."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb the ALARM."]
+		},
+		"TALK": {
+			"events": ["print The ALARM can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the ALARM."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the ALARM."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the ALARM."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the ALARM."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the ALARM."]
 		}
+	}		
 },{
     "name": "large_poster",
 	"display_name": "LARGE POSTER",
 	"article": "a",
 	"description": "You see a poster of the night sky.  You search the poster trying to figure out what its meaning is when you recognize the bright star Vega, and from there, you trace the constellation Lyra in your mind.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb the LARGE POSTER."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb the LARGE POSTER.  Even if you could, you don't have a space suit."]
+		},
+		"READ": {
+			"events": ["print There is nothing to read - unless you count reading the stars."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb the LARGE POSTER."]
+		},
+		"TALK": {
+			"events": ["print The LARGE POSTER can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the LARGE POSTER."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the LARGE POSTER."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the LARGE POSTER."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the LARGE POSTER."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the LARGE POSTER."]
+		}
+	}	
 },{
     "name": "red_button",
 	"display_name": "RED BUTTON",
@@ -411,8 +1547,38 @@
     "events": {
 		"PRESS": {
 			"events": ["print You stand frozen in place waiting for something to happen after pressing the button.  Finally after several seconds of holding your breath in anticipation, you let out a sigh of relief that nothing happened.  No good comes from pressing red buttons, you remind yourself.  And yet, when presented with one, it is hard to resist the temptation."]
-			}
+			},
+		"EAT": {
+			"events": ["print You can't $$verb the RED BUTTON."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb the RED BUTTON."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb the RED BUTTON."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb the RED BUTTON."]
+		},
+		"TALK": {
+			"events": ["print The RED BUTTON can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the RED BUTTON."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the RED BUTTON."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the RED BUTTON."]
+		},
+		"USE": {
+			"events": ["print $$verb how? Do you want to PRESS it?"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the RED BUTTON."]
 		}
+	}
 },{
     "name": "dog",
 	"display_name": "ANGRY DOG",
@@ -439,7 +1605,37 @@
 		},
 		"FEED,APPLE": {
 			"events": ["print DOGs don't eat APPLES, stupid.  Well, they shouldn't."]
-		}
+		},
+		"EAT": {
+			"events": ["print What? NO!!!"]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a DOG."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a DOG."]
+		},
+		"PULL": {
+			"events": ["print Why would you do that?  Don't you value your fingers?"]
+		},
+		"TALK": {
+			"events": ["print The DOG can hear you, but it doesn't care about what you have to say."]
+		},
+		"FIGHT": {
+			"events": ["print You don't want to $$verb the DOG."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a DOG."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a DOG."]
+		},
+		"USE": {
+			"events": ["print The DOG does not want to be used."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a DOG."]
+		}	
 	}
 },{
     "name": "crate",
@@ -450,8 +1646,35 @@
     "events": {
 		"OPEN": {
 			"events": ["print You open the crate."]
-			}
-		}
+			},
+		"EAT": {
+			"events": ["print You can't $$verb a CRATE."]
+		},
+		"ENTER": {
+			"events": ["print You don't want to $$verb the CRATE."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a CRATE."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb the CRATE."]
+		},
+		"TALK": {
+			"events": ["print The CRATE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a CRATE."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a CRATE."]
+		},
+		"USE": {
+			"events": ["print The CRATE is currently being used by the DOG."]
+		},
+		"CLOSE": {
+			"events": ["print You close the CRATE."]
+		}		
+	}
 },{
     "name": "bed",
 	"display_name": "BED",
@@ -461,14 +1684,76 @@
 	"events": {
 		"LIE DOWN": {
 			"events": ["print A quick NAP couldn't hurt, right? The BEARS were pretty understanding with GOLDILOCKS right? On the other hand, maybe you shouldn't."]
-			}
+			},
+		"EAT": {
+			"events": ["print You can't $$verb a BED."]
+		},
+		"ENTER": {
+			"events": ["print A quick NAP couldn't hurt, right? The BEARS were pretty understanding with GOLDILOCKS right? On the other hand, maybe you shouldn't."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a BED."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a BED."]
+		},
+		"TALK": {
+			"events": ["print The BED can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a BED."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a BED."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a BED."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the BED."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a BED."]
 		}
+	}
 },{
     "name": "waste_basket",
 	"display_name": "WASTE BASKET",
 	"article": "a",
 	"description": "The WASTE BASKET is empty.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb a WASTE BASKET."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a WASTE BASKET."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a WASTE BASKET."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the WASTE BASKET closer."]
+		},
+		"TALK": {
+			"events": ["print The WASTE BASKET can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a WASTE BASKET."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a WASTE BASKET."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a WASTE BASKET."]
+		},
+		"USE": {
+			"events": ["print You think of a way to $$verb the WASTE BASKET, but come up empty."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a WASTE BASKET."]
+		}
+	}	
 },{
     "name": "medicine_cabinet",
 	"display_name": "MEDICINE CABINET",
@@ -478,7 +1763,34 @@
     "events": {
 		"OPEN": {
 			"events": ["print You open the MEDICINE CABINET and see various toiletries and vitamins.  There is a single unmarked BOTTLE on a shelf"]
-		}
+		},
+		"EAT": {
+			"events": ["print You can't $$verb a MEDICINE CABINET."]
+		},
+		"ENTER": {
+			"events": ["print You won't fit."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a MEDICINE CABINET."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a MEDICINE CABINET."]
+		},
+		"TALK": {
+			"events": ["print The MEDICINE CABINET can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a MEDICINE CABINET."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a MEDICINE CABINET."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the MEDICINE CABINET."]
+		},
+		"CLOSE": {
+			"events": ["print You $$verb the MEDICINE CABINET."]
+		}	
 	}
 },{
     "name": "trunk",
@@ -489,14 +1801,73 @@
     "events": {
 		"OPEN": {
 			"events": ["print School awards and trophies are stacked inside the TRUNK.  You see some for science projects and others for academic decathlons."]
-			}
-		}
+			},
+		"EAT": {
+			"events": ["print You can't $$verb a TRUNK."]
+		},
+		"ENTER": {
+			"events": ["print The TRUNK is too crowded."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a TRUNK."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the TRUNK, but it is heavy."]
+		},
+		"TALK": {
+			"events": ["print The TRUNK can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a TRUNK."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a TRUNK."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the TRUNK."]
+		},
+		"CLOSE": {
+			"events": ["print You $$verb the TRUNK."]
+		}		
+	}
 },{
     "name": "bookcase",
 	"display_name": "BOOKCASE",
 	"article": "a",
 	"description": "Numerous books fill the BOOKCASE in front of you.  You see books like GULLIVER’S TRAVELS, THE ODYSSEY, and CRIME AND PUNISHMENT and more modern works like NINETEEN EIGHTY-FOUR and even HITCHHIKER’S GUIDE TO THE GALAXY.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb a BOOKCASE."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb the BOOKCASE."]
+		},
+		"READ": {
+			"events": ["print You want $$verb an entire BOOKCASE?"]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb the BOOKCASE."]
+		},
+		"TALK": {
+			"events": ["print The BOOKCASE can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the BOOKCASE."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the BOOKCASE."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the BOOKCASE."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the BOOKCASE."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the BOOKCASE."]
+		}
+	}	
 },{
     "name": "gulliver_travels",
 	"display_name": "GULLIVER'S TRAVELS",
@@ -506,6 +1877,33 @@
 	"events": {
 		"READ": {
 			"events": ["print You don't have time to $$verb $$this."]
+		},
+		"EAT": {
+			"events": ["print Why? You READ books - not $$verb them."]
+		},
+		"ENTER": {
+			"events": ["print You don't think you would like it there."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the book closer."]
+		},
+		"TALK": {
+			"events": ["print The book can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb GULLIVER'S TRAVELS."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the book to the first page."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb GULLIVER'S TRAVELS."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb GULLIVER'S TRAVELS."]
+		},
+		"CLOSE": {
+			"events": ["print You close the book."]
 		}
 	}
 },{
@@ -517,6 +1915,33 @@
 	"events": {
 		"READ": {
 			"events": ["print You DEFINITELY have time to $$verb $$this."]
+		},
+		"EAT": {
+			"events": ["print Why? You READ books - not $$verb them."]
+		},
+		"ENTER": {
+			"events": ["print You don't think you would like it there."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the book closer."]
+		},
+		"TALK": {
+			"events": ["print The book can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb CRIME AND PUNISHMENT."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the book to the first page."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb CRIME AND PUNISHMENT."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb CRIME AND PUNISHMENT."]
+		},
+		"CLOSE": {
+			"events": ["print You close the book."]
 		}
 	}
 },{
@@ -528,6 +1953,33 @@
 	"events": {
 		"READ": {
 			"events": ["print If you wanted to $$verb about pervasive surveillance, you'd just go read JOOGLE's terms of service agreement."]
+		},
+		"EAT": {
+			"events": ["print Why? You READ books - not $$verb them."]
+		},
+		"ENTER": {
+			"events": ["print You don't really want to go back in time, do you?"]
+		},
+		"PULL": {
+			"events": ["print You $$verb the book closer."]
+		},
+		"TALK": {
+			"events": ["print The book can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb NINETEEN EIGHTY-FOUR."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the book to the first page."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb NINETEEN EIGHTY-FOUR."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb NINETEEN EIGHTY-FOUR."]
+		},
+		"CLOSE": {
+			"events": ["print You close the book."]
 		}
 	}
 },{
@@ -539,6 +1991,33 @@
 	"events": {
 		"READ": {
 			"events": ["print You don't have time to $$verb this, but you remember that there was a classic TEXT ADVENTURE GAME about $$this.  If you didn't pick up the MAIL at the start of the game, you'd 100% lose many hours later.  What a terrible game.  Surely you could do better."]
+		},
+		"EAT": {
+			"events": ["print Why? You READ books - not $$verb them."]
+		},
+		"ENTER": {
+			"events": ["print If only!  That could be a fun adventure!"]
+		},
+		"PULL": {
+			"events": ["print You $$verb the book closer."]
+		},
+		"TALK": {
+			"events": ["print The book can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb HITCHHIKER'S GUIDE TO THE GALAXY."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the book to the first page."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb HITCHHIKER'S GUIDE TO THE GALAXY."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb HITCHHIKER'S GUIDE TO THE GALAXY."]
+		},
+		"CLOSE": {
+			"events": ["print You close the book."]
 		}
 	}
 },{
@@ -550,8 +2029,38 @@
 	"events": {
 		"PICK UP": {
 			"events": ["print As you try to pull out the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.", "change attic.direction.north narrative_text to `The BOOKCASE slides to the side revealing a walk-in safe with a KEYPAD.`"]
-			}
-		}
+			},
+		"READ": {
+			"events": ["print You can't $$verb this."]
+		},
+		"EAT": {
+			"events": ["print Why? You READ books - not $$verb them."]
+		},
+		"ENTER": {
+			"events": ["print Do you remember what happens in the ODYSSEY?"]
+		},
+		"PULL": {
+			"events": ["print As you try to pull out the ODYSSEY, it catches on something and you hear a click. The BOOKCASE slides to the side revealing a walk-in SAFE with a KEYPAD.", "change attic.direction.north narrative_text to `The BOOKCASE slides to the side revealing a walk-in safe with a KEYPAD.`"]
+		},
+		"TALK": {
+			"events": ["print The book can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb the ODYSSEY."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb the ODYSSEY."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the ODYSSEY."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the ODYSSEY."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb the ODYSSEY."]
+		}	
+	}
 },{
     "name": "keypad",
 	"display_name": "KEYPAD",
@@ -567,20 +2076,111 @@
 			},
 		"INSERT YEET": {
 			"events": ["print You enter the digits into the KEYPAD.  The door unlocks and starts to swing out.  You have unlocked a HIDDEN ROOM.", "move player to safe"]
-		}
+		},
+		"EAT": {
+			"events": ["print You can't $$verb a KEYPAD."]
+		},
+		"READ": {
+			"events": ["print The KEYPAD has numbers 0-9 with the letters A-Z spread out on the numbered keys."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a KEYPAD."]
+		},
+		"TALK": {
+			"events": ["print The KEYPAD can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a KEYPAD."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb a KEYPAD."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a KEYPAD."]
+		},
+		"USE": {
+			"events": ["print $$verb how? Do you want to ENTER something?"]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb a KEYPAD."]
+		}	
 	}
 },{
     "name": "containers",
 	"display_name": "CONTAINERS",
 	"article": "the",
 	"description": "The storage CONTAINERS are filled with old family albums.  You flip through seeing pictures of a family that might once have understood the struggles you and yours currently deal with.  That struggle has long been forgotten by them.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb CONTAINERS."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb CONTAINERS."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb CONTAINERS."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the CONTAINERS closer."]
+		},
+		"TALK": {
+			"events": ["print The CONTAINERS can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb CONTAINERS."]
+		},
+		"OPEN": {
+			"events": ["print You $$verb the CONTAINERS to see the old family albums."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb CONTAINERS."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb the CONTAINERS."]
+		},
+		"CLOSE": {
+			"events": ["print You $$verb the CONTAINERS."]
+		}
+	}	
 },{
     "name": "electronics",
 	"display_name": "ELECTRONICS",
 	"article": "the",
 	"description": "You look through the ELECTRONICS piled in the little attic closet.  You see old consoles and handheld units from Atari to Gameboy.  You can still recall playing some of these and you remember the games fondly.",
-	"type": "Scenery"
+	"type": "Scenery",
+	"events": {
+		"EAT": {
+			"events": ["print You can't $$verb ELECTRONICS."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb ELECTRONICS."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb ELECTRONICS."]
+		},
+		"PULL": {
+			"events": ["print You $$verb the ELECTRONICS closer."]
+		},
+		"TALK": {
+			"events": ["print The ELECTRONICS can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb ELECTRONICS."]
+		},
+		"OPEN": {
+			"events": ["print You can't $$verb ELECTRONICS."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb the ELECTRONICS. There is no power source."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb ELECTRONICS."]
+		},
+		"CLOSE": {
+			"events": ["print You can't $$verb ELECTRONICS."]
+		}
+	}	
 },{
     "name": "lockbox",
 	"display_name": "LOCKBOX",
@@ -590,6 +2190,36 @@
     "events": {
 		"UNLOCK,SILVER_KEY": {
 			"events": ["print You use the SILVER KEY to open the LOCKBOX.  Inside are JEWELS and GOLD for the taking! Take it back to your town and use it to give back to your community.  You succeeded in becoming a modern-day Robin Hood.", "game win"]
-			}
-		}
+			},
+		"EAT": {
+			"events": ["print You can't $$verb a LOCKBOX."]
+		},
+		"ENTER": {
+			"events": ["print You can't $$verb a LOCKBOX."]
+		},
+		"READ": {
+			"events": ["print You can't $$verb a LOCKBOX."]
+		},
+		"PULL": {
+			"events": ["print You can't $$verb a LOCKBOX."]
+		},
+		"TALK": {
+			"events": ["print The LOCKBOX can't hear you."]
+		},
+		"FIGHT": {
+			"events": ["print You can't $$verb a LOCKBOX."]
+		},
+		"OPEN": {
+			"events": ["print You need to UNLOCK the LOCKBOX."]
+		},
+		"TURN ON": {
+			"events": ["print You can't $$verb a LOCKBOX."]
+		},
+		"USE": {
+			"events": ["print You can't $$verb a LOCKBOX."]
+		},
+		"CLOSE": {
+			"events": ["print The LOCKBOX is not open."]
+		}			
+	}
 }]
