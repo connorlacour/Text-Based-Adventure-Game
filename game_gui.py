@@ -325,7 +325,7 @@ class GameGUI:
             x = 0
 
             while not parse_done:
-                max_chars = 75
+                max_chars = 73
 
                 # for a string up to length max_chars, find the last occurrence
                 #   of a ' ' char. This is where we will split the string so
@@ -336,7 +336,7 @@ class GameGUI:
 
                     for char in game_text[split_index[x]:y]:
                         if char in caps:
-                            max_chars -= 0.7
+                            max_chars -= 0.8
 
                     max_chars = ceil(max_chars)
 
