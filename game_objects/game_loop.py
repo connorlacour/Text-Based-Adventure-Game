@@ -17,13 +17,12 @@ def get_next_narration(user_text) -> str:
     print(f"v: {verb}, d: {direction}, po: {passive_obj}, ao:{active_object}")
 
     active_object, passive_object = resolve_noun_to_item_name(active_object, passive_obj)
-    import time
-    start_time = time.time()
-    if verb == "":
-        return "Not even you know what you were trying to do."
 
-    elif verb in go_synonyms:
+    if verb in go_synonyms or direction != "":
         return do_direction_command(verb, direction, active_object)
+
+    elif verb == "":
+        return "Not even you know what you were trying to do."
 
     elif verb in look_synonyms or active_object == "INVENTORY" or verb == "INVENTORY":
         if active_object == "" and verb != "INVENTORY":
@@ -258,8 +257,9 @@ def resolve_noun_to_item_name(active, passive, room: Room = None) -> (str, str):
 
 #go direction
 #go through directional item
-def do_direction_command(verb: str, direction: str, item: str = "", room: Room = None) -> str:
+def do_direction_command(verb: str = "GO", direction: str = "", item: str = "", room: Room = None) -> str:
     if room is None: room = player_location.room
+    if verb == "": verb = "GO"
     dir = ""
 
     if item != "":
