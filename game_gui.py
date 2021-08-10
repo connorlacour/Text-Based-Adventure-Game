@@ -401,7 +401,6 @@ class GameGUI:
                 text_list.append(to_list)
                 x += 1
         else:
-
             no_newline = True
             for char in game_text:
                 if char == '\n':
@@ -422,7 +421,7 @@ class GameGUI:
                         game_text = game_text[:split_index[x + 1]] + \
                                     game_text[(split_index[x + 1] + 1):]
                         to_list = game_text[split_index[x]:split_index[x+1]]
-                    if '\\n' in to_list:
+                    elif '\\n' in to_list:
                         nl_idx = to_list.index('\\n')
                         split_index[x + 1] = nl_idx + split_index[x]
                         split_index.append(y)
