@@ -17,7 +17,9 @@
 	"type": "Inventory",
     "events": {
 		"WEAR": {
-			"events": ["print You are now wearing the glove."]
+			"events": ["print You are now wearing the glove.",
+						"move glove to player_inventory"],
+			"repeatable": false
 		},
 		"TAKE OFF": {
 			"events": ["print You are no longer gloved."]
@@ -49,8 +51,8 @@
 			}
 	}
 }, {
-	"name": "burnt_note",
-	"display_name": "BURNT NOTE",
+	"name": "burnt_scrap",
+	"display_name": "BURNT SCRAP",
 	"article": "a",
 	"description": "Most of the note has been burned beyond recognition, but you think you make out the letters Y - E - E - T.",
 	"type": "Inventory"
@@ -217,7 +219,7 @@
 	"type": "Scenery",
 	"events": {
 		"READ": {
-			"events": ["print You'd rather not."]
+			"events": ["print The last name entered in the GUEST BOOK you see is John Little."]
 			}
 		}
 },{
@@ -263,10 +265,17 @@
 			"events": ["print You swing the SWORD, but when it hits Tuck, you find that the blade has been dulled and is nothing more than decorative at this point.  It leaves nothing more than a bruise.  He shakes his head at your attempt before knocking you out.", "game over"]
 		},
 		"BRIBE,SMALL_POUCH": {
-			"events": ["print Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut.", "change guest_bedroom special_intro to false"]
+			"events": [
+				"print Tuck raises his eyebrows at you curiously.  There’s a moment of silence between the two of you as he considers the offer.\n\n“I’m too old for this crap,” he mutters, swiping the pouch out of your hand and walking toward the door.  You listen as he stomps down the stairs before finally hearing the front door slam shut.",
+				"change guest_bedroom special_intro to false",
+				"move small_pouch to limbo"
+			]
 		},
 		"PERSUADE,LETTER": {
-			"events": ["print You remember the letter from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the letter to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the letter several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.", "change guest_bedroom special_intro to false"]
+			"events": ["print You remember the letter from Carole you found.  It had been addressed to someone named Tuck.  Hoping it will help you out of the situation, you offer the letter to the guard.  He narrows his gaze in suspicion at you as you fish out the paper and hand it over.  His eyes soften as he reads what’s written.\n\n“Where did you…” he starts to say.  He looks between you and the letter several times before finally sighing.  “I quit.  Hell, I’m probably out of a job anyway after falling asleep here.  As far as I’m concerned, I never saw you.”\n\nWith that, he walks out of the room.",
+				"change guest_bedroom special_intro to false",
+				"move letter to limbo"
+			]
 			}
 		}
 },{
@@ -382,7 +391,7 @@
     "name": "fireplace",
 	"display_name": "FIREPLACE",
 	"article": "the",
-	"description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT NOTE stuck between the bottom logs.",
+	"description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT SCRAP stuck between the bottom logs.",
 	"type": "Scenery"
 },{
     "name": "paper",
@@ -433,7 +442,8 @@
 				"print You slip a milk bone to the DOG through the bars of the CRATE.  It takes it carefully, keeping its eyes on you while it chews.  When it finishes, it wags its tail before curling up in the corner to lie down.",
 				"change dog display_name to `CALM DOG`",
 				"change silver_key can_take to true",
-				"change dog description to `The dog sleeps peacefully in the corner of the crate.`"]
+				"change dog description to `The dog sleeps peacefully in the corner of the crate.`",
+				"move milk_bone to limbo"]
 		},
 		"TURN ON,PORTABLE_RADIO": {
 			"events": [

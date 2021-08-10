@@ -157,6 +157,8 @@ def find_room_item(item_name) -> (Optional[Room], Optional[Item]):
         obj = room.get_item_from_room_or_discard(item_name)
         if obj is not None:
             return room, obj
+        if item_name in player_inventory:
+            return None, player_inventory[item_name]
 
     print_warning(f"Couldn't find {item_name} in any room item_list.")
     return None, None

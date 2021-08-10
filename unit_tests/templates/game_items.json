@@ -36,8 +36,8 @@
 			}
 	}
 }, {
-	"name": "burnt_note",
-	"display_name": "BURNT NOTE",
+	"name": "burnt_scrap",
+	"display_name": "BURNT SCRAP",
 	"article": "a",
 	"description": "Most of the note has been burned beyond recognition, but you think you make out the letters Y - E - E - T.",
 	"type": "Inventory"
@@ -246,7 +246,7 @@
     "name": "fireplace",
 	"display_name": "FIREPLACE",
 	"article": "the",
-	"description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT NOTE stuck between the bottom logs.",
+	"description": "The FIREPLACE has a thin line of ash around the bottom that makes you think it has been used recently but the lack of warmth indicates that whoever used it is probably gone by now.  You are just about to turn away from the FIREPLACE when you see a BURNT SCRAP stuck between the bottom logs.",
 	"type": "Scenery"
 },{
     "name": "strip_of_paper",

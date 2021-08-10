@@ -154,14 +154,21 @@ def move(event: str, room_to_check: Optional[Room] = None) -> str:
     else:
         room_to_check, target_object = find_room_item(target_name)
 
-    if destination_name == "player_inventory":
+    if room_to_check is not None and destination_name == "player_inventory":
         destination[target_name] = target_object
         update_inventory_synonym_mapping()
-    else:
+        room_to_check.delete_item(target_name)
+
+    elif room_to_check is not None:
         target_object = room_to_check.get_item_from_room(target_name)
         destination[target_name] = target_object
+        room_to_check.delete_item(target_name)
 
-    room_to_check.delete_item(target_name)
+    else:
+        if destination_name != "player_inventory":
+            destination[target_name] = target_object
+            del player_inventory[target_name]
+
     debug_print(f"Successfully moved {target_object} from {room_to_check} to {destination_name}")
 
     return ""
