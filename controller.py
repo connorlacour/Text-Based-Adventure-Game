@@ -104,7 +104,8 @@ def load_game() -> None:
 
 
 def end(status) -> None:
-    music.in_game.stop()
+    music.in_game.fadeout(5)
+    sleep(5)
     music.start_main_theme()
     end_return = game_end.GameEnd(status).main()
     if end_return == 'load':
