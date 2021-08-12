@@ -212,7 +212,7 @@ class Event:
             self.synonyms = synonym_dict[self.verb]
         elif len(self.synonyms) == 0:
             if len(self.verb.split(" ")) == 1:
-                self.synonyms = [x.upper() for x in pydict.synonym(self.verb)]
+                self.synonyms = []
             else:
                 print_warning(f"Custom Synonym not found for multi-word verb {self.verb}")
 
